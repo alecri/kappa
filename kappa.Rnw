@@ -1,0 +1,149 @@
+% -----------------------------------------------------------------------------
+% Project: PhD KAPPA
+% File: kappa.Rnw
+% Author: Alessio Crippa
+% Template: based on the tex code written by Andrea Discacciati
+%
+% Purpose: Root Rnw file, compile this to typeset the kappa!
+% -----------------------------------------------------------------------------
+
+% Class
+\documentclass[11pt,a4paper,twoside,openany]{book}
+
+% Packages
+\usepackage[english]{babel}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{threeparttable}
+\usepackage{adjustbox}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{flafter}
+\usepackage{fancyhdr}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage[pdftex,
+            pdfauthor={Alessio Crippa},
+            pdftitle={Novel methods for dose-response meta-analysis},
+            pdfcreator={LaTeX2e}]{hyperref}
+\usepackage[%showframe,
+			headheight=13.6pt,
+			%headsep=,
+			%footskip=,
+			bindingoffset=0cm,%print=.5cm, web=0cm
+			left=3cm,  %print=2cm, web=3cm
+			bottom=3cm, %print=3cm, web=3cm
+			top=3cm, %print=3cm, web=3cm,
+			right=3cm]{geometry} %print=3.5cm, web=3cm
+\usepackage{enumerate, mdwlist}
+\usepackage{etoolbox}
+\usepackage{tabularx}
+\usepackage{rotating}
+\usepackage[font={small}]{caption}
+\usepackage{chngcntr}
+\counterwithout{footnote}{chapter}
+
+%---begin see http://www.khirevich.com/latex/font/
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100, stretch=10,shrink=10]{microtype}
+\usepackage[T1]{fontenc}
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage{sectsty}
+	\chapterfont{\usefont{T1}{qhv}{b}{n}\selectfont\huge}
+\usepackage{titlesec}
+\Sexpr{knit_child('style/_titlesec.tex')}
+\usepackage{tocloft}
+\Sexpr{knit_child('style/_tocloft.tex')}
+%---end see http://www.khirevich.com/latex/font/
+
+% Header / footer
+\Sexpr{knit_child('style/_fancyhdr.tex')}
+
+% Substitutions
+\newcommand{\rveplot}{decorrelated-residuals--versus--exposure plot}
+\newcommand{\kgmsq}{kg$\times$m\textsuperscript{$-2$}}
+\newcommand{\ngml}{ng$\times$ml\textsuperscript{$-1$}}
+
+\defcitealias{discacciati_goodness_2015}{Paper~I}	
+\defcitealias{crippa_new_2016}{Paper~II}	
+\defcitealias{crippa_dose-response_2016}{Paper~III}	
+\defcitealias{crippa_dosresmeta_2016}{Paper~IV}	
+
+%\doublespacing 
+\onehalfspacing
+
+\allowdisplaybreaks
+
+\renewcommand{\sfdefault}{qhv}
+\newcommand*{\LargerCdot}{\raisebox{-0.25ex}{\scalebox{1.2}{$\cdot$}}}
+
+\DeclareMathOperator{\Cov}{Cov} 
+\DeclareMathOperator{\diag}{diag} 
+\DeclareMathOperator{\N}{N} 
+\DeclareMathOperator{\E}{E}
+\DeclareMathOperator{\logit}{logit} 
+\DeclareMathOperator{\df}{df} 
+\hyphenation{logRRs}
+\hyphenation{logRR}
+
+\addto\captionsenglish{%
+  \renewcommand{\bibname}{References}%
+}
+
+%\includeonly{abstract, results, introduction, background, aims, discussion, conclusions }
+
+%--- Kappa starts here! ---%
+\begin{document}
+
+% Front matter
+\frontmatter
+\pagestyle{nothing}
+\Sexpr{knit_child('additional/titlepage.tex')}
+\newpage
+\Sexpr{knit_child('additional/spikblad.tex')}
+\cleardoublepage
+\Sexpr{knit_child('additional/dedication.tex')}
+\cleardoublepage 
+\pagestyle{frontmatter}
+\Sexpr{knit_child('additional/abstract.tex')}
+\cleardoublepage
+\Sexpr{knit_child('additional/publications.tex')}
+\cleardoublepage
+\microtypesetup{protrusion=false}
+\tableofcontents
+%\listoffigures
+%\newpage
+%\listoftables
+\microtypesetup{protrusion=true} 
+\Sexpr{knit_child('additional/abbreviations.tex')}
+
+
+% Main matter
+\mainmatter
+\pagestyle{mainmatter}
+\Sexpr{knit_child('chapters/0_introduction/0_introduction.Rnw')}
+\Sexpr{knit_child('chapters/1_background/0_background.Rnw')}
+\Sexpr{knit_child('chapters/2_aims.Rnw')}
+\Sexpr{knit_child('chapters/3_materials/0_materials.Rnw')}
+\Sexpr{knit_child('chapters/4_results/0_results.Rnw')}
+\Sexpr{knit_child('chapters/5_discussion/0_discussion.Rnw')}
+\Sexpr{knit_child('chapters/6_conclusions/0_conclusions.Rnw')}
+\Sexpr{knit_child('chapters/7_future.Rnw')}
+
+% Appendix
+\appendix
+\Sexpr{knit_child('chapters/8_appendix/0_appendix.Rnw')}
+
+% Back matter
+\backmatter
+\bibliographystyle{additional/sj}
+\refstepcounter{chapter}
+\addcontentsline{toc}{chapter}{\bibname}
+\bibliography{additional/kappa}
+\newpage
+\pagestyle{nothing}
+\Sexpr{knit_child('additional/acknowledgements.tex')}
+
+
+\end{document}

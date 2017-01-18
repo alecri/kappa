@@ -1,0 +1,16 @@
+% ---------------------------------------------------------
+% Project: PhD KAPPA
+% File: results.tex
+% Author: Alessio Crippa
+% based on the template written by Andrea Discacciati
+%
+% Purpose: Results
+% ---------------------------------------------------------
+
+\chapter{Results}
+
+Write the results with subsections as in the background section
+
+
+% Paper I
+%\input{results.1}

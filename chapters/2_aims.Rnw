@@ -1,0 +1,26 @@
+% ---------------------------------------------------------
+% Project: PhD KAPPA
+% File: aims.tex
+% Author: Alessio Crippa
+% based on the template written by Andrea Discacciati
+%
+% Purpose: Aims
+% ---------------------------------------------------------
+
+\chapter{Aims of the thesis}
+
+The overall aims of this thesis were to <>.
+
+\bigskip
+
+ More specifically, the aims were:
+
+\begin{itemize}
+\item <>
+
+\item <>
+
+\item <>
+
+\item <>
+\end{itemize}

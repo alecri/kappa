@@ -1,0 +1,20 @@
+% ---------------------------------------------------------
+% Project: PhD KAPPA
+% File: future.tex
+% Author: Alessio Crippa
+% based on the template written by Andrea Discacciati
+%
+% Purpose: Future research
+% ---------------------------------------------------------
+
+\chapter{Future research}
+
+Based on the conclusions presented in this thesis, future research includes: 
+
+\begin{itemize}
+\item <>
+
+\item <>
+
+\item <>
+\end{itemize}
