@@ -1,3 +1,5 @@
+% !TeX root = kappa.Rnw  
+
 % ---------------------------------------------------------
 % Project: PhD KAPPA
 % File: future.tex

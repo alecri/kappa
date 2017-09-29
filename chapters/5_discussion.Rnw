@@ -1,0 +1,14 @@
+% !TeX root = kappa.Rnw  
+
+% ---------------------------------------------------------
+% Project: PhD KAPPA
+% File: discussion.tex
+% Author: Alessio Crippa
+% based on the template written by Andrea Discacciati
+%
+% Purpose: Discussion
+% ---------------------------------------------------------
+
+\chapter{Discussion}
+
+Write the discussion with subsections as in the background section

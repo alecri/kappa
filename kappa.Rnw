@@ -1,11 +1,18 @@
 % -----------------------------------------------------------------------------
 % Project: PhD KAPPA
-% File: kappa.Rnw
+% File: kappa.Rnw (root file)
 % Author: Alessio Crippa
 % Template: based on the tex code written by Andrea Discacciati
+%           url: https://github.com/anddis/phd-thesis
 %
 % Purpose: Root Rnw file, compile this to typeset the kappa!
 % -----------------------------------------------------------------------------
+
+<<global_option, echo=FALSE>>=
+opts_knit$set(self.contained=FALSE)
+opts_chunk$set(comment = NA, fig.width = 5, fig.height = 5, highlight = T, 
+               background = "white")
+@
 
 % Class
 \documentclass[11pt,a4paper,twoside,openany]{book}
@@ -26,7 +33,7 @@
 \usepackage{setspace}
 \usepackage[pdftex,
             pdfauthor={Alessio Crippa},
-            pdftitle={Novel methods for dose-response meta-analysis},
+            pdftitle={Novel methods for dose--response meta-analysis},
             pdfcreator={LaTeX2e}]{hyperref}
 \usepackage[%showframe,
 			headheight=13.6pt,
@@ -47,7 +54,11 @@
 
 %---begin see http://www.khirevich.com/latex/font/
 \usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100, stretch=10,shrink=10]{microtype}
+% remove warning
+\microtypecontext{spacing = nonfrench}
 \usepackage[T1]{fontenc}
+% remove warning
+\global\expandafter\let\csname ver@amsfonts.sty\endcsname\relax
 \usepackage[bitstream-charter]{mathdesign}
 \usepackage{sectsty}
 	\chapterfont{\usefont{T1}{qhv}{b}{n}\selectfont\huge}
@@ -60,15 +71,15 @@
 % Header / footer
 \Sexpr{knit_child('style/_fancyhdr.tex')}
 
-% Substitutions
-\newcommand{\rveplot}{decorrelated-residuals--versus--exposure plot}
-\newcommand{\kgmsq}{kg$\times$m\textsuperscript{$-2$}}
-\newcommand{\ngml}{ng$\times$ml\textsuperscript{$-1$}}
+% Substitutions (%examples)
+%\newcommand{\rveplot}{decorrelated-residuals--versus--exposure plot}
+%\newcommand{\kgmsq}{kg$\times$m\textsuperscript{$-2$}}
 
-\defcitealias{discacciati_goodness_2015}{Paper~I}	
-\defcitealias{crippa_new_2016}{Paper~II}	
-\defcitealias{crippa_dose-response_2016}{Paper~III}	
-\defcitealias{crippa_dosresmeta_2016}{Paper~IV}	
+\defcitealias{crippadosresmeta2016}{Paper~I}	
+\defcitealias{discacciati2015goodness}{Paper~II}	
+\defcitealias{crippa2016new}{Paper~III}	
+\defcitealias{crippa2018pointwise}{Paper~IV}	
+\defcitealias{crippa2018one}{Paper~V}	
 
 %\doublespacing 
 \onehalfspacing
@@ -118,29 +129,28 @@
 \microtypesetup{protrusion=true} 
 \Sexpr{knit_child('additional/abbreviations.tex')}
 
-
 % Main matter
 \mainmatter
 \pagestyle{mainmatter}
-\Sexpr{knit_child('chapters/0_introduction/0_introduction.Rnw')}
-\Sexpr{knit_child('chapters/1_background/0_background.Rnw')}
+\Sexpr{knit_child('chapters/0_background.Rnw')}
+\Sexpr{knit_child('chapters/1_introduction.Rnw')}
 \Sexpr{knit_child('chapters/2_aims.Rnw')}
-\Sexpr{knit_child('chapters/3_materials/0_materials.Rnw')}
-\Sexpr{knit_child('chapters/4_results/0_results.Rnw')}
-\Sexpr{knit_child('chapters/5_discussion/0_discussion.Rnw')}
-\Sexpr{knit_child('chapters/6_conclusions/0_conclusions.Rnw')}
+\Sexpr{knit_child('chapters/3_materials.Rnw')}
+\Sexpr{knit_child('chapters/4_results.Rnw')}
+\Sexpr{knit_child('chapters/5_discussion.Rnw')}
+\Sexpr{knit_child('chapters/6_conclusions.Rnw')}
 \Sexpr{knit_child('chapters/7_future.Rnw')}
 
 % Appendix
 \appendix
-\Sexpr{knit_child('chapters/8_appendix/0_appendix.Rnw')}
+\Sexpr{knit_child('chapters/8_appendix.Rnw')}
 
 % Back matter
 \backmatter
-\bibliographystyle{additional/sj}
+\bibliographystyle{style/jss}
 \refstepcounter{chapter}
 \addcontentsline{toc}{chapter}{\bibname}
-\bibliography{additional/kappa}
+\bibliography{additional/kappa_bib}
 \newpage
 \pagestyle{nothing}
 \Sexpr{knit_child('additional/acknowledgements.tex')}

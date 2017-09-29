@@ -1,0 +1,14 @@
+% !TeX root = kappa.Rnw  
+
+% ---------------------------------------------------------
+% Project: PhD KAPPA
+% File: background.tex
+% Author: Alessio Crippa
+% based on the template written by Andrea Discacciati
+%
+% Purpose: Background
+% ---------------------------------------------------------
+
+\chapter{Background}
+
+Write my background with subsections
