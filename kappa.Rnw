@@ -8,10 +8,16 @@
 % Purpose: Root Rnw file, compile this to typeset the kappa!
 % -----------------------------------------------------------------------------
 
-<<global_option, echo=FALSE>>=
+<<global_option, echo=FALSE, include=FALSE>>=
+library(knitr)
 opts_knit$set(self.contained=FALSE)
-opts_chunk$set(comment = NA, fig.width = 5, fig.height = 5, highlight = T, 
-               background = "white")
+opts_chunk$set(echo = FALSE, message = FALSE, comment = NA, fig.path = "../figure/",
+               out.width = "\\textwidth",
+               fig.align = "center", fig.width = 7, fig.height = 4.5, fig.pos= "h")
+pkgs <- c("tidyverse", "dosresmeta")
+lapply(pkgs, require, character.only = TRUE)
+# loading libraries and useful functions
+source("code/functions.R")
 @
 
 % Class
@@ -132,8 +138,8 @@ opts_chunk$set(comment = NA, fig.width = 5, fig.height = 5, highlight = T,
 % Main matter
 \mainmatter
 \pagestyle{mainmatter}
-\Sexpr{knit_child('chapters/0_background.Rnw')}
-\Sexpr{knit_child('chapters/1_introduction.Rnw')}
+\Sexpr{knit_child('chapters/0_introduction.Rnw')}
+\Sexpr{knit_child('chapters/1_background.Rnw')}
 \Sexpr{knit_child('chapters/2_aims.Rnw')}
 \Sexpr{knit_child('chapters/3_materials.Rnw')}
 \Sexpr{knit_child('chapters/4_results.Rnw')}

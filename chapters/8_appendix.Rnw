@@ -1,4 +1,4 @@
-% !TeX root = kappa.Rnw  
+% !TeX root = ../kappa.Rnw  
 
 % ---------------------------------------------------------
 % Project: PhD KAPPA
