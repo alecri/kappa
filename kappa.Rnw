@@ -103,6 +103,7 @@ source("code/functions.R")
 \renewcommand{\sfdefault}{qhv}
 \newcommand*{\LargerCdot}{\raisebox{-0.25ex}{\scalebox{1.2}{$\cdot$}}}
 
+\DeclareMathOperator{\R}{\textsf{R}}
 \DeclareMathOperator{\Cov}{Cov} 
 \DeclareMathOperator{\diag}{diag} 
 \DeclareMathOperator{\N}{N} 

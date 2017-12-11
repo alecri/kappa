@@ -12,18 +12,21 @@
 
 \chapter{Aims of the thesis}
 
-The overall aims of this thesis were to <>.
+The overall aims of this thesis were to develop and implement new methods for dose--response in meta-analysis, in order to deal with the methodological aspects that have not yet been addressed.
 
 \bigskip
 
- More specifically, the aims were:
+More specifically, the aims were:
 
 \begin{itemize}
-\item <>
+\item To describe the implementation of the main aspects of a dose--response meta-analysis and the usage of the \texttt{dosresmeta} $\R$ package.
 
-\item <>
+\item To present and discuss relevant measures and graphical tools to assess the goodness-of-fit in dose--response meta-analysis of binary outcome.
 
-\item <>
+\item To develop a new measure of between-study heterogeneity in the broader context of meta-analysis,  and assess its statistical properties as compared to other available measures. 
 
-\item <>
+\item To explore possible advantages of a point-wise approach, especially, in case of dose--response meta-analysis where the exposure range varies substantially across the studies.
+
+\item To formalize and present an alternative one-stage random-effects method for dose-response meta-analysis of aggregated data, formulating the meta-analytic model in terms of a general linear mixed-effect model. 
+
 \end{itemize}
