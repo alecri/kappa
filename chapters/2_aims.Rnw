@@ -27,6 +27,6 @@ More specifically, the aims were:
 
 \item To explore possible advantages of a point-wise approach, especially, in case of dose--response meta-analysis where the exposure range varies substantially across the studies.
 
-\item To formalize and present an alternative one-stage random-effects method for dose-response meta-analysis of aggregated data, formulating the meta-analytic model in terms of a general linear mixed-effect model. 
+\item To formalize and present an alternative one-stage random-effects model for dose-response meta-analysis of aggregated data, formulating the meta-analytic model in terms of a general linear mixed-effect model. 
 
 \end{itemize}
