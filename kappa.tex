@@ -204,6 +204,7 @@
 \newcommand*{\LargerCdot}{\raisebox{-0.25ex}{\scalebox{1.2}{$\cdot$}}}
 
 \DeclareMathOperator{\R}{\textsf{R}}
+\DeclareMathOperator{\Var}{Var}
 \DeclareMathOperator{\Cov}{Cov} 
 \DeclareMathOperator{\diag}{diag} 
 \DeclareMathOperator{\N}{N} 
@@ -372,19 +373,19 @@ but to be wrong for more sophisticated reasons.''} \\
 \bigskip
 %\chapter*{Abstract}
 \small
-\par Dose-response meta-analysis is a statistical technique increasingly used to combine and contrast the evidence on the association between a continuous exposure and the risk of a health outcome. Several papers refined selected aspects of the methodology, such as implementations of flexible strategies and considering extensions to multivariate meta-analysis. However, there were still several relevant questions that needed to be addressed. This thesis aims to address these issues by developing and implementing (\citetalias{crippadosresmeta2016}) new strategies and ad-hoc measures, including tools for evaluating the goodness-of-fit (\citetalias{discacciati2015goodness}), a new measure for quantifying the impact of heterogeneity (\citetalias{crippa2016new}), a strategy to deal with differences in the exposure range across studies (\citetalias{crippa2018pointwise}), and a one-stage approach to estimate complex models without excluding relevant studies (\citetalias{crippa2018one}).
+\par Dose--response meta-analysis is a statistical procedure for combining and contrasting the evidence on the association between a continuous exposure and the risk of a health outcome. Several papers refined selected aspects of the methodology, such as implementation of flexible strategies and extensions to multivariate meta-analysis. However, there were still several relevant questions that needed to be addressed. This thesis aims to address these issues by developing and implementing new strategies and ad-hoc measures (\citetalias{crippadosresmeta2016}), including tools for evaluating the goodness-of-fit (\citetalias{discacciati2015goodness}), a new measure for quantifying the impact of heterogeneity (\citetalias{crippa2016new}), a strategy to deal with differences in the exposure range across studies (\citetalias{crippa2018pointwise}), and a one-stage approach to estimate complex models without excluding relevant studies (\citetalias{crippa2018one}).
 
-In \citetalias{crippadosresmeta2016}, we described the implementation of the main aspects of the methodology in the \texttt{dosresmeta} $\R$ package available on CRAN. Dedicated functions was written to facilitate specific tasks such as definition of the design matrix and prediction of the pooled results. We illustrated how to estimate both linear and non-linear curves, conduct test of hypotheses, and present the results in a grapichal way using summarized data on alcohol intake and colorectal cancer risk.
+In \citetalias{crippadosresmeta2016}, we described the implementation of the main aspects of the methodology in the \texttt{dosresmeta} $\R$ package available on CRAN. Dedicated functions was written to facilitate specific tasks such as definition of the design matrix and prediction of the pooled results. We illustrated how to estimate both linear and non-linear curves, conduct test of hypotheses, and present the results in a tabular and grapichal format using summarized data on alcohol intake and colorectal cancer risk.
  
-In \citetalias{discacciati2015goodness}, we discussed how to evaluate the goodness-of-fit for dose-response meta-analysis. The proposed solutions consist of descriptive measures to summarize the agreement between fitted and observed data (the deviance and the coefficient of determination), and graphical tools to visualize the fit of the model (decorrelated residuals-versus-exposure plot). Data from two published meta-analyses were used to show how these tools can improve the practice of quantitative synthesis of aggregated dose-response data. 
+In \citetalias{discacciati2015goodness}, we discussed how to evaluate the goodness-of-fit. The proposed solutions consist of descriptive measures to summarize the agreement between fitted and observed data (the deviance and the coefficient of determination), and graphical tools to visualize the fit of the model (decorrelated residuals-versus-exposure plot). A reanalysis of two published meta-analyses exemplified how these tools can improve the practice of quantitative synthesis of aggregated dose--response data. 
 
-In \citetalias{crippa2016new}, we proposed and discussed a new measure, $R_b$, to quantify the proportion of the variance of the pooled estimate attributable to the between-study heterogeneity. $R_b$ does not make any assumption about the distribution of the within-study error variances, nor does it require specification of a typical value for these quantities. The performance of the proposed measure was evaluated in an extensive simulation study. We demonstrated how to present and interpret the $R_b$ re-analyzing three published meta-analyses.
+In \citetalias{crippa2016new}, we proposed and characterized a new measure, $R_b$, to quantify the proportion of the variance of the pooled estimate attributable to the between-study heterogeneity. Contrary to the available measures of heterogeneity, $R_b$ does not make any assumption about the distribution of the within-study error variances, nor does it require specification of a typical value for these quantities. The performance of the proposed measure was evaluated in an extensive simulation study. We demonstrated how to present and interpret the $R_b$ re-analyzing three published meta-analyses.
 
-In \citetalias{crippa2018pointwise}, we extended a point-wise approach to dose--response meta-analysis of aggregated data. The strategy consists of combining predicted relative risks for a fine grid of exposure values based on potentially different dose-response models. Thus, a point-wise approach can improve the flexibility in modelling the study-specific curves and may limit the impact of extrapolation by predicting the study-specific relative risk based on the observe exposure range. We illustrated the methodology using both individual and aggregated participant data.
+In \citetalias{crippa2018pointwise}, we extended a point-wise approach to dose--response meta-analysis of aggregated data. The strategy consists of combining predicted relative risks for a fine grid of exposure values based on potentially different dose--response models. A point-wise approach can improve the flexibility in modeling the study-specific curves and may limit the impact of extrapolation by predicting the study-specific relative risk based on the observe exposure range. We illustrated the methodology using both individual and aggregated participant data.
 
-In \citetalias{crippa2018one}, we formalized a one-stage approach for dose--response meta-analysis in terms of a linear mixed model. We explained the main aspects of the methodology and how to extend the measures typically presented in a two-stage analysis. Using both hypothetical and real data, we showed how the one-stage approach can facilitate investigation the impact of heterogeneity over the exposure range, model comparison, and prediction of individual dose-response associations. The main advantage is that complex curves can be estimated without excluding relevant studies.
+In \citetalias{crippa2018one}, we formalized a one-stage approach for dose--response meta-analysis in terms of a linear mixed model. We explained the main aspects of the methodology and how to extend the measures typically presented in a two-stage analysis. Using both hypothetical and real data, we showed how the one-stage approach can facilitate investigation the impact of heterogeneity over the exposure range, model comparison, and prediction of individual dose--response associations. The main advantage is that flexible curves can be estimated regardless of the number of data-points in the individual analyses.
 
-In conclusion, the methods presented in this thesis enrich the set of tools available to apply dose--response meta-analyses and to address specific questions including goodness-of-fit evaluation (\citetalias{discacciati2015goodness}) and a new measure of heterogeneity (\citetalias{crippa2016new}). In addition, we presented alternative models for pooling results in case of heterogeneous exposure range (\citetalias{crippa2018pointwise}) and for estimating complex models without excluding relevant studies (\citetalias{crippa2018one}). The proposed methods have been illustrated using real data and implemented in the \texttt{dosresmeta} and \texttt{hetmeta} $\R$ packages available on CRAN (\citetalias{crippadosresmeta2016}). 
+In conclusion, the methods presented in this thesis enrich the set of tools available for applying dose--response meta-analyses and for addressing specific questions including goodness-of-fit evaluation (\citetalias{discacciati2015goodness}) and quantification of heterogeneity (\citetalias{crippa2016new}). In addition, we presented alternative models for pooling results in case of heterogeneous exposure range (\citetalias{crippa2018pointwise}) and for estimating complex models without excluding relevant studies (\citetalias{crippa2018one}). The proposed methods have been illustrated using real data and implemented in the \texttt{dosresmeta} and \texttt{hetmeta} $\R$ packages available on CRAN (\citetalias{crippadosresmeta2016}). 
 
 \normalsize
 \cleardoublepage
@@ -480,16 +481,16 @@ WLS & Weighted Least Squares
 
 \chapter{Introduction}
 
-A single experiment or study can hardly provide a definitive answer to a specific scientific question. Science is oftentimes referred to as a cumulative process where results from many studies, aiming to address the common question of interest, contribute to create and update the scientific evidence. In the cumulative paradigm, meta-analysis is the statistical methodology to combine and compare the current evidence in the field. This process lies at the heart of evidence-based medicine, and plays a major role in informing policy and practice.
+A single experiment can hardly provide a definitive answer to a scientific question. Science is oftentimes referred to as a cumulative process where results from many studies, aiming to address the common question of interest, contribute to create and update the scientific evidence. In the cumulative paradigm, meta-analysis is the statistical methodology to combine and compare the current evidence in the field. This process lies at the heart of the concept of evidence-based medicine, and plays a major role in informing policy and practice.
 
-Many epidemiological studies assess whether the occurrance of a health outcome (e.g. mortality, incidence of a disease) varies according to a quantitative exposure (e.g. amount of physical activity, alcohol intake). 
-The quantitative exposure is frequently divided in intervals and the results are expressed in a tabular format as relative risks for different exposure categories. A high vs. low meta-analysis contrasts the relative risks for the highest exposure versus the lower one. This approach, however, discards the results for intermediate categories and thus provides only a limited picture. The information of the quantitative exposure is also lost, and the estimates being combined may be associated to different exposure values.
+Epidemiological studies often assess whether the occurrance of a health outcome (e.g. mortality, incidence of a disease) varies according to a quantitative exposure (e.g. amount of physical activity, alcohol intake). 
+The quantitative exposure is frequently divided in intervals and the results are expressed in a tabular format as relative risks for different exposure groups. A high verusu low meta-analysis contrasts the relative risks for the highest exposure category compared to the lower one. This approach, however, discards the results for intermediate categories and thus provides only a limited picture. The information of the quantitative exposure is also lost and the estimates being compared may be associated to different exposure values.
 
-A dose--response meta-analysis, instead, has the potential to be more informative and powerful since it uses the whole available information to estimate the dose--response association. Because the estimates depend on the same reference category, it is not possible to regress the relative risks on the assigned dose using oridinaly least square. Greenland and Longnecker described in their seminal paper in 1992 how to reconstruct the correlation within set of relative risks and incorporate it in the dose--response analysis using generalized least square regression. Since then, the number of published dose--response meta-analysis has rapidly increased in many fields of application including oncology, public health, environmental sciences, nutrition, endocrinology, and internal medicine. 
-Additional papers refined selected aspects of the proposed methodology, mainly focusing on the implementation of flexible strategies to model the dose-response curve and incorporating the advances of multivariate meta-analysis. However, there were still several relevant questions that needed to be addressed, including how to assess the goodness-of-fit, how to quantify the impact of heterogeneity, how to deal with differences in the exposure range across studies, and how to estimate complex models without excluding relevant studies.
+A dose--response meta-analysis, instead, has the potential to be more informative and powerful since it uses the whole available information to estimate the dose--response association. Because the estimates depend on the same reference group, it is not possible to regress the relative risks on the assigned dose using oridinaly least square. Greenland and Longnecker described in their seminal paper in 1992 how to reconstruct the correlation within set of relative risks and incorporate it in the dose--response analysis using generalized least square regression. Since then, the number of published dose--response meta-analysis has rapidly increased in many fields of application including oncology, public health, environmental sciences, nutrition, endocrinology, and internal medicine. 
+Additional papers refined selected aspects of the proposed methodology, mainly focusing on the implementation of flexible strategies in modeling non-linear associations and incorporating the advances of multivariate meta-analysis. However, there were still several relevant questions that needed to be addressed such as how to assess the goodness-of-fit (\citetalias{discacciati2015goodness}), how to quantify the impact of heterogeneity (\citetalias{crippa2016new}, how to deal with differences in the exposure range across studies (\citetalias{crippa2018pointwise}), and how to estimate complex models without excluding relevant studies (\citetalias{crippa2018one}).
 
-This thesis aims to address these issues by developing and implementing (\citetalias{crippadosresmeta2016}) new strategies and ad-hoc measures, including tools to evaluate the goodness-of-fit (\citetalias{discacciati2015goodness}), a new measure to quantify the impact of heterogeneity (\citetalias{crippa2016new}), a strategy to deal with differences in the exposure range across studies (\citetalias{crippa2018pointwise}), and a one-stage approach to estimate complex models without excluding relevant studies (\citetalias{crippa2018one}).
-This thesis aims to address these issues by developing new strategies and ad-hoc measures. The proposed methodologies are demonstrated reanalyzing published meta-analyses and are implemented in user friendly packages written in the free and open source R language, to bridge the gap between theory and application.
+%This thesis aims to address these issues by developing and implementing new strategies and ad-hoc measures (\citetalias{crippadosresmeta2016}), including tools to evaluate the goodness-of-fit (\citetalias{discacciati2015goodness}), a new measure to quantify the impact of heterogeneity (\citetalias{crippa2016new}), a strategy to deal with differences in the exposure range across studies (\citetalias{crippa2018pointwise}), and a one-stage approach to estimate complex models without excluding relevant studies (\citetalias{crippa2018one}).
+This thesis aims to address these issues by developing and implementing new strategies and ad-hoc measures (\citetalias{crippadosresmeta2016}). The proposed methodologies are demonstrated reanalyzing published meta-analyses and are implemented in user friendly packages written in the free and open source R language, to bridge the gap between theory and application.
 
 % !TeX root = ../kappa.Rnw  
 
@@ -504,18 +505,137 @@ This thesis aims to address these issues by developing new strategies and ad-hoc
 
 \chapter{Background}
 
-Write my background with subsections.
+\section{Meta-analysis}
+
+Relevant research questions are typically addressed by independent investigators in multiple studies. The sampling error and possibly differences in the investigations will inevitably produce diverse results, sometimes even conflicting. Evidence-based medicine requires a synthesis of the available evidence to optimize the decision-making process \citep{haidich2010meta}. 
+
+Meta-analysis, or more generally quantitative review synthesis, is the statistical methodology for integrating and synthetizing the information arising from multiple studies \citep{borenstein2009references}. Using appropriate statistical models, quantitative reviews contrast and pool results in the hope of identifying similarities or explain differences across study findings. Meta-analysis represents the state of the art for systematically reviewing the evidence, as indicated by the increasing number of published meta-analyses over the last 40 years (Figure~\ref{fig:num_meta-analysis}).
+
+The classical approach for meta-analysis consists of a weighted average of the study-specific results or estimates. A fixed-effect model for meta-analysis assumes that all the studies estimate a single common parameter \citep{rice2017re}. The hypothesis of homogeneity of the estimates is rarely applicable in biomedical and social sciences where studies typically differ in terms of design, disease classification, exposure measurement, and implemented statistical analyses \citep{colditz1995heterogeneity}. In such cases, heterogeneity across estimates is expected and should be considered in the analysis \citep{higgins2009re}. If the parameters estimated in the studies are not identical but similar, a random-effects models can be used to identify those similarities or to explain the observed heterogeneity \citep{higgins2009re}.
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[ht!]
+
+{\centering \includegraphics[width=\textwidth]{../figure/num_meta-analysis-1} 
+
+}
+
+\caption[Number of publications about meta-analysis (results from Medline search using text "meta-analysis" until December 2017)]{Number of publications about meta-analysis (results from Medline search using text "meta-analysis" until December 2017).}\label{fig:num_meta-analysis}
+\end{figure}
+
+
+\end{knitrout}
+
+
+\subsection{Random-effects meta-analysis}
+
+In a meta-analysis of $K$ studies indexed by $i = 1, \dots, K$, we denote $\hat \beta_i$ the estimate of an effect of interest (effect size) in the $i$-th study.
+%, and $\hat v_i$ an estimate of the related sampling variance. 
+
+A random-effects model for meta-analysis can be written as
+\begin{equation}
+\hat \beta_i = \beta + u_i + \varepsilon_i
+\label{eq:rma}
+\end{equation}
+
+\noindent where $\beta$ is the underlying mean effect, oftentimes the main parameter of interest. The random-effects $u_i$ represent the study-specific deviations from the mean effect $\beta$ allowing each study to estimate a similar parameter $\beta_i$ defined as $\beta + u_i $. The random component follows a generic $f$ distribution with mean 0 and variance equal to $\tau^2$, the between-studies heterogeneity. 
+The within-study error components $\varepsilon_i$ have also mean 0 and variance equal to $\hat v_i$, an estimate of the sampling variance of $\hat \beta_i$.
+Because the sample size in the individual investigations is often large, the uncertainty around the estimates of the sampling variance is negligible. Therefore, $\hat v_i$ can be considered fixed and denoted as $v_i$. In addition, for the central limit theorem, $\varepsilon_i \sim  \mathcal{N}\left(0, v_i \right)$, or alternatively, $\hat \beta_i | u_i \sim \mathcal{N}\left(\beta+u_i, v_i \right)$.
+
+An inverse variance-weighted approach for meta-analysis estimates the mean effect $\beta$ as a weighted average of the $\hat \beta_i$ \citep{whitehead1991general, dersimonian1986meta}
+\begin{align}
+\hat \beta = \frac{\sum_{i = 1}^k \hat \beta_i \hat w_i}{\sum_{i = 1}^k \hat w_i} \label{eq:avgbeta} \\
+\widehat{\Var} \left(\hat \beta \right) = \left( \sum_{i = 1}^k \hat w_i \right)^{-1}
+\end{align}
+\noindent with weights $\hat w_i = \left(v_i + \hat \tau^2 \right)^{-1}$ and $\hat \tau^2$ being an estimate of the between-study heterogeneity. 
+
+
+\subsection{Test and estimates of heterogeneity}
+
+A second parameter of interest, often overlooked, is the between-study heterogeneity, $\tau^2$. Focusing on the mean effect alone may provide only a limited piece of information, especially in case of heterogeneous effects \citep{borenstein2010basic}. Indeed, an evaluation of the extent of heterogeneity is a crucial step in determining the appropriateness of presenting a summary measure of the observed effect sizes.
+
+Presence of heterogeneity is frequently defined as the excess in the variability of $\hat \beta_i$ above that expected alone by chance. A summary measure of the observed variability is represented by the $Q$~statistic
+\begin{equation}
+Q = \sum_{i=1}^K \left(\hat \beta_i - \hat \beta_{\text{fe}} \right)^2
+\label{eq:Q}
+\end{equation}
+\noindent where $\hat \beta_{\text{fe}} = \sum_{i=1}^K \hat \beta_i v_i^{-2}/ \sum_{i=1}^K v_i^{-2}$ is the estimate of $\beta$ in a fixed-effect model. Based on that, Cochrane developed a test for assessing hypothesis of homogeneity of the study-specific estimates \citep{cochran1954combination}. Under the null hypothesis of no heterogeneity ($H_0: \tau^2 = 0$) the $Q$~statistic follows a $\chi^2$ with $K-1$ degrees of freedom. A $p$~value less than 0.10 is oftentimes used as evidence for presence of between-studies variability. It is known, however, that the test is sensible to the number of studies $K$ failing to reject the null hypothesis even for high value of $\tau^2$ when K is small, and contrary it is more likely to reject $H_0$ for negligible between-studies variation when $K$ is big \citep{higgins2002quantifying, takkouche1999evaluation}. Therefore, failing to reject the null hypothesis does not provide evidence supporting homogeneity in the effect sizes \citep{biggerstaff1997incorporating}. In addition, the dichotomization heterogeneous/homogeneous is not very informative, especially because heterogeneity is almost always present. 
+
+An estimate of $\tau^2$, instead, directly provides information about the amount of heterogeneity and is thus the more natural measure of between-studies variability. Based on the expectation of $Q$, Dersimonian and Laird proposed the following estimator for $\tau^2$ using the method of moments \citep{dersimonian1986meta}
+\begin{equation}
+\hat \tau^2_{\text{DL}} = \max \left\{0, \frac{Q - (K-1)}{\sum_{i=1}^K v_i^{-2} - \sum_{i=1}^K v_i^{-4}/\sum_{i=1}^K v_i^{-2} } \right\}
+\label{eq:tau2DL}
+\end{equation}
+
+\noindent The moment-based estimator is one of the most popular estimators of $\tau^2$ because it has a simple non-iterative formulation and does not require any distributional assumptions for the random-effects rather than having a finite first order moment. Other common non-iterative alternatives include an estimator based on the variance components \citep{hedges1983random} and using methods for estimating the error variance in a weighted linear model \citep{sidik2005simple}. Iterative methods based on maximizing the likelihood or restricted likelihood can also be used by specifying a distributional form for the random-effects. The more conventional choice is typically a normal distribution $u_i \sim \mathcal{N}\left( 0, \tau^2 \right)$, which implies $\beta_i \sim \mathcal{N}\left(\beta, \tau^2 \right)$ and $\hat \beta_i \sim \mathcal{N}\left(\beta + u_i, \tau^2 + v_i \right)$.
+
+Although $\tau^2$ is the more natural and appropriate measure of between-study variability, the actual value is difficult to interpret because it depends on type of effect size (e.g. log relative risk, standardized mean difference) and has no upper limit. Therefore, both evaluation of the degree (or levels) and the comparison of heterogeneity in different meta-analyses can hardly be based on the estimate of $\tau^2$.
+
+
+\subsection{Measures of heterogeneity}
+
+To complement the test based approach and the information provided by $\hat tau^2$, measures that quantify the impact of heterogeneity have been proposed \citep{higgins2002quantifying}. 
+Higgins et al. presented several possibilities in the simpler case where all the sampling variances $v_i$ are equal to a fixed and known value $\sigma^2$. 
+
+Two measures aim to estimate the ratio $\sigma^2/(\sigma^2/ + \tau^2)$, namely the $H^2= Q/(K-1)$ that represents the excess in $Q$~statistic relative to its degrees of freedom, and $R^2 = \Var{\hat \beta}/\Var{\hat \beta_{\text{FE}}}$ which describe the inflation in the variability of the mean effect in a random-effects model compared with a fixed-effect model.
+Other measures, instead, relate the between-studies heterogeneity, $\tau^2$, to the marginal or unconditional variability $\tau^2 + v_i$, which is defined by the sum of within- and between-study components. These measures can be more easily interpreted as the percentage of the total variability due to heterogeneity, similar to the intraclass correlation coefficient defined for linear mixed-effects models. The ratio directly involves the within-terms $v_i$ that again varies across the studies. Indeed, the most popular measures, namely the $R_I$ \citep{ takkouche1999evaluation} and the $I^2$ \citep{higgins2002quantifying}, replaced $v_i$ with a statistic that summarizes the observed distribution of $v_i$.
+Takkouche et al. chose
+\begin{equation}
+s_1^2 = \frac{K}{\sum_{i=1}^K v_i^{-2}}
+\label{eq:Ri}
+\end{equation}
+\noindent that is the harmonic mean of the inverse of the sampling variances. 
+Higgins et al., instead, described the ``typical'' within-study variance as
+\begin{equation}
+s_2^2 = \frac{(K-1) \sum_{i=1}^K v_i^{-2}}{ \left( \sum_{i=1}^K v_i^{-2} \right)^2 - \sum_{i=1}^K v_i^{-4}}
+\label{eq:I2}
+\end{equation}
+\noindent that provided a direct relationship with the $Q$~statistic: $I^2 = (Q - (K-1))/Q$ when $\tau^2$ is estimated using the method of moments.
+\noindent Both statistics can be expressed as a percentage where 0\% corresponds to no heterogeneity and increasing values imply higher levels of heterogeneity. It is known that these measures depend on precision of the study-specific estimates and tend to increase to 100\% when the $v_i$ are much smaller than the estimated $\tau^2$. 
+A complementary measure is the between-studies coefficient of variation, defined as $\tau^2/|\hat \beta|$, that does not directly depend on the within-study variances. However, it increases quickly as $\hat \beta$ becomes smaller, and is not defined for $\hat \beta = 0$.
+
+While the limitations of the $Q$~test approach are widely known, little emphasis is placed on the assumptions underneath the definition of the established measures of heterogeneity, i.e.  all the estimates being reported with the same precision, which is unlikely to be met in almost all the applications. A measure of the impact of heterogeneity that does not require such an assumption would be desirable.
+
+
+\section{Categorical models for dose--response analysis}
+
+
+
+
+
+\newpage
+
+\subsection{Categorical analysis with individual participant data}
+
+\subsection{Aggregated dose--response data}
+
+\subsection{High versus low meta-analysis}
+
+
+
+\section{Dose--response meta-analysis}
+
+\subsection{First stage: study-specific curves}
+
+\subsection{Second stage: multivariate meta-analysis}
+
+
+
+\section{Software}
+
+
 
 Here an example of a figure (Figure~\ref{fig:cite_grl}).
 
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[h]
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[ht!]
 
 {\centering \includegraphics[width=\textwidth]{../figure/cite_grl-1} 
 
 }
 
-\caption[ ]{ }\label{fig:cite_grl}
+\caption[Number of citations of the paper by Greenland and Longnecker (1992) obtained from Google Scholar 1992-2017 (until December 2017)]{Number of citations of the paper by Greenland and Longnecker (1992) obtained from Google Scholar 1992-2017 (until December 2017).}\label{fig:cite_grl}
 \end{figure}
 
 
@@ -545,13 +665,13 @@ More specifically, the aims were:
 \begin{itemize}
 \item To describe the implementation of the main aspects of a dose--response meta-analysis and the usage of the \texttt{dosresmeta} $\R$ package.
 
-\item To present and discuss relevant measures and graphical tools to assess the goodness-of-fit in dose--response meta-analysis of binary outcome.
+\item To present and discuss relevant measures and graphical tools to assess the goodness-of-fit in dose--response meta-analysis.
 
-\item To develop a new measure of between-study heterogeneity in the broader context of meta-analysis,  and assess its statistical properties as compared to other available measures. 
+\item To develop a new measure of between-study heterogeneity in the broader context of meta-analysis and assess its properties as compared to other available measures. 
 
 \item To explore possible advantages of a point-wise approach, especially, in case of dose--response meta-analysis where the exposure range varies substantially across the studies.
 
-\item To formalize and present an alternative one-stage random-effects model for dose-response meta-analysis of aggregated data, formulating the meta-analytic model in terms of a general linear mixed-effect model. 
+\item To formalize and present an alternative one-stage random-effects model for dose--response meta-analysis of aggregated data, formulating the meta-analytic model in terms of a general linear mixed-effect model. 
 
 \end{itemize}
 
@@ -567,9 +687,47 @@ More specifically, the aims were:
 % Purpose: Materials
 % ---------------------------------------------------------
 
-\chapter{Materials and methods}
+\chapter{Methods}
 
-Write materials and methods with subsections as in the background section
+\section{The \texttt{dosresmeta} R package}
+
+\subsection{Implementation}
+
+\subsection{Exposure modeling}
+
+
+\section{A new measure of heterogeneity}
+
+\subsection{Statistical proporties}
+
+\subsection{Simulation study}
+
+
+\section{Goodness-of-fit}
+
+\subsection{Deviance}
+
+\subsection{Coefficient of determination}
+
+\subsection{Visual tools}
+
+
+\section{A point-wise approach}
+
+\subsection{Prediction of study-specific (log) relative risks}
+
+\subsection{Pool of dose--response prediction}
+
+
+\section{A one-stage model}
+
+\subsection{Model definition}
+
+\subsection{Estimation and hypothesis testing}
+
+\subsection{Prediction}
+
+\subsection{Comparison with two-stage analysis}
 
 % !TeX root = ../kappa.Rnw  
 
@@ -584,7 +742,7 @@ Write materials and methods with subsections as in the background section
 
 \chapter{Results}
 
-Write the results with subsections as in the background section
+
 
 
 % Paper I
@@ -618,21 +776,21 @@ Write the discussion with subsections as in the background section
 
 \chapter{Conclusions}
 
-The methods presented in this thesis enrich the set of tools available to apply dose--response meta-analyses and to address specific questions including how to evaluate the goodness-of-fit and how to measure the impact of the between-studies heterogeneity. Furthermore, this thesis presents alternative models for pooling results in case of heterogeneous exposure range and for estimating complex models without excluding relevant studies. The proposed methods have been illustrated using real data from published meta-analyses and implemented in the \texttt{dosresmeta} and \texttt{hetmeta} $\R$ packages available on CRAN. 
+The methods presented in this thesis enrich the set of tools available for applying dose--response meta-analyses and for addressing specific questions including how to evaluate the goodness-of-fit and how to measure the impact of the between-studies heterogeneity. Furthermore, this thesis describes alternative models for pooling results in case of heterogeneous exposure range and for estimating complex models without excluding relevant studies. The proposed methods have been illustrated using real data from published meta-analyses and implemented in the \texttt{dosresmeta} and \texttt{hetmeta} $\R$ packages available on CRAN. 
 
 More specifically we conclude the following:
 
 \begin{itemize}
 
-\item The \texttt{dosresmeta} $\R$ package can help practitioners to conduct dose--response meta-analyses and to apply the methods presented in this thesis. Dedicated functions help to avoid common pitfalls frequently encountered in published meta-analyses, such as definition of the design matrix and prediction of the pooled results (\citetalias{crippadosresmeta2016}).
+\item The \texttt{dosresmeta} $\R$ package can help practitioners to conduct dose--response meta-analyses and to apply the methods presented in this thesis. Dedicated functions help to avoid pitfalls frequently encountered in published meta-analyses, such as definition of the design matrix and prediction of the pooled results (\citetalias{crippadosresmeta2016}).
 
-\item Goodness-of-fit should be regularly evaluated in applied dose-response meta-analysis. The proposed solutions consist of descriptive measures to summarize the agreement between fitted and observed data (the deviance and the coefficient of determination), and graphical tools to visualize the fit of the model (decorrelated residuals-versus-exposure plot). These tools can be employed to identify systematic dose--response patterns and possible source of heterogeneity, and to support the conclusions in applied meta-analyses (\citetalias{discacciati2015goodness}).
+\item Goodness-of-fit should be regularly evaluated in applied dose--response meta-analysis. The proposed solutions consist of descriptive measures to summarize the agreement between fitted and observed data (the deviance and the coefficient of determination), and graphical tools to visualize the fit of the model (decorrelated residuals-versus-exposure plot). These tools can be employed to identify systematic dose--response patterns and possible source of heterogeneity, and to support the conclusions in applied meta-analyses (\citetalias{discacciati2015goodness}).
 
-\item The new measure of heterogeneity, $R_b$, quantifies the proportion of the variance of the pooled estimate attributable to the between-study heterogeneity. It does not make any assumption about the distribution of the within-study error variances, nor does it require specification of a typical value for these quantities. Therefore, we recommend the use of the $R_b$ as preferred measure for quantifying the impact of heterogeneity (\citetalias{crippa2016new}). 
+\item The new measure of heterogeneity, $R_b$, quantifies the proportion of the variance of the pooled estimate attributable to the between-study heterogeneity. Contrary to the available measures of heterogeneity, it does not make any assumption about the distribution of the within-study error variances, nor does it require specification of a typical value for these quantities. Therefore, we recommend the use of the $R_b$ as preferred measure for quantifying the impact of heterogeneity (\citetalias{crippa2016new}). 
 
-\item A point-wise strategy for dose-response meta-analysis does not require the specification of a unique model as in the traditional approaches, and thus allows for more flexibility in modeling the individual curves. In addition, the extent of extrapolation is limited by predicting the study-specific relative risk based on the observe exposure range. The use of the described strategy may improve the robustness of the results, especially in case of heterogeneous exposure range (\citetalias{crippa2018pointwise}).
+\item A point-wise strategy for dose--response meta-analysis does not require the specification of a unique model as in the traditional approaches, and therefore allows for more flexibility in modeling the individual curves. In addition, the extent of extrapolation is limited by predicting the study-specific relative risk based on the observe exposure range. The use of the described strategy may improve the robustness of the results, especially in case of heterogeneous exposure range (\citetalias{crippa2018pointwise}).
 
-\item A one-stage approach for dose--response meta-analysis consists of a linear mixed-effects model, which offer useful tools for describing the impact of heterogeneity over the exposure range, for comparing the fit of different models, and for predicting individual dose-response associations. The main advantage as compared to a two-stage analysis is that complex curves can be estimated without excluding relevant studies (\citetalias{crippa2018one}).
+\item A one-stage approach for dose--response meta-analysis consists of a linear mixed-effects model, which offer useful tools for describing the impact of heterogeneity over the exposure range, for comparing the fit of different models, and for predicting individual dose--response associations. Thhe main advantage is that flexible curves can be estimated regardless of the number of data-points in the individual analyses (\citetalias{crippa2018one}).
 
 \end{itemize}
 

@@ -11,22 +11,133 @@
 
 \chapter{Background}
 
-Write my background with subsections.
+\section{Meta-analysis}
+
+Relevant research questions are typically addressed by independent investigators in multiple studies. The sampling error and possibly differences in the investigations will inevitably produce diverse results, sometimes even conflicting. Evidence-based medicine requires a synthesis of the available evidence to optimize the decision-making process \citep{haidich2010meta}. 
+
+Meta-analysis, or more generally quantitative review synthesis, is the statistical methodology for integrating and synthetizing the information arising from multiple studies \citep{borenstein2009references}. Using appropriate statistical models, quantitative reviews contrast and pool results in the hope of identifying similarities or explain differences across study findings. Meta-analysis represents the state of the art for systematically reviewing the evidence, as indicated by the increasing number of published meta-analyses over the last 40 years (Figure~\ref{fig:num_meta-analysis}).
+
+The classical approach for meta-analysis consists of a weighted average of the study-specific results or estimates. A fixed-effect model for meta-analysis assumes that all the studies estimate a single common parameter \citep{rice2017re}. The hypothesis of homogeneity of the estimates is rarely applicable in biomedical and social sciences where studies typically differ in terms of design, disease classification, exposure measurement, and implemented statistical analyses \citep{colditz1995heterogeneity}. In such cases, heterogeneity across estimates is expected and should be considered in the analysis \citep{higgins2009re}. If the parameters estimated in the studies are not identical but similar, a random-effects models can be used to identify those similarities or to explain the observed heterogeneity \citep{higgins2009re}.
+
+
+<<num_meta-analysis, fig.cap='Number of publications about meta-analysis (results from Medline search using text "meta-analysis" until December 2017).'>>=
+count_meta %>%
+  subset(year <= 2017) %>%
+  ggplot(aes(year, count)) + 
+  geom_point(size = 2) + geom_line() +
+  scale_x_continuous(breaks = seq(1980, 2017, 5)) +
+  labs(y = "Number of publications about meta-analysis", x = "Year") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+@
+
+
+\subsection{Random-effects meta-analysis}
+
+In a meta-analysis of $K$ studies indexed by $i = 1, \dots, K$, we denote $\hat \beta_i$ the estimate of an effect of interest (effect size) in the $i$-th study.
+%, and $\hat v_i$ an estimate of the related sampling variance. 
+
+A random-effects model for meta-analysis can be written as
+\begin{equation}
+\hat \beta_i = \beta + u_i + \varepsilon_i
+\label{eq:rma}
+\end{equation}
+
+\noindent where $\beta$ is the underlying mean effect, oftentimes the main parameter of interest. The random-effects $u_i$ represent the study-specific deviations from the mean effect $\beta$ allowing each study to estimate a similar parameter $\beta_i$ defined as $\beta + u_i $. The random component follows a generic $f$ distribution with mean 0 and variance equal to $\tau^2$, the between-studies heterogeneity. 
+The within-study error components $\varepsilon_i$ have also mean 0 and variance equal to $\hat v_i$, an estimate of the sampling variance of $\hat \beta_i$.
+Because the sample size in the individual investigations is often large, the uncertainty around the estimates of the sampling variance is negligible. Therefore, $\hat v_i$ can be considered fixed and denoted as $v_i$. In addition, for the central limit theorem, $\varepsilon_i \sim  \mathcal{N}\left(0, v_i \right)$, or alternatively, $\hat \beta_i | u_i \sim \mathcal{N}\left(\beta+u_i, v_i \right)$.
+
+An inverse variance-weighted approach for meta-analysis estimates the mean effect $\beta$ as a weighted average of the $\hat \beta_i$ \citep{whitehead1991general, dersimonian1986meta}
+\begin{align}
+\hat \beta = \frac{\sum_{i = 1}^k \hat \beta_i \hat w_i}{\sum_{i = 1}^k \hat w_i} \label{eq:avgbeta} \\
+\widehat{\Var} \left(\hat \beta \right) = \left( \sum_{i = 1}^k \hat w_i \right)^{-1}
+\end{align}
+\noindent with weights $\hat w_i = \left(v_i + \hat \tau^2 \right)^{-1}$ and $\hat \tau^2$ being an estimate of the between-study heterogeneity. 
+
+
+\subsection{Test and estimates of heterogeneity}
+
+A second parameter of interest, often overlooked, is the between-study heterogeneity, $\tau^2$. Focusing on the mean effect alone may provide only a limited piece of information, especially in case of heterogeneous effects \citep{borenstein2010basic}. Indeed, an evaluation of the extent of heterogeneity is a crucial step in determining the appropriateness of presenting a summary measure of the observed effect sizes.
+
+Presence of heterogeneity is frequently defined as the excess in the variability of $\hat \beta_i$ above that expected alone by chance. A summary measure of the observed variability is represented by the $Q$~statistic
+\begin{equation}
+Q = \sum_{i=1}^K \left(\hat \beta_i - \hat \beta_{\text{fe}} \right)^2
+\label{eq:Q}
+\end{equation}
+\noindent where $\hat \beta_{\text{fe}} = \sum_{i=1}^K \hat \beta_i v_i^{-2}/ \sum_{i=1}^K v_i^{-2}$ is the estimate of $\beta$ in a fixed-effect model. Based on that, Cochrane developed a test for assessing hypothesis of homogeneity of the study-specific estimates \citep{cochran1954combination}. Under the null hypothesis of no heterogeneity ($H_0: \tau^2 = 0$) the $Q$~statistic follows a $\chi^2$ with $K-1$ degrees of freedom. A $p$~value less than 0.10 is oftentimes used as evidence for presence of between-studies variability. It is known, however, that the test is sensible to the number of studies $K$ failing to reject the null hypothesis even for high value of $\tau^2$ when K is small, and contrary it is more likely to reject $H_0$ for negligible between-studies variation when $K$ is big \citep{higgins2002quantifying, takkouche1999evaluation}. Therefore, failing to reject the null hypothesis does not provide evidence supporting homogeneity in the effect sizes \citep{biggerstaff1997incorporating}. In addition, the dichotomization heterogeneous/homogeneous is not very informative, especially because heterogeneity is almost always present. 
+
+An estimate of $\tau^2$, instead, directly provides information about the amount of heterogeneity and is thus the more natural measure of between-studies variability. Based on the expectation of $Q$, Dersimonian and Laird proposed the following estimator for $\tau^2$ using the method of moments \citep{dersimonian1986meta}
+\begin{equation}
+\hat \tau^2_{\text{DL}} = \max \left\{0, \frac{Q - (K-1)}{\sum_{i=1}^K v_i^{-2} - \sum_{i=1}^K v_i^{-4}/\sum_{i=1}^K v_i^{-2} } \right\}
+\label{eq:tau2DL}
+\end{equation}
+
+\noindent The moment-based estimator is one of the most popular estimators of $\tau^2$ because it has a simple non-iterative formulation and does not require any distributional assumptions for the random-effects rather than having a finite first order moment. Other common non-iterative alternatives include an estimator based on the variance components \citep{hedges1983random} and using methods for estimating the error variance in a weighted linear model \citep{sidik2005simple}. Iterative methods based on maximizing the likelihood or restricted likelihood can also be used by specifying a distributional form for the random-effects. The more conventional choice is typically a normal distribution $u_i \sim \mathcal{N}\left( 0, \tau^2 \right)$, which implies $\beta_i \sim \mathcal{N}\left(\beta, \tau^2 \right)$ and $\hat \beta_i \sim \mathcal{N}\left(\beta + u_i, \tau^2 + v_i \right)$.
+
+Although $\tau^2$ is the more natural and appropriate measure of between-study variability, the actual value is difficult to interpret because it depends on type of effect size (e.g. log relative risk, standardized mean difference) and has no upper limit. Therefore, both evaluation of the degree (or levels) and the comparison of heterogeneity in different meta-analyses can hardly be based on the estimate of $\tau^2$.
+
+
+\subsection{Measures of heterogeneity}
+
+To complement the test based approach and the information provided by $\hat tau^2$, measures that quantify the impact of heterogeneity have been proposed \citep{higgins2002quantifying}. 
+Higgins et al. presented several possibilities in the simpler case where all the sampling variances $v_i$ are equal to a fixed and known value $\sigma^2$. 
+
+Two measures aim to estimate the ratio $\sigma^2/(\sigma^2/ + \tau^2)$, namely the $H^2= Q/(K-1)$ that represents the excess in $Q$~statistic relative to its degrees of freedom, and $R^2 = \Var{\hat \beta}/\Var{\hat \beta_{\text{FE}}}$ which describe the inflation in the variability of the mean effect in a random-effects model compared with a fixed-effect model.
+Other measures, instead, relate the between-studies heterogeneity, $\tau^2$, to the marginal or unconditional variability $\tau^2 + v_i$, which is defined by the sum of within- and between-study components. These measures can be more easily interpreted as the percentage of the total variability due to heterogeneity, similar to the intraclass correlation coefficient defined for linear mixed-effects models. The ratio directly involves the within-terms $v_i$ that again varies across the studies. Indeed, the most popular measures, namely the $R_I$ \citep{ takkouche1999evaluation} and the $I^2$ \citep{higgins2002quantifying}, replaced $v_i$ with a statistic that summarizes the observed distribution of $v_i$.
+Takkouche et al. chose
+\begin{equation}
+s_1^2 = \frac{K}{\sum_{i=1}^K v_i^{-2}}
+\label{eq:Ri}
+\end{equation}
+\noindent that is the harmonic mean of the inverse of the sampling variances. 
+Higgins et al., instead, described the ``typical'' within-study variance as
+\begin{equation}
+s_2^2 = \frac{(K-1) \sum_{i=1}^K v_i^{-2}}{ \left( \sum_{i=1}^K v_i^{-2} \right)^2 - \sum_{i=1}^K v_i^{-4}}
+\label{eq:I2}
+\end{equation}
+\noindent that provided a direct relationship with the $Q$~statistic: $I^2 = (Q - (K-1))/Q$ when $\tau^2$ is estimated using the method of moments.
+\noindent Both statistics can be expressed as a percentage where 0\% corresponds to no heterogeneity and increasing values imply higher levels of heterogeneity. It is known that these measures depend on precision of the study-specific estimates and tend to increase to 100\% when the $v_i$ are much smaller than the estimated $\tau^2$. 
+A complementary measure is the between-studies coefficient of variation, defined as $\tau^2/|\hat \beta|$, that does not directly depend on the within-study variances. However, it increases quickly as $\hat \beta$ becomes smaller, and is not defined for $\hat \beta = 0$.
+
+While the limitations of the $Q$~test approach are widely known, little emphasis is placed on the assumptions underneath the definition of the established measures of heterogeneity, i.e.  all the estimates being reported with the same precision, which is unlikely to be met in almost all the applications. A measure of the impact of heterogeneity that does not require such an assumption would be desirable.
+
+
+\section{Categorical models for dose--response analysis}
+
+
+
+
+
+\newpage
+
+\subsection{Categorical analysis with individual participant data}
+
+\subsection{Aggregated dose--response data}
+
+\subsection{High versus low meta-analysis}
+
+
+
+\section{Dose--response meta-analysis}
+
+\subsection{First stage: study-specific curves}
+
+\subsection{Second stage: multivariate meta-analysis}
+
+
+
+\section{Software}
+
+
 
 Here an example of a figure (Figure~\ref{fig:cite_grl}).
 
-<<cite_grl, fig.cap=" ">>=
-citations <- get_article_cite_history("HcvPl18AAAAJ", "IjCSPb-OGe4C")
-
-citations %>%
-  subset(year < 2017) %>%
+<<cite_grl, fig.cap='Number of citations of the paper by Greenland and Longnecker (1992) obtained from Google Scholar 1992-2017 (until December 2017).'>>=
+count_grl %>%
+  #subset(year < 2017) %>%
   ggplot(aes(year, cites)) + 
   geom_point(size = 2) + geom_line() +
-  #geom_smooth(se = F) +
   scale_x_continuous(breaks = seq(1992, 2017, 4)) +
-  labs(y = "Number of citations", x = "Year") +
-  theme_light() + 
-  theme(panel.border = element_blank(), axis.line = element_line(),
-        axis.text.x = element_text(angle = 45, hjust = 1))
+  labs(y = "Number of dose-response meta-analyses", x = "Year") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 @
 

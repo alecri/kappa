@@ -1,4 +1,4 @@
-\begin{thebibliography}{5}
+\begin{thebibliography}{19}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -8,6 +8,37 @@
   \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
   \urlstyle{rm}\Url}\fi
 \providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{Biggerstaff and Tweedie(1997)}]{biggerstaff1997incorporating}
+Biggerstaff B, Tweedie R (1997).
+\newblock \enquote{Incorporating variability in estimates of heterogeneity in
+  the random effects model in meta-analysis.}
+\newblock \emph{Statistics in medicine}, \textbf{16}(7), 753--768.
+
+\bibitem[{Borenstein \emph{et~al.}(2009)Borenstein, Hedges, Higgins, and
+  Rothstein}]{borenstein2009references}
+Borenstein M, Hedges LV, Higgins J, Rothstein HR (2009).
+\newblock \emph{References}.
+\newblock Wiley Online Library.
+
+\bibitem[{Borenstein \emph{et~al.}(2010)Borenstein, Hedges, Higgins, and
+  Rothstein}]{borenstein2010basic}
+Borenstein M, Hedges LV, Higgins J, Rothstein HR (2010).
+\newblock \enquote{A basic introduction to fixed-effect and random-effects
+  models for meta-analysis.}
+\newblock \emph{Research synthesis methods}, \textbf{1}(2), 97--111.
+
+\bibitem[{Cochran(1954)}]{cochran1954combination}
+Cochran WG (1954).
+\newblock \enquote{The combination of estimates from different experiments.}
+\newblock \emph{Biometrics}, \textbf{10}(1), 101--129.
+
+\bibitem[{Colditz \emph{et~al.}(1995)Colditz, Burdick, and
+  Mosteller}]{colditz1995heterogeneity}
+Colditz GA, Burdick E, Mosteller F (1995).
+\newblock \enquote{Heterogeneity in meta-analysis of data from epidemiologic
+  studies: a commentary.}
+\newblock \emph{American journal of epidemiology}, \textbf{142}(4), 371--382.
 
 \bibitem[{Crippa \emph{et~al.}(2018{\natexlab{a}})Crippa, Discacciati, Bottai,
   Spiegelman, and Orsini}]{crippa2018one}
@@ -37,11 +68,63 @@ Crippa A, Thomas I, Orsini N (2018{\natexlab{b}}).
   aggregated data.}
 \newblock \emph{Submitted}.
 
+\bibitem[{DerSimonian and Laird(1986)}]{dersimonian1986meta}
+DerSimonian R, Laird N (1986).
+\newblock \enquote{Meta-analysis in clinical trials.}
+\newblock \emph{Controlled clinical trials}, \textbf{7}(3), 177--188.
+
 \bibitem[{Discacciati \emph{et~al.}(2015)Discacciati, Crippa, and
   Orsini}]{discacciati2015goodness}
 Discacciati A, Crippa A, Orsini N (2015).
 \newblock \enquote{Goodness of fit tools for dose--response meta-analysis of
   binary outcomes.}
 \newblock \emph{Research synthesis methods}.
+
+\bibitem[{Haidich(2010)}]{haidich2010meta}
+Haidich AB (2010).
+\newblock \enquote{Meta-analysis in medical research.}
+\newblock \emph{Hippokratia}, \textbf{14}(Suppl 1), 29.
+
+\bibitem[{Hedges(1983)}]{hedges1983random}
+Hedges LV (1983).
+\newblock \enquote{A random effects model for effect sizes.}
+\newblock \emph{Psychological Bulletin}, \textbf{93}(2), 388.
+
+\bibitem[{Higgins and Thompson(2002)}]{higgins2002quantifying}
+Higgins J, Thompson SG (2002).
+\newblock \enquote{Quantifying heterogeneity in a meta-analysis.}
+\newblock \emph{Statistics in medicine}, \textbf{21}(11), 1539--1558.
+
+\bibitem[{Higgins \emph{et~al.}(2009)Higgins, Thompson, and
+  Spiegelhalter}]{higgins2009re}
+Higgins J, Thompson SG, Spiegelhalter DJ (2009).
+\newblock \enquote{A re-evaluation of random-effects meta-analysis.}
+\newblock \emph{Journal of the Royal Statistical Society: Series A (Statistics
+  in Society)}, \textbf{172}(1), 137--159.
+
+\bibitem[{Rice \emph{et~al.}(2017)Rice, Higgins, and Lumley}]{rice2017re}
+Rice K, Higgins J, Lumley T (2017).
+\newblock \enquote{A re-evaluation of fixed effect (s) meta-analysis.}
+\newblock \emph{Journal of the Royal Statistical Society: Series A (Statistics
+  in Society)}.
+
+\bibitem[{Sidik and Jonkman(2005)}]{sidik2005simple}
+Sidik K, Jonkman JN (2005).
+\newblock \enquote{Simple heterogeneity variance estimation for meta-analysis.}
+\newblock \emph{Journal of the Royal Statistical Society: Series C (Applied
+  Statistics)}, \textbf{54}(2), 367--384.
+
+\bibitem[{Takkouche \emph{et~al.}(1999)Takkouche, Cadarso-Su{\'a}rez, and
+  Spiegelman}]{takkouche1999evaluation}
+Takkouche B, Cadarso-Su{\'a}rez C, Spiegelman D (1999).
+\newblock \enquote{Evaluation of old and new tests of heterogeneity in
+  epidemiologic meta-analysis.}
+\newblock \emph{American journal of epidemiology}, \textbf{150}(2), 206--215.
+
+\bibitem[{Whitehead and Whitehead(1991)}]{whitehead1991general}
+Whitehead A, Whitehead J (1991).
+\newblock \enquote{A general parametric approach to the meta-analysis of
+  randomized clinical trials.}
+\newblock \emph{Statistics in medicine}, \textbf{10}(11), 1665--1677.
 
 \end{thebibliography}

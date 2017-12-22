@@ -10,6 +10,44 @@
 % Purpose: Materials
 % ---------------------------------------------------------
 
-\chapter{Materials and methods}
+\chapter{Methods}
 
-Write materials and methods with subsections as in the background section
+\section{The \texttt{dosresmeta} R package}
+
+\subsection{Implementation}
+
+\subsection{Exposure modeling}
+
+
+\section{A new measure of heterogeneity}
+
+\subsection{Statistical proporties}
+
+\subsection{Simulation study}
+
+
+\section{Goodness-of-fit}
+
+\subsection{Deviance}
+
+\subsection{Coefficient of determination}
+
+\subsection{Visual tools}
+
+
+\section{A point-wise approach}
+
+\subsection{Prediction of study-specific (log) relative risks}
+
+\subsection{Pool of dose--response prediction}
+
+
+\section{A one-stage model}
+
+\subsection{Model definition}
+
+\subsection{Estimation and hypothesis testing}
+
+\subsection{Prediction}
+
+\subsection{Comparison with two-stage analysis}

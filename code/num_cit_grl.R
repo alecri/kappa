@@ -1,12 +1,14 @@
 ## number of citations of Greenland and Longnecker (1992)
+## last updated: 171219
 # https://scholar.google.com/citations?view_op=view_citation&hl=en&citation_for_view=HcvPl18AAAAJ:IjCSPb-OGe4C
 
 library(tidyverse)
-
 source("code/functions.R")
-citations <- get_article_cite_history("HcvPl18AAAAJ", "IjCSPb-OGe4C")
 
-citations %>%
+count_grl <- get_article_cite_history("HcvPl18AAAAJ", "IjCSPb-OGe4C")
+save(count_grl, file = "data/count_grl.RData")
+
+count_grl %>%
   subset(year < 2017) %>%
   ggplot(aes(year, cites)) + 
   geom_point(size = 2) + geom_line() +

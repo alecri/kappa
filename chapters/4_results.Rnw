@@ -11,7 +11,7 @@
 
 \chapter{Results}
 
-Write the results with subsections as in the background section
+
 
 
 % Paper I

@@ -13,11 +13,18 @@ library(knitr)
 opts_knit$set(self.contained=FALSE)
 opts_chunk$set(echo = FALSE, message = FALSE, comment = NA, fig.path = "../figure/",
                out.width = "\\textwidth",
-               fig.align = "center", fig.width = 7, fig.height = 4.5, fig.pos= "h")
+               fig.align = "center", fig.width = 7, fig.height = 4.5, fig.pos= "ht!")
 pkgs <- c("tidyverse", "dosresmeta")
 lapply(pkgs, require, character.only = TRUE)
 # loading libraries and useful functions
 source("code/functions.R")
+# loading data
+load("data/count_meta.RData")
+load("data/count_grl.RData")
+# setting a ggplot theme for all the plots
+theme_kappa <- theme_light() +
+  theme(panel.border = element_blank(), axis.line = element_line())
+theme_set(theme_kappa)
 @
 
 % If you get the following error:
@@ -104,6 +111,7 @@ source("code/functions.R")
 \newcommand*{\LargerCdot}{\raisebox{-0.25ex}{\scalebox{1.2}{$\cdot$}}}
 
 \DeclareMathOperator{\R}{\textsf{R}}
+\DeclareMathOperator{\Var}{Var}
 \DeclareMathOperator{\Cov}{Cov} 
 \DeclareMathOperator{\diag}{diag} 
 \DeclareMathOperator{\N}{N} 
