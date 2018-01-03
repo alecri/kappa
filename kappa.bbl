@@ -1,4 +1,4 @@
-\begin{thebibliography}{19}
+\begin{thebibliography}{37}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -8,6 +8,26 @@
   \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
   \urlstyle{rm}\Url}\fi
 \providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{Bagnardi \emph{et~al.}(2004)Bagnardi, Zambon, Quatto, and
+  Corrao}]{bagnardi2004flexible}
+Bagnardi V, Zambon A, Quatto P, Corrao G (2004).
+\newblock \enquote{Flexible meta-regression functions for modeling aggregate
+  dose-response data, with an application to alcohol and mortality.}
+\newblock \emph{American journal of epidemiology}, \textbf{159}(11),
+  1077--1086.
+
+\bibitem[{Berkey \emph{et~al.}(1995)Berkey, Hoaglin, Mosteller, and
+  Colditz}]{berkey1995random}
+Berkey CS, Hoaglin DC, Mosteller F, Colditz GA (1995).
+\newblock \enquote{A random-effects regression model for meta-analysis.}
+\newblock \emph{Statistics in medicine}, \textbf{14}(4), 395--411.
+
+\bibitem[{Berlin \emph{et~al.}(1993)Berlin, Longnecker, and
+  Greenland}]{berlin1993meta}
+Berlin JA, Longnecker MP, Greenland S (1993).
+\newblock \enquote{Meta-analysis of epidemiologic dose-response data.}
+\newblock \emph{Epidemiology}, \textbf{4}(3), 218--228.
 
 \bibitem[{Biggerstaff and Tweedie(1997)}]{biggerstaff1997incorporating}
 Biggerstaff B, Tweedie R (1997).
@@ -80,10 +100,44 @@ Discacciati A, Crippa A, Orsini N (2015).
   binary outcomes.}
 \newblock \emph{Research synthesis methods}.
 
+\bibitem[{Gasparrini \emph{et~al.}(2012)Gasparrini, Armstrong, and
+  Kenward}]{gasparrini2012multivariate}
+Gasparrini A, Armstrong B, Kenward M (2012).
+\newblock \enquote{Multivariate meta-analysis for non-linear and other
+  multi-parameter associations.}
+\newblock \emph{Statistics in medicine}, \textbf{31}(29), 3821--3839.
+
+\bibitem[{Greenland(1995)}]{greenland1995dose}
+Greenland S (1995).
+\newblock \enquote{Dose-response and trend analysis in epidemiology:
+  alternatives to categorical analysis.}
+\newblock \emph{Epidemiology}, pp. 356--365.
+
+\bibitem[{Greenland and Longnecker(1992)}]{greenland1992methods}
+Greenland S, Longnecker MP (1992).
+\newblock \enquote{Methods for trend estimation from summarized dose-response
+  data, with applications to meta-analysis.}
+\newblock \emph{American journal of epidemiology}, \textbf{135}(11),
+  1301--1309.
+
 \bibitem[{Haidich(2010)}]{haidich2010meta}
 Haidich AB (2010).
 \newblock \enquote{Meta-analysis in medical research.}
 \newblock \emph{Hippokratia}, \textbf{14}(Suppl 1), 29.
+
+\bibitem[{Hamling \emph{et~al.}(2008)Hamling, Lee, Weitkunat, and
+  Amb{\"u}hl}]{hamling2008facilitating}
+Hamling J, Lee P, Weitkunat R, Amb{\"u}hl M (2008).
+\newblock \enquote{Facilitating meta-analyses by deriving relative effect and
+  precision estimates for alternative comparisons from a set of estimates
+  presented by exposure level or disease category.}
+\newblock \emph{Statistics in medicine}, \textbf{27}(7), 954--970.
+
+\bibitem[{Harrell~Jr(2015)}]{harrell2015regression}
+Harrell~Jr FE (2015).
+\newblock \emph{Regression modeling strategies: with applications to linear
+  models, logistic and ordinal regression, and survival analysis}.
+\newblock Springer.
 
 \bibitem[{Hedges(1983)}]{hedges1983random}
 Hedges LV (1983).
@@ -102,11 +156,58 @@ Higgins J, Thompson SG, Spiegelhalter DJ (2009).
 \newblock \emph{Journal of the Royal Statistical Society: Series A (Statistics
   in Society)}, \textbf{172}(1), 137--159.
 
+\bibitem[{Higgins(2008)}]{higgins2008commentary}
+Higgins JP (2008).
+\newblock \enquote{Commentary: Heterogeneity in meta-analysis should be
+  expected and appropriately quantified.}
+\newblock \emph{International journal of epidemiology}, \textbf{37}(5),
+  1158--1160.
+
+\bibitem[{Jackson \emph{et~al.}(2011)Jackson, Riley, and
+  White}]{jackson2011multivariate}
+Jackson D, Riley R, White IR (2011).
+\newblock \enquote{Multivariate meta-analysis: Potential and promise.}
+\newblock \emph{Statistics in Medicine}, \textbf{30}(20), 2481--2498.
+
+\bibitem[{Orsini \emph{et~al.}(2006)Orsini, Bellocco, Greenland
+  \emph{et~al.}}]{orsini2006generalized}
+Orsini N, Bellocco R, Greenland S, \emph{et~al.} (2006).
+\newblock \enquote{Generalized least squares for trend estimation of summarized
+  dose-response data.}
+\newblock \emph{Stata Journal}, \textbf{6}(1), 40.
+
+\bibitem[{Orsini \emph{et~al.}(2011{\natexlab{a}})Orsini, Greenland
+  \emph{et~al.}}]{orsini2011procedure}
+Orsini N, Greenland S, \emph{et~al.} (2011{\natexlab{a}}).
+\newblock \enquote{A procedure to tabulate and plot results after flexible
+  modeling of a quantitative covariate.}
+\newblock \emph{Stata Journal}, \textbf{11}(1), 1.
+
+\bibitem[{Orsini \emph{et~al.}(2011{\natexlab{b}})Orsini, Li, Wolk, Khudyakov,
+  and Spiegelman}]{orsini2011meta}
+Orsini N, Li R, Wolk A, Khudyakov P, Spiegelman D (2011{\natexlab{b}}).
+\newblock \enquote{Meta-analysis for linear and nonlinear dose-response
+  relations: examples, an evaluation of approximations, and software.}
+\newblock \emph{American journal of epidemiology}, \textbf{175}(1), 66--73.
+
+\bibitem[{Pinheiro and Bates(2010)}]{pinheiro2010mixed}
+Pinheiro J, Bates D (2010).
+\newblock \emph{Mixed-{Effects} {Models} in {S} and {S}-{PLUS}}.
+\newblock Springer Science \& Business Media.
+\newblock ISBN 978-1-4419-0318-1.
+
 \bibitem[{Rice \emph{et~al.}(2017)Rice, Higgins, and Lumley}]{rice2017re}
 Rice K, Higgins J, Lumley T (2017).
 \newblock \enquote{A re-evaluation of fixed effect (s) meta-analysis.}
 \newblock \emph{Journal of the Royal Statistical Society: Series A (Statistics
   in Society)}.
+
+\bibitem[{Royston \emph{et~al.}(2006)Royston, Altman, and
+  Sauerbrei}]{royston2006dichotomizing}
+Royston P, Altman DG, Sauerbrei W (2006).
+\newblock \enquote{Dichotomizing continuous predictors in multiple regression:
+  a bad idea.}
+\newblock \emph{Statistics in medicine}, \textbf{25}(1), 127--141.
 
 \bibitem[{Sidik and Jonkman(2005)}]{sidik2005simple}
 Sidik K, Jonkman JN (2005).
@@ -114,12 +215,29 @@ Sidik K, Jonkman JN (2005).
 \newblock \emph{Journal of the Royal Statistical Society: Series C (Applied
   Statistics)}, \textbf{54}(2), 367--384.
 
+\bibitem[{Sutton and Higgins(2008)}]{sutton2008recent}
+Sutton AJ, Higgins J (2008).
+\newblock \enquote{Recent developments in meta-analysis.}
+\newblock \emph{Statistics in medicine}, \textbf{27}(5), 625--650.
+
 \bibitem[{Takkouche \emph{et~al.}(1999)Takkouche, Cadarso-Su{\'a}rez, and
   Spiegelman}]{takkouche1999evaluation}
 Takkouche B, Cadarso-Su{\'a}rez C, Spiegelman D (1999).
 \newblock \enquote{Evaluation of old and new tests of heterogeneity in
   epidemiologic meta-analysis.}
 \newblock \emph{American journal of epidemiology}, \textbf{150}(2), 206--215.
+
+\bibitem[{Turner \emph{et~al.}(2010)Turner, Dobson, and
+  Pocock}]{turner2010categorisation}
+Turner EL, Dobson JE, Pocock SJ (2010).
+\newblock \enquote{Categorisation of continuous risk factors in epidemiological
+  publications: a survey of current practice.}
+\newblock \emph{Epidemiologic Perspectives \& Innovations}, \textbf{7}(1), 9.
+
+\bibitem[{Verbeke(1997)}]{verbeke1997linear}
+Verbeke G (1997).
+\newblock \emph{Linear mixed models for longitudinal data}.
+\newblock Springer.
 
 \bibitem[{Whitehead and Whitehead(1991)}]{whitehead1991general}
 Whitehead A, Whitehead J (1991).

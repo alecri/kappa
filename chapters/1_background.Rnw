@@ -15,9 +15,9 @@
 
 Relevant research questions are typically addressed by independent investigators in multiple studies. The sampling error and possibly differences in the investigations will inevitably produce diverse results, sometimes even conflicting. Evidence-based medicine requires a synthesis of the available evidence to optimize the decision-making process \citep{haidich2010meta}. 
 
-Meta-analysis, or more generally quantitative review synthesis, is the statistical methodology for integrating and synthetizing the information arising from multiple studies \citep{borenstein2009references}. Using appropriate statistical models, quantitative reviews contrast and pool results in the hope of identifying similarities or explain differences across study findings. Meta-analysis represents the state of the art for systematically reviewing the evidence, as indicated by the increasing number of published meta-analyses over the last 40 years (Figure~\ref{fig:num_meta-analysis}).
+Meta-analysis, or more generally quantitative review synthesis, is the statistical methodology for integrating and synthetizing the information arising from multiple studies \citep{borenstein2009references}. Using appropriate statistical models, quantitative reviews contrast and pool results in the hope of identifying similarities or explain differences across study findings. Meta-analysis represents the state of the art for systematically reviewing the evidence, as indicated by the increasing number of published meta-analyses over the last 40 years (figure~\ref{fig:num_meta-analysis}).
 
-The classical approach for meta-analysis consists of a weighted average of the study-specific results or estimates. A fixed-effect model for meta-analysis assumes that all the studies estimate a single common parameter \citep{rice2017re}. The hypothesis of homogeneity of the estimates is rarely applicable in biomedical and social sciences where studies typically differ in terms of design, disease classification, exposure measurement, and implemented statistical analyses \citep{colditz1995heterogeneity}. In such cases, heterogeneity across estimates is expected and should be considered in the analysis \citep{higgins2009re}. If the parameters estimated in the studies are not identical but similar, a random-effects models can be used to identify those similarities or to explain the observed heterogeneity \citep{higgins2009re}.
+The classical approach for meta-analysis consists of a weighted average of the study-specific results or estimates. A fixed-effect model for meta-analysis assumes that all the studies estimate a single common parameter \citep{rice2017re}. The hypothesis of homogeneity of the estimates is rarely applicable in biomedical and social sciences where studies typically differ in terms of design, disease classification, exposure measurement, and implemented statistical analyses \citep{colditz1995heterogeneity}. In such cases, heterogeneity across estimates is expected and should be considered in the analysis \citep{higgins2008commentary}. If the parameters estimated in the studies are not identical but similar, a random-effects models can be used to identify those similarities or to explain the observed heterogeneity \citep{higgins2009re}.
 
 
 <<num_meta-analysis, fig.cap='Number of publications about meta-analysis (results from Medline search using text "meta-analysis" until December 2017).'>>=
@@ -25,111 +25,150 @@ count_meta %>%
   subset(year <= 2017) %>%
   ggplot(aes(year, count)) + 
   geom_point(size = 2) + geom_line() +
-  scale_x_continuous(breaks = seq(1980, 2017, 5)) +
+  scale_x_continuous(breaks = seq(1980, 2017, 5), minor_breaks = seq(1980, 2017, 5)) +
   labs(y = "Number of publications about meta-analysis", x = "Year") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 @
 
 
 \subsection{Random-effects meta-analysis}
+\label{sec:rma}
 
-In a meta-analysis of $K$ studies indexed by $i = 1, \dots, K$, we denote $\hat \beta_i$ the estimate of an effect of interest (effect size) in the $i$-th study.
+In a meta-analysis of $I$ studies indexed by $i = 1, \dots, I$, we denote $\hat \beta_i$ the estimate of an effect of interest (effect size) in the $i$-th study.
 %, and $\hat v_i$ an estimate of the related sampling variance. 
-
 A random-effects model for meta-analysis can be written as
 \begin{equation}
 \hat \beta_i = \beta + u_i + \varepsilon_i
 \label{eq:rma}
 \end{equation}
 
-\noindent where $\beta$ is the underlying mean effect, oftentimes the main parameter of interest. The random-effects $u_i$ represent the study-specific deviations from the mean effect $\beta$ allowing each study to estimate a similar parameter $\beta_i$ defined as $\beta + u_i $. The random component follows a generic $f$ distribution with mean 0 and variance equal to $\tau^2$, the between-studies heterogeneity. 
+\noindent where $\beta$ is the underlying mean effect, oftentimes the main parameter of interest. The random-effects $u_i$ represent the study-specific deviations from the mean effect $\beta$ allowing each study to estimate a similar parameter $\beta_i$ defined as $\beta + u_i $. The random effects follow a generic $f$ distribution with mean 0 and variance equal to $\tau^2$, the between-studies heterogeneity. 
 The within-study error components $\varepsilon_i$ have also mean 0 and variance equal to $\hat v_i$, an estimate of the sampling variance of $\hat \beta_i$.
 Because the sample size in the individual investigations is often large, the uncertainty around the estimates of the sampling variance is negligible. Therefore, $\hat v_i$ can be considered fixed and denoted as $v_i$. In addition, for the central limit theorem, $\varepsilon_i \sim  \mathcal{N}\left(0, v_i \right)$, or alternatively, $\hat \beta_i | u_i \sim \mathcal{N}\left(\beta+u_i, v_i \right)$.
 
 An inverse variance-weighted approach for meta-analysis estimates the mean effect $\beta$ as a weighted average of the $\hat \beta_i$ \citep{whitehead1991general, dersimonian1986meta}
 \begin{align}
-\hat \beta = \frac{\sum_{i = 1}^k \hat \beta_i \hat w_i}{\sum_{i = 1}^k \hat w_i} \label{eq:avgbeta} \\
-\widehat{\Var} \left(\hat \beta \right) = \left( \sum_{i = 1}^k \hat w_i \right)^{-1}
+\hat \beta = \frac{\sum_{i = 1}^I \hat \beta_i \hat w_i}{\sum_{i = 1}^I \hat w_i} \label{eq:avgbeta} \\
+\widehat{\Var} \left(\hat \beta \right) = \left( \sum_{i = 1}^I \hat w_i \right)^{-1}
 \end{align}
 \noindent with weights $\hat w_i = \left(v_i + \hat \tau^2 \right)^{-1}$ and $\hat \tau^2$ being an estimate of the between-study heterogeneity. 
 
 
-\subsection{Test and estimates of heterogeneity}
+\subsection{Test and estimates of heterogeneity}\label{sec:het_rma}
 
 A second parameter of interest, often overlooked, is the between-study heterogeneity, $\tau^2$. Focusing on the mean effect alone may provide only a limited piece of information, especially in case of heterogeneous effects \citep{borenstein2010basic}. Indeed, an evaluation of the extent of heterogeneity is a crucial step in determining the appropriateness of presenting a summary measure of the observed effect sizes.
 
 Presence of heterogeneity is frequently defined as the excess in the variability of $\hat \beta_i$ above that expected alone by chance. A summary measure of the observed variability is represented by the $Q$~statistic
 \begin{equation}
-Q = \sum_{i=1}^K \left(\hat \beta_i - \hat \beta_{\text{fe}} \right)^2
+Q = \sum_{i=1}^I \left(\hat \beta_i - \hat \beta_{\text{fe}} \right)^2
 \label{eq:Q}
 \end{equation}
-\noindent where $\hat \beta_{\text{fe}} = \sum_{i=1}^K \hat \beta_i v_i^{-2}/ \sum_{i=1}^K v_i^{-2}$ is the estimate of $\beta$ in a fixed-effect model. Based on that, Cochrane developed a test for assessing hypothesis of homogeneity of the study-specific estimates \citep{cochran1954combination}. Under the null hypothesis of no heterogeneity ($H_0: \tau^2 = 0$) the $Q$~statistic follows a $\chi^2$ with $K-1$ degrees of freedom. A $p$~value less than 0.10 is oftentimes used as evidence for presence of between-studies variability. It is known, however, that the test is sensible to the number of studies $K$ failing to reject the null hypothesis even for high value of $\tau^2$ when K is small, and contrary it is more likely to reject $H_0$ for negligible between-studies variation when $K$ is big \citep{higgins2002quantifying, takkouche1999evaluation}. Therefore, failing to reject the null hypothesis does not provide evidence supporting homogeneity in the effect sizes \citep{biggerstaff1997incorporating}. In addition, the dichotomization heterogeneous/homogeneous is not very informative, especially because heterogeneity is almost always present. 
+\noindent where $\hat \beta_{\text{fe}} = \sum_{i=1}^I \hat \beta_i v_i^{-2}/ \sum_{i=1}^I v_i^{-2}$ is the estimate of $\beta$ in a fixed-effect model. Based on this statistic, Cochrane developed a test for assessing the hypothesis of homogeneity of the study-specific estimates \citep{cochran1954combination}. Under the null hypothesis of no heterogeneity ($H_0: \tau^2 = 0$) the $Q$~statistic follows a $\chi^2$ distribution with $I-1$ degrees of freedom. A $p$~value less than 0.10 is oftentimes used as evidence for presence of between-studies variability. It is known, however, that the test is sensible to the number of studies $I$ failing to reject the null hypothesis even for high value of $\tau^2$ when K is small, and contrary, is more likely to reject $H_0$ for negligible between-studies variation when $K$ is big \citep{higgins2002quantifying, takkouche1999evaluation}. Therefore, failing to reject the null hypothesis does not provide evidence supporting homogeneity in the effect sizes \citep{biggerstaff1997incorporating}. In addition, the dichotomization heterogeneous/homogeneous is not very informative, especially because heterogeneity is almost always present \citep{higgins2008commentary}. 
 
 An estimate of $\tau^2$, instead, directly provides information about the amount of heterogeneity and is thus the more natural measure of between-studies variability. Based on the expectation of $Q$, Dersimonian and Laird proposed the following estimator for $\tau^2$ using the method of moments \citep{dersimonian1986meta}
 \begin{equation}
-\hat \tau^2_{\text{DL}} = \max \left\{0, \frac{Q - (K-1)}{\sum_{i=1}^K v_i^{-2} - \sum_{i=1}^K v_i^{-4}/\sum_{i=1}^K v_i^{-2} } \right\}
+\hat \tau^2_{\text{DL}} = \max \left\{0, \frac{Q - (I-1)}{\sum_{i=1}^I v_i^{-2} - \sum_{i=1}^I v_i^{-4}/\sum_{i=1}^I v_i^{-2} } \right\}
 \label{eq:tau2DL}
 \end{equation}
 
-\noindent The moment-based estimator is one of the most popular estimators of $\tau^2$ because it has a simple non-iterative formulation and does not require any distributional assumptions for the random-effects rather than having a finite first order moment. Other common non-iterative alternatives include an estimator based on the variance components \citep{hedges1983random} and using methods for estimating the error variance in a weighted linear model \citep{sidik2005simple}. Iterative methods based on maximizing the likelihood or restricted likelihood can also be used by specifying a distributional form for the random-effects. The more conventional choice is typically a normal distribution $u_i \sim \mathcal{N}\left( 0, \tau^2 \right)$, which implies $\beta_i \sim \mathcal{N}\left(\beta, \tau^2 \right)$ and $\hat \beta_i \sim \mathcal{N}\left(\beta + u_i, \tau^2 + v_i \right)$.
+\noindent The moment-based estimator is one of the most popular estimators of $\tau^2$ because it has a simple non-iterative formulation and does not require any distributional assumption for the random-effects rather than having a finite first order moment. Other common non-iterative alternatives include estimators based on the variance components \citep{hedges1983random} and on methods for estimating the error variance in weighted linear models \citep{sidik2005simple}. Iterative methods based on maximizing the likelihood or restricted likelihood can also be used by specifying a distributional form for the random-effects. The more conventional choice is typically a normal distribution $u_i \sim \mathcal{N}\left( 0, \tau^2 \right)$, which implies $\beta_i \sim \mathcal{N}\left(\beta, \tau^2 \right)$ and $\hat \beta_i \sim \mathcal{N}\left(\beta + u_i, \tau^2 + v_i \right)$.
 
 Although $\tau^2$ is the more natural and appropriate measure of between-study variability, the actual value is difficult to interpret because it depends on type of effect size (e.g. log relative risk, standardized mean difference) and has no upper limit. Therefore, both evaluation of the degree (or levels) and the comparison of heterogeneity in different meta-analyses can hardly be based on the estimate of $\tau^2$.
 
 
 \subsection{Measures of heterogeneity}
 
-To complement the test based approach and the information provided by $\hat tau^2$, measures that quantify the impact of heterogeneity have been proposed \citep{higgins2002quantifying}. 
+To complement the test based approach and the information provided by $\hat \tau^2$, measures that quantify the impact of heterogeneity have been proposed \citep{higgins2002quantifying}. 
 Higgins et al. presented several possibilities in the simpler case where all the sampling variances $v_i$ are equal to a fixed and known value $\sigma^2$. 
 
-Two measures aim to estimate the ratio $\sigma^2/(\sigma^2/ + \tau^2)$, namely the $H^2= Q/(K-1)$ that represents the excess in $Q$~statistic relative to its degrees of freedom, and $R^2 = \Var{\hat \beta}/\Var{\hat \beta_{\text{FE}}}$ which describe the inflation in the variability of the mean effect in a random-effects model compared with a fixed-effect model.
+Two measures aim to estimate the ratio $\sigma^2/(\sigma^2 + \tau^2)$, namely the $H^2= Q/(I-1)$ that represents the excess in $Q$~statistic relative to its degrees of freedom, and $R^2 = \Var\left(\hat \beta\right)/\Var\left(\hat \beta_{\text{FE}}\right)$ which describes the inflation in the variability of the mean effect in a random-effects model compared with a fixed-effect model.
 Other measures, instead, relate the between-studies heterogeneity, $\tau^2$, to the marginal or unconditional variability $\tau^2 + v_i$, which is defined by the sum of within- and between-study components. These measures can be more easily interpreted as the percentage of the total variability due to heterogeneity, similar to the intraclass correlation coefficient defined for linear mixed-effects models. The ratio directly involves the within-terms $v_i$ that again varies across the studies. Indeed, the most popular measures, namely the $R_I$ \citep{ takkouche1999evaluation} and the $I^2$ \citep{higgins2002quantifying}, replaced $v_i$ with a statistic that summarizes the observed distribution of $v_i$.
 Takkouche et al. chose
 \begin{equation}
-s_1^2 = \frac{K}{\sum_{i=1}^K v_i^{-2}}
+s_1^2 = \frac{I}{\sum_{i=1}^I v_i^{-2}}
 \label{eq:Ri}
 \end{equation}
 \noindent that is the harmonic mean of the inverse of the sampling variances. 
 Higgins et al., instead, described the ``typical'' within-study variance as
 \begin{equation}
-s_2^2 = \frac{(K-1) \sum_{i=1}^K v_i^{-2}}{ \left( \sum_{i=1}^K v_i^{-2} \right)^2 - \sum_{i=1}^K v_i^{-4}}
+s_2^2 = \frac{(I-1) \sum_{i=1}^I v_i^{-2}}{ \left( \sum_{i=1}^I v_i^{-2} \right)^2 - \sum_{i=1}^I v_i^{-4}}
 \label{eq:I2}
 \end{equation}
-\noindent that provided a direct relationship with the $Q$~statistic: $I^2 = (Q - (K-1))/Q$ when $\tau^2$ is estimated using the method of moments.
+\noindent that provided a direct relationship with the $Q$~statistic: $I^2 = (Q - (I-1))/Q$ when $\tau^2$ is estimated using the method of moments.
 \noindent Both statistics can be expressed as a percentage where 0\% corresponds to no heterogeneity and increasing values imply higher levels of heterogeneity. It is known that these measures depend on precision of the study-specific estimates and tend to increase to 100\% when the $v_i$ are much smaller than the estimated $\tau^2$. 
 A complementary measure is the between-studies coefficient of variation, defined as $\tau^2/|\hat \beta|$, that does not directly depend on the within-study variances. However, it increases quickly as $\hat \beta$ becomes smaller, and is not defined for $\hat \beta = 0$.
 
 While the limitations of the $Q$~test approach are widely known, little emphasis is placed on the assumptions underneath the definition of the established measures of heterogeneity, i.e.  all the estimates being reported with the same precision, which is unlikely to be met in almost all the applications. A measure of the impact of heterogeneity that does not require such an assumption would be desirable.
 
 
+
 \section{Categorical models for dose--response analysis}
 
+Epidemiological studies often assess the strength and direction of the association between protective or risk factors (generally referred to as exposures) and the occurrence of a health outcome. When the exposure of interest is measured on a continuous scale, the additional information on the shape of the relationship is mostly of interest. Including the continuous variable simply as covariate in the appropriate statistical model assumes that the outcome linearly depends on the covariate. Associations between variables, however, are rarely linear. If the real dose-response is in fact non-linear, estimating a linear trend will have important consequences in detecting an association \citep{harrell2015regression}. 
 
+One common approach to relax the linearity assumption is to divide the quantitative exposure in categories. This categorical approach has been frequently criticized because of severe limitations \citep{royston2006dichotomizing, greenland1995dose} including loss of information and thus power, assuming an unrealistic step function, and subjective choice in selecting cut-points. Instead, many articles presented and illustrated alternative solutions such as the use of fractional polynomials and regression splines for easily modelling non-linear relationships. 
 
+Nevertheless, a recent survey among top medical and epidemiological journals estimated that categorization occurred 86\% of the times \citep{turner2010categorisation}. One possible reason is that a categorical approach facilitates the interpretation of the estimated regression coefficients and simplifies the presentation of the results in a tabular format \citep{orsini2011procedure}. 
 
-
-\newpage
-
-\subsection{Categorical analysis with individual participant data}
 
 \subsection{Aggregated dose--response data}
 
-\subsection{High versus low meta-analysis}
+In a categorical approach the quantitative exposure is divided in $J+1$ categories. The corresponding indicator or dummy variables index by $j = 1, \dots, J$ are included in the model in place of the exposure variable. The results from such a categorical dose--response analysis are expressed as relative measures using one category (corresponding to the omitted dummy variable) as referent. Depending on the study-design and on the statistical model, the results consist of estimated odds ratios, rate ratios, or risk ratios (generally referred to as relative risks (RRs)) for the different exposure categories, possibly adjusted for potential confounders. The corresponding 95\% confidence intervals $\widehat{\mathrm{RR}}_L, \widehat{\mathrm{RR}}_U$ provide information on the uncertainty related to the estimated regression coefficients. Additional information about the assigned dose (mean or median within exposure intervals), the number of cases and the total number of subjects or person-time usually complements the reported results. The general structure and notation for aggregated or summarized dose--response data are presented for a generic $i$-th study in table~\ref{tab:aggr_data}. The $i$ pedix in $J_i$ highlights that independent studies may categorized the continuous exposure using different number of categories.
+
+\begin{table}
+  \centering
+  \begin{threeparttable}
+    \caption{Aggregated results from a categorical dose--response analysis.}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{cccccc}
+      \hline
+      %\\[-1em]
+      Exposure level & Assigned dose & Cases & n\tnote{a} & $\widehat{\mathrm{RR}}$ & 95\% CI \\
+      \hline
+      0 & $x_{i0}$ & $c_{i0}$ & $n_{i0}$ & $1$ & --- \\
+      1 & $x_{i1}$ & $c_{i1}$ & $n_{i1}$ & $\widehat{\mathrm{RR}}_{i1}$ & $\widehat{{\mathrm{RR}}}_{Li1}$, $\widehat{{\mathrm{RR}}}_{Ui1}$ \\
+      \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+      $\mathrm{J_i}$ & $x_{iJ_i}$ & $c_{iJ_i}$ & $J_{iJ_i}$ & $\widehat{\mathrm{RR}}_{iJ_i}$ & $\widehat{{\mathrm{RR}}}_{LiJ_i}$, $\widehat{{\mathrm{RR}}}_{UiJ_i}$ \\
+      \hline
+    \end{tabular}
+    \begin{tablenotes}
+      \item [a] \footnotesize Depending on the study design, this column reports either total number of subjects or amount of person-time.
+    \end{tablenotes}
+    \label{tab:aggr_data}
+\end{threeparttable}
+\end{table}
+
+The statistical model relate the effect of the exposure categories on a transformation of the mean outcome. Typically, these transformations involve the natural logarithm such as the log odds, log risk, or log rate. The estimated regression coefficients are then exponentiated for ease of interpretation but the inference is actually performed on the modelling scale. Therefore, the effect sizes considered in a meta-analysis of multiple aggregated dose--response data consist of the estimated log $\widehat{\mathrm{RR}}$s and the corresponding standard errors that can be easily derived from the data available in table \ref{tab:aggr_data}
+\begin{equation}
+\widehat{\SE} \left( \log \widehat{\mathrm{RR}} \right) = \frac{\log \left(\widehat{\mathrm{RR}}_U \right) - \log \left(\widehat{\mathrm{RR}}_L \right)}{2\; z_{1- \alpha/2}}
+\label{eq:se_logrr}
+\end{equation} 
+\noindent where $z_{1- \alpha/2}$ is the $1- \alpha/2$ quantile of a standard normal distribution, usually approximated to 1.96 for the common $\alpha$ = 5\% level.
+
+A distinctive feature of aggregated dose--response data is the correlation among the (log) $\widehat{\mathrm{RR}}$s, which arises from the fact that they are estimated using a common reference group. Each $\widehat{\mathrm{RR}}$ has the same baseline risk as denominator that works as comparator. If the observed baseline risk happens to be high or low just by chance, the estimated $\widehat{\mathrm{RR}}$s will be also higher or lower than expected. This adds complications in guessing a trend from a categorical dose-response analysis or in directly comparing results based on different baseline categories. 
+
+
+\subsection{High vs. low, categorical, and meta-regression models}
+
+A common approach for synthetizing the information from multiple aggregated dose-response data is to limit the analysis on a small portion of the available results. In particular, a high- versus-low meta-analysis focuses on the results for the highest exposure categories. By selecting only the last raw of the aggregated dose--response data, the meta-analytic models discussed in section~\ref{sec:rma} are used for combining and contrasting the results, with $\hat \beta_i = \widehat{\mathrm{RR}}_{iJ_i}$. 
+A major limitation of a high- versus-low approach is that both the highest and the lowest category may be associate to a different exposure value. To limit the impact of heterogeneous category definitions, practitioners should carefully plan the analysis by selecting the $\widehat{\mathrm{RR}}$s for exposure categories whose definition is more consistent across studies. If also the choice of baseline category substantially differs, the $\widehat{\mathrm{RR}}$s can be re-expressed using an alternative reference category implementing dedicated methodologies \cite{hamling2008facilitating}.
+
+The major limitation, however, is that only a subset of the data is analyzed, while the remaining information about intermediate exposure categories is excluded from the analysis. As a consequence, much of the information about the shape of the dose-response is lost and the power of detecting an association may dramatically decrease (e.g. in case of a U-shape relationship). A possible remedy, although less common, is to conduct a categorical meta-analysis, which consists of separate univariate meta-analyses pooling the results from comparable exposure categories. A dose-response association is then deducted from observing the combined $\widehat{\mathrm{RR}}$s for increasing dose levels. A part from evident difficulties in identifying $\widehat{\mathrm{RR}}$s for homogenous exposure intervals in applied works, this approach does not take into account the correlations across set of log $\widehat{\mathrm{RR}}$s and suffers from the same problem of guessing a trend from a categorical dose--response analysis. 
+
+An additional alternative may be the use meta-regression models \cite{berkey1995random}, where the dummy variables for the exposure categories or transformation of the dose are included as covariates in model~\ref{eq:rma}. The rational would be to estimate a pooled RRs for different dose levels and to reduce the heterogeneity across study finding. Despite the quantitative exposure can be modelled using flexible tools, a meta-regression model treats the continuous predictor as a confounder. In addition, inference may be severely biased because the described approach fails to handle the hierarchical structure of the data, that is dose levels nested within studies.
 
 
 
 \section{Dose--response meta-analysis}
 
-\subsection{First stage: study-specific curves}
+The aim of a dose--response meta-analysis is to reconstruct the shape of the association from multiple aggregated dose--response data. As compared to the previous strategies, it has the advantages of using the whole information available and being more informative. By describing the variation of the outcome over the entire exposure range, a dose--response meta-analysis allows to answer the following questions
+\begin{itemize}
+\item Is there any association between increasing dose levels and the outcome? If that’s the case, what is the shape of the relationship?
+\item Which exposure values are associated with the minimum or maximum outcome value?
+\item Is there any difference in the study-specific dose--response associations? Which factors can explain the observed heterogeneity?
+\end{itemize}
 
-\subsection{Second stage: multivariate meta-analysis}
-
-
-
-\section{Software}
-
-
-
-Here an example of a figure (Figure~\ref{fig:cite_grl}).
+The methodology for dose--response meta-analysis was first presented by Greenland and Longnecker in their seminal paper \citep{greenland1992methods}, which quickly became a standard reference for applied works. Indeed, the number of published dose--response meta-analyses increased exponentially from 9 in 2000 to 172 in 2016 (figure~\ref{fig:cite_grl}).
 
 <<cite_grl, fig.cap='Number of citations of the paper by Greenland and Longnecker (1992) obtained from Google Scholar 1992-2017 (until December 2017).'>>=
 count_grl %>%
@@ -141,3 +180,349 @@ count_grl %>%
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 @
 
+The most popular fields of application include oncology, public environmental and public health, nutrition epidemiology, and general internal medicine. Dose-response meta-analyses are published in many leading medical and epidemiological journals, including JAMA, Lancet, Stroke, Gastroenterology, American J of Medicine, American J of Clinical Nutrition, American J Epidemiology, International J Epidemiology, Journal National Cancer Institute, International J of Cancer, Statistics in Medicine and many others. The method is also used by the World Cancer Research Fund/American Institute for Cancer Research for reviewing the evidence on the relations between life-style factors (e.g. diet and physical activity) and cancer. Guidelines based on these quantitative reviews are central to promote the overall health and prevent many chronic diseases.
+
+The common approach for dose--response meta-analysis consists of a two-stage procedure, where the regression coefficients for the study-specific trends are first estimated separately within each study, and then combined using meta-analysis. In the next sections we cover the main methodological aspects related to each stage of the analysis.
+
+
+\subsection{First stage: study-specific trends}
+
+If we had access to the individual patient data, the dose-response model for a simple linear trend could be written as
+\begin{equation}
+\log \left( \lambda \left(x, \mathbf{z} \right) \right) =  \beta_0 + \beta_1x + \boldsymbol{\gamma}^\top \mathbf{z}
+\label{eq:lin_ipd}
+\end{equation}
+\noindent with $x$ the quantitative exposure and $z$ the set of possible confounders. The outcome variable is the log of a transformation of the mean outcome (e.g. odds, risk, or rate). Transformations of the exposure variable can be included to relax the linearity assumption, such as a quadratic term
+\begin{equation}
+\log \left( \lambda \left(x, \mathbf{z} \right) \right) =  \beta_0 + \beta_1x + \beta_2x^2 + \boldsymbol{\gamma}^\top \mathbf{z}
+\label{eq:quadr_ipd}
+\end{equation}
+\noindent However, we have rarely access to the individual patient data and our inference is limited to a summary of the initial data. In particular, aggregated data from a categorical analysis can be often retrieved from published articles. 
+\noindent The aim of the first stage of a dose--response meta-analysis is to estimate the $\beta$ coefficients in equation \ref{eq:lin_ipd} and \ref{eq:quadr_ipd} using aggregated dose--response data. We consider the notation presented in table~\ref{tab:aggr_data} with $i = 1, \dots, I$ indexing the studies and $j = 1, \dots, J_i$ the non-referent dose levels of a generic $i$-th study. The corresponding two models can be written as
+\begin{equation}
+\log \left( \widehat{\mathrm{RR}}_{ij} \right) = \log \left( \hat \lambda \left(x = x_{ij} \right) \right) - \log \left( \hat \lambda \left(x = x_{i0} \right) \right) = \beta_1\left(x_{ij} - x_{i0} \right)
+\label{eq:lin_ad}
+\end{equation}
+\begin{equation}
+\log \left( \widehat{\mathrm{RR}}_{ij} \right) = \log \left( \hat \lambda \left(x = x_{ij} \right) \right) - \log \left( \hat \lambda \left(x = x_{i0} \right) \right) = \beta_1\left(x_{ij} - x_{i0} \right) + \beta_2\left(x_{ij}^2 - x_{i0}^2 \right)
+\label{eq:quadr_ad}
+\end{equation}
+
+\noindent More generally, the $i$-th dose-response model is defined as
+\begin{equation}
+\mathbf{y}_i = \mathbf{X}_i \boldsymbol{\beta}_i + \boldsymbol{\varepsilon}_i
+\label{eq:drmodel}
+\end{equation}
+The outcome $\mathbf{y}_i $ is the $J_i$ length vector of the non-referent log $\widehat{\mathrm{RR}}$s while $\mathbf{X}_i$ the $J_i \times p$ design matrix containing the $p$ transformations of the assigned dose used to model the dose--response association
+\begin{equation}
+ \mathbf{X}_i=\left[
+\begin{array}{ccc}
+g_{1}(x_{i1}) - g_{1}(x_{i0}) & \hdots & g_{p}(x_{ip}) - g_{p}(x_{i0}) \\
+\vdots &  & \vdots \\
+g_{1}(x_{iJ_i}) -  g_{1}(x_{i0}) & \hdots & g_{p}(x_{iJ_i}) -  g_{p}(x_{i0}) \\
+\end{array}%
+\right] 
+\label{eq:des.matrix}
+\end{equation}
+
+\noindent In the linear trend analysis (model~\ref{eq:lin_ad}), $\mathbf{X}_i$ includes only the dose levels, $p$ = 1, $g_1(x) = x$ (identity function)
+
+\begin{equation*}
+ \mathbf{X}_i=\left[
+\begin{array}{c}
+x_{i1} - x_{i0} \\
+\vdots \\
+x_{iJ_i} - x_{i0} \\
+\end{array}%
+\right] 
+\end{equation*}
+
+\noindent while $p = 2$ columns are needed in the quadratic model ~\ref{eq:quadr_ad}: $g_1(x) = x$ and $g_2(x) = x^2$
+
+\begin{equation*}
+ \mathbf{X}_i=\left[
+\begin{array}{cc}
+x_{i1} - x_{i0} & x_{i1}^2 - x_{i0}^2 \\
+\vdots & \vdots \\
+x_{iJ_i} - x_{i0} & x_{iJ_i}^2 - x_{i0}^2 \\
+\end{array}%
+\right] 
+\end{equation*}
+
+\noindent A feature of the models \ref{eq:drmodel} is the absence of the intercept term. The reference line in table~\ref{tab:aggr_data} is not actually used for the estimation of the regression coefficients but introduces the constrain on the predicted log $\widehat{\mathrm{RR}}$, which needs to be 0 ($\widehat{\mathrm{RR}}$ = 1) for the reference dose value $x_{i0}$, as explicit in models~\ref{eq:lin_ad} and~\ref{eq:quadr_ad}.
+
+\subsubsection*{Approximation of the covariance between log $\widehat{\mathrm{RR}}$}
+
+\noindent A particular characteristic of summarized dose--response data is that the log $\widehat{\mathrm{RR}}$s are reported with different precision and are constructed using the same baseline group. Thus, the error terms $\boldsymbol{\varepsilon}_i$ in equation~\ref{eq:drmodel} are heterogeneous and correlated, with a covariance matrix structured as
+\begin{equation}
+\Cov\left(\boldsymbol{\epsilon}_i\right) = \mathbf{S}_i = \left[
+\begin{array}{ccccc}
+\sigma_{i11} & \ \ & \ & & \ \\
+\vdots \ & \ddots & & & \ \\
+\sigma_{i1j}& \ & \sigma_{ijj}& & \ \\
+\vdots & \ & \ & \ddots & \\
+\sigma_{i1J_i} & \ldots & \sigma_{iJ_ij} & \ldots & \sigma_{iJ_iJ_i}
+\end{array}
+\right] 
+\label{eq:S_i}
+\end{equation}
+\noindent with the variance of the log $\widehat{\mathrm{RR}}$s on the diagonal ($\sigma_{ijj}$) and the pairwise covariances as non-diagonal elements ($\sigma_{ijj'}$).
+
+Two methods have been proposed to approximate the covariances $\sigma_{ijj'}$ \citep{greenland1992methods, hamling2008facilitating}. Greenland and Longnecker described an algorithm to construct a table of pseudo or effective counts (number of cases and participants or person-time) that would produce the adjusted log $\widehat{\mathrm{RR}}$s as those published. A unique solution for the algorithm is ensured by keeping the margins of the pseudo-counts equal to the observed ones. Alternatively, Hamling et al. modified the previous algorithm in such a way that the pseudo-counts would also match the standard errors of the log $\widehat{\mathrm{RR}}$s. Negligible differences in the reconstructed covariance matrices were found when comparing the two methods \cite{orsini2011meta}.
+
+\subsubsection*{Estimation}
+
+The dose-response coefficients $\boldsymbol{\beta}_i$ can be efficienly estimated using generalized least squares estimator (GLS), which minimizes the quadratic loss function $\left(\mathbf{y}_i- \mathbf{X}_i \boldsymbol{\beta}_i \right)^\top \mathbf{S}_i^{-1} \left(\mathbf{y}_i- \mathbf{X}_i \boldsymbol{\beta}_i \right)$ with respect to $\boldsymbol{\beta}_i$ assuming the covariance matrix $\mathbf{S}_i$ known. 
+\begin{equation}
+\begin{gathered}
+\boldsymbol{\hat \beta}_i = ( \mathbf{X}_i^\top  \mathbf{S}_i^{-1} \mathbf{X}_i)^{-1} \mathbf{X}_i^\top  \mathbf{S}_i^{-1} \mathbf{y}_i \\ 
+\widehat{\Var} \left( \boldsymbol{\hat \beta}_i \right) = ( \mathbf{X}_i^\top \mathbf{S}_i^{-1} \mathbf{X}_i)^{-1}
+\end{gathered}
+\label{eq:gls}
+\end{equation}
+
+\noindent The GLS estimates in equation~\ref{eq:gls} do not require any distributional assumption for the error terms. However, for the central limit theory, the error terms follow approximately a normal distribution $\boldsymbol{\epsilon}_i \sim \mathcal{N}\left(\mathbf{0}, \mathbf{S}_i \right)$. 
+Using this additional assumption, the log-likelihood of model~\ref{eq:drmodel} is
+\begin{equation}
+\ell\left(\boldsymbol{\beta}_i\right) = -\frac{J_i}{2}\log\left(2\pi\right) - \frac{1}{2}|\mathbf{S}_i| - \frac{1}{2} \left[\left(\mathbf{y}_i- \mathbf{X}_i \boldsymbol{\beta}_i \right)^\top \left( \mathbf{S}_i \right)^{-1} \left(\mathbf{y}_i- \mathbf{X}_i \boldsymbol{\beta}_i \right) \right]
+\label{eq:drmodel_logLik}
+\end{equation}
+
+\noindent Interestingly, the maximum likelihood estimates that maximize the log-likelihood~\ref{eq:drmodel_logLik} coincides with the GLS estimates in~\ref{eq:gls} \citep{orsini2006generalized}. Introducing the normality distribution for the random errors facilitates the inference, i.e. test of hypothesis and confidence intervals, on the $\boldsymbol{\beta}_i$ coefficients. The estimates in~\ref{eq:gls} are a linear combination of normal distributions ($\mathbf{y}_i \sim \mathcal{N}\left(\mathbf{X}_i \boldsymbol{\beta}_i, \mathbf{S}_i \right)$) and therefore are also normally  distributed $\boldsymbol{\hat \beta}_i \sim \mathcal{N}\left( \boldsymbol{\beta}_i, {\Var} \left( \boldsymbol{\hat \beta}_i \right)\right)$.
+
+The ML and GLS estimators always give unbiased estimates of $\boldsymbol{\beta}_i$ regardless of the specification of $\mathbf{S}_i$ \citep{orsini2006generalized}. As a consequence, also a weighted least square estimator (WLS) that assumes independence of the log $\widehat{\mathrm{RR}}$s will produce unbiased estimates. However, taking into account the correlation will improve the statistical properties of the estimator, in particular the efficiency. 
+We investigated the differences between the GLS and WLS estimators using a simulation study of 5000 aggregated dose--response data where the true trends were linear ($\beta_\text{TRUE} =$ \Sexpr{round(beta_lin[2], 3)}). As expected, both the estimators were unbiased and consistent but the empirical distribution of the GLS estimator was more concentrated around the true $\beta$ value \ref{fig:cov_methods_lin}. The WLS estimates of the standard errors of the $\hat \beta_i$ were lower than the corresponding GLS values. This had a direct effect on the inference for the estimated linear trend. For istance, it may be interesting to fit a quadratic curve as in~\ref{eq:quadr_ad} and test the hypothesis $H_0: \beta_2 = 0$, i.e. departure from a linear trend. Using inference based on WLS estimators the null hypothesis were wrongly rejected \Sexpr{100*mean(p_val_indep_lin < .05)}\% of the time, lower than the nominal level $\alpha = 5$\%. The corresponding number for the GLS estimator was instead closer (\Sexpr{100*mean(p_val_gl_lin < .05)}\%). 
+\noindent We also implemented simulations assuming a quadratic curve with the true coefficients $\boldsymbol{\beta}_\text{TRUE}$ = (\Sexpr{round(beta_quadr[2], 3)}, \Sexpr{round(beta_quadr[3], 3)}). Similar results for the empirical bivariate distribution of $ \boldsymbol{\hat \beta}_i$ and their standard errors are presented in figure~\ref{fig:cov_methods_quadr}.
+
+<<cov_methods_lin, fig.cap=paste0('Empirical distribution of the $\\hat \\beta$ (panel A) and $\\widehat{\\Var} \\left( \\hat \\beta_i \\right)$ (panel B) for a linear trend assuming independence of the log $\\widehat{\\mathrm{RR}}$  and reconstructing the covariances using the Greenland and Longnecker’s method. Results are based on simulations with 5000 replications and a true linear trend $\\beta = $', round(beta_lin[2], 3), '.')>>=
+p_betas_lin <- ggplot(betas_lin, aes(x = beta, col = cov)) +
+    geom_line(stat = "density")  +
+    geom_vline(xintercept = beta_lin[2], linetype = "dotted") +
+    scale_color_discrete(labels = c("Greenland-Longnecker", "Independence")) +
+    labs(col = "Method", x = expression(hat(beta)))
+p_se_lin <- ggplot(bvcov_lin, aes(x = vcov^.5, col = cov)) +
+    geom_line(stat = "density") +
+    labs(x = expression(paste("SE(", hat(beta), ")")), col = "Method") +
+    scale_color_discrete(labels = c("Greenland-Longnecker", "Independence"))
+p_sim_lin <- plot_grid( 
+  p_betas_lin + theme(legend.position="none"),
+  p_se_lin + theme(legend.position="none"),
+  align = 'vh', labels = c("A", "B"), hjust = -1, nrow = 1)
+legend_sim_lin <- get_legend(p_betas_lin + theme(legend.position="bottom"))
+p_sim_lin <- plot_grid(p_sim_lin, legend_sim_lin, ncol = 1, rel_heights = c(1, .1))
+p_sim_lin
+@
+
+<<cov_methods_quadr, fig.cap=paste0('Empirical bivariate distribution of the beta coefficients (panel A) and their standard errors (panel B) for a quadratic trend assuming independence of the log $\\widehat{\\mathrm{RR}}$  and reconstructing the covariances using the Greenland and Longnecker’s method. Results are based on simulations with 5000 replications and a true quadratic trend $\\beta_{1} = $', round(beta_quadr[2], 3), ', $\\beta_{2} = $', round(beta_quadr[3], 3) , '.')>>=
+p_betas_quadr <- betas_quadr %>%
+  dplyr::select(coef, beta, sim, cov) %>%
+  spread(coef, beta) %>%
+  ggplot(aes(x = dose, y = I, col = cov)) +
+  #stat_density2d(aes(fill = ..level..), geom = "polygon") +
+  geom_density2d() +
+  geom_vline(xintercept = beta_quadr[2], linetype = "dotted") +
+  geom_hline(yintercept = beta_quadr[3], linetype = "dotted") +
+  scale_color_discrete(labels = c("Greenland-Longnecker", "Independence")) +
+  labs(x = expression(hat(beta)[1]), y = expression(hat(beta)[2]), col = "Method")
+p_se_quadr <- bvcov_quadr %>%
+  dplyr::select(coef, vcov, sim, cov) %>%
+  spread(coef, vcov) %>%
+  ggplot(aes(x = `1`^.5, y = `3`^.5, col = cov)) +
+  geom_density2d() +
+  scale_color_discrete(labels = c("Greenland-Longnecker", "Independence")) +
+  labs(x = expression(paste("SE(", hat(beta)[1], ")")), col = "Method", 
+       y = expression(paste("SE(", hat(beta)[2], ")"))) 
+p_sim_quadr <- plot_grid( 
+  p_betas_quadr + theme(legend.position="none"),
+  p_se_quadr + theme(legend.position="none"),
+  align = 'vh', labels = c("A", "B"), hjust = -1, nrow = 1)
+legend_sim_quadr <- get_legend(p_betas_quadr + theme(legend.position="bottom"))
+p_sim_quadr <- plot_grid(p_sim_quadr, legend_sim_quadr, ncol = 1, rel_heights = c(1, .1))
+p_sim_quadr
+@
+
+
+\subsection{Second stage: multivariate meta-analysis}
+
+The study-specific dose-response curves are defined by the $p$ transformations, $g_1(x), \dots, g_p(x)$, and the estimated regression coefficients $\boldsymbol{\hat \beta}_i$. A pooled dose--response can be obtained by combining the $\boldsymbol{\hat \beta}_i$ coefficients. For that purpose, the same functional relationship needs to be defined across the studies. Therefore, the transformations of the exposure were not subscripted by the study index $i$.
+
+\noindent The $p$ length vector of the $\boldsymbol{\hat \beta}_i$ parameters and the accompanying $p \times p$ covariances matrices $\widehat{\Var} \left( \boldsymbol{\hat \beta}_i \right)$ serve as outcome in the meta-analytic model. We consider the more general setting with $p \ge 2$ and relate the univariate case as a simpler instance. Since the dimension of the outcome is no longer univariate, extensions of models \ref{eq:rma} to the multivariate settings can be implemented for accommodating the synthesis of correlated estimates.
+
+\subsubsection*{Model definition}
+
+A multivariate random-effects model has a similar formulation as in the univariate case
+\begin{equation}
+\boldsymbol{\hat \beta}_i = \boldsymbol{\beta} + \mathbf{u}_i + \boldsymbol{\varepsilon}_i
+\label{eq:rmma}
+\end{equation}
+\noindent The unobserved random effects $\mathbf{u}_i$ are now of dimension $p$ representing study-specific deviation from the mean $\boldsymbol{\beta}$ parameter. As before, they have zero mean $\E\left[\mathbf{u}_i\right] = \mathbf{0}$ and $\Var\left[\mathbf{u}_i\right] = \boldsymbol{\Psi}$, the $p \times p$ between-study variance matrix. An additional distributional function for the random-effects may facilitate the inference (especially confidence intervals) and improve the prediction of marginal and conditional dose-response association. Typically a multivariate normal distribution is adopted $\mathbf{u}_i \sim \mathcal{N}\left(\mathbf{0}, \boldsymbol{\Psi} \right)$. Hence, we can write the marginal model of~\ref{eq:rmma} as
+\begin{equation}
+\boldsymbol{\hat \beta}_i \sim \mathcal{N}\left(\boldsymbol{\beta}, \boldsymbol{\Sigma}_i \right)
+\label{eq:rmma2}
+\end{equation}
+\noindent where the marginal variance $\boldsymbol{\Sigma}_i = \widehat{\Var} \left( \boldsymbol{\hat \beta}_i \right) + \boldsymbol{\Psi}$ is defined by the sum of the within-study and between-studies variance components. The model~\ref{eq:rmma2} implies a two-stage sampling procedure where the study-specific $\boldsymbol{\beta}_i$ parameters are assumed to be sampled from a multivariate normal distribution centered around the population average parameter $\boldsymbol{\beta}$. The study-specific estimates $\boldsymbol{\hat \beta}_i$ are themselves sampled from a multivariate distribution with zero mean and error variance assumed known.
+
+The multivariate random-effects model~\ref{eq:rmma2} can be extended to meta-regression models by including study-levels covariates that might change the shape of the dose-response relationship. The dose-response coefficients are modeled as a linear combination of the $m$ study-level covariates $\mathbf{z}_i = \left(z_{i1}, \dots, z_{im} \right)$, with $ 
+z_{i1} = 1$ indicating the intercept term
+\begin{equation}
+\boldsymbol{\hat \beta}_i \sim \mathcal{N}\left(\mathbf{Z}_i\boldsymbol{\beta}, \boldsymbol{\Sigma}_i\right)
+\label{eq:rmmra2}
+\end{equation}
+\noindent The $p\times pm$ design matrix $\mathbf{Z}_i$ is constructed taking the Kronecker between the $\mathbf{z}_i$ and the identity matrix of dimension $p$ ($\mathbf{I}_{(p)}$)
+\begin{equation}
+\mathbf{Z}_i = \mathbf{I}_{(p)} \otimes \mathbf{z}_i^\top = 
+	\begin{bmatrix}
+		1 & z_{i2} & \cdots & z_{im} & \cdots & 0 & 0 & \cdots & 0 \\
+		\vdots &  &  &  & \ddots & &  &  &  \\
+		0 & 0 & \cdots & 0 & \cdots & 1 & z_{i2} & \cdots & z_{im} \\
+	\end{bmatrix}
+\end{equation}
+\noindent For example, the $\mathbf{Z}_i$ matrix relating the effect of a binary variable $z_i$ to the dose--response coefficients for a quadratic trend is
+\begin{equation*}
+\mathbf{Z}_i = \mathbf{I}_{(2)} \otimes \mathbf{z}_i^\top = 
+	\begin{bmatrix}
+		1 & 0 \\
+		0 & 1
+	\end{bmatrix} \otimes
+	(1, z_i)=
+	\begin{bmatrix}
+		1 & z_i  & 0 & 0 \\
+		0 & 0 & 1 & z_i  \\
+	\end{bmatrix}
+\end{equation*} 
+
+\subsubsection*{Estimation}
+
+Several methods are available for estimating the parameters of interest, namely the $p$ dose--response coefficients in $\boldsymbol{\beta}$ and the $p(p+1)/2$ length vector $\boldsymbol{\xi}$ containing the elements of the between-studies covariance $\boldsymbol{\Psi}$. There is generally no reason to assume a specific covariance structure. We consider here likelihood-based estimators \citep{verbeke1997linear, pinheiro2010mixed}. In particular, ML estimators estimates simultaneously $\boldsymbol{\beta}$ and $\boldsymbol{\xi}$ by maximizing the log-likelihood the marginal model~\ref{eq:rmmra2}
+\begin{equation}
+\ell\left(\boldsymbol{\beta}, \boldsymbol{\xi} \right) = -\frac{1}{2}Ip\log(\pi) -\frac{1}{2}\sum_{i=1}^I \log |\boldsymbol{\Sigma}_i| - \frac{1}{2}\sum_{i=1}^I\left[ \left(\boldsymbol{\hat \beta}_i - \mathbf{Z}_i\boldsymbol{\beta} \right)^\top \boldsymbol{\Sigma}_i^{-1} \left(\boldsymbol{\hat \beta}_i - \mathbf{Z}_i\boldsymbol{\beta} \right) \right]
+\label{eq:rmma_logLik}
+\end{equation}
+
+\noindent ML estimators, however, don’t take into account the loss of degrees of freedom due to the $\boldsymbol{\beta}$ estimation. Alternatively, restricted maximum likelihood methods (REML) maximizes a set of contrasts defined as a function of the only covariance parameters
+\begin{align}
+\ell_R\left(\boldsymbol{\xi} \right) =& -\frac{1}{2}\left(Ip - pm\right) -\frac{1}{2}\sum_{i=1}^I \log |\boldsymbol{\Sigma}_i| -\frac{1}{2}\sum_{i=1}^I \log \left|\mathbf{Z}_i^\top\boldsymbol{\Sigma}_i\mathbf{Z}_i \right| + \\
+&- \frac{1}{2}\sum_{i=1}^I\left[ \left(\boldsymbol{\hat \beta}_i - \mathbf{Z}_i\boldsymbol{\beta} \right)^\top \boldsymbol{\Sigma}_i^{-1} \left(\boldsymbol{\hat \beta}_i - \mathbf{Z}_i\boldsymbol{\beta} \right) \right]
+\label{eq:rmma_logRLik}
+\end{align}
+
+\noindent Both estimation methods require iterative algorithms, where conditional estimates of $\boldsymbol{\hat \beta}$ are plugged in either \ref{eq:rmma_logLik} or \ref{eq:rmma_logRLik}, regarded as function of $\boldsymbol{\xi}$ only, until convergence.
+
+\subsubsection*{Hypothesis testing and heterogeneity}
+
+There are two main domains of interest for making inference on the parameters that relate either to the fixed-effects $\boldsymbol{\beta}$ or the variance components in $\boldsymbol{\Psi}$. Using the normality assumption for the random-effects, inference is based on the approximated normal distribution for $\boldsymbol{\hat \beta}$, with mean and covariance matrix defined similarly as in equation~\ref{eq:gls}.
+
+\noindent Since the mean dose-response association is defined by the $\boldsymbol \beta$, the hypothesis of no association can be evaluated by testing $H_0: \boldsymbol{\beta} = \boldsymbol{0}$. 
+%In case of $p > 1$ multivariate Walt-type test are needed.
+Alternatively, a subset or linear combinations of $\boldsymbol \beta$ may be interesting. For example, in a quadratic trend the non-linearity is introduced by the quadratic term $x^2$. Thus, testing $H_0: \beta_2 = 0$ is a possible way for evaluating departure from a linear dose-response relationship.
+
+As previously presented in section~\ref{sec:het_rma}, the coefficients defining $\boldsymbol{\Psi}$ are not nuisance parameters rather than useful for quantifying the variation of the study-specific associations $\boldsymbol{\beta}_i$. Similar measures of testing and quantifying the impact of heterogeneity have been extended to the multivariate setting. In particular, the $Q$~statistic
+\begin{equation}
+Q = \sum_{i=1}^I \left(\boldsymbol{\hat \beta}_i - \mathbf{Z}_i\boldsymbol{\hat \beta}_{\text{fe}}\right) ^\top \widehat{\Var} \left( \boldsymbol{\hat \beta}_i \right)^{-1} \left(\boldsymbol{\hat \beta}_i - \mathbf{Z}_i\boldsymbol{\hat \beta}_{\text{fe}}\right)
+\label{eq:Qmulti}
+\end{equation}
+\noindent with $\boldsymbol{\hat \beta}_{\text{fe}}$ estimating under a fixed-effect model, is used to test $H_0: \boldsymbol{\Psi} = \boldsymbol{0}$. Under the null hypothesis, the $Q$~statistic follow a $\chi^2$ with $Ip - pm$ degrees of freedom. When $p = 1$ the formulations~\ref{eq:Q} and~\ref{eq:Qmulti} coincide. The multivariate extension of the $I^2$ was derived relating the $Q$~statistics to its degrees of freedom $I^2 = \max \left\{0, \frac{Q- (Ip - pm)}{Ip - pm}\right\}$.
+
+\subsubsection*{Prediction}
+
+Oftentimes the estimated mean coefficients $\boldsymbol{\hat \beta}$ are not directly interpretable (an exception is the estimate for a linear trend). The dose-response results are thus communicated as predicted (log) relative risk for selected exposure levels using one value as referent. Obtaining predictions either in a graphical or tabular presentation is thus an important step of the analysis and yet often poorly implemented.
+
+Based on the model~\ref{eq:rmma}, the predicted $\log RR$ for a dose level $x_v$ using $x_\mathrm{ref}$ as referent can be calculated as
+\begin{align}
+\log \widehat{RR}(x = x_v) = \left(\mathbf{X}_v\boldsymbol{\hat \beta} \right) \label{eq:pred} \\
+\Var \left(\log \widehat{RR}(x = x_v) \right) = \mathbf{X}_v \widehat{\Var} \left( \boldsymbol{\hat \beta} \right) \mathbf{X}_v^\top \label{eq:varpred}
+\end{align}
+\noindent where $\mathbf{X}_v$ is the design matrix defined in the first-stage analysis (equation~\ref{eq:des.matrix}). For example, the predicted $\log RR$ for the quadratic model~\ref{eq:quadr_ad} comparing $x_v$ versus $x_\mathrm{ref}$ is
+\begin{equation*}
+\log \widehat{RR}(x = x_v) = \hat \beta_1 \left(x_v - x_\mathrm{ref} \right) + \hat \beta_2 \left(x_v^2 - x_\mathrm{ref}^2 \right)
+\end{equation*}
+Of note, the referent dose $x_\mathrm{ref}$ is an arbitrary value and thus does not need to correspond to any of the study-specific reference values $x_{i0}$.
+
+\noindent A confidence interval for the predicted $\log \widehat{RR}(x = x_v)$ is based on the normal distribution of $\boldsymbol{\hat \beta}$
+\begin{equation*}
+\log \widehat{RR}(x = x_v) \mp z_{1- \alpha/2} \Var \left(\log \widehat{RR}(x = x_v) \right)^{\frac{1}{2}}
+\label{eq:pred_ci}
+\end{equation*}
+
+
+Formulas~\ref{eq:pred} and~\ref{eq:varpred} can be extended to meta-regression models. The predicted $\log RR$ conditional on a specific study-level covariate pattern $\mathbf{z} = \mathbf{z}_v$ is
+\begin{align}
+\log \widehat{RR}\left(x = x_v, \mathbf{z} \right) = \mathbf{z}_v) = \left(\mathbf{X}_v \left(\mathbf{I}_{(p)} \otimes \mathbf{Z}_v^\top \right) \boldsymbol{\hat \beta} \right) \label{eq:pred_mr} \\
+\Var \left(\log \widehat{RR}\left(x = x_v, \mathbf{z} \right) \right) = \left( \mathbf{X}_v \mathbf{Z}_v\right) \widehat{\Var} \left( \boldsymbol{\hat \beta} \right) \left( \mathbf{X}_v \mathbf{Z}_v\right)^\top \label{eq:varpred_mr}
+\end{align}
+
+
+\subsection{Methodological research}
+
+Dose--response meta-analysis has received attention not only in applied works but also in theoretical articles that covered different aspects of the methodology. 
+\noindent Greenland and Longnecker originally presented the two-stage approach for efficiently estimating a linear trend in a fixed-effect analysis. An alternative model for estimating curvilinear model, referred to as ``pool first'', was also presented. The technique consists of a one-stage approach where the aggregated data are considered altogether and a single model as in~\ref{eq:drmodel} is fitted. By first combining the data, more flexible curve such as polynomials or splines can be estimated. The study-specific dose-response analyses are limited by the minimum number of non-referent log RRs across the studies. For example, if the aggregated data for a study consists of only one non referent log RR, only a univariate model with $p = 1$ can be estimated. 
+\noindent The authors refined the methodology by extending the two-stage approach to allow for heterogeneity for estimating a linear trend \citep{berlin1993meta}. In addition, they discussed alternatives for assigning the dose levels within exposure categories and presented meta-regression models to investigate the possible effect of study-level characteristics on the estimated linear trends. 
+
+\subsubsection*{Flexible dose--response models}
+
+The primary interest of the methodologicaln reserach was in presenting alternative strategies for estimating non-linear curves. Bagnardi et al. described the use of fractional polynomials and restricted cubic splines using aggregated dose--response data \citep{bagnardi2004flexible}. Based on a practical example on the association between alcohol consumption and all-cause mortality, the authors showed how implementation of these flexible techniques may prevent misleading results from conventional polynomials (e.g. quadratic) curves. Fractional polynomials of order two consist of large family of curves defined in the general form of
+\begin{equation}
+\mathrm{FP2}(x) = \beta_1 x^{p_1} + \beta_2x^{p_2}
+\label{eq:fracpol}
+\end{equation}
+\noindent where $p_1$ and $p_2$ are chosen in the set of power coefficients $\left\{-2, -1, -0.5, 0, 0.5, 1, 2, 3 \right\}$. When $p = 0$ $x^p$ becomes $\log(x)$, while if $p_1 = p_2$ the second transformation of $x$ becomes $x^{p_2}\log(x)$. The advantage of models as in~\ref{eq:fracpol} is that different shapes, including U- and J-shapes, can be estimated by only two coefficients chosen using different combinations for the power terms $(p_1, p_2)$. Typically, the best fitting fractional polynomial is chosen in such a way that the $(p_1, p_2)$ corresponds to the model with the highest likelihood, or equivalently, lowest deviance. 
+
+A popular alternative for flexibly model the dose--response association is represented by the use of splines, largely presented by Orsini et al. using data from the Pooling Project of Prospective Studies of Diet and Cancer \citep{orsini2011meta}. Splines functions consist of consecutive polynomials connected at specific points of the exposure range called knots. Choosing $\mathbf{k} = \left(k_1, \dots, k_K\right)$ knots and third order polynomials, also known as cubic splines (CS), the model is
+\begin{equation}
+\mathrm{CS}(x) = \beta_1 x + \beta_2x^2 + \beta_3x^3 + \sum_{l = 1}^{K-1} \beta_{l+3}(x - k_l)_{+}^3
+\label{eq:cs}
+\end{equation}
+\noindent where the `+' notation has been used ($u_+ = u$ if $u \ge 0$ and $u_+ = 0$ otherwise). To avoid strange behaviors at the extremes of the exposure range, the model~\ref{eq:cs} is constraint to be linear before and after the first and last knots, respectively. For example, using three knots a restricted cubic spline model (RCS) is defied as
+\begin{equation}
+\mathrm{RCS}(x) = \beta_1 x + \beta_2 \left[ \left( x - k_1 \right)_{+}^3 - \frac{k_3 - k_1}{k_3 - k_2} \left( x - k_2  \right)_{+}^3 + \frac{k_2 - k_1}{k_3 - k_2} \left(x - k_3 \right)_{+}^3\right]
+\label{eq:rcs}
+\end{equation}
+\noindent The second transformation is generally divided by $(k_3 - k_1)^2$ to improve the numerical behavior and to put the spline transformations on the same scale \citep{harrell2015regression}.
+
+The previous strategies have been often presented for exposures where 0 was the natural reference categories (e.g. alcohol consumption). Liu et al. extended the methodology for handling non-zero reference categories, as in the case of Body Mass Index. In particular, they first described how to construct the design matrix in terms of contrasts, as clarified in equation~\ref{eq:des.matrix}. Misspecification of the design matrix (i.e. $\log \mathrm{RR} = \beta_1 (x_1 - x_0) + \beta_2 (x_1 - x_0)^2$ instead of $\log \mathrm{RR} = \beta_1 (x_1 - x_0) + \beta_2 (x_1^2 - x_0^2)$) may increase the risk of generating artifacts and misleading conclusions. Note that for zero exposure categories the problem is generally not relevant since many functions return zero for $x = 0$ ($g(0) = 0$).
+
+
+\subsubsection*{Multivariate meta-analysis}
+
+The major contribution for estimating non-linear curves in a random-effects analysis came with the extension of univariate meta-analytic models to the multivariate case. The formalization and implementation of multivariate meta-analysis enabled the extension of a two-stage dose--response meta-analysis to the more complex case of multiple parameters association \citep{gasparrini2012multivariate}. The multivariate framework can accommodate the synthesis of correlated outcomes, or estimates, derived in the first stage dose--response analyses. The application of the strategies presented in~\ref{eq:fracpol} and~\ref{eq:rcs} in a random-effects setting has been easily facilitated by the implementation of dedicated packages for multivariate meta-analysis \citep{orsini2011meta, jackson2011multivariate}.
+
+\noindent More generally, the methodological advancements for meta-analysis were diverse and numerous (see \cite{sutton2008recent} for an overview). Important improvements that directly affected how results are presented related mainly to the quantification and assessment of hetereogenity, with the definition of the measures presented in~\ref{sec:het_rma}. In addition, many other articles enriched the set of tools for pooling study-specific effects, with a direct application to the second stage of a dose--response meta-analysis. Among the many, it is worth to mention the implementation of several estimation methods for the between-study variability (see for a comparison based on simulation studies); advancement in performing meta-regression; proposal of sequential approaches and statistical power; and introduction of Bayesian methods.
+
+
+
+\subsection{Research questions}
+
+
+
+
+
+
+\newpage
+
+\section{Software}
+
+<<dosresmeta_ts, fig.cap='Monthly number of downloads of the dosresmeta R package from the RStudio CRAN mirror September 2013 - December 2017.'>>=
+ggplot(dosresmeta_count, aes(month, n)) + 
+  geom_point(size = 2) + geom_line() +
+  scale_x_date(date_breaks = "6 month", date_minor_breaks = "6 month", date_labels = "%b %Y") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(y = "Number of downloads of dosresmeta per month", x = "")
+@
+
+<<dosresmeta_map, fig.cap='Total number of downloads of the doseresmeta R package worldwide from the RStudio CRAN mirror September 2013 - December 2017.', results='hide'>>=
+map <- joinCountryData2Map(dosresmeta_map, joinCode = "ISO2", nameJoinColumn = "country")
+old_par <- par()
+par(mai = c(0, 0, 0.2, 0), xaxs = "i", yaxs = "i")
+op <- palette(heat.colors(5)[5:1])
+cutVector <- c(1, 50, 100, 500, 1500, 4100)
+#classify the data to a factor
+map@data[["n_cat"]] <- cut(map@data[["n"]], cutVector, include.lowest = TRUE, right = F)
+#rename the categories
+levels(map@data[["n_cat"]]) <- c("1-50", "50-100", "100-500", "500-1500", ">1500")
+mapParams <- mapCountryData(map, nameColumnToPlot = "n_cat", catMethod = "categorical",
+                            mapTitle = "", addLegend = FALSE, oceanCol = "azure",
+                            colourPalette = "palette", missingCountryCol = "white")
+do.call(addMapLegendBoxes, c(mapParams, x = 'left', horiz = F, bg = NA, bty = "n",
+                             title = ""))
+suppressWarnings(par(old_par))
+@

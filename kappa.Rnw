@@ -12,15 +12,19 @@
 library(knitr)
 opts_knit$set(self.contained=FALSE)
 opts_chunk$set(echo = FALSE, message = FALSE, comment = NA, fig.path = "../figure/",
-               out.width = "\\textwidth",
+               out.width = "\\textwidth", cache = TRUE,
                fig.align = "center", fig.width = 7, fig.height = 4.5, fig.pos= "ht!")
-pkgs <- c("tidyverse", "dosresmeta")
+pkgs <- c("knitr", "tidyverse", "dosresmeta", "lubridate", "rworldmap", "Epi", "xtable",
+          "cowplot")
 lapply(pkgs, require, character.only = TRUE)
 # loading libraries and useful functions
 source("code/functions.R")
 # loading data
-load("data/count_meta.RData")
-load("data/count_grl.RData")
+data_names <- paste0("data/", 
+                     c("count_meta", "count_grl", "count_dosresmeta", "res_cov_lin",
+                       "res_cov_quadr"), 
+                     ".RData")
+lapply(data_names, load, .GlobalEnv)
 # setting a ggplot theme for all the plots
 theme_kappa <- theme_light() +
   theme(panel.border = element_blank(), axis.line = element_line())
@@ -69,6 +73,7 @@ theme_set(theme_kappa)
 \usepackage{rotating}
 \usepackage[font={small}]{caption}
 \usepackage{chngcntr}
+\usepackage{booktabs}
 \counterwithout{footnote}{chapter}
 
 %---begin see http://www.khirevich.com/latex/font/
@@ -112,6 +117,7 @@ theme_set(theme_kappa)
 
 \DeclareMathOperator{\R}{\textsf{R}}
 \DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\SE}{SE}
 \DeclareMathOperator{\Cov}{Cov} 
 \DeclareMathOperator{\diag}{diag} 
 \DeclareMathOperator{\N}{N} 
