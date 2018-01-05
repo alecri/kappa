@@ -100,6 +100,7 @@ theme_set(theme_kappa)
 % Substitutions (%examples)
 %\newcommand{\rveplot}{decorrelated-residuals--versus--exposure plot}
 %\newcommand{\kgmsq}{kg$\times$m\textsuperscript{$-2$}}
+\newcommand{\pkg}[1]{{\fontseries{b}\selectfont #1}}
 
 \defcitealias{crippadosresmeta2016}{Paper~I}	
 \defcitealias{discacciati2015goodness}{Paper~II}	

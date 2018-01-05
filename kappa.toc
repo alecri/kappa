@@ -10,35 +10,35 @@
 \contentsline {subsection}{\numberline {2.2.2}High vs. low, categorical, and meta-regression models}{8}{subsection.2.2.2}
 \contentsline {section}{\numberline {2.3}Dose--response meta-analysis}{9}{section.2.3}
 \contentsline {subsection}{\numberline {2.3.1}First stage: study-specific trends}{10}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}Second stage: multivariate meta-analysis}{14}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.2}Second stage: multivariate meta-analysis}{13}{subsection.2.3.2}
 \contentsline {subsection}{\numberline {2.3.3}Methodological research}{17}{subsection.2.3.3}
-\contentsline {subsection}{\numberline {2.3.4}Research questions}{19}{subsection.2.3.4}
-\contentsline {section}{\numberline {2.4}Software}{20}{section.2.4}
-\contentsline {chapter}{\numberline {3}Aims of the thesis}{22}{chapter.3}
-\contentsline {chapter}{\numberline {4}Methods}{23}{chapter.4}
-\contentsline {section}{\numberline {4.1}The \texttt {dosresmeta} R package}{24}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Implementation}{24}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Exposure modeling}{24}{subsection.4.1.2}
-\contentsline {section}{\numberline {4.2}A new measure of heterogeneity}{24}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Statistical proporties}{24}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Simulation study}{24}{subsection.4.2.2}
-\contentsline {section}{\numberline {4.3}Goodness-of-fit}{24}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Deviance}{24}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}Coefficient of determination}{24}{subsection.4.3.2}
-\contentsline {subsection}{\numberline {4.3.3}Visual tools}{24}{subsection.4.3.3}
-\contentsline {section}{\numberline {4.4}A point-wise approach}{24}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Prediction of study-specific (log) relative risks}{24}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Pool of dose--response prediction}{24}{subsection.4.4.2}
-\contentsline {section}{\numberline {4.5}A one-stage model}{24}{section.4.5}
-\contentsline {subsection}{\numberline {4.5.1}Model definition}{24}{subsection.4.5.1}
-\contentsline {subsection}{\numberline {4.5.2}Estimation and hypothesis testing}{24}{subsection.4.5.2}
-\contentsline {subsection}{\numberline {4.5.3}Prediction}{24}{subsection.4.5.3}
-\contentsline {subsection}{\numberline {4.5.4}Comparison with two-stage analysis}{24}{subsection.4.5.4}
-\contentsline {chapter}{\numberline {5}Results}{25}{chapter.5}
-\contentsline {chapter}{\numberline {6}Discussion}{26}{chapter.6}
-\contentsline {chapter}{\numberline {7}Conclusions}{27}{chapter.7}
-\contentsline {chapter}{\numberline {8}Future research}{29}{chapter.8}
-\contentsline {chapter}{\numberline {A}Supplementary figures}{30}{appendix.A}
-\contentsline {chapter}{\numberline {B}Supplementary tables}{31}{appendix.B}
-\contentsline {chapter}{References}{32}{appendix.C}
-\contentsline {chapter}{Acknowledgements}{35}{appendix*.13}
+\contentsline {subsection}{\numberline {2.3.4}Research questions}{20}{subsection.2.3.4}
+\contentsline {section}{\numberline {2.4}Software}{21}{section.2.4}
+\contentsline {chapter}{\numberline {3}Aims of the thesis}{23}{chapter.3}
+\contentsline {chapter}{\numberline {4}Methods}{24}{chapter.4}
+\contentsline {section}{\numberline {4.1}The \texttt {dosresmeta} R package}{25}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Implementation}{25}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Exposure modeling}{25}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}A new measure of heterogeneity}{25}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Statistical proporties}{25}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Simulation study}{25}{subsection.4.2.2}
+\contentsline {section}{\numberline {4.3}Goodness-of-fit}{25}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Deviance}{25}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Coefficient of determination}{25}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}Visual tools}{25}{subsection.4.3.3}
+\contentsline {section}{\numberline {4.4}A point-wise approach}{25}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Prediction of study-specific (log) relative risks}{25}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Pool of dose--response prediction}{25}{subsection.4.4.2}
+\contentsline {section}{\numberline {4.5}A one-stage model}{25}{section.4.5}
+\contentsline {subsection}{\numberline {4.5.1}Model definition}{25}{subsection.4.5.1}
+\contentsline {subsection}{\numberline {4.5.2}Estimation and hypothesis testing}{25}{subsection.4.5.2}
+\contentsline {subsection}{\numberline {4.5.3}Prediction}{25}{subsection.4.5.3}
+\contentsline {subsection}{\numberline {4.5.4}Comparison with two-stage analysis}{25}{subsection.4.5.4}
+\contentsline {chapter}{\numberline {5}Results}{26}{chapter.5}
+\contentsline {chapter}{\numberline {6}Discussion}{27}{chapter.6}
+\contentsline {chapter}{\numberline {7}Conclusions}{28}{chapter.7}
+\contentsline {chapter}{\numberline {8}Future research}{30}{chapter.8}
+\contentsline {chapter}{\numberline {A}Supplementary figures}{31}{appendix.A}
+\contentsline {chapter}{\numberline {B}Supplementary tables}{32}{appendix.B}
+\contentsline {chapter}{References}{33}{appendix.C}
+\contentsline {chapter}{Acknowledgements}{37}{appendix*.13}
