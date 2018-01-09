@@ -76,7 +76,7 @@ An estimate of $\tau^2$, instead, directly provides information about the amount
 Although $\tau^2$ is the more natural and appropriate measure of between-study variability, the actual value is difficult to interpret because it depends on type of effect size (e.g. log relative risk, standardized mean difference) and has no upper limit. Therefore, both evaluation of the degree (or levels) and the comparison of heterogeneity in different meta-analyses can hardly be based on the estimate of $\tau^2$.
 
 
-\subsection{Measures of heterogeneity}
+\subsection{Measures of heterogeneity}\label{sec:measures_het}
 
 To complement the test based approach and the information provided by $\hat \tau^2$, measures that quantify the impact of heterogeneity have been proposed \citep{higgins2002quantifying}. 
 Higgins et al. presented several possibilities in the simpler case where all the sampling variances $v_i$ are equal to a fixed and known value $\sigma^2$. 
@@ -182,7 +182,7 @@ count_grl %>%
 The common approach for dose--response meta-analysis consists of a two-stage procedure, where the regression coefficients for the study-specific trends are first estimated separately within each study, and then combined using meta-analysis. In the next sections we cover the main methodological aspects related to each stage of the analysis.
 
 
-\subsection{First stage: study-specific trends}
+\subsection{First stage: study-specific trends}\label{sec:1st_stage}
 
 If we had access to the individual patient data, the dose-response model for a simple linear trend could be written as
 \begin{equation}
@@ -210,7 +210,7 @@ If we had access to the individual patient data, the dose-response model for a s
 \mathbf{y}_i = \mathbf{X}_i \boldsymbol{\beta}_i + \boldsymbol{\varepsilon}_i
 \label{eq:drmodel}
 \end{equation}
-The outcome $\mathbf{y}_i $ is the $J_i$ length vector of the non-referent log $\widehat{\mathrm{RR}}$s while $\mathbf{X}_i$ the $J_i \times p$ design matrix containing the $p$ transformations of the assigned dose used to model the dose--response association
+The outcome $\mathbf{y}_i$ is the $J_i$ length vector of the non-referent log $\widehat{\mathrm{RR}}$s while $\mathbf{X}_i$ the $J_i \times p$ design matrix containing the $p$ transformations of the assigned dose used to model the dose--response association
 \begin{equation}
  \mathbf{X}_i=\left[
 \begin{array}{ccc}
@@ -339,11 +339,11 @@ p_sim_quadr
 @
 
 
-\subsection{Second stage: multivariate meta-analysis}
+\subsection{Second stage: multivariate meta-analysis}\label{sec:2nd_stage}
 
 The study-specific dose-response curves are defined by the $p$ transformations, $g_1(x), \dots, g_p(x)$, and the estimated regression coefficients $\boldsymbol{\hat \beta}_i$. A pooled dose--response can be obtained by combining the $\boldsymbol{\hat \beta}_i$ coefficients. For that purpose, the same functional relationship needs to be defined across the studies. Therefore, the transformations of the exposure were not subscripted by the study index $i$.
 
-\noindent The $p$ length vector of the $\boldsymbol{\hat \beta}_i$ parameters and the accompanying $p \times p$ covariances matrices $\widehat{\Var} \left( \boldsymbol{\hat \beta}_i \right)$ serve as outcome in the meta-analytic model. We consider the setting with $p \ge 2$ and relate the univariate case as a simpler instance of the more general multivariate case. Since the dimension of the outcome is no longer univariate, extensions of models \ref{eq:rma} to the multivariate settings can be implemented for accommodating the synthesis of correlated estimates \ref{berkey1998meta, gasparrini2012multivariate, ritz2008multivariate}.
+\noindent The $p$ length vector of the $\boldsymbol{\hat \beta}_i$ parameters and the accompanying $p \times p$ covariances matrices $\widehat{\Var} \left( \boldsymbol{\hat \beta}_i \right)$ serve as outcome in the meta-analytic model. We consider the setting with $p \ge 2$ and relate the univariate case as a simpler instance of the more general multivariate case. Since the dimension of the outcome is no longer univariate, extensions of models \ref{eq:rma} to the multivariate settings can be implemented for accommodating the synthesis of correlated estimates \citep{berkey1998meta, gasparrini2012multivariate, ritz2008multivariate}.
 
 \subsubsection*{Model definition}
 
@@ -406,7 +406,7 @@ Several methods are available for estimating the parameters of interest, namely 
 \label{eq:rmma_logRLik}
 \end{align}
 
-\noindent Both estimation methods require iterative algorithms, where conditional estimates of $\boldsymbol{\hat \beta}$ are plugged in either \ref{eq:rmma_logLik} or \ref{eq:rmma_logRLik}, regarded as function of $\boldsymbol{\xi}$ only, until convergence. More details on the implementation of iterative methods for maximizing equations\label{eq:rmma_logLik} and ~\label{eq:rmma_logRLik} are described by \cite{ gasparrini2012multivariate}.
+\noindent Both estimation methods require iterative algorithms, where conditional estimates of $\boldsymbol{\hat \beta}$ are plugged in either \ref{eq:rmma_logLik} or \ref{eq:rmma_logRLik}, regarded as function of $\boldsymbol{\xi}$ only, until convergence. More details on the implementation of iterative methods for maximizing equations~\ref{eq:rmma_logLik} and ~\ref{eq:rmma_logRLik} are described by \cite{gasparrini2012multivariate}.
 
 
 \subsubsection*{Hypothesis testing and heterogeneity}
@@ -424,7 +424,7 @@ Q = \sum_{i=1}^I \left(\boldsymbol{\hat \beta}_i - \mathbf{Z}_i\boldsymbol{\hat 
 \end{equation}
 \noindent with $\boldsymbol{\hat \beta}_{\text{fe}}$ estimated under a fixed-effect model, is used to test $H_0: \boldsymbol{\Psi} = \boldsymbol{0}$. Under the null hypothesis, the $Q$~statistic follow a $\chi^2$ with $Ip - pm$ degrees of freedom. When $p = 1$ the formulations~\ref{eq:Q} and~\ref{eq:Qmulti} coincide. The multivariate extension of the $I^2$ was derived relating the $Q$~statistics to its degrees of freedom $I^2 = \max \left\{0, \frac{Q- (Ip - pm)}{Ip - pm}\right\}$ \citep{jackson2012quantifying}.
 
-\subsubsection*{Prediction}
+\subsubsection*{Prediction}\label{sec:pred}
 
 Oftentimes the estimated mean coefficients $\boldsymbol{\hat \beta}$ are not directly interpretable (an exception is the estimate for a linear trend). The dose-response results are thus communicated as predicted (log) relative risk for selected exposure levels using one value as referent. Obtaining predictions either in a graphical or tabular presentation is thus an important step of the analysis and yet often poorly implemented.
 Based on the model~\ref{eq:rmma}, the predicted $\log RR$ for a dose level $x_v$ using $x_\mathrm{ref}$ as referent can be calculated as
@@ -488,7 +488,7 @@ The major contribution for estimating non-linear curves in a random-effects anal
 
 \subsubsection*{Covariance and sensitivity analysis}
 
-\cite{orsini2006generalized} refined the initial formulas presented by Greenland and Longnecker for approximating the study-specific covariance matrices depending on the study-design. \cite(berrington2003generalized) described an alternative method that avoids the reconstruction of the covariance matrices. Instead, upper and lower bounds for the covariance matrix are used in a sensitivity analysis of the dose-response coefficients, adopting a range of plausible values for the covariances. While the alternative algorithm proposed by \cite{hamling2008facilitating} was presented in section~\ref{sec:cov}, \cite{easton1991floating} proposed the implementation of the floating absolute risks where the parameters and their standard errors can be estimated without specifying a baseline group and thus can be regarded as independent. Using individual patient data from the Pooling Project of Prospective Studies of Diet and Cancer (\url{http://www.hsph.harvard.edu/poolingproject}), negligible differences in the reconstructed covariance matrices were found comparing the three approaches \cite{orsini2011meta}. Of note, none of the methods would be needed if the authors of the original articles provided the covariance matrix along with the estimated coefficients, as it is usually done in consortia projects.
+\cite{orsini2006generalized} refined the initial formulas presented by Greenland and Longnecker for approximating the study-specific covariance matrices depending on the study-design. \cite{berrington2003generalized} described an alternative method that avoids the reconstruction of the covariance matrices. Instead, upper and lower bounds for the covariance matrix are used in a sensitivity analysis of the dose-response coefficients, adopting a range of plausible values for the covariances. While the alternative algorithm proposed by \cite{hamling2008facilitating} was presented in section~\ref{sec:cov}, \cite{easton1991floating} proposed the implementation of the floating absolute risks where the parameters and their standard errors can be estimated without specifying a baseline group and thus can be regarded as independent. Using individual patient data from the Pooling Project of Prospective Studies of Diet and Cancer (\url{http://www.hsph.harvard.edu/poolingproject}), negligible differences in the reconstructed covariance matrices were found comparing the three approaches \citep{orsini2011meta}. Of note, none of the methods would be needed if the authors of the original articles provided the covariance matrix along with the estimated coefficients, as it is usually done in consortia projects.
 
 \cite{berlin1993meta} presented alternatives for assigning the dose levels within exposure categories and illustrated the use of meta-regression models for investigating the possible effect of study-level characteristics on the estimated linear trends. \cite{shi2004meta} further discussed the issue of dose assignment in grouped measures allowing for arbitrary dose levels. In addition, they investigated the effect of heterogeneity and publication bias by means of sensitivity analyses. A similar problem of dose assignment was addressed by using a likelihood approach limited to a linear trend analysis \citep{takahashi2010assignment}. This idea has been further extended to the case of restricted cubic splines \citep{takahashi2013cubic}.
 
@@ -503,6 +503,9 @@ There are still many open research questions that need to be addressed to improv
 \noindent  None of the surveyed meta-analyses discussed the sensitivity of the overall dose-response relationship to differences in study-specific exposure distribution. This analysis can be very relevant in case of studies reporting results for heterogeneous exposure range and can enhance estimation by limiting the impact of extrapolation. The point-wise average approach presented by Saurebrei and Royston in the context of individual patient data may represent an interesting alternative to the averaging of regression coefficients. In \citetalias{crippa2018pointwise} we will evaluate the advantages of this strategy based on aggregated dose-response data.
 
 \noindent In all the meta-analyses assessing departure from of linearity, the authors excluded those studies reporting less than two non-referent RRs. Indeed, a two-stage dose-response meta-analysis requires that all the models in the dose-response analysis are identifiable. A one stage approach would avoid that requirement. Such an approach is conceptually easier to understand, and more elegant from a statistical point of view. In addition, it allows investigation of much more flexible dose-response curves, that are not possible within the context of a traditional two-stage analysis. Aim of \citetalias{crippa2018one} is to describe implementation and advantages of a one-stage random-effects dose-response meta-analysis of aggregated data.
+
+\noindent The updated \pkg{dosresmeta} package implements also functions to facilitate specific aspects of a dose-response meta-analysis. These includes the assessment of goodness-of-fit discussed in \citetalias{discacciati2015goodness}, tests for fixed- and random-effects coefficients, conditional and marginal predictions, and the use of fractional polynomials.
+
 
 
 \section{Software}

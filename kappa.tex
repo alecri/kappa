@@ -490,7 +490,6 @@ The quantitative exposure is frequently divided in intervals and the results are
 A dose--response meta-analysis, instead, has the potential to be more informative and powerful since it uses the whole available information to estimate the dose--response association. Because the estimates depend on the same reference group, it is not possible to regress the relative risks on the assigned dose using oridinaly least square. Greenland and Longnecker described in their seminal paper in 1992 how to reconstruct the correlation within set of relative risks and incorporate it in the dose--response analysis using generalized least square regression. Since then, the number of published dose--response meta-analysis has rapidly increased in many fields of application including oncology, public health, environmental sciences, nutrition, endocrinology, and internal medicine. 
 Additional papers refined selected aspects of the proposed methodology, mainly focusing on the implementation of flexible strategies in modeling non-linear associations and incorporating the advances of multivariate meta-analysis. However, there were still several relevant questions that needed to be addressed such as how to assess the goodness-of-fit (\citetalias{discacciati2015goodness}), how to quantify the impact of heterogeneity (\citetalias{crippa2016new}), how to deal with differences in the exposure range across studies (\citetalias{crippa2018pointwise}), and how to estimate complex models without excluding relevant studies (\citetalias{crippa2018one}).
 
-%This thesis aims to address these issues by developing and implementing new strategies and ad-hoc measures (\citetalias{crippadosresmeta2016}), including tools to evaluate the goodness-of-fit (\citetalias{discacciati2015goodness}), a new measure to quantify the impact of heterogeneity (\citetalias{crippa2016new}), a strategy to deal with differences in the exposure range across studies (\citetalias{crippa2018pointwise}), and a one-stage approach to estimate complex models without excluding relevant studies (\citetalias{crippa2018one}).
 This thesis aims to address these issues by developing and implementing new strategies and ad-hoc measures (\citetalias{crippadosresmeta2016}). The proposed methodologies are demonstrated reanalyzing published meta-analyses and are implemented in user friendly packages written in the free and open source R language, to bridge the gap between theory and application.
 
 % !TeX root = ../kappa.Rnw  
@@ -515,8 +514,8 @@ Meta-analysis, or more generally quantitative review synthesis, is the statistic
 The classical approach for meta-analysis consists of a weighted average of the study-specific results or estimates. A fixed-effect model for meta-analysis assumes that all the studies estimate a single common parameter \citep{rice2017re}. The hypothesis of homogeneity of the estimates is rarely applicable in biomedical and social sciences where studies typically differ in terms of design, disease classification, exposure measurement, and implemented statistical analyses \citep{colditz1995heterogeneity}. In such cases, heterogeneity across estimates is expected and should be considered in the analysis \citep{higgins2008commentary}. If the parameters estimated in the studies are not identical but similar, a random-effects models can be used to identify those similarities or to explain the observed heterogeneity \citep{higgins2009re}.
 
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[ht!]
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[ht!]
 
 {\centering \includegraphics[width=\textwidth]{../figure/num_meta-analysis-1} 
 
@@ -667,8 +666,8 @@ The aim of a dose--response meta-analysis is to reconstruct the shape of the ass
 \noindent The methodology for dose--response meta-analysis was first presented by Greenland and Longnecker in their seminal paper \citep{greenland1992methods}, which quickly became a standard reference for applied works. Indeed, the number of published dose--response meta-analyses increased exponentially from 9 in 2000 to 172 in 2016 (figure~\ref{fig:cite_grl}).
 The most popular fields of application include oncology, environmental and public health, nutrition epidemiology, and general internal medicine. Dose-response meta-analyses are published in many leading medical and epidemiological journals, including JAMA, Lancet, Stroke, Gastroenterology, American J of Medicine, American J of Clinical Nutrition, American J Epidemiology, International J Epidemiology, Journal National Cancer Institute, International J of Cancer, Statistics in Medicine and many others. The method is also used by the World Cancer Research Fund/American Institute for Cancer Research for reviewing the evidence on the relations between life-style factors (e.g. diet and physical activity) and cancer. Guidelines based on these quantitative reviews are central to promote the overall health and prevent many chronic diseases.
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[ht!]
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[ht!]
 
 {\centering \includegraphics[width=\textwidth]{../figure/cite_grl-1} 
 
@@ -683,7 +682,7 @@ The most popular fields of application include oncology, environmental and publi
 The common approach for dose--response meta-analysis consists of a two-stage procedure, where the regression coefficients for the study-specific trends are first estimated separately within each study, and then combined using meta-analysis. In the next sections we cover the main methodological aspects related to each stage of the analysis.
 
 
-\subsection{First stage: study-specific trends}
+\subsection{First stage: study-specific trends}\label{sec:1st_stage}
 
 If we had access to the individual patient data, the dose-response model for a simple linear trend could be written as
 \begin{equation}
@@ -711,7 +710,7 @@ If we had access to the individual patient data, the dose-response model for a s
 \mathbf{y}_i = \mathbf{X}_i \boldsymbol{\beta}_i + \boldsymbol{\varepsilon}_i
 \label{eq:drmodel}
 \end{equation}
-The outcome $\mathbf{y}_i $ is the $J_i$ length vector of the non-referent log $\widehat{\mathrm{RR}}$s while $\mathbf{X}_i$ the $J_i \times p$ design matrix containing the $p$ transformations of the assigned dose used to model the dose--response association
+The outcome $\mathbf{y}_i$ is the $J_i$ length vector of the non-referent log $\widehat{\mathrm{RR}}$s while $\mathbf{X}_i$ the $J_i \times p$ design matrix containing the $p$ transformations of the assigned dose used to model the dose--response association
 \begin{equation}
  \mathbf{X}_i=\left[
 \begin{array}{ccc}
@@ -792,8 +791,8 @@ The ML and GLS estimators always give unbiased estimates of $\boldsymbol{\beta}_
 We investigated the differences between the GLS and WLS estimators using a simulation study of 5000 aggregated dose--response data where the true trends were linear ($\beta_\text{TRUE} =$ -0.014). As expected, both the estimators were unbiased and consistent but the empirical distribution of the GLS estimator was more concentrated around the true $\beta$ value \ref{fig:cov_methods_lin}. The WLS estimates of the standard errors of the $\hat \beta_i$ were lower than the corresponding GLS values. This had a direct effect on the inference for the estimated linear trend. For istance, it may be interesting to fit a quadratic curve as in~\ref{eq:quadr_ad} and test the hypothesis $H_0: \beta_2 = 0$, i.e. departure from a linear trend. Using inference based on WLS estimators the null hypothesis were wrongly rejected 3.96\% of the time, lower than the nominal level $\alpha = 5$\%. The corresponding number for the GLS estimator was instead closer (4.8\%). 
 \noindent We also implemented simulations assuming a quadratic curve with the true coefficients $\boldsymbol{\beta}_\text{TRUE}$ = (-0.092, 0.003). Similar results for the empirical bivariate distribution of $ \boldsymbol{\hat \beta}_i$ and their standard errors are presented in figure~\ref{fig:cov_methods_quadr}.
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[ht!]
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[ht!]
 
 {\centering \includegraphics[width=\textwidth]{../figure/cov_methods_lin-1} 
 
@@ -805,8 +804,8 @@ We investigated the differences between the GLS and WLS estimators using a simul
 
 \end{knitrout}
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[ht!]
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[ht!]
 
 {\centering \includegraphics[width=\textwidth]{../figure/cov_methods_quadr-1} 
 
@@ -819,11 +818,11 @@ We investigated the differences between the GLS and WLS estimators using a simul
 \end{knitrout}
 
 
-\subsection{Second stage: multivariate meta-analysis}
+\subsection{Second stage: multivariate meta-analysis}\label{sec:2nd_stage}
 
 The study-specific dose-response curves are defined by the $p$ transformations, $g_1(x), \dots, g_p(x)$, and the estimated regression coefficients $\boldsymbol{\hat \beta}_i$. A pooled dose--response can be obtained by combining the $\boldsymbol{\hat \beta}_i$ coefficients. For that purpose, the same functional relationship needs to be defined across the studies. Therefore, the transformations of the exposure were not subscripted by the study index $i$.
 
-\noindent The $p$ length vector of the $\boldsymbol{\hat \beta}_i$ parameters and the accompanying $p \times p$ covariances matrices $\widehat{\Var} \left( \boldsymbol{\hat \beta}_i \right)$ serve as outcome in the meta-analytic model. We consider the setting with $p \ge 2$ and relate the univariate case as a simpler instance of the more general multivariate case. Since the dimension of the outcome is no longer univariate, extensions of models \ref{eq:rma} to the multivariate settings can be implemented for accommodating the synthesis of correlated estimates \ref{berkey1998meta, gasparrini2012multivariate, ritz2008multivariate}.
+\noindent The $p$ length vector of the $\boldsymbol{\hat \beta}_i$ parameters and the accompanying $p \times p$ covariances matrices $\widehat{\Var} \left( \boldsymbol{\hat \beta}_i \right)$ serve as outcome in the meta-analytic model. We consider the setting with $p \ge 2$ and relate the univariate case as a simpler instance of the more general multivariate case. Since the dimension of the outcome is no longer univariate, extensions of models \ref{eq:rma} to the multivariate settings can be implemented for accommodating the synthesis of correlated estimates \citep{berkey1998meta, gasparrini2012multivariate, ritz2008multivariate}.
 
 \subsubsection*{Model definition}
 
@@ -886,7 +885,7 @@ Several methods are available for estimating the parameters of interest, namely 
 \label{eq:rmma_logRLik}
 \end{align}
 
-\noindent Both estimation methods require iterative algorithms, where conditional estimates of $\boldsymbol{\hat \beta}$ are plugged in either \ref{eq:rmma_logLik} or \ref{eq:rmma_logRLik}, regarded as function of $\boldsymbol{\xi}$ only, until convergence. More details on the implementation of iterative methods for maximizing equations\label{eq:rmma_logLik} and ~\label{eq:rmma_logRLik} are described by \cite{ gasparrini2012multivariate}.
+\noindent Both estimation methods require iterative algorithms, where conditional estimates of $\boldsymbol{\hat \beta}$ are plugged in either \ref{eq:rmma_logLik} or \ref{eq:rmma_logRLik}, regarded as function of $\boldsymbol{\xi}$ only, until convergence. More details on the implementation of iterative methods for maximizing equations~\ref{eq:rmma_logLik} and ~\ref{eq:rmma_logRLik} are described by \cite{gasparrini2012multivariate}.
 
 
 \subsubsection*{Hypothesis testing and heterogeneity}
@@ -904,7 +903,7 @@ Q = \sum_{i=1}^I \left(\boldsymbol{\hat \beta}_i - \mathbf{Z}_i\boldsymbol{\hat 
 \end{equation}
 \noindent with $\boldsymbol{\hat \beta}_{\text{fe}}$ estimated under a fixed-effect model, is used to test $H_0: \boldsymbol{\Psi} = \boldsymbol{0}$. Under the null hypothesis, the $Q$~statistic follow a $\chi^2$ with $Ip - pm$ degrees of freedom. When $p = 1$ the formulations~\ref{eq:Q} and~\ref{eq:Qmulti} coincide. The multivariate extension of the $I^2$ was derived relating the $Q$~statistics to its degrees of freedom $I^2 = \max \left\{0, \frac{Q- (Ip - pm)}{Ip - pm}\right\}$ \citep{jackson2012quantifying}.
 
-\subsubsection*{Prediction}
+\subsubsection*{Prediction}\label{sec:pred}
 
 Oftentimes the estimated mean coefficients $\boldsymbol{\hat \beta}$ are not directly interpretable (an exception is the estimate for a linear trend). The dose-response results are thus communicated as predicted (log) relative risk for selected exposure levels using one value as referent. Obtaining predictions either in a graphical or tabular presentation is thus an important step of the analysis and yet often poorly implemented.
 Based on the model~\ref{eq:rmma}, the predicted $\log RR$ for a dose level $x_v$ using $x_\mathrm{ref}$ as referent can be calculated as
@@ -968,7 +967,7 @@ The major contribution for estimating non-linear curves in a random-effects anal
 
 \subsubsection*{Covariance and sensitivity analysis}
 
-\cite{orsini2006generalized} refined the initial formulas presented by Greenland and Longnecker for approximating the study-specific covariance matrices depending on the study-design. \cite(berrington2003generalized) described an alternative method that avoids the reconstruction of the covariance matrices. Instead, upper and lower bounds for the covariance matrix are used in a sensitivity analysis of the dose-response coefficients, adopting a range of plausible values for the covariances. While the alternative algorithm proposed by \cite{hamling2008facilitating} was presented in section~\ref{sec:cov}, \cite{easton1991floating} proposed the implementation of the floating absolute risks where the parameters and their standard errors can be estimated without specifying a baseline group and thus can be regarded as independent. Using individual patient data from the Pooling Project of Prospective Studies of Diet and Cancer (\url{http://www.hsph.harvard.edu/poolingproject}), negligible differences in the reconstructed covariance matrices were found comparing the three approaches \cite{orsini2011meta}. Of note, none of the methods would be needed if the authors of the original articles provided the covariance matrix along with the estimated coefficients, as it is usually done in consortia projects.
+\cite{orsini2006generalized} refined the initial formulas presented by Greenland and Longnecker for approximating the study-specific covariance matrices depending on the study-design. \cite{berrington2003generalized} described an alternative method that avoids the reconstruction of the covariance matrices. Instead, upper and lower bounds for the covariance matrix are used in a sensitivity analysis of the dose-response coefficients, adopting a range of plausible values for the covariances. While the alternative algorithm proposed by \cite{hamling2008facilitating} was presented in section~\ref{sec:cov}, \cite{easton1991floating} proposed the implementation of the floating absolute risks where the parameters and their standard errors can be estimated without specifying a baseline group and thus can be regarded as independent. Using individual patient data from the Pooling Project of Prospective Studies of Diet and Cancer (\url{http://www.hsph.harvard.edu/poolingproject}), negligible differences in the reconstructed covariance matrices were found comparing the three approaches \citep{orsini2011meta}. Of note, none of the methods would be needed if the authors of the original articles provided the covariance matrix along with the estimated coefficients, as it is usually done in consortia projects.
 
 \cite{berlin1993meta} presented alternatives for assigning the dose levels within exposure categories and illustrated the use of meta-regression models for investigating the possible effect of study-level characteristics on the estimated linear trends. \cite{shi2004meta} further discussed the issue of dose assignment in grouped measures allowing for arbitrary dose levels. In addition, they investigated the effect of heterogeneity and publication bias by means of sensitivity analyses. A similar problem of dose assignment was addressed by using a likelihood approach limited to a linear trend analysis \citep{takahashi2010assignment}. This idea has been further extended to the case of restricted cubic splines \citep{takahashi2013cubic}.
 
@@ -984,6 +983,9 @@ There are still many open research questions that need to be addressed to improv
 
 \noindent In all the meta-analyses assessing departure from of linearity, the authors excluded those studies reporting less than two non-referent RRs. Indeed, a two-stage dose-response meta-analysis requires that all the models in the dose-response analysis are identifiable. A one stage approach would avoid that requirement. Such an approach is conceptually easier to understand, and more elegant from a statistical point of view. In addition, it allows investigation of much more flexible dose-response curves, that are not possible within the context of a traditional two-stage analysis. Aim of \citetalias{crippa2018one} is to describe implementation and advantages of a one-stage random-effects dose-response meta-analysis of aggregated data.
 
+\noindent The updated \pkg{dosresmeta} package implements also functions to facilitate specific aspects of a dose-response meta-analysis. These includes the assessment of goodness-of-fit discussed in \citetalias{discacciati2015goodness}, tests for fixed- and random-effects coefficients, conditional and marginal predictions, and the use of fractional polynomials.
+
+
 
 \section{Software}
 
@@ -993,8 +995,8 @@ Dissemination of new statistical methodologies is certainly facilitated by the d
  
 The majority of the applied meta-analyses retrieved in our survey were performed using the \texttt{glst} procedure in Stata (36, 87\%), while 2 used the \texttt{metadose} macro in SAS, 2 functions in RevMan. No dedicated package was available in the free software programming language \textsf{R}. Therefore, in 2013, we released the first version of the \pkg{dosresmeta} package on CRAN (\url{https://CRAN.R-project.org/package=dosresmeta}), a package specifically designed for dose-response meta-analysis in \textsf{R}, with specific functions that greatly facilitates the application in practical works. 
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[ht!]
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[ht!]
 
 {\centering \includegraphics[width=\textwidth]{../figure/dosresmeta_ts-1} 
 
@@ -1008,8 +1010,8 @@ The majority of the applied meta-analyses retrieved in our survey were performed
 
 The \pkg{dosresmeta} package is now available in the updated version 2.0.1 and new features are being implemented in the version under development on GitHub (\url{https://github.com/alecri/dosresmeta}). Currently, the \pkg{dosresmeta} package is downloaded and used worldwide, with a median number of 260 downloads/month (Figure~\ref{fig:dosresmeta_ts}). The countries where it has been downloaded most are Great Britain (4005), United States (3905), and China (1605) (Figure~\ref{fig:dosresmeta_map}). Working examples, codes, and data are available at \url{http://alecri.github.io/software} for fully reproduce figures and numbers presented in both applied and theoretical papers.
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[ht!]
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[ht!]
 
 {\centering \includegraphics[width=\textwidth]{../figure/dosresmeta_map-1} 
 
@@ -1068,27 +1070,191 @@ More specifically, the aims were:
 
 \chapter{Methods}
 
-\section{The \texttt{dosresmeta} R package}
+\section{The \pkg{dosresmeta} \textsf{R} package}
+
+The first version of the \pkg{dosresmeta} \textsf{R} package was released on the Comprehensive R Archive Network (CRAN) on September 9, 2013. It is listed in the CRAN task view Meta-Analysis (\url{https://CRAN.R-project.org/view=MetaAnalysis}), a guide that covers the vast collection of \textsf{R} packages for facilitating meta-analysis of summary statistics.
+New features and some minor bug fixes were implemented in further versions, including the major release (2.0.0 version) in August 17, 2017. The implementation of the package is presented in \citetalias{crippadosresmeta2016}, which is also offered as a free guide for the package in a vignette accessible by typing \texttt{browseVignettes("dosresmeta")} from the \textsf{R} console.
 
 \subsection{Implementation}
 
-\subsection{Exposure modeling}
+The initial version 1.0 of the \pkg{dosresmeta} \textsf{R} package implemented the two-stage approach for dose--response meta-analysis described in sections~\ref{sec:1st_stage} and~\ref{sec:2nd_stage}. The package included some facilities for efficiently estimating the dose-response associations across the included studies and used the \pkg{mvmeta} package for combining the study-specific regression coefficients \citep{gasparrini2012multivariate}. The main novelty of the version 1.0 was the implementation of \texttt{gl} and \texttt{hamling} functions for reconstructing the covariance matrices among set of log relative risks using the methods developed by \cite{greenland1992methods} and \cite{hamling2008facilitating}. 
+In version 1.3 dedicated functions were dedicated for summarizing and displaying results, and for predicting the pooled dose-response association as described in section~\ref{sec:pred}. Compared to other routines, the \texttt{predict} function offers the possibility of deriving the predicted curve also for dose levels that are not observed in the analyzed data. The same applies for the choice of the reference dose value. The main advantage is that nice curves and tables including combined results for desired dose value can be easily obtained with a few lines of code. Practical examples are still available at \url{https://alecri.github.io/software/dosresmeta.html}.
+In addition, the \texttt{center} argument was added in the main function for centering the design matrix as described by \cite{liu2009two}. The argument has been set to \texttt{TRUE} by default for preventing possible errors when modelling non-linear curves, especially in case of non-zero exposure reference categories. Finally, additional arguments were introduced for allowing the specification of a list of covariance matrices directly by the user.
+
+\noindent New capabilities and functions were written in the version under development avaialbe on GitHub and were finally included in the major release version 2.0 on CRAN. The \pkg{dosresmeta} package was largely redesigned in the internal functions but kept unchanged the external form and arguments for backward compatibility. Three main features were introduced: the extension of the two-stage approach for dose--response meta-analysis of differences in means (rather than log relative risks) \citep{crippa2016dose}, the  possibility of fitting meta-regression models and the implementation of an alternative one-stage approach. The first was achieved by extending the choices of the \texttt{covariance} argument for results presented in terms of mean and standardized mean differences, which related to the \texttt{covar.smd} function. The alternative \texttt{covariance == "indep"} can be specified for assuming independence of the log relative risks or differences in means. This is particularly useful when the information for reconstructing the covariances is not available (see additional (useful) code section on the referenced site for examples).
+
+\noindent The implementation of the one-stage approach and related functions is discussed in more details in the methods for \citetalias{crippa2018one}. 
+The updated \pkg{dosresmeta} package implements also functions to facilitate specific aspects of a dose-response meta-analysis. These includes the assessment of goodness-of-fit discussed in \citetalias{discacciati2015goodness}, tests for fixed- and random-effects coefficients, conditional and marginal predictions, and the use of fractional polynomials.
+
+Based on the last version of the \pkg{dosresmeta} package, an interactive interface is also available at \url{http://alessiocrippa.com/shiny/dosresmeta}. The web-app can be useful for introducing to the concepts of dose--response meta-analysis those researchers who are not familiar with the \textsf{R} software.
+
+\subsection{Description of the package}
+
+The \pkg{dosresmeta} package can be downloaded from CRAN by typing directly in \textsf{R} 
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+R> install.packages("dosresmeta")
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+The version under development is instead available from GitHub
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+R> install.packages("devtools")
+R> devtools::install_github("alecri/dosresmeta")
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\noindent The package consists of a main function \texttt{dosresmeta} with the following arguments
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+R> str(dosresmeta)
+function (formula, id, v, type, cases, n, sd, data, mod = ~1, intercept = F, 
+    center = T, se, lb, ub, covariance = "gl", method = "reml", 
+    proc = "2stage", Slist, method.smd = "cohen", control = list())  
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+The dose--response model is specified in the \texttt{formula} argument in a symbolic representation. For example, if logrr and dose are the variable name for the log relative risk and assigned doses, a linear trend is speficified as \texttt{logrr $\sim$ dose} while a quadratic curve as \texttt{logrr $\sim$ dose + I(dose)\^{}2}. The variable are defined in a data.frame whose name in speficified in the \texttt{data} argument. By default \texttt{intercept = FALSE} does not include the intercept term in the covariance matrix, which is constructed in terms of contrasted unless \texttt{center = FALSE}. The \texttt{id} argument specifies the name for the study id variable (can be omitted for single study analysis). 
+The standard errors for the log relative risks is specified in the \texttt{se} argument, or alternatively, either the variances (\texttt{v}) or the lower (\texttt{lb}) and upper bounds (\texttt{ub}) of the relative risks need to be specified. The additional information about the study-design (\texttt{type}), the number of cases (\texttt{cases}), and participants or amount of person-time (\texttt{n}) is used for reconstructed the covariance of the log relative risk (or mean differences) using the method specified in the \texttt{covariance} argument (default is the Greenland and Longnecker’s method). In alternatively, a list of covariance matrices can be passed to the \texttt{Slist} argument when \texttt{covariance = "user"}.
+As defaults, a two-stage procedure with REML estimation methods (\texttt{method}) are selected. Alternatives are a one-stage procedure (\texttt{proc = "stage"}) and either ML estimators \texttt{method = "ml"} or a fixed-effect analysis \texttt{method = "fixed"}. Residual heterogeneity can be modeled in a meta-regression analysis specified in the \texttt{mods} argument. For example, a different curve depending on the study design can be specified with \texttt{mods = $\sim$ type}. Finally, a list of parameters can be passed to the \texttt{control} argument to control the fitting process.
+
+The \texttt{dosresmeta} function returns an object of class ``\texttt{dosresmeta}'' with the information from the dose--response meta-analytic model. The \texttt{print} and \texttt{summary} methods display and produce a summary of the content of a \texttt{dosresmeta} object. The \texttt{predict} method facilitates the presentation of the results of a dose--response meta-analysis
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+R> str(dosresmeta:::predict.dosresmeta)
+function (object, newdata, xref, expo = FALSE, xref_vec, ci.incl = TRUE, 
+    se.incl = FALSE, xref_pos = 1, delta, order = FALSE, ci.level = 0.95, 
+    ...)  
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\noindent where object contains the results of the \texttt{dosresmeta} function. A new data.frame with the desired doses can be passed to the \texttt{newdata} argument for obtaining the corresponding predicted log relative risks. If not provided, the predictions will be calculated for the assigned dose values across the studies. The \texttt{expo} argument can be set to \texttt{TRUE} to predect log relative risk and confidence intervals (unless \texttt{ci.incl = FALSE}) on the exponential scale. The referent value can be specified with the \texttt{xref} argument, or better, specifying the line of the newdata which serves as referent (\texttt{xref\_pos} argument). For non-linear models the a vector need to be provided in \texttt{xref\_vec} instead of \texttt{xref}. The \texttt{delta} argument is useful to predict the linear increase in the outcome for a delta increase in the exposure, and is thus only appropriate in a linear trend analysis. In the updated version of the \pkg{dosresmeta} package, a \texttt{blup} method has also been implemented to predict the study-specific random-effects and hence the conditional curves.
+
+Additional functions can be listed
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+R> ls("package:dosresmeta")
+ [1] "covar.logrr"        "covar.smd"          "dosresmeta"        
+ [4] "dosresmeta.control" "dosresmeta.fit"     "fpgrid"            
+ [7] "fracpol"            "gof"                "grl"               
+[10] "hamling"            "vpc"                "waldtest"          
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\noindent Use \texttt{ls(getNamespace("dosresmeta"), all.names=TRUE)} for a complete list including hidden auxiliary functions.
+
+
+\section{Goodness-of-fit}
+
+The aim of \citetalias{discacciati2015goodness} was to address how to evaluate the goodness-of-fit in dose--response meta-analysis. The issue is particularly relevant in a dose--response analysis where the predicted curve should be a reasonably good summary of the modelled log relative risks. However, different features of aggregated dose--response data can complicate this comparison. The predicted curve is presented using a referent, $x_\mathrm{ref}$, which may differ from the study-specific reference values. Thus the predicted and observed log relative risks can no longer be directly compared because their baseline group comparison is not the same. Even in the case where the reference values are all the same and equal to $x_\mathrm{ref}$, the covariance among the study-specific RRs and the heterogeneity across the studies add further difficulties in evaluating if the chosen model provides a good summary of the observed data. Therefore, the proposed tools for assessing the goodness-of-fit are presented in a fixed-effect analysis where meta-regression models as in~\ref{eq:rmmra2} are typically employed to explain the observed heterogeneity. We consider relevant measures, tests, and graphical tools that take into account the correlation of the observed data.
+
+\subsection{Deviance} 
+
+The first natural measure of goodness-of-fit is a comparison between the predicted and observed data points, that is the non-referent log relative risks. This can be done by analyzing the residual term errors, which is defined by the difference between the observed log RRs $\mathbf{y}_i$ and the marginal prediction
+\begin{equation}
+\boldsymbol{\hat e_i} = \mathbf{y}_i - \mathbf{X}_i \mathbf{Z}_i \boldsymbol{\hat \beta}
+\label{eq:residual}
+\end{equation}\noindent A summary for the error terms is the deviance
+\begin{equation}
+D = \sum_{i=1}^I \left(\mathbf{y}_i - \mathbf{X}_i \mathbf{Z}_i \boldsymbol{\hat \beta} \right)^\top \mathbf{S}_i^{-1} \left(\mathbf{y}_i - \mathbf{X}_i \mathbf{Z}_i \boldsymbol{\hat \beta} \right) = \sum_{i=1}^I \boldsymbol{\hat e_i}^\top \mathbf{S}_i^{-1} \boldsymbol{\hat e_i}
+\label{eq:deviance}
+\end{equation}
+
+\noindent The deviance $D$ measures the total squared deviation between observed and predicted data taking into account the covariance matrices $\mathbf{S}_i$ of the error terms. It is usually referred to as generalized residual sum of squares (GRSS) \citep{draper2014applied}. Decreasing values of $D$ indicate a better agreement between reported and fitted log RRs, with 0 being the lower bound that corresponds to perfect agreement (saturated model).
+
+\noindent The $D$~statistic can be used as a test for model specification. Under the null hypothesis that the model is correctly specified, $D$ follows a $\chi^2$ distribution with $df = n - pm$. This is equivalent to test if the residual variance, corrected for the correlation of the error terms, is larger than expected assuming that the dose--response model is correct. A small $p$~value can be interpreted as evidence that the fitted model fails in accounting the observed variation in the log relative risks. As for the $Q$~test, the deviance has no upper bound has is thus difficult to interpret the absolute value $D$.
+
+\subsection{Coefficient of determination}
+
+To complement the $D$~statistic (and the corresponding test), the coefficient of determination, $R^2$, can be used as a descriptive measure of goodness-of-fit \citep{hagquist1998goodness, kvaalseth1985cautionary}. The $R^2$ is the complement to the unit of the ratio between the $\textrm{GRSS}$ and the generalized sum of squares $\textrm{GTSS} = \sum_{i=1}^I\mathbf{y}_i^\top \mathbf{S}_i^{-1} \mathbf{y}_i$. Because the dose--response models do not have the intercept term, the $R^2$ can be defined as in \cite{buse1973goodness, theil1958economic}
+\begin{equation}
+R^2 = 1 - \frac{\textrm{GRSS}}{\textrm{GTSS}} = 1 - frac{\sum_{i=1}^I \left(\mathbf{y}_i - \mathbf{X}_i \mathbf{Z}_i \boldsymbol{\hat \beta} \right)^\top \mathbf{S}_i^{-1} \left(\mathbf{y}_i - \mathbf{X}_i \mathbf{Z}_i \boldsymbol{\hat \beta} \right)}{\sum_{i=1}^I \mathbf{y}_i^\top \mathbf{S}_i^{-1} \mathbf{y}_i}
+\label{eq:R2}
+\end{equation}
+\noindent The $R^2$ is a dimensionless number that is bounded between 0 and 1, and can be generally interpreted as the proportion of the generalized total sum of squares explained by the dose--response model and study-level covariates. The lower bound 0 corresponds to the case where all the $\beta$ coefficients are equal to 0 and therefore the model is not able to explain the variability in the observed log relative risks. Contrary, the upper bound 1 indicates a perfect agreement between reported and fitted data. 
+
+By construction the $R^2$ can not decrease as the number of regression coefficients increases. A penalized, or adjusted, version that takes into account this behavior can be defined
+\begin{equation}
+R^2_{\textrm{adj}} = 1 - \frac{n}{n-pm} \left(1 - R^2 \right)
+\label{eq:R2adj}
+\end{equation}
+
+Possibly, a low $R^2$ may indicate that more flexible transformations of the exposure are needed, or that there is considerable residual variability that might be explained by study-level covariates.
+
+\subsection{Visual tools}
+
+
+
+The visual assessment of the goodness-of-fit may reveal specific patterns in the data that might otherwise go undetected by only looking at summary measures such as the deviance and the coefficient of variation \citep{kvaalseth1985cautionary}. The graphical comparison can sometimes be delicate because different factors may affect such analysis. The aggregated dose--response data are presented using one group as comparison. This feature has two important consequences when deducting an overall trend from the reported (log) relative risks. The former is that different parameterizations, or models, can be graphically compared only if the predicted risk for the reference category is similar. The latter, instead, involves the correlation of the modelled data points which makes even harder to evaluate if a specific model fits the reported data. To illustrate both the problems we consider IPD from one of the registers involeved in the Surveillance, Epidemiology, and End Results (SEER) Program (\url{https://seer.cancer.gov}), and focus on the association between age at diagnosis and breast cancer mortality. 
+
+% latex table generated in R 3.4.3 by xtable 1.8-2 package
+% Tue Jan  9 14:03:06 2018
+\begin{table}[ht]
+\centering
+\caption{Aggregated dose-response data on the adjusted association between age and breast cancer mortality based on one registry from the SEER program using the first age category as referent.
+         } 
+\label{tab:breast_ad}
+\begin{tabular}{cccccccc}
+  \hline
+Age category & Mean age & Cases & Person-years & IRR & 95\% CI & log IRR & SE \\ 
+  \hline
+[20,35] & 32.4 & 56 & 2099.3 & 1.00 &  & 0.00 & 0.00 \\ 
+  (35,60] & 49.7 & 451 & 37585.3 & 0.68 & (0.51, 0.9) & -0.39 & 0.14 \\ 
+  (60,70] & 65.6 & 220 & 20590.7 & 0.71 & (0.53, 0.96) & -0.34 & 0.15 \\ 
+  (70,97] & 77.0 & 215 & 17896.5 & 0.77 & (0.57, 1.04) & -0.27 & 0.15 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+
+Using 35, 60, 70 year as cut points, we modelled age using 5 categories in a Poisson model adjusting for potential confounders and produced aggregated dose--response results in table~\ref{tab:breast_ad}, using the first category as referent. Using the methodology presented in section~\ref{sec:1st_stage}, we estimated a linear trend a graphically compared the predicted trend and the tabular data (figure~\ref{fig:visual_problem}). While the reported log RRs suggest an inverse association between age and breast cancer mortality, the estimated linear trend indicates opposite conclusion (a 0.17\% increase in mortality for every 5-year increase of age at diagnosis). The linear trend does not seem to properly fit the data since the fitted lined doesn’t event pass through the reported log RRs. The problem is that there are few cases in the reference age category and so the log RRs are more unstable. By changing the group comparison to the second age category, this issue is partially solved. To address the further issue of the covariance, we proposed graphical tools based on the analysis of the decorrelated residuals.
+
+\begin{knitrout}\small
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[ht!]
+
+{\centering \includegraphics[width=\textwidth]{../figure/visual_problem-1} 
+
+}
+
+\caption{Comparison between observed and fitted data using changing the comparison group from the first age category (left panel) to the second one (right panel) based on the aggregated data on the association between age and breast cancer mortality presented in table~\ref{tab:breast_ad}}\label{fig:visual_problem}
+\end{figure}
+
+
+\end{knitrout}
+
+The residuals can be decorrelated using the Cholesky factorization of the covariance matrices $\mathbf{S}_i = \mathbf{C}_i\mathbf{C}_i^\top$, with $\mathbf{C}_i$ being a lower triangular matrix $J_i \times J_i$. The decorrelated residuals $\boldsymbol{\hat e_i}^*$ are then calculated as
+\begin{equation}
+\boldsymbol{\hat e_i}^* = \mathbf{C}_i^{-1} \left(\mathbf{y}_i - \mathbf{X}_i \mathbf{Z}_i \boldsymbol{\hat \beta} \right) = \mathbf{C}_i^{-1}\boldsymbol{\hat e_i}
+\label{eq:decor_res}
+\end{equation}
+
+\noindent and plotted against the exposure. Such a graphical analysis is the equivalent of a residual vs. predictors/predicted outcome plot after a model estimated through ordinary least squares. Since the variables in the plot are transformed, the actual value of the decorellated residuals is not directly interpretable. However, it is still possible to detect specific patterns for the residuals over the exposure range. In such a case, the plot can indicate lack of fit of the fitted model for select exposure values. Overlaying a locally weighted scatterplot smoothing (LOWESS) may help to visualize possible patterns, while a different shape or color for the residuals can distinguish them according to study-level covariates in case of meta-regression models.
+
 
 
 \section{A new measure of heterogeneity}
+
+
+\newpage
+
 
 \subsection{Statistical proporties}
 
 \subsection{Simulation study}
 
 
-\section{Goodness-of-fit}
-
-\subsection{Deviance}
-
-\subsection{Coefficient of determination}
-
-\subsection{Visual tools}
 
 
 \section{A point-wise approach}

@@ -1,4 +1,4 @@
-\begin{thebibliography}{53}
+\begin{thebibliography}{62}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -23,6 +23,13 @@ Berkey C, Anderson J, Hoaglin D (1996).
 \newblock \enquote{Multiple-outcome meta-analysis of clinical trials.}
 \newblock \emph{Statistics in medicine}, \textbf{15}(5), 537--557.
 
+\bibitem[{Berkey \emph{et~al.}(1998)Berkey, Hoaglin, Antczak-Bouckoms,
+  Mosteller, and Colditz}]{berkey1998meta}
+Berkey C, Hoaglin D, Antczak-Bouckoms A, Mosteller F, Colditz G (1998).
+\newblock \enquote{Meta-analysis of multiple outcomes by regression with random
+  effects.}
+\newblock \emph{Statistics in medicine}, \textbf{17}(22), 2537--2550.
+
 \bibitem[{Berkey \emph{et~al.}(1995)Berkey, Hoaglin, Mosteller, and
   Colditz}]{berkey1995random}
 Berkey CS, Hoaglin DC, Mosteller F, Colditz GA (1995).
@@ -34,6 +41,12 @@ Berkey CS, Hoaglin DC, Mosteller F, Colditz GA (1995).
 Berlin JA, Longnecker MP, Greenland S (1993).
 \newblock \enquote{Meta-analysis of epidemiologic dose-response data.}
 \newblock \emph{Epidemiology}, \textbf{4}(3), 218--228.
+
+\bibitem[{Berrington and Cox(2003)}]{berrington2003generalized}
+Berrington A, Cox D (2003).
+\newblock \enquote{Generalized least squares for the synthesis of correlated
+  information.}
+\newblock \emph{Biostatistics}, \textbf{4}(3), 423--431.
 
 \bibitem[{Biggerstaff and Tweedie(1997)}]{biggerstaff1997incorporating}
 Biggerstaff B, Tweedie R (1997).
@@ -53,6 +66,11 @@ Borenstein M, Hedges LV, Higgins J, Rothstein HR (2010).
 \newblock \enquote{A basic introduction to fixed-effect and random-effects
   models for meta-analysis.}
 \newblock \emph{Research synthesis methods}, \textbf{1}(2), 97--111.
+
+\bibitem[{Buse(1973)}]{buse1973goodness}
+Buse A (1973).
+\newblock \enquote{Goodness of fit in generalized least squares estimation.}
+\newblock \emph{The American Statistician}, \textbf{27}(3), 106--108.
 
 \bibitem[{Cochran(1954)}]{cochran1954combination}
 Cochran WG (1954).
@@ -79,8 +97,13 @@ Crippa A, Khudyakov P, Wang M, Orsini N, Spiegelman D (2016).
   meta-analysis.}
 \newblock \emph{Statistics in medicine}, \textbf{35}(21), 3661--3675.
 
-\bibitem[{Crippa and Orsini(2016)}]{crippadosresmeta2016}
-Crippa A, Orsini N (2016).
+\bibitem[{Crippa and Orsini(2016{\natexlab{a}})}]{crippa2016dose}
+Crippa A, Orsini N (2016{\natexlab{a}}).
+\newblock \enquote{Dose-response meta-analysis of differences in means.}
+\newblock \emph{BMC medical research methodology}, \textbf{16}(1), 91.
+
+\bibitem[{Crippa and Orsini(2016{\natexlab{b}})}]{crippadosresmeta2016}
+Crippa A, Orsini N (2016{\natexlab{b}}).
 \newblock \enquote{Multivariate dose-response meta-analysis: The {dosresmeta}
   {R} Package.}
 \newblock \emph{Journal of statistical software, Code Snippets},
@@ -112,6 +135,11 @@ Discacciati A, Crippa A, Orsini N (2015).
   binary outcomes.}
 \newblock \emph{Research synthesis methods}.
 
+\bibitem[{Draper and Smith(2014)}]{draper2014applied}
+Draper NR, Smith H (2014).
+\newblock \emph{Applied regression analysis}.
+\newblock John Wiley \& Sons.
+
 \bibitem[{Easton \emph{et~al.}(1991)Easton, Peto, and
   Babiker}]{easton1991floating}
 Easton DF, Peto J, Babiker AG (1991).
@@ -138,6 +166,12 @@ Greenland S, Longnecker MP (1992).
   data, with applications to meta-analysis.}
 \newblock \emph{American journal of epidemiology}, \textbf{135}(11),
   1301--1309.
+
+\bibitem[{Hagquist and Stenbeck(1998)}]{hagquist1998goodness}
+Hagquist C, Stenbeck M (1998).
+\newblock \enquote{Goodness of fit in regression analysis--R2 and G2
+  reconsidered.}
+\newblock \emph{Quality and Quantity}, \textbf{32}(3), 229--245.
 
 \bibitem[{Haidich(2010)}]{haidich2010meta}
 Haidich AB (2010).
@@ -202,6 +236,11 @@ Jackson D, White IR, Riley RD (2012).
   multivariate meta-analyses.}
 \newblock \emph{Statistics in medicine}, \textbf{31}(29), 3805--3820.
 
+\bibitem[{Kv{\aa}lseth(1985)}]{kvaalseth1985cautionary}
+Kv{\aa}lseth TO (1985).
+\newblock \enquote{Cautionary note about R 2.}
+\newblock \emph{The American Statistician}, \textbf{39}(4), 279--285.
+
 \bibitem[{Langan \emph{et~al.}(2017)Langan, Higgins, and
   Simmonds}]{langan2017comparative}
 Langan D, Higgins J, Simmonds M (2017).
@@ -255,6 +294,14 @@ Rice K, Higgins J, Lumley T (2017).
 \newblock \enquote{A re-evaluation of fixed effect (s) meta-analysis.}
 \newblock \emph{Journal of the Royal Statistical Society: Series A (Statistics
   in Society)}.
+
+\bibitem[{Ritz \emph{et~al.}(2008)Ritz, Demidenko, and
+  Spiegelman}]{ritz2008multivariate}
+Ritz J, Demidenko E, Spiegelman D (2008).
+\newblock \enquote{Multivariate meta-analysis for data consortia, individual
+  patient meta-analysis, and pooling projects.}
+\newblock \emph{Journal of Statistical Planning and Inference},
+  \textbf{138}(7), 1919--1933.
 
 \bibitem[{Royston and Altman(1994)}]{royston1994regression}
 Royston P, Altman DG (1994).
@@ -317,6 +364,10 @@ Takkouche B, Cadarso-Su{\'a}rez C, Spiegelman D (1999).
 \newblock \enquote{Evaluation of old and new tests of heterogeneity in
   epidemiologic meta-analysis.}
 \newblock \emph{American journal of epidemiology}, \textbf{150}(2), 206--215.
+
+\bibitem[{Theil(1958)}]{theil1958economic}
+Theil H (1958).
+\newblock \enquote{Economic forecasts and policy.}
 
 \bibitem[{Turner \emph{et~al.}(2010)Turner, Dobson, and
   Pocock}]{turner2010categorisation}
