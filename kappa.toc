@@ -24,21 +24,20 @@
 \contentsline {subsection}{\numberline {4.2.2}Coefficient of determination}{29}{subsection.4.2.2}
 \contentsline {subsection}{\numberline {4.2.3}Visual tools}{29}{subsection.4.2.3}
 \contentsline {section}{\numberline {4.3}A new measure of heterogeneity}{31}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Statistical proporties}{32}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}Simulation study}{32}{subsection.4.3.2}
-\contentsline {section}{\numberline {4.4}A point-wise approach}{32}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Prediction of study-specific (log) relative risks}{32}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Pool of dose--response prediction}{32}{subsection.4.4.2}
-\contentsline {section}{\numberline {4.5}A one-stage model}{32}{section.4.5}
-\contentsline {subsection}{\numberline {4.5.1}Model definition}{32}{subsection.4.5.1}
-\contentsline {subsection}{\numberline {4.5.2}Estimation and hypothesis testing}{32}{subsection.4.5.2}
-\contentsline {subsection}{\numberline {4.5.3}Prediction}{32}{subsection.4.5.3}
-\contentsline {subsection}{\numberline {4.5.4}Comparison with two-stage analysis}{32}{subsection.4.5.4}
-\contentsline {chapter}{\numberline {5}Results}{33}{chapter.5}
-\contentsline {chapter}{\numberline {6}Discussion}{34}{chapter.6}
-\contentsline {chapter}{\numberline {7}Conclusions}{35}{chapter.7}
-\contentsline {chapter}{\numberline {8}Future research}{37}{chapter.8}
-\contentsline {chapter}{\numberline {A}Supplementary figures}{38}{appendix.A}
-\contentsline {chapter}{\numberline {B}Supplementary tables}{39}{appendix.B}
-\contentsline {chapter}{References}{40}{appendix.C}
-\contentsline {chapter}{Acknowledgements}{45}{appendix*.15}
+\contentsline {subsection}{\numberline {4.3.1}Definition and proporties}{32}{subsection.4.3.1}
+\contentsline {section}{\numberline {4.4}A point-wise approach}{33}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Estimation and prediction of study-specific curves}{35}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Averaging of dose--response prediction}{35}{subsection.4.4.2}
+\contentsline {section}{\numberline {4.5}A one-stage model}{36}{section.4.5}
+\contentsline {subsection}{\numberline {4.5.1}Model definition}{36}{subsection.4.5.1}
+\contentsline {subsection}{\numberline {4.5.2}Estimation and hypothesis testing}{37}{subsection.4.5.2}
+\contentsline {subsection}{\numberline {4.5.3}Prediction}{38}{subsection.4.5.3}
+\contentsline {subsection}{\numberline {4.5.4}Comparison with two-stage analysis}{38}{subsection.4.5.4}
+\contentsline {chapter}{\numberline {5}Results}{39}{chapter.5}
+\contentsline {chapter}{\numberline {6}Discussion}{40}{chapter.6}
+\contentsline {chapter}{\numberline {7}Conclusions}{41}{chapter.7}
+\contentsline {chapter}{\numberline {8}Future research}{43}{chapter.8}
+\contentsline {chapter}{\numberline {A}Supplementary figures}{44}{appendix.A}
+\contentsline {chapter}{\numberline {B}Supplementary tables}{45}{appendix.B}
+\contentsline {chapter}{References}{46}{appendix.C}
+\contentsline {chapter}{Acknowledgements}{51}{appendix*.17}

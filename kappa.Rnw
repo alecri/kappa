@@ -31,7 +31,8 @@ data_names <- paste0("data/",
 lapply(data_names, load, .GlobalEnv)
 # setting a ggplot theme for all the plots
 theme_kappa <- theme_light() +
-  theme(panel.border = element_blank(), axis.line = element_line())
+  theme(panel.border = element_blank(), axis.line = element_line(),
+        plot.title = element_text(hjust = 0.5))
 theme_set(theme_kappa)
 @
 

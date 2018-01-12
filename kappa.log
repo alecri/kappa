@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.7.31)  9 JAN 2018 15:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.7.31)  12 JAN 2018 14:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1346,7 +1346,7 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-<figures/ki-logo_pos.pdf, id=176, 410.53375pt x 205.76875pt>
+<figures/ki-logo_pos.pdf, id=172, 410.53375pt x 205.76875pt>
 File: figures/ki-logo_pos.pdf Graphic file (type pdf)
 
 <use figures/ki-logo_pos.pdf>
@@ -1611,7 +1611,7 @@ LaTeX Font Info:    Font shape `OT1/qhv/bx/n' in size <14.4> not available
 (Font)              Font shape `OT1/qhv/b/n' tried instead on input line 508.
 Package color Info: Redefining color shadecolor on input line 518.
 
-<../figure/num_meta-analysis-1.pdf, id=354, 505.89pt x 325.215pt>
+<../figure/num_meta-analysis-1.pdf, id=349, 505.89pt x 325.215pt>
 File: ../figure/num_meta-analysis-1.pdf Graphic file (type pdf)
 
 <use ../figure/num_meta-analysis-1.pdf>
@@ -1625,9 +1625,9 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [4 <../figure/num_meta-analysis-1.pdf>]
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 560.
+(Font)              scaled to size 7.68005pt on input line 561.
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 560.
+(Font)              scaled to size 5.76004pt on input line 561.
 
 Underfull \vbox (badness 2495) has occurred while \output is active []
 
@@ -1636,89 +1636,89 @@ Underfull \vbox (badness 3735) has occurred while \output is active []
 
  [6]
 LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
-(Font)              scaled to size 8.64006pt on input line 630.
+(Font)              scaled to size 8.64006pt on input line 631.
 
 [7] [8] [9]
-Package color Info: Redefining color shadecolor on input line 670.
- <../figure/cite_grl-1.pdf, id=481, 505.89pt x 325.215pt>
+Package color Info: Redefining color shadecolor on input line 671.
+ <../figure/cite_grl-1.pdf, id=476, 505.89pt x 325.215pt>
 File: ../figure/cite_grl-1.pdf Graphic file (type pdf)
 
 <use ../figure/cite_grl-1.pdf>
-Package pdftex.def Info: ../figure/cite_grl-1.pdf used on input line 672.
+Package pdftex.def Info: ../figure/cite_grl-1.pdf used on input line 673.
 (pdftex.def)             Requested size: 426.79135pt x 274.3697pt.
 LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
-(Font)              scaled to size 7.68005pt on input line 689.
+(Font)              scaled to size 7.68005pt on input line 690.
 LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
-(Font)              scaled to size 5.76004pt on input line 689.
+(Font)              scaled to size 5.76004pt on input line 690.
 LaTeX Font Info:    Font shape `OT1/mdbch/b/n' will be
-(Font)              scaled to size 10.51207pt on input line 689.
+(Font)              scaled to size 10.51207pt on input line 690.
 LaTeX Font Info:    Font shape `OT1/mdbch/b/n' will be
-(Font)              scaled to size 7.68005pt on input line 689.
+(Font)              scaled to size 7.68005pt on input line 690.
 LaTeX Font Info:    Font shape `OT1/mdbch/b/n' will be
-(Font)              scaled to size 5.76004pt on input line 689.
+(Font)              scaled to size 5.76004pt on input line 690.
 LaTeX Font Info:    Font shape `OML/mdbch/b/it' will be
-(Font)              scaled to size 10.51207pt on input line 689.
+(Font)              scaled to size 10.51207pt on input line 690.
 LaTeX Font Info:    Font shape `OML/mdbch/b/it' will be
-(Font)              scaled to size 7.68005pt on input line 689.
+(Font)              scaled to size 7.68005pt on input line 690.
 LaTeX Font Info:    Font shape `OML/mdbch/b/it' will be
-(Font)              scaled to size 5.76004pt on input line 689.
+(Font)              scaled to size 5.76004pt on input line 690.
 LaTeX Font Info:    Font shape `OMS/mdbch/b/n' will be
-(Font)              scaled to size 10.51207pt on input line 689.
+(Font)              scaled to size 10.51207pt on input line 690.
 LaTeX Font Info:    Font shape `OMS/mdbch/b/n' will be
-(Font)              scaled to size 7.68005pt on input line 689.
+(Font)              scaled to size 7.68005pt on input line 690.
 LaTeX Font Info:    Font shape `OMS/mdbch/b/n' will be
-(Font)              scaled to size 5.76004pt on input line 689.
+(Font)              scaled to size 5.76004pt on input line 690.
 LaTeX Font Info:    Font shape `OMX/mdbch/b/n' will be
-(Font)              scaled to size 10.51207pt on input line 689.
+(Font)              scaled to size 10.51207pt on input line 690.
 LaTeX Font Info:    Font shape `OMX/mdbch/b/n' will be
-(Font)              scaled to size 7.68005pt on input line 689.
+(Font)              scaled to size 7.68005pt on input line 690.
 LaTeX Font Info:    Font shape `OMX/mdbch/b/n' will be
-(Font)              scaled to size 5.76004pt on input line 689.
+(Font)              scaled to size 5.76004pt on input line 690.
 LaTeX Font Info:    Font shape `OML/mdbch/b/n' will be
-(Font)              scaled to size 10.51207pt on input line 689.
+(Font)              scaled to size 10.51207pt on input line 690.
 LaTeX Font Info:    Font shape `OML/mdbch/b/n' will be
-(Font)              scaled to size 7.68005pt on input line 689.
+(Font)              scaled to size 7.68005pt on input line 690.
 LaTeX Font Info:    Font shape `OML/mdbch/b/n' will be
-(Font)              scaled to size 5.76004pt on input line 689.
+(Font)              scaled to size 5.76004pt on input line 690.
 LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 10.51207pt on input line 689.
+(Font)              scaled to size 10.51207pt on input line 690.
 LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 7.68005pt on input line 689.
+(Font)              scaled to size 7.68005pt on input line 690.
 LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 5.76004pt on input line 689.
+(Font)              scaled to size 5.76004pt on input line 690.
 LaTeX Font Info:    Font shape `MDB/mdbch/b/n' will be
-(Font)              scaled to size 10.51207pt on input line 689.
+(Font)              scaled to size 10.51207pt on input line 690.
 LaTeX Font Info:    Font shape `MDB/mdbch/b/n' will be
-(Font)              scaled to size 7.68005pt on input line 689.
+(Font)              scaled to size 7.68005pt on input line 690.
 LaTeX Font Info:    Font shape `MDB/mdbch/b/n' will be
-(Font)              scaled to size 5.76004pt on input line 689.
+(Font)              scaled to size 5.76004pt on input line 690.
 
 Underfull \vbox (badness 2460) has occurred while \output is active []
 
  [10 <../figure/cite_grl-1.pdf>] [11] [12]
-Package color Info: Redefining color shadecolor on input line 795.
+Package color Info: Redefining color shadecolor on input line 796.
 
-<../figure/cov_methods_lin-1.pdf, id=537, 505.89pt x 325.215pt>
+<../figure/cov_methods_lin-1.pdf, id=532, 505.89pt x 325.215pt>
 File: ../figure/cov_methods_lin-1.pdf Graphic file (type pdf)
 
 <use ../figure/cov_methods_lin-1.pdf>
-Package pdftex.def Info: ../figure/cov_methods_lin-1.pdf used on input line 797
+Package pdftex.def Info: ../figure/cov_methods_lin-1.pdf used on input line 798
 .
 (pdftex.def)             Requested size: 426.79135pt x 274.3697pt.
 LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
-(Font)              scaled to size 9.60007pt on input line 801.
+(Font)              scaled to size 9.60007pt on input line 802.
 LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
-(Font)              scaled to size 6.72005pt on input line 801.
+(Font)              scaled to size 6.72005pt on input line 802.
 LaTeX Font Info:    Font shape `T1/mdbch/b/n' will be
-(Font)              scaled to size 4.80003pt on input line 801.
-Package color Info: Redefining color shadecolor on input line 808.
+(Font)              scaled to size 4.80003pt on input line 802.
+Package color Info: Redefining color shadecolor on input line 809.
 
-<../figure/cov_methods_quadr-1.pdf, id=538, 505.89pt x 325.215pt>
+<../figure/cov_methods_quadr-1.pdf, id=533, 505.89pt x 325.215pt>
 File: ../figure/cov_methods_quadr-1.pdf Graphic file (type pdf)
 
 <use ../figure/cov_methods_quadr-1.pdf>
 Package pdftex.def Info: ../figure/cov_methods_quadr-1.pdf used on input line 8
-10.
+11.
 (pdftex.def)             Requested size: 426.79135pt x 274.3697pt.
  [13 <../figure/cov_methods_lin-1.pdf>]
 [14 <../figure/cov_methods_quadr-1.pdf>] [15] [16]
@@ -1733,7 +1733,7 @@ LaTeX Font Info:    Font shape `T1/cmtt/m/n' will be
 
 [19] [20]
 Package color Info: Redefining color shadecolor on input line 999.
- <../figure/dosresmeta_ts-1.pdf, id=744, 505.89pt x 325.215pt>
+ <../figure/dosresmeta_ts-1.pdf, id=739, 505.89pt x 325.215pt>
 File: ../figure/dosresmeta_ts-1.pdf Graphic file (type pdf)
 
 <use ../figure/dosresmeta_ts-1.pdf>
@@ -1743,7 +1743,7 @@ Package pdftex.def Info: ../figure/dosresmeta_ts-1.pdf used on input line 1001.
  [21]
 Package color Info: Redefining color shadecolor on input line 1014.
 
-<../figure/dosresmeta_map-1.pdf, id=759, 505.89pt x 325.215pt>
+<../figure/dosresmeta_map-1.pdf, id=754, 505.89pt x 325.215pt>
 File: ../figure/dosresmeta_map-1.pdf Graphic file (type pdf)
 
 <use ../figure/dosresmeta_map-1.pdf>
@@ -1769,76 +1769,88 @@ Package color Info: Redefining color shadecolor on input line 1145.
  [27] [28] [29]
 Package color Info: Redefining color shadecolor on input line 1225.
 
-<../figure/visual_problem-1.pdf, id=856, 505.89pt x 325.215pt>
+<../figure/visual_problem-1.pdf, id=851, 505.89pt x 289.08pt>
 File: ../figure/visual_problem-1.pdf Graphic file (type pdf)
 
 <use ../figure/visual_problem-1.pdf>
 Package pdftex.def Info: ../figure/visual_problem-1.pdf used on input line 1227
 .
-(pdftex.def)             Requested size: 426.79135pt x 274.3697pt.
+(pdftex.def)             Requested size: 426.79135pt x 243.88417pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1968) has occurred while \output is active []
 
  [30]
-[31 <../figure/visual_problem-1.pdf>] [32]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [31 <../figure/visual_problem-1.pdf>] [32] [33]
+Package color Info: Redefining color shadecolor on input line 1317.
+
+<../figure/milk_sub-1.pdf, id=906, 505.89pt x 505.89pt>
+File: ../figure/milk_sub-1.pdf Graphic file (type pdf)
+
+<use ../figure/milk_sub-1.pdf>
+Package pdftex.def Info: ../figure/milk_sub-1.pdf used on input line 1319.
+(pdftex.def)             Requested size: 426.79135pt x 426.7973pt.
+ [34 <../figure/milk_sub-1.pdf>] [35] [36]
+[37] [38]
 Chapter 5.
-[33
+[39
 
 ]
 Chapter 6.
-[34
+[40
 
 ]
 Chapter 7.
-[35
+[41
 
-] [36]
+] [42]
 Chapter 8.
-[37
+[43
 
 ]
 Appendix A.
-[38
+[44
 
 ]
 Appendix B.
-[39
+[45
 
-] (./kappa.bbl [40
+] (./kappa.bbl [46
 
 
-] [41]
-Overfull \hbox (1.10829pt too wide) in paragraph at lines 275--279
+] [47] [48]
+Overfull \hbox (1.10829pt too wide) in paragraph at lines 303--307
 \T1/mdbch/m/n/10.95 (-10) nonlinear dose-response relations: examples, an evalu
 ation of approximations, and software.''
  []
 
-[42] [43]) [44]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1424.
- [45
+[49]) [50]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1602.
+ [51
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1424.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1602.
  (./kappa.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1424.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1424.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1602.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1602.
 
 Package rerunfilecheck Info: File `kappa.out' has not changed.
-(rerunfilecheck)             Checksum: 43AC7742556534B3EFB66EC5FB0B75A9;2996.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1424.
+(rerunfilecheck)             Checksum: D0D5E9E63E827213A511A03E1B581B4E;2933.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1602.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 375 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 15763 strings out of 492995
- 241704 string characters out of 6132704
- 363687 words of memory out of 5000000
- 18409 multiletter control sequences out of 15000+600000
- 158125 words of font info for 376 fonts, out of 8000000 for 9000
+ 15835 strings out of 492995
+ 242938 string characters out of 6132704
+ 365202 words of memory out of 5000000
+ 18444 multiletter control sequences out of 15000+600000
+ 159414 words of font info for 385 fonts, out of 8000000 for 9000
  1143 hyphenation exceptions out of 8191
- 53i,15n,92p,1367b,944s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 53i,22n,92p,1367b,938s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/ly1/texnans
 i.enc}{/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.
 enc}{/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/tex-gyre/q-rm.enc}{/usr
@@ -1859,10 +1871,10 @@ usr/local/texlive/2017/texmf-dist/fonts/type1/public/mathdesign/mdbch/md-chri7m
 /usr/local/texlive/2017/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/l
 ocal/texlive/2017/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></usr/loc
 al/texlive/2017/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on kappa.pdf (61 pages, 495854 bytes).
+Output written on kappa.pdf (67 pages, 534529 bytes).
 PDF statistics:
- 1051 PDF objects out of 1200 (max. 8388607)
- 947 compressed objects within 10 object streams
- 223 named destinations out of 1000 (max. 500000)
- 69505 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 1148 PDF objects out of 1200 (max. 8388607)
+ 1035 compressed objects within 11 object streams
+ 248 named destinations out of 1000 (max. 500000)
+ 69502 words of extra memory for PDF output out of 74296 (max. 10000000)
 

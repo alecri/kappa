@@ -38,18 +38,19 @@ In a meta-analysis of $I$ studies indexed by $i = 1, \dots, I$, we denote $\hat 
 %, and $\hat v_i$ an estimate of the related sampling variance. 
 A random-effects model for meta-analysis can be written as
 \begin{equation}
-\hat \beta_i = \beta + u_i + \varepsilon_i
+\hat \beta_i = \beta + b_i + \varepsilon_i
 \label{eq:rma}
 \end{equation}
 
-\noindent where $\beta$ is the underlying mean effect, oftentimes the main parameter of interest. The random-effects $u_i$ represent the study-specific deviations from the mean effect $\beta$ allowing each study to estimate a similar parameter $\beta_i$ defined as $\beta + u_i $. The random effects follow a generic $f$ distribution with mean 0 and variance equal to $\tau^2$, the between-studies heterogeneity. 
+\noindent where $\beta$ is the underlying mean effect, oftentimes the main parameter of interest. The random-effects $b_i$ represent the study-specific deviations from the mean effect $\beta$ allowing each study to estimate a similar parameter $\beta_i$ defined as $\beta + b_i $. The random effects follow a generic $f$ distribution with mean 0 and variance equal to $\tau^2$, the between-studies heterogeneity. 
 The within-study error components $\varepsilon_i$ have also mean 0 and variance equal to $\hat v_i$, an estimate of the sampling variance of $\hat \beta_i$.
-Because the sample size in the individual investigations is often large, the uncertainty around the estimates of the sampling variance is negligible. Therefore, $\hat v_i$ can be considered fixed and denoted as $v_i$. In addition, for the central limit theorem, $\varepsilon_i \sim  \mathcal{N}\left(0, v_i \right)$, or alternatively, $\hat \beta_i | u_i \sim \mathcal{N}\left(\beta+u_i, v_i \right)$.
+Because the sample size in the individual investigations is often large, the uncertainty around the estimates of the sampling variance is negligible. Therefore, $\hat v_i$ can be considered fixed and denoted as $v_i$. In addition, for the central limit theorem, $\varepsilon_i \sim  \mathcal{N}\left(0, v_i \right)$, or alternatively, $\hat \beta_i | b_i \sim \mathcal{N}\left(\beta+b_i, v_i \right)$.
 
 An inverse variance-weighted approach for meta-analysis estimates the mean effect $\beta$ as a weighted average of the $\hat \beta_i$ \citep{whitehead1991general, dersimonian1986meta}
 \begin{align}
 \hat \beta = \frac{\sum_{i = 1}^I \hat \beta_i \hat w_i}{\sum_{i = 1}^I \hat w_i} \label{eq:avgbeta} \\
 \widehat{\Var} \left(\hat \beta \right) = \left( \sum_{i = 1}^I \hat w_i \right)^{-1}
+\label{eq:avgvarbeta}
 \end{align}
 \noindent with weights $\hat w_i = \left(v_i + \hat \tau^2 \right)^{-1}$ and $\hat \tau^2$ being an estimate of the between-study heterogeneity. 
 
@@ -71,7 +72,7 @@ An estimate of $\tau^2$, instead, directly provides information about the amount
 \label{eq:tau2DL}
 \end{equation}
 
-\noindent The moment-based estimator is one of the most popular estimators of $\tau^2$ because it has a simple non-iterative formulation and does not require any distributional assumption for the random-effects rather than having a finite first order moment. Other common non-iterative alternatives include estimators based on the variance components \citep{hedges1983random} and on methods for estimating the error variance in weighted linear models \citep{sidik2005simple}. Iterative methods based on maximizing the likelihood or restricted likelihood can also be used by specifying a distributional form for the random-effects. The more conventional choice is typically a normal distribution $u_i \sim \mathcal{N}\left( 0, \tau^2 \right)$, which implies $\beta_i \sim \mathcal{N}\left(\beta, \tau^2 \right)$ and $\hat \beta_i \sim \mathcal{N}\left(\beta + u_i, \tau^2 + v_i \right)$.
+\noindent The moment-based estimator is one of the most popular estimators of $\tau^2$ because it has a simple non-iterative formulation and does not require any distributional assumption for the random-effects rather than having a finite first order moment. Other common non-iterative alternatives include estimators based on the variance components \citep{hedges1983random} and on methods for estimating the error variance in weighted linear models \citep{sidik2005simple}. Iterative methods based on maximizing the likelihood or restricted likelihood can also be used by specifying a distributional form for the random-effects. The more conventional choice is typically a normal distribution $b_i \sim \mathcal{N}\left( 0, \tau^2 \right)$, which implies $\beta_i \sim \mathcal{N}\left(\beta, \tau^2 \right)$ and $\hat \beta_i \sim \mathcal{N}\left(\beta + b_i, \tau^2 + v_i \right)$.
 
 Although $\tau^2$ is the more natural and appropriate measure of between-study variability, the actual value is difficult to interpret because it depends on type of effect size (e.g. log relative risk, standardized mean difference) and has no upper limit. Therefore, both evaluation of the degree (or levels) and the comparison of heterogeneity in different meta-analyses can hardly be based on the estimate of $\tau^2$.
 
@@ -349,60 +350,59 @@ The study-specific dose-response curves are defined by the $p$ transformations, 
 
 A multivariate random-effects model has a similar formulation as in the univariate case
 \begin{equation}
-\boldsymbol{\hat \beta}_i = \boldsymbol{\beta} + \mathbf{u}_i + \boldsymbol{\varepsilon}_i
+\boldsymbol{\hat \beta}_i = \boldsymbol{\beta} + \mathbf{b}_i + \boldsymbol{\varepsilon}_i
 \label{eq:rmma}
 \end{equation}
-\noindent The unobserved random effects $\mathbf{u}_i$ are now of dimension $p$, still representing study-specific deviation from the mean $\boldsymbol{\beta}$ parameter. As before, they have zero mean $\E\left[\mathbf{u}_i\right] = \mathbf{0}$ and $\Var\left[\mathbf{u}_i\right] = \boldsymbol{\Psi}$, the $p \times p$ between-study variance matrix. Specification of a parametric distribution for the random-effects may facilitate the inference (especially confidence intervals) and improve the prediction of marginal and conditional dose-response associations. Typically a multivariate normal distribution is adopted $\mathbf{u}_i \sim \mathcal{N}\left(\mathbf{0}, \boldsymbol{\Psi} \right)$. Hence, we can write the marginal model of~\ref{eq:rmma} as
+\noindent The unobserved random effects $\mathbf{b}_i$ are now of dimension $p$, still representing study-specific deviation from the mean $\boldsymbol{\beta}$ parameter. As before, they have zero mean $\E\left[\mathbf{b}_i\right] = \mathbf{0}$ and $\Var\left[\mathbf{b}_i\right] = \boldsymbol{\Psi}$, the $p \times p$ between-study variance matrix. Specification of a parametric distribution for the random-effects may facilitate the inference (especially confidence intervals) and improve the prediction of marginal and conditional dose-response associations. Typically a multivariate normal distribution is adopted $\mathbf{b}_i \sim \mathcal{N}\left(\mathbf{0}, \boldsymbol{\Psi} \right)$. Hence, we can write the marginal model of~\ref{eq:rmma} as
 \begin{equation}
 \boldsymbol{\hat \beta}_i \sim \mathcal{N}\left(\boldsymbol{\beta}, \boldsymbol{\Sigma}_i \right)
 \label{eq:rmma2}
 \end{equation}
 \noindent where the marginal variance $\boldsymbol{\Sigma}_i = \widehat{\Var} \left( \boldsymbol{\hat \beta}_i \right) + \boldsymbol{\Psi}$ is defined by the sum of the within-study and between-studies variance components. The model~\ref{eq:rmma2} implies a two-stage sampling procedure where the study-specific $\boldsymbol{\beta}_i$ parameters are assumed to be sampled from a multivariate normal distribution centered around the population average parameter $\boldsymbol{\beta}$. The study-specific estimates $\boldsymbol{\hat \beta}_i$ are themselves sampled from a multivariate distribution with zero mean and error variance assumed known.
 
-\noindent The multivariate random-effects model~\ref{eq:rmma2} can be extended to meta-regression models by including study-levels covariates that might change the shape of the dose-response relationship. The dose-response coefficients are then modeled as a linear combination of the $m$ study-level covariates $\mathbf{z}_i = \left(z_{i1}, \dots, z_{im} \right)$, with $ 
-z_{i1} = 1$ indicating the intercept term
+\noindent The multivariate random-effects model~\ref{eq:rmma2} can be extended to meta-regression models by including study-levels covariates that might change the shape of the dose-response relationship. The dose-response coefficients are then modeled as a linear combination of the $m$ study-level covariates $\mathbf{u}_i = \left(u_{i1}, \dots, u_{im} \right)$, with $u_{i1} = 1$ indicating the intercept term
 \begin{equation}
-\boldsymbol{\hat \beta}_i \sim \mathcal{N}\left(\mathbf{Z}_i\boldsymbol{\beta}, \boldsymbol{\Sigma}_i\right)
+\boldsymbol{\hat \beta}_i \sim \mathcal{N}\left(\widetilde{\mathbf{X}}_i \boldsymbol{\beta}, \boldsymbol{\Sigma}_i\right)
 \label{eq:rmmra2}
 \end{equation}
-\noindent The $p\times pm$ design matrix $\mathbf{Z}_i$ is constructed taking the Kronecker product between the $\mathbf{z}_i$ and the identity matrix of dimension $p$ ($\mathbf{I}_{(p)}$)
+\noindent The $p\times pm$ design matrix $\widetilde{\mathbf{X}}_i$ is constructed taking the Kronecker product between the $\mathbf{u}_i$ and the identity matrix of dimension $p$ ($\mathbf{I}_{(p)}$)
 \begin{equation}
-\mathbf{Z}_i = \mathbf{I}_{(p)} \otimes \mathbf{z}_i^\top = 
+\widetilde{\mathbf{X}}_i = \mathbf{I}_{(p)} \otimes \mathbf{u}_i^\top = 
 	\begin{bmatrix}
-		1 & z_{i2} & \cdots & z_{im} & \cdots & 0 & 0 & \cdots & 0 \\
+		1 & u_{i2} & \cdots & u_{im} & \cdots & 0 & 0 & \cdots & 0 \\
 		\vdots &  &  &  & \ddots & &  &  &  \\
-		0 & 0 & \cdots & 0 & \cdots & 1 & z_{i2} & \cdots & z_{im} \\
+		0 & 0 & \cdots & 0 & \cdots & 1 & u_{i2} & \cdots & u_{im} \\
 	\end{bmatrix}
 \end{equation}
-\noindent For example, the $\mathbf{Z}_i$ matrix relating the effect of a binary variable $z_i$ to the dose--response coefficients for a quadratic trend is
+\noindent For example, the $\widetilde{\mathbf{X}}_i$ matrix relating the effect of a binary variable $u_i$ to the dose--response coefficients for a quadratic trend is
 \begin{equation*}
-\mathbf{Z}_i = \mathbf{I}_{(2)} \otimes \mathbf{z}_i^\top = 
+\widetilde{\mathbf{X}}_i = \mathbf{I}_{(2)} \otimes \mathbf{u}_i^\top = 
 	\begin{bmatrix}
 		1 & 0 \\
 		0 & 1
 	\end{bmatrix} \otimes
 	(1, z_i)=
 	\begin{bmatrix}
-		1 & z_i  & 0 & 0 \\
-		0 & 0 & 1 & z_i  \\
+		1 & u_i  & 0 & 0 \\
+		0 & 0 & 1 & u_i  \\
 	\end{bmatrix}
 \end{equation*} 
 
-\noindent The dimension of $\boldsymbol{\hat \beta}$ is now $m\times p$. The coefficients related to the intercept terms are interpreted as the mean dose-response coefficient when all the study-level covariates $\mathbf{z}$ are equal to zero. The remaining coefficients indicate how the mean dose-response asspciation vary with respect to the corresponding study-level covariate.
+\noindent The dimension of $\boldsymbol{\hat \beta}$ is now $m\times p$. The coefficients related to the intercept terms are interpreted as the mean dose-response coefficient when all the study-level covariates $\mathbf{u}$ are equal to zero. The remaining coefficients indicate how the mean dose-response asspciation vary with respect to the corresponding study-level covariate.
 
 
 \subsubsection*{Estimation}
 
 Several methods are available for estimating the parameters of interest, namely the $p \times m$ dose--response coefficients in $\boldsymbol{\beta}$ and the $p(p+1)/2$ length vector $\boldsymbol{\xi}$ containing the elements of the between-studies covariance $\boldsymbol{\Psi}$. There is generally no reason to assume a specific covariance structure \citep{white2011multivariate}. We consider here likelihood-based estimators \citep{verbeke1997linear, pinheiro2010mixed}. In particular, ML estimators estimate simultaneously $\boldsymbol{\beta}$ and $\boldsymbol{\xi}$ by maximizing the log-likelihood of the marginal model~\ref{eq:rmmra2}
 \begin{equation}
-\ell\left(\boldsymbol{\beta}, \boldsymbol{\xi} \right) = -\frac{1}{2}Ip\log(\pi) -\frac{1}{2}\sum_{i=1}^I \log |\boldsymbol{\Sigma}_i| - \frac{1}{2}\sum_{i=1}^I\left[ \left(\boldsymbol{\hat \beta}_i - \mathbf{Z}_i\boldsymbol{\beta} \right)^\top \boldsymbol{\Sigma}_i^{-1} \left(\boldsymbol{\hat \beta}_i - \mathbf{Z}_i\boldsymbol{\beta} \right) \right]
+\ell\left(\boldsymbol{\beta}, \boldsymbol{\xi} \right) = -\frac{1}{2}Ip\log(\pi) -\frac{1}{2}\sum_{i=1}^I \log |\boldsymbol{\Sigma}_i| - \frac{1}{2}\sum_{i=1}^I\left[ \left(\boldsymbol{\hat \beta}_i - \widetilde{\mathbf{X}}_i\boldsymbol{\beta} \right)^\top \boldsymbol{\Sigma}_i^{-1} \left(\boldsymbol{\hat \beta}_i - \widetilde{\mathbf{X}}_i\boldsymbol{\beta} \right) \right]
 \label{eq:rmma_logLik}
 \end{equation}
 
 \noindent ML estimators, however, don’t take into account the loss of degrees of freedom due to the $\boldsymbol{\beta}$ estimation \cite{harville1977maximum}. Alternatively, restricted maximum likelihood methods (REML) maximizes a set of contrasts defined as a function of the only covariance parameters
 \begin{align}
-\ell_R\left(\boldsymbol{\xi} \right) =& -\frac{1}{2}\left(Ip - pm\right) -\frac{1}{2}\sum_{i=1}^I \log |\boldsymbol{\Sigma}_i| -\frac{1}{2}\sum_{i=1}^I \log \left|\mathbf{Z}_i^\top\boldsymbol{\Sigma}_i\mathbf{Z}_i \right| + \\
-&- \frac{1}{2}\sum_{i=1}^I\left[ \left(\boldsymbol{\hat \beta}_i - \mathbf{Z}_i\boldsymbol{\beta} \right)^\top \boldsymbol{\Sigma}_i^{-1} \left(\boldsymbol{\hat \beta}_i - \mathbf{Z}_i\boldsymbol{\beta} \right) \right]
+\ell_R\left(\boldsymbol{\xi} \right) =& -\frac{1}{2}\left(Ip - pm\right) -\frac{1}{2}\sum_{i=1}^I \log |\boldsymbol{\Sigma}_i| -\frac{1}{2}\sum_{i=1}^I \log \left|\widetilde{\mathbf{X}}_i^\top\boldsymbol{\Sigma}_i\widetilde{\mathbf{X}}_i \right| + \\
+&- \frac{1}{2}\sum_{i=1}^I\left[ \left(\boldsymbol{\hat \beta}_i - \widetilde{\mathbf{X}}_i\boldsymbol{\beta} \right)^\top \boldsymbol{\Sigma}_i^{-1} \left(\boldsymbol{\hat \beta}_i - \widetilde{\mathbf{X}}_i\boldsymbol{\beta} \right) \right]
 \label{eq:rmma_logRLik}
 \end{align}
 
@@ -419,7 +419,7 @@ Alternatively, a subset or linear combinations of $\boldsymbol \beta$ may be of 
 
 As previously presented in section~\ref{sec:het_rma}, the coefficients defining $\boldsymbol{\Psi}$ are not nuisance parameters rather than useful for quantifying the variation of the study-specific associations $\boldsymbol{\beta}_i$. Similar measures for testing and quantifying the impact of heterogeneity have been extended to the multivariate setting \citep{berkey1996multiple}. In particular, the $Q$~statistic
 \begin{equation}
-Q = \sum_{i=1}^I \left(\boldsymbol{\hat \beta}_i - \mathbf{Z}_i\boldsymbol{\hat \beta}_{\text{fe}}\right) ^\top \widehat{\Var} \left( \boldsymbol{\hat \beta}_i \right)^{-1} \left(\boldsymbol{\hat \beta}_i - \mathbf{Z}_i\boldsymbol{\hat \beta}_{\text{fe}}\right)
+Q = \sum_{i=1}^I \left(\boldsymbol{\hat \beta}_i - \widetilde{\mathbf{X}}_i\boldsymbol{\hat \beta}_{\text{fe}}\right) ^\top \widehat{\Var} \left( \boldsymbol{\hat \beta}_i \right)^{-1} \left(\boldsymbol{\hat \beta}_i - \widetilde{\mathbf{X}}_i\boldsymbol{\hat \beta}_{\text{fe}}\right)
 \label{eq:Qmulti}
 \end{equation}
 \noindent with $\boldsymbol{\hat \beta}_{\text{fe}}$ estimated under a fixed-effect model, is used to test $H_0: \boldsymbol{\Psi} = \boldsymbol{0}$. Under the null hypothesis, the $Q$~statistic follow a $\chi^2$ with $Ip - pm$ degrees of freedom. When $p = 1$ the formulations~\ref{eq:Q} and~\ref{eq:Qmulti} coincide. The multivariate extension of the $I^2$ was derived relating the $Q$~statistics to its degrees of freedom $I^2 = \max \left\{0, \frac{Q- (Ip - pm)}{Ip - pm}\right\}$ \citep{jackson2012quantifying}.

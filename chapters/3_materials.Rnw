@@ -92,7 +92,7 @@ D = \sum_{i=1}^I \left(\mathbf{y}_i - \mathbf{X}_i \mathbf{Z}_i \boldsymbol{\hat
 
 To complement the $D$~statistic (and the corresponding test), the coefficient of determination, $R^2$, can be used as a descriptive measure of goodness-of-fit \citep{hagquist1998goodness, kvaalseth1985cautionary}. The $R^2$ is the complement to the unit of the ratio between the $\textrm{GRSS}$ and the generalized sum of squares $\textrm{GTSS} = \sum_{i=1}^I\mathbf{y}_i^\top \mathbf{S}_i^{-1} \mathbf{y}_i$. Because the dose--response models do not have the intercept term, the $R^2$ can be defined as in \cite{buse1973goodness, theil1958economic}
 \begin{equation}
-R^2 = 1 - \frac{\textrm{GRSS}}{\textrm{GTSS}} = 1 - frac{\sum_{i=1}^I \left(\mathbf{y}_i - \mathbf{X}_i \mathbf{Z}_i \boldsymbol{\hat \beta} \right)^\top \mathbf{S}_i^{-1} \left(\mathbf{y}_i - \mathbf{X}_i \mathbf{Z}_i \boldsymbol{\hat \beta} \right)}{\sum_{i=1}^I \mathbf{y}_i^\top \mathbf{S}_i^{-1} \mathbf{y}_i}
+R^2 = 1 - \frac{\textrm{GRSS}}{\textrm{GTSS}} = 1 - \frac{\sum_{i=1}^I \left(\mathbf{y}_i - \mathbf{X}_i \mathbf{Z}_i \boldsymbol{\hat \beta} \right)^\top \mathbf{S}_i^{-1} \left(\mathbf{y}_i - \mathbf{X}_i \mathbf{Z}_i \boldsymbol{\hat \beta} \right)}{\sum_{i=1}^I \mathbf{y}_i^\top \mathbf{S}_i^{-1} \mathbf{y}_i}
 \label{eq:R2}
 \end{equation}
 \noindent The $R^2$ is a dimensionless number that is bounded between 0 and 1, and can be generally interpreted as the proportion of the generalized total sum of squares explained by the dose--response model and study-level covariates. The lower bound 0 corresponds to the case where all the $\beta$ coefficients are equal to 0 and therefore the model is not able to explain the variability in the observed log relative risks. Contrary, the upper bound 1 indicates a perfect agreement between reported and fitted data. 
@@ -160,7 +160,7 @@ tab_1501 %>%
 
 Using 35, 60, 70 year as cut points, we modelled age using 5 categories in a Poisson model adjusting for potential confounders and produced aggregated dose--response results in table~\ref{tab:breast_ad}, using the first category as referent. Using the methodology presented in section~\ref{sec:1st_stage}, we estimated a linear trend a graphically compared the predicted trend and the tabular data (figure~\ref{fig:visual_problem}). While the reported log RRs suggest an inverse association between age and breast cancer mortality, the estimated linear trend indicates opposite conclusion (a \Sexpr{round(100*(delta_lin$pred-1), 2)}\% increase in mortality for every 5-year increase of age at diagnosis). The linear trend does not seem to properly fit the data since the fitted lined doesn’t event pass through the reported log RRs. The problem is that there are few cases in the reference age category and so the log RRs are more unstable. By changing the group comparison to the second age category, this issue is partially solved. To address the further issue of the covariance, we proposed graphical tools based on the analysis of the decorrelated residuals.
 
-<<visual_problem, fig.cap = 'Comparison between observed and fitted data using changing the comparison group from the first age category (left panel) to the second one (right panel) based on the aggregated data on the association between age and breast cancer mortality presented in table~\\ref{tab:breast_ad}'>>=
+<<visual_problem, fig.cap = 'Comparison between observed and fitted data using changing the comparison group from the first age category (left panel) to the second one (right panel) based on the aggregated data on the association between age and breast cancer mortality presented in table~\\ref{tab:breast_ad}', fig.height=4>>=
 gridExtra::grid.arrange(
   ggplot(tab_1501, aes(x = dose, y = exp.Est..)) + 
     geom_point() +
@@ -190,30 +190,221 @@ The residuals can be decorrelated using the Cholesky factorization of the covari
 
 \section{A new measure of heterogeneity}
 
+One of the possible reasons for large values of $D$ or similarly small values of $R^2$ is presence of heterogeneity in the dose-response associations. The measures of heterogeneity presented in section~\ref{sec:measures_het}, namely $\hat R_I$ and $I^2$ were derived based on the assumption of homogeneity for the error variance terms $v_i$, which is unlikely to be met in applications. To illustrate this point, let us consider the two hypothetical distributions for the within-study error terms in table~\ref{tab:hyp_vi}. The distribution of $v_i$ in the first example (analysis A) is much more homogenous compared to the second scenario (analysis B). The coefficient of variation for the $v_i$ in the second example is 20 times higher than the corresponding number in the first scenario. While it seems reasonable to assume homogeneity of the $v_i$ for the analysis A, in the second case this hypothesis is not appropriate. Nonetheless both $\hat R_I$ and $I^2$ would summarize the two distributions with a single common number. 
 
-\newpage
+<<hyp_vi, results='asis'>>=
+hyp_vi %>%
+  `colnames<-`(c("Analysis", "$v_1, \\dots, v_5$", "$CV_{v_i}$",
+                 "$s_1^2$", "$s_2^2$")) %>%
+  xtable(digits = c(0, 0, 0, 2, 1, 1), align = "cccccc", label = "tab:hyp_vi",
+         caption = "Hypothetical distributions of within-study errors 
+in two meta-analyses of 5 studies.") %>%
+  print(include.rownames = FALSE, caption.placement = "top",
+        sanitize.text.function=identity)
+@
 
+\subsection{Definition and proporties}
 
-\subsection{Statistical proporties}
+The available measures relate the between-study heterogeneity to the overall variability, whose definition also varies across a study. A different prospective consists of measuring the impact of heterogeneity in determining the variance of the combined effect in a random-effects analysis. This quantity depends on the $\tau^2$ and on the variance of the combined $\hat \beta$, quantities that don't require the assumption of homogeneity for the within-study error terms.
 
-\subsection{Simulation study}
+\noindent To determine how $\tau^2$ contributes to give $\widehat{\Var} \left(\hat \beta \right)$, we consider the hypothetical case where all the estimates $\hat \beta_i$ are reported with no error, i.e. $v_i = 0 \; \forall i = 1, \dots, I$. The weights used in the meta-analytic model depends only on $\tau^2$, and following equation~\ref{eq:avgvarbeta} the variance of the combined effect is $\widehat{\Var} \left(\hat \beta \right) = \left(\sum_{i = 1}^I \hat \tau^2 \right)^{-1} = \hat \tau^2/I$.
+In the more realistic case where $v_i > 0$, the variance of $\hat \beta$ will increase to incorporate the uncertainty in the reported estimates. The contribution of the heterogeneity is still defined by $\hat \tau^2/I$. The new measure of heterogeneity, $R_b$, can be written as
+\begin{equation}
+\hat R_b = \frac{\hat \tau^2}{I \widehat{\Var} \left(\hat \beta \right)} = \frac{\hat \tau^2}{I/\left( \sum_{i = 1}^I \frac{1}{v_i + \hat \tau^2} \right)} = \frac{1}{I}\sum_{i = 1}^I \frac{\hat \tau^2}{\hat \tau^2 + v_i}
+\label{eq:Rb}
+\end{equation}
 
+\noindent The $\hat R_b$ is a dimensionless number that can be expressed as a percentage, ranging from 0\% (corresponding to $\hat \tau^2 = 0$, i.e. no observed heterogeneity) to 100\%, for the hypothetical case where all the effects are estimated with no error. The proposed measure is defined as a function of the estimated heterogeneity ($\tau^2$), the number of studies (I), and the within-study error terms ($v_i$). It satisfies the criteria required for a measure of heterogeneity \citep{higgins2002quantifying}: it is a non-decreasing function of $\hat \tau^2$, it is invariant to scale transformation of the estimates, and is not intrinsically affected by the number of studies included in the analysis. Similarly to $\hat R_I$ and $I^2$, the proposed measure is a function on the within-error terms $v_i$ and so it tends to 1 in case of meta-anlaysis of very precise estimates, even for relative small values of $\hat \tau^2$. As already mentioned in section~\ref{sec:measures_het}, the use of the between-studies coefficient of variation can complement these measures \citep{takkouche1999evaluation}.
+
+\noindent The right hand of equation~\ref{eq:Rb} expresses $\hat R_b$ as an average of the ratios of the $\hat \tau^2$ to the study-specific overall variance $v_i + \hat \tau^2$. It is easy to derive that $\hat R_b$ coincides with the definition of $\hat R_I$ and $I^2$ in case of homogeneity of the $v_i$. When the within-errors vary across study, the difference between $\hat R_b$ and $I^2$ will depend on the actual values of $v_i$, while it can be proven that $\hat R_b \le \hat R_I$.
+
+An estimate of the between-study heterogeneity is required for the computation of $\hat R_b$ as well for the alternative measures $\hat R_I$ and $I^2$. The moment-based estimator presented in equation~\ref{eq:tau2DL} is a standard choice in many applied meta-analyses and has the advantage of having a closed formulation. In addition, the estimator is asymptotically consistent \citep{jackson2010extending}. Using this estimation method, $\hat R_b$ can be expressed as a function of the $Q$~statistic
+\begin{equation}
+\hat R_b = \frac{1}{I} \sum_{i = 1}^I \frac{Q - (I-1)}{Q + a_i - (I - 1)} 
+\label{eq:RbQ}
+\end{equation}
+\noindent with $a_i = v_i \left(\sum_{i = 1}^I w_i - \sum_{i = 1}^Iw_i^2/\sum_{i = 1}^I w_i \right)$. The asymptotic variance for $\hat R_b$ can be derived by using the delta method on the relation~\ref{eq:RbQ}
+\begin{equation}
+\widehat{\Var} \left(\hat R_b \right) \approx \left(  \frac{1}{I} \sum_{i = 1}^I \frac{a_i}{(Q + a_i - (I-1))^2} \right)^2 \Var(Q)
+\label{eq:var_Rb}
+\end{equation}
+
+\noindent The formula for $\Var(Q) = 2(I-1) + 4\left(S_1 - \frac{S_2}{S_1}\right)\tau^2 + 2\left(S_2 - 2\frac{S_3}{S_1} + \frac{S_2^2}{S_1^2} \right)$, with $S_r = \sum_{i = 1}^I w_i^r$, was first presented by \cite{ biggerstaff1997incorporating}.
+
+\noindent When the number of studies is large, $\hat R_b$ is asymptotically distributed and thus Wald-type confidence interval can be constructed $\hat R_b \pm z_{1-\alpha/2} \sqrt{ \widehat{\Var} \left(\hat R_b \right)}$.
 
 
 
 \section{A point-wise approach}
 
-\subsection{Prediction of study-specific (log) relative risks}
+<<>>=
+data("milk_mort")
+id_milk <- c(14, 11, 9, 3) 
+milk_sub <- filter(milk_mort, id %in% id_milk)
+q_milk <- quantile(milk_sub$dose, c(.1, .5, .9))
+max_dose <- tapply(milk_sub$dose, milk_sub$id, max)
+fps <- fpgrid()
+shift <- 5
+scale <- 10
+modi_milk <- lapply(split(milk_sub, milk_sub$id), function(d){
+  lapply(split(fps, 1:nrow(fps)), function(p){
+    dosresmeta(logrr ~ fracpol(dose, p = p, shift, scale),
+               se = se, type = type, cases = cases, n = n, data = d)
+  })
+})
+AIC_i <- lapply(modi_milk, function(m) sapply(m, AIC))
+best_i <- sapply(AIC_i, which.min)
+fpbest <- fps[best_i, ]
+modi_milk_sel <- Map(function(m, i) m[[i]], modi_milk, best_i)
+p_milk <- Map(function(d, m, p){
+  newdata <- data.frame(dose = seq(min(d$dose), max(d$dose), length.out = 100)) %>%
+    mutate(pred = predict(m, ., expo = T)$pred)
+  ggplot(d, aes(dose, rr)) +
+    geom_errorbar(aes(ymin = lb, ymax = ub)) +
+    scale_y_continuous(trans = "log", breaks = c(.5, .6, .7, .85, 1, 1.25, 1.5)) +
+    labs(y = "Relative risk", x = "Milk consumption (ml/day)", 
+         title = paste0("Study ID ", d$id[1], ", p = (", paste0(p, collapse = ", "), ")")) +
+    geom_line(data = newdata, aes(x = dose, y = pred))
+}, d = split(milk_sub, milk_sub$id), m = modi_milk_sel, p = split(fpbest, 1:nrow(fpbest)))
+@
 
-\subsection{Pool of dose--response prediction}
+Measures of heterogeneity are frequently employed in applied works and in applications of meta-regression models. In a dose--response meta-analysis, however, there are two aspects of heterogeneity that can not be captured using standard methods. More specifically, in a two-stage analysis the same functional transformations $g_1, \dots, g_p$ need to be defined for all the studies so that the regression coefficients can be properly combined by meta-analysis.
+This may have important consequences in case the chosen dose--response model adequately fits only a subset of the analyzed studies. To illustrate this aspect, we consider a subset of 4 studies on the association between milk consumption (ml/day) and all-cause mortality \citep{larsson2015milk}. We modelled the individual curves using FP2 and selected in each study the combination of power terms which maximized the log likelihood (or equivalently with the minimum AIC). The chosen power terms in the individual analyses differ although the predicted curves describe a similar association figure~\ref{fig:milk_sub}. Forcing a unique set of power terms may decrease the fit of some of the study-specific analyses and thus produce more unstable estimates for the dose--response parameters.
+
+\noindent An other difficulty may be encountered in uniformly defining the $g$ transformation across the studies. For instance, we might decide to model the previous association between milk consumption and mortality using RCS. A percentile approach is commonly adopted for choosing where to place the $\mathbf{k}$ in equation~\ref{eq:rcs}. The first and third knots at located at the extremes, generally at the 10-th and 90-th percentiles of the exposure distribution, while the median exposure value is chosen for the remaining knot.
+If the exposure distributions largely vary (especially in terms of range definition), as it is in this case, it may not be possible to equally locate the knots in all the studies. Indeed, in our example only one study considered dose levels higher than the upper knot (\Sexpr{q_milk[3]} ml/day). As a consequence, the second spline transformation for the other studies will is equal 0 and the model is not estimable (the design matrix is not invertible). 
+
+\noindent A second related problem directly affects the prediction of the pooled log relative risks. The maximum dose levels varies largely across studies, with values \Sexpr{paste(max_dose, collapse = ",")} ml/day. 
+The predictions from the second stage analysis, however, are obtained using the combined $\boldsymbol{\hat \beta}$, which disregard information about the exposure ranges. All the studies contribute in predicting the log relative risks, even if some of them only reported results for low exposure values. In such a way, the combined curve may severely affected by these extrapolations.
+
+A pointwise approach for meta-analysis of aggregated dose--response data may properly address the described issues.
+
+<<milk_sub, fig.cap="Dose-response associations between milk consumption (ml/day) and all-cause mortality in 4 studies. The curves are modelled using fractional polynomials with the sets of power terms $p$ (reported in the title) chosen by maximizing the study-specific likelihoods. The results are presented on the log scale using the observed reference values as comparators.", fig.height=7>>=
+marrangeGrob(grobs = p_milk, ncol = 2, nrow = 2, top = NULL)
+@
+
+A pointwise approach was first presented by \cite{sauerbrei2011new} for meta-analysis of continuous covariates based on IPD. The strategy consists of separately estimating the study-specific curves and, based on them, calculating the predicted log relative risks for selected exposure values. The combined curve is obtained by pooling the predicted relative risks instead of calculating them from the combined regression coefficients. The described methodology has the advantage of fitting potential diverse curves across the studies, and limiting the study-specific predicted log relative risks to the observed exposure range.   
+
+\subsection{Estimation and prediction of study-specific curves}
+
+The first step of a pointwise approach is similar to the methodology presented in section~\ref{sec:1st_stage} with the difference that the $g$ transformations in the design matrices~\ref{eq:des.matrix} are subscripted by the study index $i$, to highlight that they may differ across the studies, also in terms of number ($p_i$) 
+\begin{equation}
+ \mathbf{X}_i=\left[
+\begin{array}{ccc}
+g_{i1}(x_{i1}) - gi_{1}(x_{i0}) & \hdots & g_{ip_i}(x_{ip}) - g_{ip_i}(x_{i0}) \\
+\vdots &  & \vdots \\
+g_{i1}(x_{iJ_i}) -  gi_{1}(x_{i0}) & \hdots & g_{ip_i}(x_{iJ_i}) -  g_{ip_i}(x_{i0}) \\
+\end{array}
+\right] 
+\label{eq:des.matrix_pwa}
+\end{equation}
+\noindent For example, different power terms for FP2 can be chosen or, for a RCS analysis, the knots can be located separately in each study. Potentially, a mixed of curves could be also estimated across the study in order to improve the fit of the individual dose-response analyses. The regression coefficients are then be estimated using generalized least squares estimators presented in equation~\ref{eq:gls}.
+
+Once the curves have been estimated, the results of the first step analysis are presented in terms of predicted log relative risks of a set of $v_i$ exposure values $\mathbf{x_{v_i}}$ using a suitable value $x_\mathrm{ref}$ as comparator. The $i$ indexed is used to highlight that the chosen dose values may differ across the studies. In particular, the predictions in each study can be limited to the observed exposure range $\max \left( \mathbf{x_{v_i}} \right) \le \max{\mathbf{x_i}}$.
+\begin{align}
+\hat {\boldsymbol y}_i &= \mathbf{X}_{v_i} \boldsymbol{\hat \beta_i}
+\label{eq:pred_pwa} \\
+\hat{\boldsymbol{v}}_i &= \mathrm{diag}\left( \mathbf{X}_{v_i} \widehat{\Var} \left( \boldsymbol{\hat \beta_i} \right) \mathbf{X}_{v_i}^\top \right)
+\label{eq:predv_pwa}
+\end{align}
+\noindent with formulas similar to those presented in equation~\ref{eq:pred} and ~\ref{eq:varpred}, with the notable difference that the predictions are based on the study-specific $\boldsymbol{\hat \beta_i}$ rather than the mean $\boldsymbol{\hat \beta}$ coefficients.
+
+\subsection{Averaging of dose--response prediction}
+
+In a pointwise strategy the combined dose-response curve is derived by pooling the study-specific predicted log relative risks derived in equation~\ref{eq:pred_pwa}. The second step analysis consists of $v = \max(v_i)$ univariate meta-analyses where the effect sizes are the elements in $\hat {\boldsymbol y}_i$ with the within-error variances $\hat{\boldsymbol{v}}_i$.
+The combined predicted relative risks are estimated using the weighted average presented in equation~\ref{eq:avgbeta}.
+
+As a final result, the combined dose-response curve is graphically presented as a smooth function of the combined predicted relative risks for the chosen $v$ dose levels. In addition, all the results of the univariate meta-analyses can be pointwisely presented, such as estimates of the heterogeneity $\tau^2$ and related measures, $R_b$, $I^2$, and $R_i$, the $Q$~statistic, and the study-specific weights, with the potential of a much richer set of results.
 
 
 \section{A one-stage model}
 
+The study-specific dose--response analysis in a standard two-stage or alternative pointwise approach suffer from the limited number of data points. Most of the individual studies present results for 2 to 4 non-referent exposure categories, but cases where dichotomization of the exposure occurred are not rare \citep{turner2010categorisation}. In the latter case, only dose-response models parameterized by $p = 1$ coefficient can be estimated (e.g. linear trend). Indeed, a standard requirement for meta-analysis of non-linear curves is that the studies provide at least two non-referent relative risks.
+
+The extension of the one-stage approach to a random-effects meta-analysis may overcome the constrain from the limited number of individual data points. A one-stage approach is conceptually easier since the entire analysis can be formulated in a single statistical model. Flexible curves characterized by multiple parameters ($p > 3$) can be easily accommodated, so that more elaborate research questions can be answered, without loosing the information from those studies usually excluded in a two-stage analysis.
+
 \subsection{Model definition}
+
+A one-stage dose--response meta-analysis can be written in the form of a linear mixed-effects model
+\begin{equation}
+\mathbf{y}_{i} = \mathbf{X}_{i} \boldsymbol{\beta} + \mathbf{Z}_{i}  \mathbf{b}_i + \boldsymbol{\varepsilon}_{i}
+\label{eq:onestage}
+\end{equation}
+\noindent where the terms $\mathbf{y}_{i}$, $\mathbf{X}_{i}$, and $\boldsymbol{\varepsilon}_{i}$ are defined exactly as those presented in the first step of a two-stage analysis (equation~\ref{eq:drmodel}). The quantities $\boldsymbol{\beta}$ and $\mathbf{b}_i$, instead, are the population average parameter and unobserved random-effects as defined in second step (equation~\ref{eq:rmma}). The additional $\mathbf{Z}_{i}$ is the $n_i \times p$ design matrix for the random-effects and coincides with the definition of $\mathbf{X}_{i}$.
+
+\noindent Placing the multivariate distribution for the random-effects terms, the marginal model for a one stage analysis is
+\begin{equation}
+\mathbf{y}_{i} \sim \mathcal{N} \left( \mathbf{X}_{i} \boldsymbol{\beta},  \mathbf{Z}_{i} \boldsymbol{\Psi} \mathbf{Z}_{i}^\top  + \mathbf{S}_i \right)
+\label{eq:marginal_os}
+\end{equation}
+\noindent Similarly, the conditional model is defined as
+\begin{equation}
+\mathbf{y}_{i} \mid \boldsymbol{b}_i \sim \mathcal{N} \left( \mathbf{X}_{i} \boldsymbol{\beta} + \mathbf{Z}_{i} \boldsymbol{b}_i,  \mathbf{S}_i \right)
+\label{eq:conditional_os}
+\end{equation}
+
+\noindent Note that the conditional and marginal models are now defined for the log relative risks rather than the dose-response coefficients. In particular, the definition of the marginal variance $\boldsymbol{\Sigma}_i  = \mathbf{Z}_{i} \boldsymbol{\Psi} \mathbf{Z}_{i}^\top  + \mathbf{S}_i$ is quite different. It depends not only on the within and between components but also on the corresponding dose value $x_{ij}$ (or equivalently $z_{ij}$) associated with $y_{ij}$.
+
+Meta-regression models can be estimated by including in $\mathbf{X}_{i}$ the interaction terms between the $p$ transformations of the exposure variable and study-level covariates, while leaving unchanged the definition of the $\mathbf{Z}_{i}$ matrix for the random-effects. Assuming a quadratic curve and a binary study-level covariate $u_i$, the design matrices for the fixed- and random-effects can be written as
+\begin{equation*}
+\mathbf{X}_i =
+	\begin{bmatrix}
+		x_{i1} - x_{i0}  & x_{i1}^2 - x_{i0}^2 & \left(x_{i1} - x_{i0}\right) u_i &  \left( x_{i1}^2 - x_{i0}^2\right) u_i \\
+		\vdots & \vdots & \vdots & \vdots \\
+		x_{iJ_i} - x_{i0}  & x_{iJ_i}^2 - x_{i0}^2 & \left(x_{iJ_i} - x_{i0}\right) u_i  & \left(x_{iJ_i}^2 - x_{i0}^2\right) u_i \\
+	\end{bmatrix}
+\end{equation*} 
+
+\begin{equation*}
+\mathbf{Z}_i =
+	\begin{bmatrix}
+		x_{i1} - x_{i0}  & x_{i1}^2 - x_{i0}^2 \\
+		\vdots & \vdots \\
+		x_{iJ_i} - x_{i0}  & x_{iJ_i}^2 - x_{i0}^2 \\
+	\end{bmatrix}
+\end{equation*} 
 
 \subsection{Estimation and hypothesis testing}
 
+The parameters to be estimated are the $m\times p$ fixed effects and the $p \times (p+1)/2$ elements of the between-study variance matrix. We consider likelihood-based estimators that maximize either the log-likelihood of model~\ref{eq:conditional_os}
+\begin{equation}
+\ell \left( \boldsymbol{\beta}, \boldsymbol{\xi} \right) = 
+ -\frac{1}{2} n \log(2\pi)  -\frac{1}{2} \sum_{i=1}^k \log | \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) |  -\frac{1}{2}\sum_{i=1}^k \left[ \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\beta} \right)^\top \left( \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) \right)^{-1} \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\beta} \right) \right]
+\label{eq:logLik_os}
+\end{equation}
+\noindent or the corresponding restricted version
+\begin{equation}
+\begin{split}
+\ell_R \left( \boldsymbol{\xi} \right) = & 
+ -\frac{1}{2} (n - p) \log(2\pi)  - \frac{1}{2} \sum_{i=1}^k \log | \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) |  - \frac{1}{2} \log \left| \sum_{i=1}^k \mathbf{X}_i^T \left( \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) \right)^{-1}  \mathbf{X}_i  \right| + \\
+&-\frac{1}{2}\sum_{i=1}^k \left[ \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\hat \beta} \right)^\top \left( \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) \right)^{-1} \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\hat \beta} \right) \right]
+\end{split}
+\label{eq:logLikR_os}
+\end{equation}
+
+As in case of multivariate meta-analysis, likelihood estimators requires iterative algorithms in optimizing the functions~\ref{eq:logLik_os} and ~\ref{eq:logLikR_os}. 
+In particular, the Nelder-Mead method can be employed to find the maximum for the parameters in the multidimensional domain. For ease of computation, both likelihoods are expressed as function of only the $\boldsymbol{\xi}$ parameters, which corresponds to the elements of the lower triangular Cholesky decomposition of $\boldsymbol{\Psi}$. The algorithms start with an initial guess for $\boldsymbol{\Psi}$, obtain an estimate for $\boldsymbol{\beta}$ using GLS estimators and maximize the objective function in terms of $\boldsymbol{\xi}$. The steps are iterated until convergence.
+
+Test of hypothesis and confidence intervals are based on the established theory for mixed models. Inference on the fixed-effects coefficients is conducted in a similar way as presented in section~\ref{sec:2nd_stage}, using the asymptotic normal distribution for the estimator of $\boldsymbol{\beta}$. Tests for the variance components, instead, generally require a mixture of $\chi^2$ because the coefficients to be tested can only be positive. When $p \ge 2$, however, the distribution of the test statistic is difficult to implement, so that alternative measures can be instead applied. Following the idea behind the definition of the Intraclass Correlation Coefficient (ICC), the marginal variance in~\ref{eq:marginal_os} can also be decomposed in the within-study and between-studies components. The dose-response model~\ref{eq:onestage} is a mixed model with random-effects for the slope terms and with no intercept. Thus, the between-studies variance is a quadratic function of the assigned dose values. For this setting \cite{goldstein2002partitioning} defined the Variance Partition Coefficient (VPC) as the ratio of the between-studies component by the total residual variability
+\begin{equation}
+\textrm{VPC}_{ij} = \frac{\mathbf{z}_{ij} \boldsymbol{\Psi} \mathbf{z}_{ij}^\top}{\mathbf{z}_{ij} \boldsymbol{\Psi} \mathbf{z}_{ij}^\top  + s_{ij}^2}
+\label{eq:vpc}
+\end{equation}
+
+\noindent The VPC is indexed by both $i$ and $j$ because it depends both on the observed dose value $z_{ij}$ and the variance for the log relative risk $s_{ij}^2$. Values for VPC can be expressed as percentage to quantify the proportion of residual variance attributable to heterogeneity. Because the VPC will typically vary for different doses, overlay a LOWESS smother in a scatter plot VPC versus dose levels may help to examine the impact of heterogeneity over the exposure range.
+
 \subsection{Prediction}
 
+Predictions for the combined, or marginal, curve are obtained as in equation~\ref{eq:pred}, where now the $\boldsymbol{\hat \beta}$ coefficients were estimated using the log relative risks as outcome variables rather than the study-specific $\boldsymbol{\hat \beta}_i$. 
+
+\noindent Predictions are also available for study-specific curves. Using the normality distribution for the random-effects, \cite{henderson1959estimation} compute the asymptotic best linear unbiased prediction (BLUP) of the random-effects $\boldsymbol{b}$ as
+\begin{equation}
+\hat {\mathbf{b}}_i = \hat{\boldsymbol{\Psi}} \mathbf{Z}_i^\top \hat{\boldsymbol{\Sigma}}_i^{-1}\left( \mathbf{y}_i - \mathbf{X}_i\hat{\boldsymbol{\beta}} \right)
+\label{eq:blup_os}
+\end{equation}
+
+The conditional dose-response coefficients are defined as $\mathbf{X}_i\hat{\boldsymbol{\beta}} + \hat {\mathbf{b}}_i$. Of note, individual curves defined by $p$ parameters can be predicted for those studies reporting $J_i < p$ non-referent relative risks. The BLUP employ the information of the entire distribution of the random-effects to make the best possible prediction.
+
 \subsection{Comparison with two-stage analysis}
+
+Previous methodological articles have oftentimes implemented new methods using the two-stage approach, mainly because of computation reasons. The alternative one-stage approach has been frequently referred to as equivalent and was no further investigated. The tools to assess the goodness-of-fit in \citetalias{discacciati2015goodness} were established using the one-stage framework. We proved in the supplementary material that the two techniques give identical results in a fixed-effects analysis of non-linear curves, not only for the simpler case of a linear trend. In the appendix of \citetalias{crippa2018one}, we extended the equivalence to the setting of non-linear curves for a random-effects model. In order to provide the same point and interval estimates, the study-specific models in the two-stage analysis need to be estimable, i.e. $p \le \min(J_i)$. In practical examples, small discrepancies in $\boldsymbol{\hat \beta}$ and $\widehat{\Var} \left( \boldsymbol{\hat \beta} \right)$ may be related to differences in the optimization methods for the objective functions of the two techinques.

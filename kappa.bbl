@@ -1,4 +1,4 @@
-\begin{thebibliography}{62}
+\begin{thebibliography}{67}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -154,6 +154,13 @@ Gasparrini A, Armstrong B, Kenward M (2012).
   multi-parameter associations.}
 \newblock \emph{Statistics in medicine}, \textbf{31}(29), 3821--3839.
 
+\bibitem[{Goldstein \emph{et~al.}(2002)Goldstein, Browne, and
+  Rasbash}]{goldstein2002partitioning}
+Goldstein H, Browne W, Rasbash J (2002).
+\newblock \enquote{Partitioning variation in multilevel models.}
+\newblock \emph{Understanding Statistics: Statistical Issues in Psychology,
+  Education, and the Social Sciences}, \textbf{1}(4), 223--231.
+
 \bibitem[{Greenland(1995)}]{greenland1995dose}
 Greenland S (1995).
 \newblock \enquote{Dose-response and trend analysis in epidemiology:
@@ -204,6 +211,13 @@ Hedges LV (1983).
 \newblock \enquote{A random effects model for effect sizes.}
 \newblock \emph{Psychological Bulletin}, \textbf{93}(2), 388.
 
+\bibitem[{Henderson \emph{et~al.}(1959)Henderson, Kempthorne, Searle, and
+  Von~Krosigk}]{henderson1959estimation}
+Henderson CR, Kempthorne O, Searle SR, Von~Krosigk C (1959).
+\newblock \enquote{The estimation of environmental and genetic trends from
+  records subject to culling.}
+\newblock \emph{Biometrics}, \textbf{15}(2), 192--218.
+
 \bibitem[{Higgins and Thompson(2002)}]{higgins2002quantifying}
 Higgins J, Thompson SG (2002).
 \newblock \enquote{Quantifying heterogeneity in a meta-analysis.}
@@ -236,6 +250,13 @@ Jackson D, White IR, Riley RD (2012).
   multivariate meta-analyses.}
 \newblock \emph{Statistics in medicine}, \textbf{31}(29), 3805--3820.
 
+\bibitem[{Jackson \emph{et~al.}(2010)Jackson, White, and
+  Thompson}]{jackson2010extending}
+Jackson D, White IR, Thompson SG (2010).
+\newblock \enquote{Extending DerSimonian and Laird's methodology to perform
+  multivariate random effects meta-analyses.}
+\newblock \emph{Statistics in medicine}, \textbf{29}(12), 1282--1297.
+
 \bibitem[{Kv{\aa}lseth(1985)}]{kvaalseth1985cautionary}
 Kv{\aa}lseth TO (1985).
 \newblock \enquote{Cautionary note about R 2.}
@@ -247,6 +268,13 @@ Langan D, Higgins J, Simmonds M (2017).
 \newblock \enquote{Comparative performance of heterogeneity variance estimators
   in meta-analysis: a review of simulation studies.}
 \newblock \emph{Research synthesis methods}, \textbf{8}(2), 181--198.
+
+\bibitem[{Larsson \emph{et~al.}(2015)Larsson, Crippa, Orsini, Wolk, and
+  Micha{\"e}lsson}]{larsson2015milk}
+Larsson SC, Crippa A, Orsini N, Wolk A, Micha{\"e}lsson K (2015).
+\newblock \enquote{Milk consumption and mortality from all causes,
+  cardiovascular disease, and cancer: a systematic review and meta-analysis.}
+\newblock \emph{Nutrients}, \textbf{7}(9), 7749--7763.
 
 \bibitem[{Liu \emph{et~al.}(2009)Liu, Cook, Bergstr{\"o}m, and
   Hsieh}]{liu2009two}
@@ -315,6 +343,12 @@ Royston P, Altman DG, Sauerbrei W (2006).
 \newblock \enquote{Dichotomizing continuous predictors in multiple regression:
   a bad idea.}
 \newblock \emph{Statistics in medicine}, \textbf{25}(1), 127--141.
+
+\bibitem[{Sauerbrei and Royston(2011)}]{sauerbrei2011new}
+Sauerbrei W, Royston P (2011).
+\newblock \enquote{A new strategy for meta-analysis of continuous covariates in
+  observational studies.}
+\newblock \emph{Statistics in medicine}, \textbf{30}(28), 3341--3360.
 
 \bibitem[{Shi and Copas(2004)}]{shi2004meta}
 Shi JQ, Copas J (2004).
