@@ -14,12 +14,12 @@ opts_knit$set(self.contained=FALSE, out.format = "latex")
 opts_chunk$set(echo = FALSE, message = FALSE, comment = NA, fig.path = "../figure/",
                out.width = "\\textwidth", cache = TRUE, highlight = F, background = "white",
                fig.align = "center", fig.width = 7, fig.height = 4.5, fig.pos= "ht!",
-               prompt = TRUE, size = "small", col)
-options(prompt ="R> ", width = 72)
+               prompt = TRUE, size = "footnotesize", col)
+options(prompt ="R> ", width = 90, show.signif.stars = FALSE)
 knit_theme$set("print")
 
 pkgs <- c("knitr", "tidyverse", "dosresmeta", "lubridate", "rworldmap", "Epi", "xtable",
-          "cowplot", "gridExtra")
+          "cowplot", "gridExtra", "scales")
 lapply(pkgs, require, character.only = TRUE)
 # loading libraries and useful functions
 source("code/functions.R")
@@ -107,7 +107,7 @@ theme_set(theme_kappa)
 %\newcommand{\kgmsq}{kg$\times$m\textsuperscript{$-2$}}
 \newcommand{\pkg}[1]{{\fontseries{b}\selectfont #1}}
 
-\defcitealias{crippadosresmeta2016}{Paper~I}	
+\defcitealias{crippa2016dosresmeta}{Paper~I}	
 \defcitealias{discacciati2015goodness}{Paper~II}	
 \defcitealias{crippa2016new}{Paper~III}	
 \defcitealias{crippa2018pointwise}{Paper~IV}	

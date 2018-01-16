@@ -1,4 +1,4 @@
-\begin{thebibliography}{67}
+\begin{thebibliography}{69}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -90,6 +90,13 @@ Crippa A, Discacciati A, Bottai M, Spiegelman D, Orsini N (2018{\natexlab{a}}).
 \newblock \enquote{One-stage dose--response meta-analysis for aggregated data.}
 \newblock \emph{Manuscript}.
 
+\bibitem[{Crippa \emph{et~al.}(2014)Crippa, Discacciati, Larsson, Wolk, and
+  Orsini}]{crippa2014coffee}
+Crippa A, Discacciati A, Larsson SC, Wolk A, Orsini N (2014).
+\newblock \enquote{Coffee consumption and mortality from all causes,
+  cardiovascular disease, and cancer: a dose-response meta-analysis.}
+\newblock \emph{American journal of epidemiology}, \textbf{180}(8), 763--775.
+
 \bibitem[{Crippa \emph{et~al.}(2016)Crippa, Khudyakov, Wang, Orsini, and
   Spiegelman}]{crippa2016new}
 Crippa A, Khudyakov P, Wang M, Orsini N, Spiegelman D (2016).
@@ -102,7 +109,7 @@ Crippa A, Orsini N (2016{\natexlab{a}}).
 \newblock \enquote{Dose-response meta-analysis of differences in means.}
 \newblock \emph{BMC medical research methodology}, \textbf{16}(1), 91.
 
-\bibitem[{Crippa and Orsini(2016{\natexlab{b}})}]{crippadosresmeta2016}
+\bibitem[{Crippa and Orsini(2016{\natexlab{b}})}]{crippa2016dosresmeta}
 Crippa A, Orsini N (2016{\natexlab{b}}).
 \newblock \enquote{Multivariate dose-response meta-analysis: The {dosresmeta}
   {R} Package.}
@@ -275,6 +282,14 @@ Larsson SC, Crippa A, Orsini N, Wolk A, Micha{\"e}lsson K (2015).
 \newblock \enquote{Milk consumption and mortality from all causes,
   cardiovascular disease, and cancer: a systematic review and meta-analysis.}
 \newblock \emph{Nutrients}, \textbf{7}(9), 7749--7763.
+
+\bibitem[{Legrady \emph{et~al.}(1987)Legrady, Dyer, Shekelle, Stamler, Liu,
+  Paul, Lepper, and Shryock}]{legrady1987coffee}
+Legrady D, Dyer AR, Shekelle RB, Stamler J, Liu K, Paul O, Lepper M, Shryock AM
+  (1987).
+\newblock \enquote{Coffee consumption and mortality in the Chicago Western
+  Electric Company study.}
+\newblock \emph{American journal of epidemiology}, \textbf{126}(5), 803--812.
 
 \bibitem[{Liu \emph{et~al.}(2009)Liu, Cook, Bergstr{\"o}m, and
   Hsieh}]{liu2009two}

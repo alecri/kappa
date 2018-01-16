@@ -24,7 +24,7 @@
 \contentsline {subsection}{\numberline {4.2.2}Coefficient of determination}{29}{subsection.4.2.2}
 \contentsline {subsection}{\numberline {4.2.3}Visual tools}{29}{subsection.4.2.3}
 \contentsline {section}{\numberline {4.3}A new measure of heterogeneity}{31}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Definition and proporties}{32}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.1}Definition and properties}{32}{subsection.4.3.1}
 \contentsline {section}{\numberline {4.4}A point-wise approach}{33}{section.4.4}
 \contentsline {subsection}{\numberline {4.4.1}Estimation and prediction of study-specific curves}{35}{subsection.4.4.1}
 \contentsline {subsection}{\numberline {4.4.2}Averaging of dose--response prediction}{35}{subsection.4.4.2}
@@ -34,10 +34,13 @@
 \contentsline {subsection}{\numberline {4.5.3}Prediction}{38}{subsection.4.5.3}
 \contentsline {subsection}{\numberline {4.5.4}Comparison with two-stage analysis}{38}{subsection.4.5.4}
 \contentsline {chapter}{\numberline {5}Results}{39}{chapter.5}
-\contentsline {chapter}{\numberline {6}Discussion}{40}{chapter.6}
-\contentsline {chapter}{\numberline {7}Conclusions}{41}{chapter.7}
-\contentsline {chapter}{\numberline {8}Future research}{43}{chapter.8}
-\contentsline {chapter}{\numberline {A}Supplementary figures}{44}{appendix.A}
-\contentsline {chapter}{\numberline {B}Supplementary tables}{45}{appendix.B}
-\contentsline {chapter}{References}{46}{appendix.C}
-\contentsline {chapter}{Acknowledgements}{51}{appendix*.17}
+\contentsline {section}{\numberline {5.1}Paper~I}{39}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Single study analysis}{39}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Multiple studies}{41}{subsection.5.1.2}
+\contentsline {chapter}{\numberline {6}Discussion}{47}{chapter.6}
+\contentsline {chapter}{\numberline {7}Conclusions}{48}{chapter.7}
+\contentsline {chapter}{\numberline {8}Future research}{50}{chapter.8}
+\contentsline {chapter}{\numberline {A}Supplementary figures}{51}{appendix.A}
+\contentsline {chapter}{\numberline {B}Supplementary tables}{52}{appendix.B}
+\contentsline {chapter}{References}{53}{appendix.C}
+\contentsline {chapter}{Acknowledgements}{58}{appendix*.19}

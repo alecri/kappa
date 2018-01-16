@@ -11,8 +11,154 @@
 
 \chapter{Results}
 
-
-
+We illustrate the usage of the developed methodologies and measures reanalyzing data from published dose--response meta-analyses. 
 
 % Paper I
-%\input{results.1}
+\section{Paper~I}
+
+The aim of \citetalias{crippa2016dosresmeta} was to describe the implementation of the two-stage approach for dose--response meta-analysis in the \pkg{dosresmeta} \textsf{R} package.
+We demonstrate the main aspects of the methodology reanalyzing aggregated dose--response data from 21 prospective studies on the association between coffee consumption (cups/day) and all-cause mortality \citep{crippa2014coffee}. The data set \texttt{coffee\_mort} is included in the package, with the first six lines printed below.
+
+<<coffee_mort, echo=T>>=
+library(dosresmeta)
+data("coffee_mort")
+head(coffee_mort)
+@
+
+\subsection{Single study analysis}
+
+\noindent We show how to estimate the dose--response association in a single study. For that purpose, we select the first study ID 1 consisting of 3 non-referent log relative risks \citep{legrady1987coffee}. One relevant feature of aggregated dose--response data is the correlation arising from having a common comparator. The \texttt{covar.logrr} function can be used to reconstruct the covariance matrix using the method by \cite{greenland1992methods}.
+
+<<legrady, echo=TRUE>>=
+legrady <- subset(coffee_mort, id == 1)
+covar.logrr(cases = cases, n = n, y = logrr, v = I(se^2), type = type, 
+            data = legrady)
+@
+
+\noindent The alternative method by \cite{hamling2008facilitating} can be used by specifying \texttt{covariance = "h"} in the \texttt{covar.logrr} funciton. The reconstructed covariance matrix is used to efficiently estimate the dose--response association. For example, a linear trend $y_{1j} = \beta_1 (x_{1j} - x_{10})$ can be estimated with
+
+<<lin_le, echo=TRUE>>=
+lin_le <- dosresmeta(logrr ~ dose, se = se, type = type, cases = cases, 
+                     n = n, data = legrady)
+lin_le
+@
+<<>>=
+b1_lin_le <- round(coef(lin_le), 3)
+eb1_lin_le <- round(exp(b1_lin_le), 3)
+@
+
+\noindent The change in the log relative risk of all-cause mortality associated with a 1 cup/day increase in coffee consumption was \Sexpr{b1_lin_le}. The interpretation is easier on the exponential scale: every 1 cup/day increase was associated with a \Sexpr{100*(eb1_lin_le - 1)}\%
+($\exp(\Sexpr{b1_lin_le}) = \Sexpr{eb1_lin_le}$) higher mortality risk. 
+The \texttt{predict} method facilitates the computation for the predicted linear increase for any arbitrary amount of coffee consumption. For example, setting \texttt{delta = 3}
+
+<<predict, echo=1>>=
+predict(lin_le, delta = 3, expo = TRUE)
+@
+<<>>=
+pred_le <- round(predict(lin_le, delta = 3, expo = TRUE)[-1], 2)
+@
+
+\noindent every 3 cups/day increase in coffee consumption was associate with a \Sexpr{100*(pred_le[1] - 1)}\% (95\% CI: \Sexpr{paste(pred_le[-1], collapse = ", ")}) higher mortality risk.
+
+Alternative curves can be specified in the formula argument. For example, a quadratic trend $y_{1j} = \beta_1 (x_{1j} - x_{10}) + \beta_2 (x_{1j}^2 - x_{10}^2)$ can be estimated.
+<<quadr_le, echo = TRUE>>=
+quadr_le <- dosresmeta(logrr ~ dose + I(dose^2), se = se, type = type,
+                     cases = cases, n = n, data = legrady)
+quadr_le
+@
+
+\noindent The coefficients of the quadratic model are not directly interpretable. The results can be instead presented in terms of predicted relative risk for select values of coffee consumption.
+<<pred_le2, echo=TRUE>>=
+predict(quadr_le, newdata = data.frame(dose = 0:6), expo = TRUE)
+@
+
+\subsection{Multiple studies}
+
+The chosen curves can be estimated also for the other studies. One possibility is to use the \pkg{tidyverse} package in order to obtain the linear trends and corresponding variances
+
+<<lin_bi, echo=T>>=
+library(tidyverse)
+lin_i <- coffee_mort %>%
+  split(.$id) %>%
+  map(~ dosresmeta(logrr ~ dose, se = se, type = type,
+                   cases = cases, n = n, data = .x))
+lin_bi <- map_dbl(lin_i, ~ coef(.x))
+lin_vi <- map_dbl(lin_i, ~ vcov(.x))
+head(cbind(bi = lin_bi, vi = lin_vi))
+@
+
+\noindent The mean linear trend can be calculated with standard packages for meta-analysis such as the \pkg{mvmeta} package
+<<lin_b_mv, echo = T>>=
+mvmeta(lin_bi, lin_vi)
+@
+
+\noindent Alternatively, the two steps of a two-stage analysis (dose--response analysis and pooling) are unified and simplified in the \texttt{dosresmeta} function. In a single call, the study-specific linear trends are estimated and combined with the results being stored in the \texttt{lin} object. 
+<<lin_b, echo = T>>=
+lin <- dosresmeta(logrr ~ dose, id = id, se = se, type = type,
+            cases = cases, n = n, data = coffee_mort)
+@
+
+\noindent The \texttt{summary} method displays the measures and tests of interest
+<<summary_lin_b, echo = 1>>=
+summary(lin)
+sum_lin <- summary(lin)
+@
+
+\noindent There was an inverse association between increasing levels of coffee consumption and all-cause mortality risk, with a mean relative risk of $\exp(\Sexpr{round(coef(lin), 2)}) = \Sexpr{round(exp(coef(lin)), 2)}$ for a 1 cup/day increase. Similarly to the single study analysis, the \texttt{predict} function returns the combined result for any amount of coffee contumption.
+<<pred_lin, echo=T>>=
+predict(lin, delta = 3, expo = T)
+@
+
+\noindent The linear trend appeared to be heterogeneous as indicated by both the $Q$~test ($Q$ = \Sexpr{round(sum_lin$qstat$Q)}, $p$~value < 0.01) and $I^2 = \Sexpr{round(100*(sum_lin$qstat$Q - sum_lin$qstat$df)/sum_lin$qstat$Q)}$.
+A possible alternative for both reducing the observed heterogeneity and relaxing the linearity assumption is to model the dose--response as a quadratic curve.
+<<quadr, echo=-3>>=
+quadr <- dosresmeta(logrr ~ dose + I(dose^2), id = id, se = se, type = type,
+                    cases = cases, n = n, data = coffee_mort)
+summary(quadr)
+sum_quadr <- summary(quadr)
+@
+
+\noindent The overall test $H_0: \beta_1 = \beta_2 = 0$ (\texttt{Chi2 model}) indicated that the mortality risk significantly varies according to coffee consumption levels. The quadratic model reduces to the simpler linear trend analysis when $\beta_2 = 0$. Thus, the univariate test for $\beta_2$ ($z$ = \Sexpr{round(sum_quadr$coefficients[2, "z"], 2)}, $p$~value < 0.01) suggested that the all-cause mortality risk is related in a non-linear fashion with coffee consumption. The heterogeneity in the study-specific regression coefficients reduced but its impact was still important, with the multivariate $I^2$ = \Sexpr{round(100*(sum_quadr$qstat$Q[1] - sum_quadr$qstat$df[1])/sum_quadr$qstat$Q[1])}\%. 
+
+The predicted log relative risks from the linear and quadratic analysis can be presented in a graphical format using $x_\mathrm{ref} = 0$ cups/day as referent (figure~\ref{fig:pred_fig}).
+
+<<pred_fig, echo=T, fig.cap="Combined dose-response association between coffee consumption and all-cause mortality (solid line) with 95\\% confidence intervals (shaded area). Coffee consumption was modelled with a quadratic curve in a two-stage random-effects meta-analysis. Dashed line represents the combined linear trend. The value 0 cups/day serves as referent. The relative risks are plotted on the log scale.">>=
+xref <- 0
+pred <- data.frame(dose = c(xref, seq(0, 8, .1))) %>%
+  predict(quadr, newdata = ., expo = T) %>%
+  cbind(lin = predict(lin, newdata = ., expo = T))
+ggplot(pred, aes(dose, pred, ymin = ci.lb, ymax = ci.ub)) +
+  geom_line() + geom_ribbon(alpha = .1) +
+  geom_line(aes(y = lin.pred), linetype = "dashed") +
+  scale_y_continuous(trans = "log", breaks = scales::pretty_breaks()) +
+  labs(x = "Coffee consumption (cups/day)", y = "Relative Risk")
+@
+
+\noindent Alternatively, the predicted relative risks for desired exposure values, say from 0 to 5 cups/day can be presented in a table
+
+<<pred_tab, echo = T, >>=
+filter(pred, dose %in% 0:5) %>%
+  select(-`I(dose^2)`, -lin.dose) %>% 
+  unique() %>% round(3)
+@
+
+\noindent The previous predictions can be easily re-expressed using a different exposure value such as 1.5 cup/day by changing \texttt{xref <- 1.5} and rerunning the previous code to produce a new figure or table.
+
+The study-specific dose--response coefficients and related covariance matrices are stored in the results and can be easily accessed. For example, the $\boldsymbol{\hat \beta}_i$ and $\widehat{\Var} \left( \boldsymbol{\hat \beta}_i \right)$ for the quadratic model in the first two studies are
+
+<<bi_Si, echo=TRUE>>=
+quadr$bi[1:2, ]
+quadr$Si[1:2]
+@
+
+\noindent and can be used to plot the individual curves in figure~\ref{fig:individual_curves}.
+<<individual_curves, echo=TRUE, warning=FALSE, fig.cap="Study-specific quadratic associations between coffee consumption and all-cause mortality. The relative risks are presented on a log scale using 0 cups/day as referent.">>=
+newd <- data.frame(dose = c(xref, seq(0, 6, .1)))
+newd %>%
+  cbind(map(array_branch(quadr$bi, 1), ~ exp(.x[1]*newd$dose + .x[2]*newd$dose^2))) %>%
+  gather(study, pred, -dose) %>%
+  ggplot(aes(dose, pred, group = study)) + geom_line() +
+  scale_y_continuous(trans = "log", breaks = c(.5, 1, 2, 5, 10), limits = c(.25, 10)) +
+  labs(x = "Coffee consumption (cups/day)", y = "Relative Risk")
+@
+

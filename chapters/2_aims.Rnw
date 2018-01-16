@@ -19,7 +19,7 @@ The overall aims of this thesis were to develop and implement new methods for do
 More specifically, the aims were:
 
 \begin{itemize}
-\item To describe the implementation of the main aspects of a dose--response meta-analysis and the usage of the \texttt{dosresmeta} $\R$ package.
+\item To describe the implementation of the main aspects of a dose--response meta-analysis and the usage of the \pkg{dosresmeta} \textsf{R} package.
 
 \item To present and discuss relevant measures and graphical tools to assess the goodness-of-fit in dose--response meta-analysis.
 
