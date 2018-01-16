@@ -1112,9 +1112,9 @@ R> devtools::install_github("alecri/dosresmeta")
 \definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
 R> str(dosresmeta)
-function (formula, id, v, type, cases, n, sd, data, mod = ~1, intercept = F, center = T, 
-    se, lb, ub, covariance = "gl", method = "reml", proc = "2stage", Slist, method.smd = "cohen", 
-    control = list())  
+function (formula, id, v, type, cases, n, sd, data, mod = ~1, intercept = F, 
+    center = T, se, lb, ub, covariance = "gl", method = "reml", proc = "2stage", 
+    Slist, method.smd = "cohen", control = list())  
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -1129,8 +1129,9 @@ The \texttt{dosresmeta} function returns an object of class ``\texttt{dosresmeta
 \definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
 R> str(dosresmeta:::predict.dosresmeta)
-function (object, newdata, xref, expo = FALSE, xref_vec, ci.incl = TRUE, se.incl = FALSE, 
-    xref_pos = 1, delta, order = FALSE, ci.level = 0.95, ...)  
+function (object, newdata, xref, expo = FALSE, xref_vec, ci.incl = TRUE, 
+    se.incl = FALSE, xref_pos = 1, delta, order = FALSE, ci.level = 0.95, 
+    ...)  
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -1143,9 +1144,10 @@ Additional functions can be listed
 \definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
 R> ls("package:dosresmeta")
- [1] "covar.logrr"        "covar.smd"          "dosresmeta"         "dosresmeta.control"
- [5] "dosresmeta.fit"     "fpgrid"             "fracpol"            "gof"               
- [9] "grl"                "hamling"            "vpc"                "waldtest"          
+ [1] "covar.logrr"        "covar.smd"          "dosresmeta"        
+ [4] "dosresmeta.control" "dosresmeta.fit"     "fpgrid"            
+ [7] "fracpol"            "gof"                "grl"               
+[10] "hamling"            "vpc"                "waldtest"          
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -1153,7 +1155,7 @@ R> ls("package:dosresmeta")
 \noindent Use \texttt{ls(getNamespace("dosresmeta"), all.names=TRUE)} for a complete list including hidden auxiliary functions.
 
 
-\section{Goodness-of-fit}
+\section{Goodness-of-fit}\label{sec:gof}
 
 The aim of \citetalias{discacciati2015goodness} was to address how to evaluate the goodness-of-fit in dose--response meta-analysis. The issue is particularly relevant in a dose--response analysis where the predicted curve should be a reasonably good summary of the modelled log relative risks. However, different features of aggregated dose--response data can complicate this comparison. The predicted curve is presented using a referent, $x_\mathrm{ref}$, which may differ from the study-specific reference values. Thus the predicted and observed log relative risks can no longer be directly compared because their baseline group comparison is not the same. Even in the case where the reference values are all the same and equal to $x_\mathrm{ref}$, the covariance among the study-specific RRs and the heterogeneity across the studies add further difficulties in evaluating if the chosen model provides a good summary of the observed data. Therefore, the proposed tools for assessing the goodness-of-fit are presented in a fixed-effect analysis where meta-regression models as in~\ref{eq:rmmra2} are typically employed to explain the observed heterogeneity. We consider relevant measures, tests, and graphical tools that take into account the correlation of the observed data.
 
@@ -1197,7 +1199,7 @@ Possibly, a low $R^2$ may indicate that more flexible transformations of the exp
 The visual assessment of the goodness-of-fit may reveal specific patterns in the data that might otherwise go undetected by only looking at summary measures such as the deviance and the coefficient of variation \citep{kvaalseth1985cautionary}. The graphical comparison can sometimes be delicate because different factors may affect such analysis. The aggregated dose--response data are presented using one group as comparison. This feature has two important consequences when deducting an overall trend from the reported (log) relative risks. The former is that different parameterizations, or models, can be graphically compared only if the predicted risk for the reference category is similar. The latter, instead, involves the correlation of the modelled data points which makes even harder to evaluate if a specific model fits the reported data. To illustrate both the problems we consider IPD from one of the registers involved in the Surveillance, Epidemiology, and End Results (SEER) Program (\url{https://seer.cancer.gov}), and focus on the association between age at diagnosis and breast cancer mortality. 
 
 % latex table generated in R 3.4.3 by xtable 1.8-2 package
-% Mon Jan 15 13:57:17 2018
+% Tue Jan 16 11:47:03 2018
 \begin{table}[ht]
 \centering
 \caption{Aggregated dose-response data on the adjusted association between age and breast cancer mortality based on one registry from the SEER program using the first age category as referent.
@@ -1246,7 +1248,7 @@ The residuals can be decorrelated using the Cholesky factorization of the covari
 One of the possible reasons for large values of $D$ or similarly small values of $R^2$ is presence of heterogeneity in the dose--response associations. The measures of heterogeneity presented in section~\ref{sec:measures_het}, namely $\hat R_I$ and $I^2$ were derived based on the assumption of homogeneity for the error variance terms $v_i$, which is unlikely to be met in applications. To illustrate this point, let us consider the two hypothetical distributions for the within-study error terms in table~\ref{tab:hyp_vi}. The distribution of $v_i$ in the first example (analysis A) is much more homogeneous compared to the second scenario (analysis B). The coefficient of variation for the $v_i$ in the second example is 20 times higher than the corresponding number in the first scenario. While it seems reasonable to assume homogeneity of the $v_i$ for the analysis A, in the second case this hypothesis is not appropriate. Nonetheless both $\hat R_I$ and $I^2$ would summarize the two distributions with a single common number. 
 
 % latex table generated in R 3.4.3 by xtable 1.8-2 package
-% Mon Jan 15 13:57:18 2018
+% Tue Jan 16 11:47:04 2018
 \begin{table}[ht]
 \centering
 \caption{Hypothetical distributions of within-study errors 
@@ -1818,6 +1820,75 @@ R> newd %>%
 
 \end{knitrout}
 
+
+\section{Paper~II}
+
+
+
+We use the tools presented in section~\ref{sec:gof} to evaluate the goodness-of-fit of the previous analyses. The \texttt{gof} function returns a display of the quantities of interest, namely the deviance test and the adjusted and unadjusted $R^2$. 
+We started with the simpler linear trend estimated in a fixed-effect analysis.
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+R> gof(lin, fixed = TRUE)
+Goodness-of-fit statistics:
+
+Deviance test: 
+D = 225.244 (df = 78), p-value = 0.000
+
+Coefficient of determination R-squared: 0.488 
+Adjusted R-squared: 0.482
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\noindent The fit for the model assuming a linear relationship was poor (analysis A in table~\ref{tab:gof_tab}). In particular, the deviance test rejected the null hypothesis that the model was properly specified ($D$ = 225.2, $p$~value < 0.001) while the percentage of the accounted variation by the analysis was 49\%. In addition, the decorrelated residuals vs exposure plot in panel A of figure~\ref{fig:gof_pic} indicated a specific pattern with negative residuals for low values of the exposure (before 5 cups/day) and positive ones for high levels of coffee consumption.
+
+A possible solution for addressing the lack of fit of the previous analysis is to consider a non-linear example such as a quadratic curve (analysis B). The fit slightly improved as indicated by \textrm{$\mathrm{R^2}$} which increased to 65\% (\textrm{$\mathrm{R_{\textrm{adj}}^2}$} = 0.64). The deviance test, however, still showed evidence of lack of fit ($D$ = 155.1, $p$~value < 0.001). Furthermore, even if the variability of the residuals around reduced (panel B of figure~\ref{fig:gof_pic}), the LOWESS smoother showed again a tendency to be more likely positive for low and extreme high exposure values.
+
+An alternative strategy (analysis C) was to model coffee consumption using RCS with 3 knots located at the fixed quantiles 0.10, 0.5, and 0.9 corresponding to 0, 2, 6.5 cups/day. Since the number of parameters is the same as in the analysis B ($p$ = 2), the \textrm{$\mathrm{R^2}$} can be used to compare the fit of the two strategies. In particular, the RCS analysis had a better fit, as indicated by the higher \textrm{$\mathrm{R^2}$} = 0.68 (\textrm{$\mathrm{R_{\textrm{adj}}^2}$} = 0.67). The pattern in the residuals was also leveled off around zero with the exception for the 3 highest dose levels. The deviance test, however, rejected again the null hypothesis for model specification, possibly because of the heterogeneity in the individual curves. 
+
+To address this variability, we employed meta-regression models to explain differences across the studies (analysis D). We included two study-level covariates indicating the geographical area where the study was conducted (Europa, USA, and Japan) and the sex of the participants (only men, only women, and both sexes). Both the decorellated vs exposure plot and \textrm{$\mathrm{R_{\textrm{adj}}^2}$} = 0.74 indicated an improvement in the overall fit of the analysis even if the $p$~value for the deviance test was below the nominal value ($D$ = 100.4, $p$~value = 0.008).
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[ht!]
+
+{\centering \includegraphics[width=\textwidth]{../figure/gof_pic-1} 
+
+}
+
+\caption[Decorrelated residuals versus exposure plots with LOWESS smother for different modelling strategies in a dose--response meta-analysis between coffee consumption and all-cause mortality \citep{crippa2014coffee}]{Decorrelated residuals versus exposure plots with LOWESS smother for different modelling strategies in a dose--response meta-analysis between coffee consumption and all-cause mortality \citep{crippa2014coffee}}\label{fig:gof_pic}
+\end{figure}
+
+
+\end{knitrout}
+
+\begin{table}
+
+\begin{threeparttable}
+\caption{\label{tab:gof_tab}Goodness-of-fit tests and measures for dose-response meta-analysis of coffee consumption and all-cause mortality \citep{crippa2014coffee}}
+\centering
+\begin{tabular}[t]{ccccccc}
+\toprule
+Analysis & Model & Deviance & df & $p$~value & \textrm{$\mathrm{R^2}$} & \textrm{$\mathrm{R_{\textrm{adj}}^2}$}\\
+\midrule
+A & Linear & 225.244 & 78 & 0.000 & 0.488 & 0.482\\
+B & Quadratic & 155.093 & 77 & 0.000 & 0.648 & 0.638\\
+C & RCS \textsuperscript{a} & 141.332 & 77 & 0.000 & 0.679 & 0.671\\
+D & RCS + interaction \textsuperscript{b} & 100.372 & 69 & 0.008 & 0.772 & 0.739\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item[a] 3 knots located at the 10th, 50th, and 90th percentiles of the distribution of coffee.
+\item[b] As in c) + interaction with gender of participants (only men, only women, both sexes) and geographical area (Europe, USA, Japan) included as categorical study-level covariates.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+
+
+
+\section{Paper~III}
 
 % !TeX root = ../kappa.Rnw  
 

@@ -15,11 +15,11 @@ opts_chunk$set(echo = FALSE, message = FALSE, comment = NA, fig.path = "../figur
                out.width = "\\textwidth", cache = TRUE, highlight = F, background = "white",
                fig.align = "center", fig.width = 7, fig.height = 4.5, fig.pos= "ht!",
                prompt = TRUE, size = "footnotesize", col)
-options(prompt ="R> ", width = 90, show.signif.stars = FALSE)
+options(prompt ="R> ", width = 85, show.signif.stars = FALSE)
 knit_theme$set("print")
 
 pkgs <- c("knitr", "tidyverse", "dosresmeta", "lubridate", "rworldmap", "Epi", "xtable",
-          "cowplot", "gridExtra", "scales")
+          "cowplot", "gridExtra", "scales", "kableExtra", "rms")
 lapply(pkgs, require, character.only = TRUE)
 # loading libraries and useful functions
 source("code/functions.R")

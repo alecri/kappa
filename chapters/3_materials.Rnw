@@ -43,7 +43,7 @@ devtools::install_github("alecri/dosresmeta")
 @
 
 \noindent The package consists of a main function \texttt{dosresmeta} with the following arguments
-<<usage, echo = TRUE>>=
+<<usage, echo = TRUE, R.options=list(width = 80)>>=
 str(dosresmeta)
 @
 
@@ -53,7 +53,7 @@ As defaults, a two-stage procedure with REML estimation methods (\texttt{method}
 
 The \texttt{dosresmeta} function returns an object of class ``\texttt{dosresmeta}'' with the information from the dose--response meta-analytic model. The \texttt{print} and \texttt{summary} methods display and produce a summary of the content of a \texttt{dosresmeta} object. The \texttt{predict} method facilitates the presentation of the results of a dose--response meta-analysis
 
-<<pred, echo = TRUE>>=
+<<pred, echo = TRUE, R.options=list(width = 80)>>=
 str(dosresmeta:::predict.dosresmeta)
 @
 
@@ -68,7 +68,7 @@ ls("package:dosresmeta")
 \noindent Use \texttt{ls(getNamespace("dosresmeta"), all.names=TRUE)} for a complete list including hidden auxiliary functions.
 
 
-\section{Goodness-of-fit}
+\section{Goodness-of-fit}\label{sec:gof}
 
 The aim of \citetalias{discacciati2015goodness} was to address how to evaluate the goodness-of-fit in dose--response meta-analysis. The issue is particularly relevant in a dose--response analysis where the predicted curve should be a reasonably good summary of the modelled log relative risks. However, different features of aggregated dose--response data can complicate this comparison. The predicted curve is presented using a referent, $x_\mathrm{ref}$, which may differ from the study-specific reference values. Thus the predicted and observed log relative risks can no longer be directly compared because their baseline group comparison is not the same. Even in the case where the reference values are all the same and equal to $x_\mathrm{ref}$, the covariance among the study-specific RRs and the heterogeneity across the studies add further difficulties in evaluating if the chosen model provides a good summary of the observed data. Therefore, the proposed tools for assessing the goodness-of-fit are presented in a fixed-effect analysis where meta-regression models as in~\ref{eq:rmmra2} are typically employed to explain the observed heterogeneity. We consider relevant measures, tests, and graphical tools that take into account the correlation of the observed data.
 

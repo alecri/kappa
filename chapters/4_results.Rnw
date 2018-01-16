@@ -162,3 +162,81 @@ newd %>%
   labs(x = "Coffee consumption (cups/day)", y = "Relative Risk")
 @
 
+
+\section{Paper~II}
+
+<<>>=
+k <- quantile(coffee_mort$dose, c(.1, .5, .9))
+spl <- dosresmeta(logrr ~ rcs(dose, k), id = id, se = se, type = type,
+                  cases = cases, n = n, data = coffee_mort, method = "fixed")
+spl_reg <- dosresmeta(logrr ~ rcs(dose, k), id = id, se = se, type = type,
+                  cases = cases, n = n, data = coffee_mort, method = "fixed",
+                  mod = ~ gender + area)
+tab_gof <- data.frame(
+  analysis = c("A", "B", "C", "D"),
+  model = c("Linear", "Quadratic", 
+            paste("RCS", footnote_marker_alphabet(1, "latex")),
+            paste("RCS + interaction", footnote_marker_alphabet(2, "latex")))
+) %>%
+  cbind(
+    map(list(lin, quadr, spl, spl_reg), ~ gof(.x)) %>%
+      map(~ c(deviance = .x$deviance$D, df = .x$deviance$df, p = .x$deviance$p,
+              R2 = .x$R2, R2adj = .x$R2adj)) %>%
+      do.call("rbind", .)
+  )
+@
+
+We use the tools presented in section~\ref{sec:gof} to evaluate the goodness-of-fit of the previous analyses. The \texttt{gof} function returns a display of the quantities of interest, namely the deviance test and the adjusted and unadjusted $R^2$. 
+We started with the simpler linear trend estimated in a fixed-effect analysis.
+<<gof_stat, echo=TRUE>>=
+gof(lin, fixed = TRUE)
+@
+\noindent The fit for the model assuming a linear relationship was poor (analysis A in table~\ref{tab:gof_tab}). In particular, the deviance test rejected the null hypothesis that the model was properly specified ($D$ = \Sexpr{round(tab_gof$deviance[1], 1)}, $p$~value < 0.001) while the percentage of the accounted variation by the analysis was \Sexpr{round(100*tab_gof$R2[1])}\%. In addition, the decorrelated residuals vs exposure plot in panel A of figure~\ref{fig:gof_pic} indicated a specific pattern with negative residuals for low values of the exposure (before 5 cups/day) and positive ones for high levels of coffee consumption.
+
+A possible solution for addressing the lack of fit of the previous analysis is to consider a non-linear example such as a quadratic curve (analysis B). The fit slightly improved as indicated by \textrm{$\mathrm{R^2}$} which increased to \Sexpr{round(100*tab_gof$R2[2])}\% (\textrm{$\mathrm{R_{\textrm{adj}}^2}$} = \Sexpr{round(tab_gof$R2adj[2], 2)}). The deviance test, however, still showed evidence of lack of fit ($D$ = \Sexpr{round(tab_gof$deviance[2], 1)}, $p$~value < 0.001). Furthermore, even if the variability of the residuals around reduced (panel B of figure~\ref{fig:gof_pic}), the LOWESS smoother showed again a tendency to be more likely positive for low and extreme high exposure values.
+
+An alternative strategy (analysis C) was to model coffee consumption using RCS with 3 knots located at the fixed quantiles 0.10, 0.5, and 0.9 corresponding to \Sexpr{paste(k, collapse = ", ")} cups/day. Since the number of parameters is the same as in the analysis B ($p$ = 2), the \textrm{$\mathrm{R^2}$} can be used to compare the fit of the two strategies. In particular, the RCS analysis had a better fit, as indicated by the higher \textrm{$\mathrm{R^2}$} = \Sexpr{round(tab_gof$R2[3], 2)} (\textrm{$\mathrm{R_{\textrm{adj}}^2}$} = \Sexpr{round(tab_gof$R2adj[3], 2)}). The pattern in the residuals was also leveled off around zero with the exception for the 3 highest dose levels. The deviance test, however, rejected again the null hypothesis for model specification, possibly because of the heterogeneity in the individual curves. 
+
+To address this variability, we employed meta-regression models to explain differences across the studies (analysis D). We included two study-level covariates indicating the geographical area where the study was conducted (Europa, USA, and Japan) and the sex of the participants (only men, only women, and both sexes). Both the decorellated vs exposure plot and \textrm{$\mathrm{R_{\textrm{adj}}^2}$} = \Sexpr{round(tab_gof$R2adj[4], 2)} indicated an improvement in the overall fit of the analysis even if the $p$~value for the deviance test was below the nominal value ($D$ = \Sexpr{round(tab_gof$deviance[4], 1)}, $p$~value = \Sexpr{round(tab_gof$p[4], 3)}).
+
+<<gof_pic, warning=FALSE, fig.height=7, fig.cap="Decorrelated residuals versus exposure plots with LOWESS smother for different modelling strategies in a dose--response meta-analysis between coffee consumption and all-cause mortality \\citep{crippa2014coffee}">>=
+pglin <- gof(lin)$tdata %>%
+  mutate(dose = coffee_mort$dose[coffee_mort$se != 0]) %>%
+  ggplot(aes(dose, tresiduals)) +
+  geom_point() + geom_smooth(se = F, color = "black") +
+  ylim(c(-4, 4)) + labs(x = "Coffee consumption (cups/day)",
+                        y = "Decorellated residuals", title = "Linear") 
+pgquadr <- gof(quadr)$tdata %>%
+  mutate(dose = coffee_mort$dose[coffee_mort$se != 0]) %>%
+  ggplot(aes(dose, tresiduals)) +
+  geom_point() + geom_smooth(se = F, color = "black") +
+  ylim(c(-4, 4)) + labs(x = "Coffee consumption (cups/day)",
+                        y = "Decorellated residuals", title = "Quadratic") 
+pgspl <- gof(spl)$tdata %>%
+  mutate(dose = coffee_mort$dose[coffee_mort$se != 0]) %>%
+  ggplot(aes(dose, tresiduals)) +
+  geom_point() + geom_smooth(se = F, color = "black") +
+  ylim(c(-4, 4)) + labs(x = "Coffee consumption (cups/day)",
+                        y = "Decorellated residuals", title = "RCS") 
+pgspl_reg <- gof(spl_reg)$tdata %>%
+  mutate(dose = coffee_mort$dose[coffee_mort$se != 0]) %>%
+  ggplot(aes(dose, tresiduals)) +
+  geom_point() + geom_smooth(se = F, color = "black") +
+  ylim(c(-4, 4)) + labs(x = "Coffee consumption (cups/day)",
+                        y = "Decorellated residuals", title = "RCS + interaction") 
+plot_grid(pglin, pgquadr, pgspl, pgspl_reg,
+  align = 'vh', labels = c("A", "B", "C", "D"), ncol = 2, nrow = 2)
+@
+
+<<gof_tab, results='asis'>>=
+kable(tab_gof, "latex", align = "c", booktabs = T, escape = F, digits = 3,
+      caption = "Goodness-of-fit tests and measures for dose-response meta-analysis of coffee consumption and all-cause mortality \\citep{crippa2014coffee}", 
+      col.names = c("Analysis", "Model", "Deviance", "df", "$p$~value", "\\textrm{$\\mathrm{R^2}$}", "\\textrm{$\\mathrm{R_{\\textrm{adj}}^2}$}")) %>%
+  kable_styling(position = "center") %>%
+  footnote(alphabet = c("3 knots located at the 10th, 50th, and 90th percentiles of the distribution of coffee.", 
+                        "As in c) + interaction with gender of participants (only men, only women, both sexes) and geographical area (Europe, USA, Japan) included as categorical study-level covariates."),
+           footnote_as_chunk = F, threeparttable = T)
+@
+
+
+\section{Paper~III}
