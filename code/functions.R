@@ -23,3 +23,42 @@ get_article_cite_history <- function(id, article){
   tmp$pubid <- article
   return(tmp)
 }
+
+
+# easily get prediction for rma.uni models
+pred.rma <- function(object, transf, string = 0, digits = 2){
+  pred <- if (missing(transf)){
+    predict(object)
+  } else {
+    predict(object, transf = transf)
+  }
+  pred <- suppressWarnings(as.double(unlist(pred)))[c(1, 3, 4)]
+  pred <- round(pred, digits)
+  names(pred) <- c("pred", "ci.lb", "ci.ub")
+  if (string == 1){
+    pred <- paste0(pred[1], " (", pred[2], ", ", pred[3], ")")
+  }
+  pred
+}
+
+
+# label for forest plot
+Qlab <- function(mod, total = TRUE){
+  str0 <- if (total){
+    #      "Overall (I-squared = "
+    "Overall (Rb = "
+  } else {
+    #      "Subtotal (I-squared = "
+    "Subtotal (Rb = "
+  }
+  #   I2str <- round(mod$I2, 0)
+  Rbstr <- round(hetmeta(mod)$Rb, 0)
+  str1 <- "%, p"
+  pQstr <- if (mod$QEp <0.01){
+    " < 0.01)"
+  } else {
+    paste0(" = ", round(mod$QEp, 2), ")")
+  }
+  #   paste0(str0, I2str, str1, pQstr)
+  paste0(str0, Rbstr, str1, pQstr)
+}

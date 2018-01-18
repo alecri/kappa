@@ -240,3 +240,223 @@ kable(tab_gof, "latex", align = "c", booktabs = T, escape = F, digits = 3,
 
 
 \section{Paper~III}
+
+<<>>=
+data("process_bc")
+process <- process_bc %>%
+  group_by(id) %>%
+  nest() %>%
+  mutate(
+    Slist = map(data, ~ if (any(is.na(.x$cases) | is.na(.x$n))){
+      diag(.x$se[.x$se != 0]^2, nrow = sum(.x$se != 0))
+    } else {
+      covar.logrr(cases = .x$cases, n = .x$n, y = .x$logrr, v = I(.x$se^2), 
+                  type = .x$type)
+    }),
+    lin = map2(data, Slist, 
+               ~ dosresmeta(logrr ~ dose, se = se, data = .x, covariance = "user",
+                            Slist = .y)),
+    quadr = map2(data, Slist, 
+                 ~ dosresmeta(logrr ~ dose + I(dose^2), se = se, data = .x, covariance = "user",
+                              Slist = .y)),
+    yi = 50*map_dbl(lin, coef),
+    vi = 50^2*map_dbl(lin, vcov),
+    author = map_chr(data, ~ as.character(.x$author[1])),
+    year = map_chr(data, ~ as.character(.x$year[1])),
+    type = map_chr(data, ~ as.character(.x$type[1]))
+  )
+k_processed <- quantile(process_bc$dose, c(.10, .5, .90))
+process <- process_bc %>%
+  group_by(id) %>%
+  nest() %>%
+  mutate(
+    Slist = map(data, ~ if (any(is.na(.x$cases) | is.na(.x$n))){
+      diag(.x$se[.x$se != 0]^2, nrow = sum(.x$se != 0))
+    } else {
+      covar.logrr(cases = .x$cases, n = .x$n, y = .x$logrr, v = I(.x$se^2), 
+                  type = .x$type)
+    }),
+    lin = map2(data, Slist, 
+               ~ dosresmeta(logrr ~ dose, se = se, data = .x, covariance = "user",
+                            Slist = .y)),
+    quadr = map2(data, Slist, 
+                 ~ dosresmeta(logrr ~ dose + I(dose^2), se = se, data = .x, covariance = "user",
+                              Slist = .y)),
+    spline = map2(data, Slist, 
+                 ~ dosresmeta(logrr ~ rcs(dose, k_processed), se = se, data = .x, covariance = "user",
+                              Slist = .y)),
+    yi = 50*map_dbl(lin, coef),
+    vi = 50^2*map_dbl(lin, vcov),
+    author = map_chr(data, ~ as.character(.x$author[1])),
+    year = map_chr(data, ~ as.character(.x$year[1])),
+    type = map_chr(data, ~ as.character(.x$type[1]))
+  )
+p_pr_quadr <- summary(mvmeta(do.call("rbind", map(process$quadr, ~ coef(.x))) ~ 1, 
+                             map(process$quadr, ~vcov(.x)), method = "mm"))$coefficients[2, 4]
+p_pr_spline <- summary(mvmeta(do.call("rbind", map(process$spline, ~ coef(.x))) ~ 1, 
+                              map(process$spline, ~vcov(.x)), method = "mm"))$coefficients[2, 4]
+lin_pr <- rma.uni(yi = yi, vi = vi, data = process, method = "DL")
+pred_pr <- pred.rma(lin_pr, transf = exp, digits = 2)
+lin_het_pr <- hetmeta(lin_pr)
+hetmes_pr <- confint(lin_het_pr)
+
+tab_rb <- data_frame(
+  analysis = "Processed meat",
+  beta =  pred.rma(lin_pr, transf = exp, string = T),
+  Qtest = paste(round(c(lin_pr$QE, lin_pr$QEp), c(0, 2)), collapse = ", "),
+  CV_vi = round(lin_het_pr$cv_vi, 2)
+) %>%
+  cbind(
+    rbind(apply(round(confint(lin_het_pr)[-4, ]), 1, function(x) 
+      paste0(x[1], " (", x[3], ", ", x[4], ")")))
+  )
+@
+
+The aim of \citetalias{crippa2016new} was to develop an alternative measure of heterogeneity for meta-analysis that did not depend on the distribution of the within-study error terms. We illustrate how to employ the new measure reanalyzing aggregated dose--response data on the association between meat and bladder cancer \citep{crippa2016red}. Five cohort and 8 case-control studies reported results for either red or processed meat and bladder cancer risk including a total of 10,271 cases and 1,066,027 participants. The data for both the associations are also included in the \texttt{dosresmeta} package.
+
+\subsection{Processed meat and bladder cancer}
+
+\noindent We started considering a linear trend analysis for the association between processed meat and bladder cancer risk. The effect sizes for the meta-analysis in the second part of a two-stage dose--response meta-analysis were the linear trends for a 50 g per day increase in processed meat consumption (figure~\ref{fig:forest_pr}). The combined relative risk was \Sexpr{pred_pr[1]} (95\% CI \Sexpr{paste(pred_pr[2:3], collapse = ", ")}). The $Q$~test provided some indication of presence of statistical heterogeneity ($Q $ = \Sexpr{round(lin_pr$QE, 1)}, $p$~value = \Sexpr{round(lin_pr$QEp, 2)}). The $\hat R_b$ = \Sexpr{round(hetmes_pr[1, 1])}\% (95\% CI \Sexpr{paste(round(hetmes_pr[1, 3:4]), collapse = ", ")}) indicated that the contribution of heterogeneity in the pooled analysis was limited (table~1), as also suggested by the alternative measures $I^2$ = \Sexpr{ round(hetmes_pr[2, 1])}\% (95\% CI \Sexpr{paste(round(hetmes_pr[2, 3:4]), collapse = ", ")}) and $R_I$ = \Sexpr{ round(hetmes_pr[3, 1])}\% (95\% CI \Sexpr{paste(round(hetmes_pr[3, 3:4]), collapse = ", ")}). Because the within-study variances were substantial homogenous the differences between the alternative measures were negligible. 
+
+\noindent No evidence of non-linearity was observed using either a quadratic curve ($p$~value = \Sexpr{round(p_pr_quadr, 3)}) or a RCS model with 3 knots located at fixed percentiles ($p$~value = \Sexpr{round(p_pr_spline, 3)}).
+
+<<forest_pr, warning=FALSE, fig.cap="Relative risks of bladder cancer for every 50 g increase per day in processed meat consumption">>=
+old <- par()
+xlim <- c(-1.3, 2.25)
+par(bg = "white", cex = 1, font = 1, las = 1)
+forest(lin_pr, slab = paste0(process$author, ", ", process$year), 
+       atransf = exp, order = order(process$type), showweights = T,
+       ylim = c(-1, 14), xlab = "", mlab = Qlab(lin_pr),
+       xlim = xlim, at = log(c(.7, 1, 1.5, 2, 3))
+)
+par(font = 2)
+text(xlim[1], 12.5, "Author(s), Year", pos = 4)
+text(xlim[2]-.05, 12.5, "RR [95% CI]", pos = 2)
+text(xlim[2]-.65, 12.5, "Weight", pos = 2)
+mtext("processed meat and bladder cancer", side = 3, line = 2, cex = 1.25)
+mtext("for every 50 g per day increment", side = 3, line = 1, cex = 1.25)
+par(old)
+@
+
+\subsection{Red meat and bladder cancer}
+
+<<>>=
+data("red_bc")
+k_red <- quantile(red_bc$dose, c(.10, .5, .90))
+red <- red_bc %>%
+  group_by(id) %>%
+  nest() %>%
+  mutate(
+    Slist = map(data, ~ if (any(is.na(.x$cases) | is.na(.x$n))){
+      diag(.x$se[.x$se != 0]^2, nrow = sum(.x$se != 0))
+    } else {
+      covar.logrr(cases = .x$cases, n = .x$n, y = .x$logrr, v = I(.x$se^2), 
+                  type = .x$type)
+    }),
+    lin = map2(data, Slist, 
+               ~ dosresmeta(logrr ~ dose, se = se, data = .x, covariance = "user",
+                            Slist = .y)),
+    quadr = map2(data, Slist, 
+                 ~ dosresmeta(logrr ~ dose + I(dose^2), se = se, data = .x, covariance = "user",
+                              Slist = .y)),
+    spline = map2(data, Slist, 
+                  ~ dosresmeta(logrr ~ rcs(dose, k_red), se = se, data = .x, covariance = "user",
+                               Slist = .y)),
+    yi = 100*map_dbl(lin, coef),
+    vi = 100^2*map_dbl(lin, vcov),
+    author = map_chr(data, ~ as.character(.x$author[1])),
+    year = map_chr(data, ~ as.character(.x$year[1])),
+    type = map_chr(data, ~ as.character(.x$type[1])),
+    area = map_chr(data, ~ .x$area[1]),
+    unit = map_chr(data, ~ as.character(.x$unit[1]))
+  )
+p_red_quadr <- summary(mvmeta(do.call("rbind", map(red$quadr, ~ coef(.x))) ~ 1, 
+                             map(red$quadr, ~vcov(.x)), method = "mm"))$coefficients[2, 4]
+p_red_spline <- summary(mvmeta(do.call("rbind", map(red$spline, ~ coef(.x))) ~ 1, 
+                              map(red$spline, ~vcov(.x)), method = "mm"))$coefficients[2, 4]
+lin_red <- rma.uni(yi = yi, vi = vi, data = red, method = "DL")
+lin_redcc <- rma.uni(yi = yi, vi = vi, data = subset(red, type == "cc"), method = "DL")
+lin_redci <- rma.uni(yi = yi, vi = vi, data = subset(red, type != "cc"), method = "DL")
+lin_het_red <- hetmeta(lin_red)
+pred_red <- pred.rma(lin_red, transf = exp, digits = 2)
+pred_redci <- pred.rma(lin_redci, transf = exp, digits = 2)
+pred_redcc <- pred.rma(lin_redcc, transf = exp, digits = 2)
+lin_het_redcc <- hetmeta(lin_redcc)
+lin_het_redci <- hetmeta(lin_redci)
+hetmes_red <- confint(lin_het_red)
+hetmes_redcc <- confint(lin_het_redcc)
+hetmes_redci <- confint(lin_het_redci)
+@
+
+An analogous analysis was conducted for the association between red meat consumption and bladder cancer risk, with the estimated linear trends expressed for a 100 g per day increase. The pooled relative risk was \Sexpr{pred_red[1]} (95\% CI \Sexpr{paste(pred_red[2:3], collapse = ", ")})). The study-specific associations in figure~\ref{fig:forest_red}, however, appeared to be heterogeneous ($Q $ = \Sexpr{round(lin_red$QE, 1)}, $p$~value < 0.01). In particular, the contribution of the heterogeneity in determining the variance of the combined effect was $\hat R_b$ = \Sexpr{round(hetmes_red[1, 1])}\%, indicating a moderate impact. Given that the distribution of within-error terms was higher as compared to the previous analysis (figure~\ref{fig:fig_dist_vi}), the differences with the alternative measures were substantially higher: $I^2$ = \Sexpr{ round(hetmes_red[2, 1])}\% (95\% CI \Sexpr{paste(round(hetmes_red[2, 3:4]), collapse = ", ")}) and $R_I$ = \Sexpr{ round(hetmes_red[3, 1])}\% (95\% CI \Sexpr{paste(round(hetmes_red[3, 3:4]), collapse = ", ")}), which suggested a larger impact of the heterogeneity. 
+
+\noindent Similarly to the case of processed meat, no evidence of non-linearity was found ($p$~value equal to \Sexpr{round(p_red_quadr, 2)} and \Sexpr{round(p_red_spline, 2)} for $\beta_2$ in the quadratic and RCS model.)
+
+<<forest_red, fig.height=6.5, fig.cap = "Relative risks of bladder cancer for every 50 g increase per day in red meat consumption separately for cohort and case-control studies">>=
+a <- table(red$type)["cc"]
+b <- sum(table(red$type)[c("ir", "ci")])
+xlim <- c(-1.75, 2.75)
+old <- par()
+par(bg = "white", cex = 1, font = 1, las = 1)
+forest(lin_red, slab = paste0(red$author, ", ", red$year), 
+       atransf = exp, order = order(red$type), showweights = T,
+       rows = c(3:(a+2), (6+a):(5+a+b)), ylim = c(-3, a+b+9), xlab = "",
+       mlab = Qlab(lin_red), xlim = xlim, at=log(c(.65, 1, 1.5, 2, 3.5))
+)
+text(xlim[1], c(6 + a + b, 3 + a), c("Cohort", "Case-control"), pos = 4)
+par(font = 2)
+text(xlim[1], a + b + 7.5, "Author(s), Year", pos = 4)
+text(xlim[2]-.05, a + b + 7.5, "RR [95% CI]", pos = 2)
+text(xlim[2]-.9, a + b + 7.5, "Weight", pos = 2)
+par(font = 1)
+addpoly(lin_redcc, row = 2, cex = 1, atransf = exp, mlab = Qlab(lin_redcc, F))
+addpoly(lin_redci, row = 5+a, cex = 1, atransf = exp, mlab = Qlab(lin_redci, F))
+par(font = 2)
+mtext("Red meat and bladder cancer", side = 3, line = 2, cex = 1.25)
+mtext("for every 100 g per day increment", side = 3, line = 1, cex = 1.25)
+@
+
+The variability across the linear trends could be related to differences in the study design. Figure~\ref{fig:forest_red} reports also the results separately for cohort and case-control studies. No association was observed in the subset of the prospective studies (combined RR = \Sexpr{pred_redci[1]} (95\% CI \Sexpr{paste(pred_redci[2:3], collapse = ", ")})). The individual associations were homogenous ($Q $ = \Sexpr{round(lin_redci$QE, 1)}, $p$~value = \Sexpr{round(lin_redci$QEp, 2)}), with $\hat R_b$ = \Sexpr{round(hetmes_pr[1, 1])}\%. The results for case-control studies, instead, largely varied across studies $Q $ = \Sexpr{round(lin_redcc$QE, 1)}, $p$~value < 0.01 and $\hat R_b$ = \Sexpr{round(hetmes_redcc[1, 1])}\%. A summary of the results for the alternative measures of heterogeneity in the different analyses is presented in table~\ref{tab:tab_rb}.
+
+<<tab_rb, results='asis'>>=
+tab_rb <- rbind(tab_rb,
+                data.frame(analysis = c("Red meat", "Red meat Case-control", "Red meat Prospective")) %>%
+                  cbind(
+                    do.call("rbind", 
+                            map(list(lin_red, lin_redci, lin_redcc), ~
+                                  cbind(pred.rma(.x, transf = exp, string = T),
+                                        paste(c(round(.x$QE), ifelse(.x$QEp < 0.01, "< 0.01", round(.x$QEp, 1))),
+                                              collapse = ", "),
+                                        round(hetmeta(.x)$cv_vi, 2)
+                                  )
+                            ))  
+                  ) %>%
+                  cbind(
+                    do.call("rbind", map(list(confint(lin_het_red), confint(lin_het_redci), confint(lin_het_redcc)), 
+                                         ~ apply(round(.x[-4, ]), 1, function(x) 
+                                           paste0(x[1], " (", x[3], ", ", x[4], ")"))
+                    ))
+                  ) %>%
+                  `colnames<-`(names(tab_rb))
+                )
+
+tab_rb %>%
+  kable("latex", align = "c", booktabs = T, escape = F,
+        caption = "Measures of heterogeneity for dose--response meta-analysis between processed and red meat and bladder cancer risk \\citep{crippa2016red}", 
+        col.names = c("Analysis", "$\\hat \\beta$ (95\\% CI)", "$Q$~test, $p$~values", 
+                      "$CV_{v_i}$", "$\\hat R_b$ (95\\% CI)" , "$I^2$ (95\\% CI)",
+                      "$\\hat R_I$ (95\\% CI)")) %>%
+  kable_styling(font_size = 9)
+@
+
+<<dist_vi>>=
+dist_vi <- ggplot(NULL, aes(lin_pr$vi, linetype = "Processed meat")) +
+  geom_line(stat = "density", adjust = 2.5) +
+  geom_line(aes(lin_red$vi, linetype = "Read meat"), 
+            stat = "density", adjust = 2.5) +
+  labs(x = "Within-study error variance", linetype = "Exposure")
+@
+
+
+\section{Paper IV}
+

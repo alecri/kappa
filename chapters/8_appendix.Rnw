@@ -11,7 +11,10 @@
 
 \chapter{Supplementary figures}
 
-Figures.
+<<fig_dist_vi, fig.cap="Estimated distribution for within-error terms in a dose--response meta-analysis between processed and red meat and bladder cancer risk \\citep{crippa2016red}">>=
+dist_vi
+@
+
 
 %--tables
 \chapter{Supplementary tables}

@@ -19,7 +19,7 @@ options(prompt ="R> ", width = 85, show.signif.stars = FALSE)
 knit_theme$set("print")
 
 pkgs <- c("knitr", "tidyverse", "dosresmeta", "lubridate", "rworldmap", "Epi", "xtable",
-          "cowplot", "gridExtra", "scales", "kableExtra", "rms")
+          "cowplot", "gridExtra", "scales", "kableExtra", "rms", "metafor", "hetmeta")
 lapply(pkgs, require, character.only = TRUE)
 # loading libraries and useful functions
 source("code/functions.R")

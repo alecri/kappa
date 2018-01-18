@@ -1,4 +1,4 @@
-\begin{thebibliography}{69}
+\begin{thebibliography}{70}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -97,12 +97,19 @@ Crippa A, Discacciati A, Larsson SC, Wolk A, Orsini N (2014).
   cardiovascular disease, and cancer: a dose-response meta-analysis.}
 \newblock \emph{American journal of epidemiology}, \textbf{180}(8), 763--775.
 
-\bibitem[{Crippa \emph{et~al.}(2016)Crippa, Khudyakov, Wang, Orsini, and
-  Spiegelman}]{crippa2016new}
-Crippa A, Khudyakov P, Wang M, Orsini N, Spiegelman D (2016).
+\bibitem[{Crippa \emph{et~al.}(2016{\natexlab{a}})Crippa, Khudyakov, Wang,
+  Orsini, and Spiegelman}]{crippa2016new}
+Crippa A, Khudyakov P, Wang M, Orsini N, Spiegelman D (2016{\natexlab{a}}).
 \newblock \enquote{A new measure of between-studies heterogeneity in
   meta-analysis.}
 \newblock \emph{Statistics in medicine}, \textbf{35}(21), 3661--3675.
+
+\bibitem[{Crippa \emph{et~al.}(2016{\natexlab{b}})Crippa, Larsson, Discacciati,
+  Wolk, and Orsini}]{crippa2016red}
+Crippa A, Larsson SC, Discacciati A, Wolk A, Orsini N (2016{\natexlab{b}}).
+\newblock \enquote{Red and processed meat consumption and risk of bladder
+  cancer: a dose--response meta-analysis of epidemiological studies.}
+\newblock \emph{European journal of nutrition}, pp. 1--13.
 
 \bibitem[{Crippa and Orsini(2016{\natexlab{a}})}]{crippa2016dose}
 Crippa A, Orsini N (2016{\natexlab{a}}).
