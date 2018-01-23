@@ -11,12 +11,43 @@
 
 \chapter{Supplementary figures}
 
+<<p_indiv, fig.cap="Study-specific quadratic associations between coffee consumption and all-cause mortality. The relative risks are presented on a log scale using 0 cups/day as referent.">>=
+p_indiv
+@
+
 <<fig_dist_vi, fig.cap="Estimated distribution for within-error terms in a dose--response meta-analysis between processed and red meat and bladder cancer risk \\citep{crippa2016red}">>=
 dist_vi
 @
 
+<<p_chr, fig.cap="Graphical visualization of the study-specific exposure distribution for 13 studies included in a dose--response meta-analysis between red meat consumption (g per day) and bladder cancer risk. The crosses and circle are, respectively, the referent and non-referent assigned dose of red meat consumption.">>=
+p_chr
+@
 
-%--tables
+
 \chapter{Supplementary tables}
 
-Tables.
+<<chr_redtab>>=
+kable(chr_red, "latex", align = "c", booktabs = T, digits = 1, 
+      col.names = c("ID", "Referent", "Min", "P25", "Median", "P75", "Max"), 
+      caption = "Descriptive statistics of the assigned dose levels for 13 studies 
+      included in a dose--response meta-analysis between red meat consumption (g per day) and bladder
+      cancer risk")
+@
+
+
+<<AIC_pi_red>>=
+lapply(AIC_pi_red, round, 2) %>%
+  do.call("cbind", .) %>%
+  `rownames<-`(apply(fpgrid, 1, function(f) paste0("(", paste(f, collapse = ", "), ")"))) %>%
+  rbind(
+    `best p` = apply(fpgrid[unlist(pb_red), ], 1, function(f) paste(f, collapse = ", "))
+  ) %>%
+  as.data.frame() %>%
+  rownames_to_column(var = "p") %>%
+  kable("latex", align = "c", booktabs = T, escape = F, 
+        caption = "AIC for the study-specific fractional polynomials of order two with power terms specified by $p$. The last row reports the power term corresponding to the lowest AIC.
+") %>%
+  kable_styling(font_size = 8)
+@
+
+
