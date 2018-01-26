@@ -14,7 +14,7 @@
 We illustrate the usage of the developed methodologies and measures reanalyzing data from published dose--response meta-analyses. 
 
 % Paper I
-\section{Paper~I}
+\section{Paper~I}\label{sec:res_paperI}
 
 The aim of \citetalias{crippa2016dosresmeta} was to describe the implementation of the two-stage approach for dose--response meta-analysis in the \pkg{dosresmeta} \textsf{R} package.
 We demonstrate the main aspects of the methodology reanalyzing aggregated dose--response data from 21 prospective studies on the association between coffee consumption (cups/day) and all-cause mortality \citep{crippa2014coffee}. The data set \texttt{coffee\_mort} is included in the package, with the first six lines printed below.
@@ -35,7 +35,7 @@ covar.logrr(cases = cases, n = n, y = logrr, v = I(se^2), type = type,
             data = legrady)
 @
 
-\noindent The alternative method by \cite{hamling2008facilitating} can be used by specifying \texttt{covariance = "h"} in the \texttt{covar.logrr} funciton. The reconstructed covariance matrix is used to efficiently estimate the dose--response association. For example, a linear trend $y_{1j} = \beta_1 (x_{1j} - x_{10})$ can be estimated with
+\noindent The alternative method by \cite{hamling2008facilitating} can be used by specifying \texttt{covariance = "h"} in the \texttt{covar.logrr} function. The reconstructed covariance matrix is used to efficiently estimate the dose--response association. For example, a linear trend $y_{1j} = \beta_1 (x_{1j} - x_{10})$ can be estimated with
 
 <<lin_le, echo=TRUE>>=
 lin_le <- dosresmeta(logrr ~ dose, se = se, type = type, cases = cases, 
@@ -104,7 +104,7 @@ summary(lin)
 sum_lin <- summary(lin)
 @
 
-\noindent There was an inverse association between increasing levels of coffee consumption and all-cause mortality risk, with a mean relative risk of $\exp(\Sexpr{round(coef(lin), 2)}) = \Sexpr{round(exp(coef(lin)), 2)}$ for a 1 cup/day increase. Similarly to the single study analysis, the \texttt{predict} function returns the combined result for any amount of coffee contumption.
+\noindent There was an inverse association between increasing levels of coffee consumption and all-cause mortality risk, with a mean relative risk of $\exp(\Sexpr{round(coef(lin), 2)}) = \Sexpr{round(exp(coef(lin)), 2)}$ for a 1 cup/day increase. Similarly to the single study analysis, the \texttt{predict} function returns the combined result for any amount of coffee consumption.
 <<pred_lin, echo=T>>=
 predict(lin, delta = 3, expo = T)
 @
@@ -163,7 +163,7 @@ p_indiv <- newd %>%
 @
 
 
-\section{Paper~II}
+\section{Paper~II}\label{sec:res_paperII}
 
 <<paperII>>=
 k <- quantile(coffee_mort$dose, c(.1, .5, .9))
@@ -459,6 +459,7 @@ dist_vi <- ggplot(NULL, aes(lin_pr$vi, linetype = "Processed meat")) +
   labs(x = "Within-study error variance", linetype = "Exposure")
 @
 
+
 <<paperIV, warning=FALSE>>=
 data("red_bc")
 
@@ -603,7 +604,6 @@ with(predavg_extr, errbar(x[i], pred[i], ci.lb[i], ci.ub[i],
                           lwd = c(1.25), pch = 19, cap = 0.01, xlim = c(0, 300),
                           ylim = c(.5, 3),
                           xlab = "Red meat consumption (g per day)", ylab = "Risk ratio"))
-abline(h = 1)
 with(subset(predfp1, dose %in% seq(0, 350, 25)),
      errbar(dose + 5, pred, ci.lb, ci.ub, col = c("black"), add = T,
             lty = 2, lwd = c(1.25), cap = 0.01))
@@ -676,4 +676,197 @@ p_chr <- ggplot(chr_red, aes(x = min, y = seq_along(id))) +
 
 \section{Paper~V}
 
-In paper~V we formalized a one-stage approach for dose--response meta-analysis.
+<<paperV>>=
+data("coffee_mort")
+data("coffee_mort_add")
+coffee <- rbind(coffee_mort, coffee_mort_add) %>%
+  arrange(id) %>%
+  subset(area == "Europe")
+Slist <- lapply(unique(coffee$id), function(i)
+  with(subset(coffee, id == i), {
+    if (any(is.na(cases) | is.na(n))){
+      diag(se[se != 0 & !is.na(se)]^2, nrow = sum(se != 0 & !is.na(se)))
+    }
+    else {
+      covar.logrr(y = logrr, v = I(se^2), cases = cases, n = n,
+                  type = type)
+    }
+  }))
+names(Slist) <- unique(coffee$id)
+newd <- data.frame(dose = seq(0, 8, length.out = 100))
+newd_tab <- data.frame(dose = c(0:6))
+twostage <- dosresmeta(logrr ~ dose + I(dose^2), id = id, se = se, 
+                       data = subset(coffee, !(id %in% c(28, 29))), 
+                       covariance = "user", Slist = Slist[!names(Slist) %in% c("28", "29")])
+onestage <- dosresmeta(logrr ~ dose + I(dose^2), id = id, se = se, data = coffee, 
+                  covariance = "user", Slist = Slist, proc = "1stage")
+tab_coffee <- newd_tab %>%
+  bind_cols(predict(twostage, ., expo = T)[, -c(1:2)]) %>%
+  bind_cols(predict(onestage, ., expo = T)[, -c(1:2)]) %>%
+  round(2)
+p_ts <- round(summary(twostage)$coefficients[2, 4], 3)
+p_os <- round(summary(onestage)$coefficients[2, 4], 3)
+se_ts <- round(summary(twostage)$coefficients[1:2, 2], 3)
+se_os <- round(summary(onestage)$coefficients[1:2, 2], 3)
+sum_ts <- summary(twostage)
+psi_ts <- round(c(twostage$Psi)[-2], 5)
+psi_os <- round(c(onestage$Psi)[-2], 5)
+
+bi_os <- data.frame(
+  id = unique(coffee$id),
+  xmin = tapply(coffee$dose, coffee$id, min),
+  xref = tapply(coffee$dose, coffee$id, head, 1),
+  xmax = tapply(coffee$dose, coffee$id, max),
+  bi = t(apply(dosresmeta:::blup.dosresmeta(onestage), 1, function(x) x + rbind(coef(onestage))))
+)
+bi_ts <- data.frame(
+  id = setdiff(unique(coffee$id), c(28, 29)),
+  bi = t(apply(dosresmeta:::blup.dosresmeta(twostage), 1, function(x) x + rbind(coef(twostage))))
+)
+bi <- merge(bi_os, bi_ts, by = "id", all = T)
+predi <- data.frame(
+  x = newd$dose,
+  y_os = pred_sq(coef =  bi[, c("bi.1.x", "bi.2.x")], newd$dose, bi$xref),
+  y_ts = pred_sq(coef =  bi[, c("bi.1.y", "bi.2.y")], newd$dose, bi$xref)
+)
+@
+
+A common limitation of a two-stage and pointwise approach is that the dose--response analyses are limited by the low number of data points in each study, usually $J_i \le 3$. We demonstrate an alternative one-stage model for dose--response meta-analysis using a subset of the data on coffee consumption and all-cause mortality presented in sections~\ref{sec:res_paperI} and \ref{sec:res_paperII}. The data consists of the results for 12 independent populations including 5508 cases and 750959 participants. The results for two cohorts \citep{nilsson2012traditional} were excluded in the initial analysis of a non-linear trend because they only reported 1 non-referent risk. We performed a one-stage random-effects meta-analysis assuming a quadratic relationship on the whole data set and compared the results with the corresponding two-stage analysis which excluded the results by \cite{nilsson2012traditional}. 
+
+\noindent Although both the analyses suggested a U-shaped association between increasing levels of coffee consumption and mortality risk, the predicted curve from a two-stage model provided lower relative risk estimates. Using 0 cups/day, the predicted RRs for 2 cups/day were \Sexpr{tab_coffee[3, 2]} (95\% CI \Sexpr{paste(tab_coffee[3, 3:4], collapse = ", ")}) for the two-stage analysis, and \Sexpr{tab_coffee[3, 5]} (95\% CI \Sexpr{paste(tab_coffee[3, 6:7], collapse = ", ")}) for the one-stage model. Similarly, for 5 cups/day the corresponding numbers were \Sexpr{tab_coffee[6, 2]} (95\% CI \Sexpr{paste(tab_coffee[6, 3:4], collapse = ", ")}) and \Sexpr{tab_coffee[6, 5]} (95\% CI \Sexpr{paste(tab_coffee[6, 6:7], collapse = ", ")}). Interestingly, the standard errors for the beta coefficients were lower in the two stage analysis ($\SE \left(\hat \beta_1 \right)$ = \Sexpr{se_ts[1]}, $\SE \left(\hat \beta_2 \right) = \Sexpr{se_ts[2]}$), even if the corresponding estimates form the one-stager analysis were based on a larger number of data points ($\SE \left(\hat \beta_1 \right)$ = \Sexpr{se_os[1]}, $\SE \left(\hat \beta_2 \right) = \Sexpr{se_os[2]}$). As a consequence, the confidence intervals for the reported predicted relative risks were larger in the one-stage analysis, while the $p$ value for non-linearity $H_0: \beta_2 = 0$ was lower in a two-stage analysis: $p$ = \Sexpr{p_ts} compared to $p$ = \Sexpr{p_os} from the alternative one-stage model.
+
+<<comp_osts, fig.cap="Combined quadratic association between coffee consumption (cups/day) and all-cause mortality estimated using a one-stage (solid line) and two-stage (dashed line) approach. The predicted relative risks are plotted on the scale using 0 cups/day as referent">>=
+newd %>%
+  mutate(
+    twostage = predict(twostage, ., expo = T)$pred,
+    onestage = predict(onestage, ., expo = T)$pred
+  ) %>%
+  gather(analysis, pred, -dose) %>%
+  mutate(analysis = factor(analysis, labels = c("One-stage", "Two-stage"))) %>%
+  ggplot(aes(dose, pred, linetype = analysis)) +
+  geom_line() +
+  scale_y_continuous(trans = "log", breaks = pretty_breaks()) + 
+  labs(x = "Coffee consumption (cups/day)", y = "Relative risk", linetype = "Curve") +
+  scale_linetype_manual(values = c(`One-stage` = "solid", `Two-stage` = "dashed"))
+@
+
+\noindent The exclusion of 2 studies affected also the estimation of the variance components in $\boldsymbol{\Psi}$. For example, the variance of the random-effects based on 10 out of the 12 studies (two-stage) were \Sexpr{psi_ts[1]} for $b_1$ and \Sexpr{psi_ts[1]} for $b_2$, while were \Sexpr{psi_os[1]} and \Sexpr{psi_os[1]} in the alternative model. The $I^2$ = \Sexpr{round(100*(sum_ts$qstat$Q[1] - sum_ts$qstat$df[1])/sum_ts$qstat$Q[1])} from the multivariate two-stage analysis indicated a moderate impact of the heterogeneity. The same question can be addressed in a one-stage analysis by looking at the variance partition coefficients for the observed dose values. The VPC plot suggested a limited impact of heterogeneity between 20 and 40\% for coffee consumption below 7 cups/day, while it become substantial for higher exposure values (figure~\ref{fig:p_coffee_vpc}).
+
+Oftentimes it can be informative to provide a graphical presentation not only of the marginal association but also of the study-specific or conditional curves. The multivariate normal distribution for the random-effects is used to predict the study-specific regression coefficients, exploiting the information from the between-studies heterogeneity matrix (table~\ref{tab:blup_tab}). 
+It is worth to notice that the non-linear curves in the one-stage approach can be predicted also for those studies providing only one non-referent log RR (study ID 27 and 28), which were instead excluded in the traditional approach. The predicted conditional curves are graphically presented in figure~\ref{fig:p_grid_coffee}.
+
+<<p_grid_coffee, fig.cap="Best linear unbiased predicted quadratic curves for the association between coffee consumption and all-cause mortality in a one-stage (solid lines) and two-stage (dashed lines) approach. The relative risks are presented on the log scale using the study-specific reference categories as comparator", fig.height=9>>=
+p_coffee <- lapply(seq_along(unique(coffee$id)), function(i){
+  idi <- unique(coffee$id)[i]
+  ggplot(subset(coffee, id == idi), aes(x = dose, y = exp(logrr))) + 
+    geom_errorbar(aes(ymin = exp(logrr - 1.96*se), ymax = exp(logrr + 1.96*se)), width = .3) +
+    geom_line(data = predi, aes_string(x = "x", y = paste0("y_os.pred", i), lty = "'One-stage'"), lwd = 1) +
+    geom_line(data = predi, aes_string(x = "x", y = paste0("y_ts.pred", i), lty = "'Two-stage'"), lwd = 1) +
+    scale_y_continuous(trans = "log", breaks = pretty_breaks()) + xlim(c(0, 8)) +
+    theme(legend.position = "none", axis.title.y = element_text(size = rel(.8)),
+          axis.title.x = element_text(size = rel(.8))) + 
+    labs(title = paste0("Study ID ", idi), x = "Coffee consumption, cups/day", 
+         y = "Relative Risk", lty = "Curve")
+})
+grid_coffee <- plot_grid(plotlist = p_coffee, nrow = 4, ncol = 3, 
+                           align = 'vh', hjust = -1)
+legend_grid_coffee <- get_legend(p_coffee[[1]] + theme(legend.position = "bottom"))
+p_grid_coffee <- plot_grid(grid_coffee, legend_grid_coffee, ncol = 1, rel_heights = c(1, .1))
+p_grid_coffee
+@
+
+<<model_comp_os>>=
+quadr_ml <- dosresmeta(logrr ~ dose + I(dose^2), id = id, se = se, data = coffee, 
+                     covariance = "user", Slist = Slist, proc = "1stage", method = "ml")
+spk_ml <- dosresmeta(logrr ~ I(1*(dose < 1)) + I((dose-1)*(dose >= 1)) +
+                       I((dose-4)*(dose >= 4)), 
+                        id = id, se = se, data = coffee, 
+                        covariance = "user", proc = "1stage", method = "ml",
+                        Slist = Slist, control = list(maxiter = 5000))
+newd_tab2 <- data.frame(dose = c(1, 0, 2:6))
+pred_tab2 <- cbind(
+  newd_tab2,
+  predict(spk_ml, newd_tab2, expo = F)[, -c(1:3)]
+)
+sum_spk <- summary(spk_ml)
+pred_spk1 <- round(exp(pred_tab2[2, -1]), 2)
+pred_spk2 <- round(exp(sum_spk$coefficients[2, c(1, 5:6)]), 2)
+pred_spk3a <- round(sum_spk$coefficients[3, c(1, 5:6)], 2)
+pred_spk3b <- round(exp(ci.lin(spk_ml, ctr.mat = cbind(0, 1, 1))[, c(1, 5:6)]), 2)
+k2 <- c(0, 1, 3, 5, 7, 10)
+categ <- dosresmeta(logrr ~ relevel(cut(dose, breaks = k2, include.lowest = T, right = F), 2), 
+                    id = id, se = se, data = coffee, 
+                    covariance = "user", proc = "1stage", method = "ml",
+                    Slist = Slist, control = list(maxiter = 5000))
+pred_cat_os <- round(exp(summary(categ)$coefficients[, c(1, 5:6)]), 2)
+categ_test <- round(waldtest(vcov(categ), coef(categ), 2:4)$chitest[c(1, 3)], 2)
+AIC_os <- round(sapply(list(quadr = quadr_ml, spk = spk_ml, categ = categ), AIC))
+
+xref <- 1
+comp <- rbind(xref, newd) %>%
+  mutate(
+    quadr = predict(quadr_ml, ., expo = T)$pred,
+    spike = predict(spk_ml, ., expo = T)$pred,
+    categories = predict(categ, ., expo = T)$pred
+  )
+p_comp <- ggplot(comp, aes(dose, quadr, linetype = "Quadratic")) +
+  geom_line() +
+  geom_line(data = subset(comp, dose < 1), aes(y = spike, linetype = "Spike at 0")) +
+  geom_line(data = subset(comp, dose >= 1), aes(y = spike, linetype = "Spike at 0")) +
+  scale_y_continuous(trans = "log", breaks = pretty_breaks()) + 
+  labs(x = "Coffee consumption (cups/day)", y = "Relative risk", linetype = "Model") +
+  scale_linetype_manual(values = c(`Quadratic` = "dashed", `Spike at 0` = "solid",
+                                   `Categories` = "longdash"))
+for (i in seq_along(k2[-1])){
+  p_comp <- p_comp + geom_line(data = subset(comp, dose >= k2[i] & dose < k2[i+1]), 
+                     aes(y = categories, linetype = "Categories"))
+}
+@
+
+Different strategies can be chosen to model the dose--response association of interest. A one-stage approach, in particular, gives the opportunity to estimate complex curve defined by multiple parameters in order to answer more elaborated research questions. A model with a spike at zero treats the low or unexposed participants as a separate group, and estimate the dose-response association only for the exposed groups. For example, we can think the participants drinking a low amount coffee (less than 1 cup/day) as a separate group and that the rest of the association can be described by two lines with a different slope before and after 4 cups/day. The mixed of linear splines model can be specified as
+\begin{multline*}
+\mathbf{y}_i = (\beta_1 + b_{i1}) \mathbf{I} (\mathbf{x}_{i} < 1) +(\beta_2  + b_{i2}) (\mathbf{x}_{i} - 1 - x_{i0})\mathbf{I}(\mathbf{x}_{i} \ge 1)+ \\  +(\beta_3  + b_{i3}) (\mathbf{x}_{i} - 4 - x_{i0})\mathbf{I}(\mathbf{x}_{i} \ge 4) + \boldsymbol{\epsilon}_{i}
+\label{spike_zero}
+\end{multline*}
+
+\noindent where the indicator function $\mathbf{I}$ assumes value 1 if the condition in the parenthesis  is met, 0 otherwise.
+\noindent Another possibility consists of considering homogeneous groups of exposure in which the mortality risk can be considered constant. For instance, coffee consumption could be divided in intervals $< 1$, $[1, 3)$, $[3, 5)$, $[5, 7)$, and $> 7$ cups/day. The dose--response model is specified by including 4 dummy variables ($x_1, x_2, x_3$, and $x_4$) and using one level (e.g. $[1, 3)$) as referent
+\begin{multline*}
+\mathbf{y}_i =  (\beta_0 + b_{i0}) + (\beta_1 + b_{i1}) (\mathbf{x_1}_{i} - {x_1}_{i0}) + (\beta_2  + b_{i2}) (\mathbf{x_2}_{i} - {x_2}_{i0})
+(\beta_3 + b_{i3}) (\mathbf{x_3}_{i} - {x_3}_{i0}) + \\  + (\beta_4 + b_{i4}) (\mathbf{x_4}_{i} - {x_4}_{i0}) + \boldsymbol{\epsilon}_{i}
+\end{multline*}
+
+\noindent The two models are parameterized, respectively, by $p = 3$ and $p = 4$ parameters. It is unlikely to have enough data points (at least 4 non referent log RRs) for estimating the previous models in a two-stage analysis. Using a one-stage approach, instead, the predicted curve from those alternative analyses are presented graphically in figure~\ref{fig:p_comp_os} together with the quadratic model described before. 
+In the spike at 0 model, the predicted mortality risk for the unexposed participants was \Sexpr{100*(pred_spk1[1] - 1)}\% higher (95\% CI \Sexpr{ paste(pred_spk1[2:3], collapse = ", ")}) as compared to participants drinking 1 cup/day. Every one cup per day increase in coffee consumption was associated with \Sexpr{100*(1 - pred_spk2[1])} (95\% CI \Sexpr{ paste(pred_spk2[2:3], collapse = ", ")}) reduction in all-risk mortality, whereas the same number was less pronounced ($\beta_3$ = \Sexpr{pred_spk3a[1]}) for coffee consumption higher than 4 cups/day, with a decreased risk of \Sexpr{ 100*(1 - pred_spk3b[1])} \% (95\% CI \Sexpr{paste(pred_spk3b[2:3], collapse = ", ")}). 
+The categorical model provided similar results with a \Sexpr{100*(pred_cat_os[1, 1] - 1)}\% (95\% CI \Sexpr{ paste(pred_cat_os[1, 2:3], sep = ", ")}) higher mortality risk for never drinkers compared to the category $[1, 3)$ of coffee consumption. Categories for coffee consumption greater or equal to 3 cup/day indicated a decreased mortality risk. We can evaluate if this further decline is significant by testing $H_0: \beta_2 = \beta_3 = \beta_4 = 0$. The multivariate Wald test did non provide enough evidence to reject the null hypothesis ($\chi_3^2$ = \Sexpr{ categ_test[1]}, $p$~value = \Sexpr{categ_test[2]}).
+The fit of the alternative analyses can be compared by looking at the AIC. We selected the quadratic curve as the best fitting model since it had the lowest AIC (\Sexpr{AIC_os[1]}), as compared to the spike at 0 (\Sexpr{AIC_os[2]}) and categorical model (\Sexpr{AIC_os[3]}).
+
+<<meta-regression_coffee>>=
+quadr_reg <- dosresmeta(logrr ~ dose + I(dose^2), id = id, se = se, data = coffee, 
+                       covariance = "user", Slist = Slist, proc = "1stage",
+                       mod = ~ gender, method = "reml")
+chitest_reg <- round(waldtest(vcov(quadr_reg), coef(quadr_reg), 3:6)$chitest[c(1, 3)], 2)
+coffee_vpc <- coffee %>%
+  filter(se != 0) %>%
+  mutate(
+    `Quadratic` = vpc(onestage),
+    `Quadratic meta-regression` = vpc(quadr_reg)
+  ) %>%
+  gather(curve, vpc, Quadratic:`Quadratic meta-regression`)
+
+p_coffee_vpc <- ggplot(coffee_vpc, aes(dose, vpc, group = curve)) +
+  geom_point(aes(shape = curve)) +
+  geom_smooth(aes(linetype = curve), method = "loess", se = F, col = "black") +
+  labs(y = "VPC", x = "Coffee consumption (cups/day)", shape = "Curve", linetype = "Curve") + 
+  theme(legend.position = "top")
+@
+
+After choosing the quadratic curve as the basis for modelling the dose--response association, we might try to relate the heterogeneity observed in the VPC plot to study-level covariates. For example, we can investigate if the sex of the study participants (3 levels: only men, only women, both sexes) substantially alter the combined quadratic association or partially explain the observed heterogeneity. This can be done by fitting a meta-regression model which includes in the fixed-effect matrix the interactions between the quadratic transformations ($x$ and $x^2$) and the two dummy variable ($u_1$ and $u_2$) for the sex of the participants
+\begin{multline*}
+\mathbf{y}_i = (\beta_1 + b_{i1}) (\mathbf{x}_{i} - {x}_{i0}) + (\beta_2  + b_{i2}) (\mathbf{x}_{i}^2 - {x}_{i0}^2) +  \\
++ \beta_3 (\mathbf{x}_{i} - {x}_{i0}) \times \mathbf{u_1}_{i} + \beta_4 (\mathbf{x}_{i}^2 - {x}_{i0}^2)\times \mathbf{u_1}_{i}  + \\ 
+ + \beta_5 (\mathbf{x}_{i} - {x}_{i0}) \times \mathbf{u_2}_{i} + \beta_6 (\mathbf{x}_{i}^2 - {x}_{i0}^2)\times \mathbf{u_2}_{i}  + 
+\boldsymbol{\epsilon}_{i}
+\end{multline*}
+
+\noindent The meta-regression model simplifies to the quadratic model when the coefficients for the interaction terms are equal to 0. A test for $H_0: \beta_3 = \beta_4 = \beta_5 = \beta_6 = 0$ is equivalent to test if the dose-response associations differ according to sex of the participants.  The multivariate Wald test ($\chi_3^2$ = \Sexpr{chitest_reg[1]}, $p$~value = \Sexpr{ chitest_reg[2]}) did not reject the null hypothesis. Furthermore, the meta-regression model was not able to explain the observed residual heterogeneity (figure~\ref{fig:p_coffee_vpc}).

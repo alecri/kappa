@@ -42,6 +42,16 @@ pred.rma <- function(object, transf, string = 0, digits = 2){
 }
 
 
+# easily get prediction for a quadratic model
+pred_sq <- function(coef, x, xref){
+  y <- do.call("cbind", Map(function(b, r){
+    exp(cbind(x - r, x^2- r^2) %*% t(b))
+  }, split(coef, 1:nrow(coef)), split(xref, seq_along(xref))))
+  colnames(y) <- paste0("pred", 1:ncol(y))
+  data.frame(y)
+}
+
+
 # label for forest plot
 Qlab <- function(mod, total = TRUE){
   str0 <- if (total){

@@ -781,7 +781,7 @@ The dose--response coefficients $\boldsymbol{\beta}_i$ can be efficiently estima
 \noindent The GLS estimates in equation~\ref{eq:gls} do not require any distributional assumption for the error terms. However, for the central limit theory, the error terms follow approximately a normal distribution $\boldsymbol{\epsilon}_i \sim \mathcal{N}\left(\mathbf{0}, \mathbf{S}_i \right)$. 
 Using this additional assumption, the log-likelihood of model~\ref{eq:drmodel} is
 \begin{equation}
-\ell\left(\boldsymbol{\beta}_i\right) = -\frac{J_i}{2}\log\left(2\pi\right) - \frac{1}{2}|\mathbf{S}_i| - \frac{1}{2} \left[\left(\mathbf{y}_i- \mathbf{X}_i \boldsymbol{\beta}_i \right)^\top \left( \mathbf{S}_i \right)^{-1} \left(\mathbf{y}_i- \mathbf{X}_i \boldsymbol{\beta}_i \right) \right]
+\ell\left(\boldsymbol{\beta}_i\right) = -\frac{J_i}{2}\log\left(2\pi\right) - \frac{1}{2}\log|\mathbf{S}_i| - \frac{1}{2} \left[\left(\mathbf{y}_i- \mathbf{X}_i \boldsymbol{\beta}_i \right)^\top \left( \mathbf{S}_i \right)^{-1} \left(\mathbf{y}_i- \mathbf{X}_i \boldsymbol{\beta}_i \right) \right]
 \label{eq:drmodel_logLik}
 \end{equation}
 
@@ -1411,15 +1411,15 @@ Meta-regression models can be estimated by including in $\mathbf{X}_{i}$ the int
 The parameters to be estimated are the $m\times p$ fixed effects and the $p \times (p+1)/2$ elements of the between-study variance matrix. We consider likelihood-based estimators that maximize either the log-likelihood of model~\ref{eq:conditional_os}
 \begin{equation}
 \ell \left( \boldsymbol{\beta}, \boldsymbol{\xi} \right) = 
- -\frac{1}{2} n \log(2\pi)  -\frac{1}{2} \sum_{i=1}^k \log | \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) |  -\frac{1}{2}\sum_{i=1}^k \left[ \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\beta} \right)^\top \left( \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) \right)^{-1} \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\beta} \right) \right]
+ -\frac{1}{2} n \log(2\pi)  -\frac{1}{2} \sum_{i=1}^I \log | \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) |  -\frac{1}{2}\sum_{i=1}^I \left[ \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\beta} \right)^\top \left( \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) \right)^{-1} \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\beta} \right) \right]
 \label{eq:logLik_os}
 \end{equation}
 \noindent or the corresponding restricted version
 \begin{equation}
 \begin{split}
 \ell_R \left( \boldsymbol{\xi} \right) = & 
- -\frac{1}{2} (n - p) \log(2\pi)  - \frac{1}{2} \sum_{i=1}^k \log | \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) |  - \frac{1}{2} \log \left| \sum_{i=1}^k \mathbf{X}_i^T \left( \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) \right)^{-1}  \mathbf{X}_i  \right| + \\
-&-\frac{1}{2}\sum_{i=1}^k \left[ \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\hat \beta} \right)^\top \left( \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) \right)^{-1} \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\hat \beta} \right) \right]
+ -\frac{1}{2} (n - p) \log(2\pi)  - \frac{1}{2} \sum_{i=1}^I \log | \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) |  - \frac{1}{2} \log \left| \sum_{i=1}^I \mathbf{X}_i^T \left( \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) \right)^{-1}  \mathbf{X}_i  \right| + \\
+&-\frac{1}{2}\sum_{i=1}^I \left[ \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\hat \beta} \right)^\top \left( \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) \right)^{-1} \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\hat \beta} \right) \right]
 \end{split}
 \label{eq:logLikR_os}
 \end{equation}
@@ -1467,7 +1467,7 @@ Previous methodological articles have oftentimes implemented new methods using t
 We illustrate the usage of the developed methodologies and measures reanalyzing data from published dose--response meta-analyses. 
 
 % Paper I
-\section{Paper~I}
+\section{Paper~I}\label{sec:res_paperI}
 
 The aim of \citetalias{crippa2016dosresmeta} was to describe the implementation of the two-stage approach for dose--response meta-analysis in the \pkg{dosresmeta} \textsf{R} package.
 We demonstrate the main aspects of the methodology reanalyzing aggregated dose--response data from 21 prospective studies on the association between coffee consumption (cups/day) and all-cause mortality \citep{crippa2014coffee}. The data set \texttt{coffee\_mort} is included in the package, with the first six lines printed below.
@@ -1507,7 +1507,7 @@ R> covar.logrr(cases = cases, n = n, y = logrr, v = I(se^2), type = type,
 \end{kframe}
 \end{knitrout}
 
-\noindent The alternative method by \cite{hamling2008facilitating} can be used by specifying \texttt{covariance = "h"} in the \texttt{covar.logrr} funciton. The reconstructed covariance matrix is used to efficiently estimate the dose--response association. For example, a linear trend $y_{1j} = \beta_1 (x_{1j} - x_{10})$ can be estimated with
+\noindent The alternative method by \cite{hamling2008facilitating} can be used by specifying \texttt{covariance = "h"} in the \texttt{covar.logrr} function. The reconstructed covariance matrix is used to efficiently estimate the dose--response association. For example, a linear trend $y_{1j} = \beta_1 (x_{1j} - x_{10})$ can be estimated with
 
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
@@ -1673,7 +1673,7 @@ I-square statistic = 72.7%
 \end{kframe}
 \end{knitrout}
 
-\noindent There was an inverse association between increasing levels of coffee consumption and all-cause mortality risk, with a mean relative risk of $\exp(-0.03) = 0.97$ for a 1 cup/day increase. Similarly to the single study analysis, the \texttt{predict} function returns the combined result for any amount of coffee contumption.
+\noindent There was an inverse association between increasing levels of coffee consumption and all-cause mortality risk, with a mean relative risk of $\exp(-0.03) = 0.97$ for a 1 cup/day increase. Similarly to the single study analysis, the \texttt{predict} function returns the combined result for any amount of coffee consumption.
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
@@ -1812,7 +1812,7 @@ R> p_indiv <- newd %>%
 \end{knitrout}
 
 
-\section{Paper~II}
+\section{Paper~II}\label{sec:res_paperII}
 
 
 
@@ -1953,6 +1953,7 @@ Red meat Prospective & 1.51 (1.13, 2.02) & 40, < 0.01 & 0.36 & 81 (80, 82) & 85 
 
 
 
+
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[h]
 
@@ -2014,7 +2015,74 @@ One advantage of a pointwise strategy is that also additional statistics from th
 
 \section{Paper~V}
 
-In paper~V we formalized a one-stage approach for dose--response meta-analysis.
+
+
+A common limitation of a two-stage and pointwise approach is that the dose--response analyses are limited by the low number of data points in each study, usually $J_i \le 3$. We demonstrate an alternative one-stage model for dose--response meta-analysis using a subset of the data on coffee consumption and all-cause mortality presented in sections~\ref{sec:res_paperI} and \ref{sec:res_paperII}. The data consists of the results for 12 independent populations including 5508 cases and 750959 participants. The results for two cohorts \citep{nilsson2012traditional} were excluded in the initial analysis of a non-linear trend because they only reported 1 non-referent risk. We performed a one-stage random-effects meta-analysis assuming a quadratic relationship on the whole data set and compared the results with the corresponding two-stage analysis which excluded the results by \cite{nilsson2012traditional}. 
+
+\noindent Although both the analyses suggested a U-shaped association between increasing levels of coffee consumption and mortality risk, the predicted curve from a two-stage model provided lower relative risk estimates. Using 0 cups/day, the predicted RRs for 2 cups/day were 0.86 (95\% CI 0.81, 0.91) for the two-stage analysis, and 0.89 (95\% CI 0.83, 0.96) for the one-stage model. Similarly, for 5 cups/day the corresponding numbers were 0.78 (95\% CI 0.72, 0.84) and 0.82 (95\% CI 0.76, 0.89). Interestingly, the standard errors for the beta coefficients were lower in the two stage analysis ($\SE \left(\hat \beta_1 \right)$ = 0.021, $\SE \left(\hat \beta_2 \right) = 0.003$), even if the corresponding estimates form the one-stager analysis were based on a larger number of data points ($\SE \left(\hat \beta_1 \right)$ = 0.027, $\SE \left(\hat \beta_2 \right) = 0.004$). As a consequence, the confidence intervals for the reported predicted relative risks were larger in the one-stage analysis, while the $p$ value for non-linearity $H_0: \beta_2 = 0$ was lower in a two-stage analysis: $p$ = 0.008 compared to $p$ = 0.154 from the alternative one-stage model.
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[ht!]
+
+{\centering \includegraphics[width=\textwidth]{../figure/comp_osts-1} 
+
+}
+
+\caption[Combined quadratic association between coffee consumption (cups/day) and all-cause mortality estimated using a one-stage (solid line) and two-stage (dashed line) approach]{Combined quadratic association between coffee consumption (cups/day) and all-cause mortality estimated using a one-stage (solid line) and two-stage (dashed line) approach. The predicted relative risks are plotted on the scale using 0 cups/day as referent}\label{fig:comp_osts}
+\end{figure}
+
+
+\end{knitrout}
+
+\noindent The exclusion of 2 studies affected also the estimation of the variance components in $\boldsymbol{\Psi}$. For example, the variance of the random-effects based on 10 out of the 12 studies (two-stage) were 0.0013 for $b_1$ and 0.0013 for $b_2$, while were 0.00544 and 0.00544 in the alternative model. The $I^2$ = 45 from the multivariate two-stage analysis indicated a moderate impact of the heterogeneity. The same question can be addressed in a one-stage analysis by looking at the variance partition coefficients for the observed dose values. The VPC plot suggested a limited impact of heterogeneity between 20 and 40\% for coffee consumption below 7 cups/day, while it become substantial for higher exposure values (figure~\ref{fig:p_coffee_vpc}).
+
+Oftentimes it can be informative to provide a graphical presentation not only of the marginal association but also of the study-specific or conditional curves. The multivariate normal distribution for the random-effects is used to predict the study-specific regression coefficients, exploiting the information from the between-studies heterogeneity matrix (table~\ref{tab:blup_tab}). 
+It is worth to notice that the non-linear curves in the one-stage approach can be predicted also for those studies providing only one non-referent log RR (study ID 27 and 28), which were instead excluded in the traditional approach. The predicted conditional curves are graphically presented in figure~\ref{fig:p_grid_coffee}.
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[ht!]
+
+{\centering \includegraphics[width=\textwidth]{../figure/p_grid_coffee-1} 
+
+}
+
+\caption[Best linear unbiased predicted quadratic curves for the association between coffee consumption and all-cause mortality in a one-stage (solid lines) and two-stage (dashed lines) approach]{Best linear unbiased predicted quadratic curves for the association between coffee consumption and all-cause mortality in a one-stage (solid lines) and two-stage (dashed lines) approach. The relative risks are presented on the log scale using the study-specific reference categories as comparator}\label{fig:p_grid_coffee}
+\end{figure}
+
+
+\end{knitrout}
+
+
+
+Different strategies can be chosen to model the dose--response association of interest. A one-stage approach, in particular, gives the opportunity to estimate complex curve defined by multiple parameters in order to answer more elaborated research questions. A model with a spike at zero treats the low or unexposed participants as a separate group, and estimate the dose-response association only for the exposed groups. For example, we can think the participants drinking a low amount coffee (less than 1 cup/day) as a separate group and that the rest of the association can be described by two lines with a different slope before and after 4 cups/day. The mixed of linear splines model can be specified as
+\begin{multline*}
+\mathbf{y}_i = (\beta_1 + b_{i1}) \mathbf{I} (\mathbf{x}_{i} < 1) +(\beta_2  + b_{i2}) (\mathbf{x}_{i} - 1 - x_{i0})\mathbf{I}(\mathbf{x}_{i} \ge 1)+ \\  +(\beta_3  + b_{i3}) (\mathbf{x}_{i} - 4 - x_{i0})\mathbf{I}(\mathbf{x}_{i} \ge 4) + \boldsymbol{\epsilon}_{i}
+\label{spike_zero}
+\end{multline*}
+
+\noindent where the indicator function $\mathbf{I}$ assumes value 1 if the condition in the parenthesis  is met, 0 otherwise.
+\noindent Another possibility consists of considering homogeneous groups of exposure in which the mortality risk can be considered constant. For instance, coffee consumption could be divided in intervals $< 1$, $[1, 3)$, $[3, 5)$, $[5, 7)$, and $> 7$ cups/day. The dose--response model is specified by including 4 dummy variables ($x_1, x_2, x_3$, and $x_4$) and using one level (e.g. $[1, 3)$) as referent
+\begin{multline*}
+\mathbf{y}_i =  (\beta_0 + b_{i0}) + (\beta_1 + b_{i1}) (\mathbf{x_1}_{i} - {x_1}_{i0}) + (\beta_2  + b_{i2}) (\mathbf{x_2}_{i} - {x_2}_{i0})
+(\beta_3 + b_{i3}) (\mathbf{x_3}_{i} - {x_3}_{i0}) + \\  + (\beta_4 + b_{i4}) (\mathbf{x_4}_{i} - {x_4}_{i0}) + \boldsymbol{\epsilon}_{i}
+\end{multline*}
+
+\noindent The two models are parameterized, respectively, by $p = 3$ and $p = 4$ parameters. It is unlikely to have enough data points (at least 4 non referent log RRs) for estimating the previous models in a two-stage analysis. Using a one-stage approach, instead, the predicted curve from those alternative analyses are presented graphically in figure~\ref{fig:p_comp_os} together with the quadratic model described before. 
+In the spike at 0 model, the predicted mortality risk for the unexposed participants was 14\% higher (95\% CI 1.02, 1.28) as compared to participants drinking 1 cup/day. Every one cup per day increase in coffee consumption was associated with 2 (95\% CI 0.95, 1.01) reduction in all-risk mortality, whereas the same number was less pronounced ($\beta_3$ = 0.01) for coffee consumption higher than 4 cups/day, with a decreased risk of 1 \% (95\% CI 0.96, 1.02). 
+The categorical model provided similar results with a 16\% (95\% CI 1.04, 1.28) higher mortality risk for never drinkers compared to the category $[1, 3)$ of coffee consumption. Categories for coffee consumption greater or equal to 3 cup/day indicated a decreased mortality risk. We can evaluate if this further decline is significant by testing $H_0: \beta_2 = \beta_3 = \beta_4 = 0$. The multivariate Wald test did non provide enough evidence to reject the null hypothesis ($\chi_3^2$ = 5.08, $p$~value = 0.17).
+The fit of the alternative analyses can be compared by looking at the AIC. We selected the quadratic curve as the best fitting model since it had the lowest AIC (-29), as compared to the spike at 0 (-28) and categorical model (-11).
+
+
+
+After choosing the quadratic curve as the basis for modelling the dose--response association, we might try to relate the heterogeneity observed in the VPC plot to study-level covariates. For example, we can investigate if the sex of the study participants (3 levels: only men, only women, both sexes) substantially alter the combined quadratic association or partially explain the observed heterogeneity. This can be done by fitting a meta-regression model which includes in the fixed-effect matrix the interactions between the quadratic transformations ($x$ and $x^2$) and the two dummy variable ($u_1$ and $u_2$) for the sex of the participants
+\begin{multline*}
+\mathbf{y}_i = (\beta_1 + b_{i1}) (\mathbf{x}_{i} - {x}_{i0}) + (\beta_2  + b_{i2}) (\mathbf{x}_{i}^2 - {x}_{i0}^2) +  \\
++ \beta_3 (\mathbf{x}_{i} - {x}_{i0}) \times \mathbf{u_1}_{i} + \beta_4 (\mathbf{x}_{i}^2 - {x}_{i0}^2)\times \mathbf{u_1}_{i}  + \\ 
+ + \beta_5 (\mathbf{x}_{i} - {x}_{i0}) \times \mathbf{u_2}_{i} + \beta_6 (\mathbf{x}_{i}^2 - {x}_{i0}^2)\times \mathbf{u_2}_{i}  + 
+\boldsymbol{\epsilon}_{i}
+\end{multline*}
+
+\noindent The meta-regression model simplifies to the quadratic model when the coefficients for the interaction terms are equal to 0. A test for $H_0: \beta_3 = \beta_4 = \beta_5 = \beta_6 = 0$ is equivalent to test if the dose-response associations differ according to sex of the participants.  The multivariate Wald test ($\chi_3^2$ = 2.4, $p$~value = 0.66) did not reject the null hypothesis. Furthermore, the meta-regression model was not able to explain the observed residual heterogeneity (figure~\ref{fig:p_coffee_vpc}).
 
 % !TeX root = ../kappa.Rnw  
 
@@ -2029,7 +2097,6 @@ In paper~V we formalized a one-stage approach for dose--response meta-analysis.
 
 \chapter{Discussion}
 
-Write the discussion with subsections as in the background section
 
 % !TeX root = ../kappa.Rnw  
 
@@ -2140,11 +2207,38 @@ Based on the conclusions presented in this thesis, future research includes:
 
 \end{knitrout}
 
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[ht!]
+
+{\centering \includegraphics[width=\textwidth]{../figure/p_comp_os-1} 
+
+}
+
+\caption[Comparison of different strategies (quadratic, spike at 0, and categorical models) in a dose--response meta-analysis of coffee consumption (cups/day) and all-cause mortality]{Comparison of different strategies (quadratic, spike at 0, and categorical models) in a dose--response meta-analysis of coffee consumption (cups/day) and all-cause mortality. The relative risks are presented on the log scale using 1 cup/day as referent}\label{fig:p_comp_os}
+\end{figure}
+
+
+\end{knitrout}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[ht!]
+
+{\centering \includegraphics[width=\textwidth]{../figure/p_coffee_vpc-1} 
+
+}
+
+\caption[Variance Partition Coefficients, $	extrm{VPC}_{ij}$ versus observed dose levels plot and LOWESS smoother for dose--response meta-analysis between coffee consumption (cusp/day) and all-cause mortality using a quadratic and meta-regression model]{Variance Partition Coefficients, $	extrm{VPC}_{ij}$ versus observed dose levels plot and LOWESS smoother for dose--response meta-analysis between coffee consumption (cusp/day) and all-cause mortality using a quadratic and meta-regression model.}\label{fig:p_coffee_vpc}
+\end{figure}
+
+
+\end{knitrout}
+
+
 
 \chapter{Supplementary tables}
 
 \begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{table}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{table}[!h]
 
 \caption{\label{tab:chr_redtab}Descriptive statistics of the assigned dose levels for 13 studies 
       included in a dose--response meta-analysis between red meat consumption (g per day) and bladder
@@ -2239,6 +2333,32 @@ best p & -2, -2 & -2, -2 & 0.5, 0.5 & -2, -2 & 3, 3 & -2, -2 & -2, -2 & -2, 3 & 
 
 \end{knitrout}
 
+\begin{table}[!h]
+
+\caption{\label{tab:blup_tab}Conditional predicted coefficients for quadratic curves in 12 studies on the association between coffee consumption (cups/day) and all-cause mortality based on a one-stage (os) and two-stage (ts) approach}
+\centering
+\begin{tabular}[t]{ccccc}
+\toprule
+ID & $\hat \beta_{1\textrm{os}}$ & $\hat \beta_{2\textrm{os}}$ & $\hat \beta_{1\textrm{ts}}$ & $\hat \beta_{2\textrm{ts}}$\\
+\midrule
+2 & -0.043 & 0.002 & -0.074 & 0.005\\
+4 & -0.125 & 0.015 & -0.112 & 0.013\\
+5 & -0.077 & 0.007 & -0.094 & 0.009\\
+6 & -0.060 & 0.005 & -0.080 & 0.006\\
+7 & -0.012 & -0.003 & -0.050 & 0.000\\
+10 & -0.140 & 0.018 & -0.115 & 0.013\\
+11 & -0.159 & 0.021 & -0.118 & 0.014\\
+16 & -0.028 & -0.001 & -0.074 & 0.005\\
+17 & -0.134 & 0.017 & -0.132 & 0.017\\
+18 & -0.082 & 0.008 & -0.101 & 0.010\\
+28 & 0.032 & -0.011 & NA & NA\\
+29 & -0.019 & -0.002 & NA & NA\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
 
 
 % Back matter
@@ -2265,7 +2385,7 @@ There are many people that I would like to thank for their contributions to this
 
 \bigskip
 
-\textbf{Nicola Orsini}, my main supervisor for the second half of my doctoral education.
+\textbf{Name}, for
 
 \bigskip
 

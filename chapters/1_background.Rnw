@@ -283,7 +283,7 @@ The dose--response coefficients $\boldsymbol{\beta}_i$ can be efficiently estima
 \noindent The GLS estimates in equation~\ref{eq:gls} do not require any distributional assumption for the error terms. However, for the central limit theory, the error terms follow approximately a normal distribution $\boldsymbol{\epsilon}_i \sim \mathcal{N}\left(\mathbf{0}, \mathbf{S}_i \right)$. 
 Using this additional assumption, the log-likelihood of model~\ref{eq:drmodel} is
 \begin{equation}
-\ell\left(\boldsymbol{\beta}_i\right) = -\frac{J_i}{2}\log\left(2\pi\right) - \frac{1}{2}|\mathbf{S}_i| - \frac{1}{2} \left[\left(\mathbf{y}_i- \mathbf{X}_i \boldsymbol{\beta}_i \right)^\top \left( \mathbf{S}_i \right)^{-1} \left(\mathbf{y}_i- \mathbf{X}_i \boldsymbol{\beta}_i \right) \right]
+\ell\left(\boldsymbol{\beta}_i\right) = -\frac{J_i}{2}\log\left(2\pi\right) - \frac{1}{2}\log|\mathbf{S}_i| - \frac{1}{2} \left[\left(\mathbf{y}_i- \mathbf{X}_i \boldsymbol{\beta}_i \right)^\top \left( \mathbf{S}_i \right)^{-1} \left(\mathbf{y}_i- \mathbf{X}_i \boldsymbol{\beta}_i \right) \right]
 \label{eq:drmodel_logLik}
 \end{equation}
 

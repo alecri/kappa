@@ -23,6 +23,15 @@ dist_vi
 p_chr
 @
 
+<<p_comp_os, fig.cap="Comparison of different strategies (quadratic, spike at 0, and categorical models) in a dose--response meta-analysis of coffee consumption (cups/day) and all-cause mortality. The relative risks are presented on the log scale using 1 cup/day as referent">>=
+p_comp
+@
+
+<<p_coffee_vpc, fig.cap="Variance Partition Coefficients, $\textrm{VPC}_{ij}$ versus observed dose levels plot and LOWESS smoother for dose--response meta-analysis between coffee consumption (cusp/day) and all-cause mortality using a quadratic and meta-regression model.">>=
+p_coffee_vpc
+@
+
+
 
 \chapter{Supplementary tables}
 
@@ -31,7 +40,8 @@ kable(chr_red, "latex", align = "c", booktabs = T, digits = 1,
       col.names = c("ID", "Referent", "Min", "P25", "Median", "P75", "Max"), 
       caption = "Descriptive statistics of the assigned dose levels for 13 studies 
       included in a dose--response meta-analysis between red meat consumption (g per day) and bladder
-      cancer risk")
+      cancer risk") %>%
+  kable_styling(latex_options = c("hold_position"))
 @
 
 
@@ -48,6 +58,16 @@ lapply(AIC_pi_red, round, 2) %>%
         caption = "AIC for the study-specific fractional polynomials of order two with power terms specified by $p$. The last row reports the power term corresponding to the lowest AIC.
 ") %>%
   kable_styling(font_size = 8)
+@
+
+<<blup_tab, results='asis'>>=
+bi %>%
+  select(id, bi.1.x:bi.2.y) %>%
+  kable("latex", align = "c", booktabs = T, escape = F, digits = 3, linesep = c(""), 
+        caption = "Conditional predicted coefficients for quadratic curves in 12 studies on the association between coffee consumption (cups/day) and all-cause mortality based on a one-stage (os) and two-stage (ts) approach", 
+        col.names = c("ID", "$\\hat \\beta_{1\\textrm{os}}$", "$\\hat \\beta_{2\\textrm{os}}$",
+                      "$\\hat \\beta_{1\\textrm{ts}}$", "$\\hat \\beta_{2\\textrm{ts}}$")) %>%
+  kable_styling(position = "center", latex_options = c("hold_position")) 
 @
 
 

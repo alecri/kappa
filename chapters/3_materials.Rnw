@@ -375,15 +375,15 @@ Meta-regression models can be estimated by including in $\mathbf{X}_{i}$ the int
 The parameters to be estimated are the $m\times p$ fixed effects and the $p \times (p+1)/2$ elements of the between-study variance matrix. We consider likelihood-based estimators that maximize either the log-likelihood of model~\ref{eq:conditional_os}
 \begin{equation}
 \ell \left( \boldsymbol{\beta}, \boldsymbol{\xi} \right) = 
- -\frac{1}{2} n \log(2\pi)  -\frac{1}{2} \sum_{i=1}^k \log | \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) |  -\frac{1}{2}\sum_{i=1}^k \left[ \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\beta} \right)^\top \left( \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) \right)^{-1} \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\beta} \right) \right]
+ -\frac{1}{2} n \log(2\pi)  -\frac{1}{2} \sum_{i=1}^I \log | \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) |  -\frac{1}{2}\sum_{i=1}^I \left[ \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\beta} \right)^\top \left( \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) \right)^{-1} \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\beta} \right) \right]
 \label{eq:logLik_os}
 \end{equation}
 \noindent or the corresponding restricted version
 \begin{equation}
 \begin{split}
 \ell_R \left( \boldsymbol{\xi} \right) = & 
- -\frac{1}{2} (n - p) \log(2\pi)  - \frac{1}{2} \sum_{i=1}^k \log | \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) |  - \frac{1}{2} \log \left| \sum_{i=1}^k \mathbf{X}_i^T \left( \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) \right)^{-1}  \mathbf{X}_i  \right| + \\
-&-\frac{1}{2}\sum_{i=1}^k \left[ \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\hat \beta} \right)^\top \left( \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) \right)^{-1} \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\hat \beta} \right) \right]
+ -\frac{1}{2} (n - p) \log(2\pi)  - \frac{1}{2} \sum_{i=1}^I \log | \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) |  - \frac{1}{2} \log \left| \sum_{i=1}^I \mathbf{X}_i^T \left( \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) \right)^{-1}  \mathbf{X}_i  \right| + \\
+&-\frac{1}{2}\sum_{i=1}^I \left[ \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\hat \beta} \right)^\top \left( \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) \right)^{-1} \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\hat \beta} \right) \right]
 \end{split}
 \label{eq:logLikR_os}
 \end{equation}

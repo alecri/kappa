@@ -11,4 +11,3 @@
 
 \chapter{Discussion}
 
-Write the discussion with subsections as in the background section
