@@ -122,7 +122,7 @@ sum_quadr <- summary(quadr)
 
 The predicted log relative risks from the linear and quadratic analysis can be presented in a graphical format using $x_\mathrm{ref} = 0$ cups/day as referent (figure~\ref{fig:pred_fig}).
 
-<<pred_fig, echo=T, fig.cap="Combined dose-response association between coffee consumption and all-cause mortality (solid line) with 95\\% confidence intervals (shaded area). Coffee consumption was modelled with a quadratic curve in a two-stage random-effects meta-analysis. Dashed line represents the combined linear trend. The value 0 cups/day serves as referent. The relative risks are plotted on the log scale.">>=
+<<pred_fig, echo=T, fig.cap="Combined dose--response association between coffee consumption and all-cause mortality (solid line) with 95\\% confidence intervals (shaded area). Coffee consumption was modelled with a quadratic curve in a two-stage random-effects meta-analysis. Dashed line represents the combined linear trend. The value 0 cups/day serves as referent. The relative risks are plotted on the log scale.">>=
 xref <- 0
 pred <- data.frame(dose = c(xref, seq(0, 8, .1))) %>%
   predict(quadr, newdata = ., expo = T) %>%
@@ -231,7 +231,7 @@ plot_grid(pglin, pgquadr, pgspl, pgspl_reg,
 
 <<gof_tab, results='asis'>>=
 kable(tab_gof, "latex", align = "c", booktabs = T, escape = F, digits = 3,
-      caption = "Goodness-of-fit tests and measures for dose-response meta-analysis of coffee consumption and all-cause mortality \\citep{crippa2014coffee}", 
+      caption = "Goodness-of-fit tests and measures for dose--response meta-analysis of coffee consumption and all-cause mortality \\citep{crippa2014coffee}", 
       col.names = c("Analysis", "Model", "Deviance", "df", "$p$~value", "\\textrm{$\\mathrm{R^2}$}", "\\textrm{$\\mathrm{R_{\\textrm{adj}}^2}$}")) %>%
   kable_styling(position = "center", latex_options = c("hold_position")) %>%
   footnote(alphabet = c("3 knots located at the 10th, 50th, and 90th percentiles of the distribution of coffee.", 
@@ -241,7 +241,7 @@ kable(tab_gof, "latex", align = "c", booktabs = T, escape = F, digits = 3,
 @
 
 
-\section{Paper~III}
+\section{Paper~III}\label{sec:res_paperIII}
 
 <<paperIII>>=
 data("process_bc")
@@ -584,12 +584,12 @@ grid.arrange(grobs = pbi_plot_red, nrow = 5, ncol = 3, as.table = FALSE,
 
 \clearpage
 
-\section{Paper IV}
+\section{Paper IV}\label{sec:res_paperIV}
 
 \noindent The proposed and alternative measures of between-studies variability can not capture the heterogeneity related to differences in the exposure range distributions. We present the implementation of a pointwise strategy as a possible remedy, reanalyzing the data between red meat consumption and bladder cancer risk described in the previous section.
 The data consists of 13 independent studies where the the exposure varies across studies not only in terms of definition and measurement but also in terms of range of assessment. For example, the minimum red meat consumption in one study (\Sexpr{red_bc$dose[red_bc$id == 7][1]} g per day in study ID 7) is higher then the maximum exposure value in other studies (\Sexpr{round(red_bc$dose[red_bc$id == 3][4], 1)} g per day in study ID 3). Furthermore, only 3 out 13 studies reported relative risks for meat consumption greater than 150 grams/day. Descriptive measures of red meat consumption across studies are reported in table~\ref{tab:chr_redtab} and graphically presented in figure~\ref{fig:p_chr}.
 
-\noindent We decided to model the association under investigation using fractional polynomials of order 2. To allow for differential dose-response relationships, we fitted the FP2 models for different combination of power terms separately in each studies and selected the study-specific best fitting polynomials as the model with the lowest AIC. As expected, the best study-specific power terms varied across studies (table~\ref{tab:AIC_pi_red}), with the most common polynomial defined by $p = c(-2, -2)$ (8 out of 13 studies). Interestingly, the corresponding analysis using the AIC for the analysis based on a one-stage model selected $p = c(-1, -0.5)$ as the best FP2, a combination of terms that was not preferred in none of the individual dose--response analyses. Figure~\ref{fig:pbi_plot_red} displays the predicted curves based on the best FP2 for each study, limited to the observed exposure range (black solid lines). Extrapolation are represented by dashed lines while the red curves represent the predicted association from the one-stage model, which imposed the common power terms $p = c(-1, -0.5)$ across the studies. While the alternative strategies gave similar results in the observed exposure range, larger differences were observed for high levels of red meat consumption. Taking study ID 5 as example, the predicted relative risks for 150 g compared to 15 g of red meat consumption per day were \Sexpr{pred_exi$pred[2]} (95\% CI \Sexpr{paste(pred_exi$ci.lb[2], pred_exi$ci.ub[2], sep = ", ")}) and \Sexpr{pred_ex$pred[2]} (95\% CI \Sexpr{paste(pred_ex$ci.lb[2], pred_ex$ci.ub[2], sep = ", ")}) for the FP2 with the study specific $p_5 = (3, 3)$ and the common $p = (-1, -0.5)$, respectively. 
+\noindent We decided to model the association under investigation using fractional polynomials of order 2. To allow for differential dose--response relationships, we fitted the FP2 models for different combination of power terms separately in each studies and selected the study-specific best fitting polynomials as the model with the lowest AIC. As expected, the best study-specific power terms varied across studies (table~\ref{tab:AIC_pi_red}), with the most common polynomial defined by $p = c(-2, -2)$ (8 out of 13 studies). Interestingly, the corresponding analysis using the AIC for the analysis based on a one-stage model selected $p = c(-1, -0.5)$ as the best FP2, a combination of terms that was not preferred in none of the individual dose--response analyses. Figure~\ref{fig:pbi_plot_red} displays the predicted curves based on the best FP2 for each study, limited to the observed exposure range (black solid lines). Extrapolation are represented by dashed lines while the red curves represent the predicted association from the one-stage model, which imposed the common power terms $p = c(-1, -0.5)$ across the studies. While the alternative strategies gave similar results in the observed exposure range, larger differences were observed for high levels of red meat consumption. Taking study ID 5 as example, the predicted relative risks for 150 g compared to 15 g of red meat consumption per day were \Sexpr{pred_exi$pred[2]} (95\% CI \Sexpr{paste(pred_exi$ci.lb[2], pred_exi$ci.ub[2], sep = ", ")}) and \Sexpr{pred_ex$pred[2]} (95\% CI \Sexpr{paste(pred_ex$ci.lb[2], pred_ex$ci.ub[2], sep = ", ")}) for the FP2 with the study specific $p_5 = (3, 3)$ and the common $p = (-1, -0.5)$, respectively. 
 
 \noindent In a pointwise dose--response meta-analysis we chose to predict the study specific log relative risks of a fine grid of exposure values ranging from 5 g to 300 g with step by 5 g, using 85 g/day (median reference dose value) as referent. The study-specific predictions were limited to the observed exposure range so that study ID 3, for example, predicted log RRs for dose values up to 70 g/days. Thus, the number of study-specific predicted log RRs varies across the selected red meat consumption levels. 
 The combined results from the \Sexpr{length(newd[-1, ])} meta-analyses can be presented pointwisely. 
@@ -823,7 +823,7 @@ for (i in seq_along(k2[-1])){
 }
 @
 
-Different strategies can be chosen to model the dose--response association of interest. A one-stage approach, in particular, gives the opportunity to estimate complex curve defined by multiple parameters in order to answer more elaborated research questions. A model with a spike at zero treats the low or unexposed participants as a separate group, and estimate the dose-response association only for the exposed groups. For example, we can think the participants drinking a low amount coffee (less than 1 cup/day) as a separate group and that the rest of the association can be described by two lines with a different slope before and after 4 cups/day. The mixed of linear splines model can be specified as
+Different strategies can be chosen to model the dose--response association of interest. A one-stage approach, in particular, gives the opportunity to estimate complex curve defined by multiple parameters in order to answer more elaborated research questions. A model with a spike at zero treats the low or unexposed participants as a separate group, and estimate the dose--response association only for the exposed groups. For example, we can think the participants drinking a low amount coffee (less than 1 cup/day) as a separate group and that the rest of the association can be described by two lines with a different slope before and after 4 cups/day. The mixed of linear splines model can be specified as
 \begin{multline*}
 \mathbf{y}_i = (\beta_1 + b_{i1}) \mathbf{I} (\mathbf{x}_{i} < 1) +(\beta_2  + b_{i2}) (\mathbf{x}_{i} - 1 - x_{i0})\mathbf{I}(\mathbf{x}_{i} \ge 1)+ \\  +(\beta_3  + b_{i3}) (\mathbf{x}_{i} - 4 - x_{i0})\mathbf{I}(\mathbf{x}_{i} \ge 4) + \boldsymbol{\epsilon}_{i}
 \label{spike_zero}
@@ -869,4 +869,4 @@ After choosing the quadratic curve as the basis for modelling the dose--response
 \boldsymbol{\epsilon}_{i}
 \end{multline*}
 
-\noindent The meta-regression model simplifies to the quadratic model when the coefficients for the interaction terms are equal to 0. A test for $H_0: \beta_3 = \beta_4 = \beta_5 = \beta_6 = 0$ is equivalent to test if the dose-response associations differ according to sex of the participants.  The multivariate Wald test ($\chi_3^2$ = \Sexpr{chitest_reg[1]}, $p$~value = \Sexpr{ chitest_reg[2]}) did not reject the null hypothesis. Furthermore, the meta-regression model was not able to explain the observed residual heterogeneity (figure~\ref{fig:p_coffee_vpc}).
+\noindent The meta-regression model simplifies to the quadratic model when the coefficients for the interaction terms are equal to 0. A test for $H_0: \beta_3 = \beta_4 = \beta_5 = \beta_6 = 0$ is equivalent to test if the dose--response associations differ according to sex of the participants.  The multivariate Wald test ($\chi_3^2$ = \Sexpr{chitest_reg[1]}, $p$~value = \Sexpr{ chitest_reg[2]}) did not reject the null hypothesis. Furthermore, the meta-regression model was not able to explain the observed residual heterogeneity (figure~\ref{fig:p_coffee_vpc}).

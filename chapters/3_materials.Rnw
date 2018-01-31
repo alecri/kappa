@@ -191,7 +191,7 @@ The residuals can be decorrelated using the Cholesky factorization of the covari
 
 
 
-\section{A new measure of heterogeneity}
+\section{A new measure of heterogeneity}\label{sec:Rb}
 
 One of the possible reasons for large values of $D$ or similarly small values of $R^2$ is presence of heterogeneity in the dose--response associations. The measures of heterogeneity presented in section~\ref{sec:measures_het}, namely $\hat R_I$ and $I^2$ were derived based on the assumption of homogeneity for the error variance terms $v_i$, which is unlikely to be met in applications. To illustrate this point, let us consider the two hypothetical distributions for the within-study error terms in table~\ref{tab:hyp_vi}. The distribution of $v_i$ in the first example (analysis A) is much more homogeneous compared to the second scenario (analysis B). The coefficient of variation for the $v_i$ in the second example is 20 times higher than the corresponding number in the first scenario. While it seems reasonable to assume homogeneity of the $v_i$ for the analysis A, in the second case this hypothesis is not appropriate. Nonetheless both $\hat R_I$ and $I^2$ would summarize the two distributions with a single common number. 
 
@@ -239,7 +239,7 @@ An estimate of the between-study heterogeneity is required for the computation o
 
 
 
-\section{A point-wise approach}
+\section{A point-wise approach}\label{sec:pwa}
 
 <<>>=
 # code: motivating_pointwise.R
