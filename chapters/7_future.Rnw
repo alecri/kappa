@@ -14,9 +14,14 @@
 Based on the conclusions presented in this thesis, future research includes: 
 
 \begin{itemize}
-\item <>
+\item Implementing additive models as a smoother for dose--response meta-analysis. The non-parametric regression models can be use to investigate and identify the shape of the dose-response relationship. Formulae for estimation of additive models need to be extended to take into account the correlation of the error terms and the lack of intercept term.
 
-\item <>
+\item A limited set of tools is available for evaluating possible sources of bias for dose--response meta-analysis. In particular, a set of tools including descriptive measures, tests, and plots would be desirable for examining the likelihood of publication bias. Follow this direction, a similar application of the trim and fill method could provide some aid in performing such a sensitivity analysis.
 
-\item <>
+\item Random-effects models for dose--response meta-analysis focus on estimating the population average risk-exposure association. Methods for evaluating the influence of specific data points and the effect of possible outliers are not available. A possibility could be to switch the focus from the mean to selected percentiles such as the median, which is generally less sensible to extreme observations.
+
+\item Bayesian methods for dose--response meta-analysis has not yet been presented. A Bayesian prospective has the advantages of incorporating pertinent information that can be available from external sources. In addition, the uncertainty for all the parameters can be directly specified in the model. More generally, communication of the results can be enhanced by making probability statements about the quantities of interest.
+
+\item More generally, study selection is a frequent issue in meta-analyses of aggregated data. On the other hand, sharing of individual patient data is oftentimes difficult because of privacy agreements and costs involved in the data collection. A solution could be the implementation of a platform where practitioners are allowed to upload aggregated data without the need to have them published.
+
 \end{itemize}
