@@ -1,0 +1,216 @@
+AbstractText            Extracts 'AbstractText' from 'Medline' object.
+AbstractText-methods    ~~ Methods for Function 'AbstractText' in
+                        Package 'RISmed' ~~
+Acronym                 Extracts 'Acronym' from 'Medline' object.
+Acronym-methods         ~~ Methods for Function 'Acronym' in Package
+                        'RISmed' ~~
+Affiliation             Extracts 'Affiliation' from 'Medline' object.
+Affiliation-methods     ~~ Methods for Function 'Affiliation' in
+                        Package 'RISmed' ~~
+Agency                  Extracts 'Agency' from 'Medline' object.
+Agency-methods          ~~ Methods for Function 'Agency' in Package
+                        'RISmed' ~~
+ArticleId               Extracts 'ArticleId' from 'Medline' object.
+ArticleId-methods       ~~ Methods for Function 'ArticleId' in Package
+                        'RISmed' ~~
+ArticleTitle            Extracts 'ArticleTitle' from 'Medline' object.
+ArticleTitle-methods    ~~ Methods for Function 'ArticleTitle' in
+                        Package 'RISmed' ~~
+Author                  Extracts 'Author' from 'Medline' object.
+Author-methods          ~~ Methods for Function 'Author' in Package
+                        'RISmed' ~~
+Cited                   Number of citations
+Cited-methods           ~~ Methods for Function 'Cited' in Package
+                        'RISmed' ~~
+CollectiveName          Extracts 'CollectiveName' from 'Medline'
+                        object.
+CollectiveName-methods
+                        ~~ Methods for Function 'CollectiveName' in
+                        Package 'RISmed' ~~
+CopyrightInformation    Extracts 'CopyrightInformation' from 'Medline'
+                        object.
+CopyrightInformation-methods
+                        ~~ Methods for Function 'CopyrightInformation'
+                        in Package 'RISmed' ~~
+Country                 Extracts 'Country' from 'Medline' object.
+Country-methods         ~~ Methods for Function 'Country' in Package
+                        'RISmed' ~~
+DayAccepted             Extracts 'DayAccepted' from 'Medline' object.
+DayAccepted-methods     ~~ Methods for Function 'DayAccepted' in
+                        Package 'RISmed' ~~
+DayEpublish             Extracts 'DayEpublish' from 'Medline' object.
+DayEpublish-methods     ~~ Methods for Function 'DayEpublish' in
+                        Package 'RISmed' ~~
+DayPmc                  Extracts 'DayPmc' from 'Medline' object.
+DayPmc-methods          ~~ Methods for Function 'DayPmc' in Package
+                        'RISmed' ~~
+DayPpublish             Extracts 'DayPpublish' from 'Medline' object.
+DayPpublish-methods     ~~ Methods for Function 'DayPpublish' in
+                        Package 'RISmed' ~~
+DayPubmed               Extracts 'DayPubmed' from 'Medline' object.
+DayPubmed-methods       ~~ Methods for Function 'DayPubmed' in Package
+                        'RISmed' ~~
+DayReceived             Extracts 'DayReceived' from 'Medline' object.
+DayReceived-methods     ~~ Methods for Function 'DayReceived' in
+                        Package 'RISmed' ~~
+ELocationID             Extracts 'ELocationID' from 'Medline' object.
+ELocationID-methods     ~~ Methods for Function 'ELocationID' in
+                        Package 'RISmed' ~~
+EUtilsGet               Results of an NCBI EUtils query
+EUtilsQuery             Construct URL to make NCBI EUtils query
+EUtilsSummary           Get summary of NCBI EUtils query
+EUtilsSummary-class     Class '"EUtilsSummary"'
+GrantID                 Extracts 'GrantID' from 'Medline' object.
+GrantID-methods         ~~ Methods for Function 'GrantID' in Package
+                        'RISmed' ~~
+HourAccepted            Extracts 'HourAccepted' from 'Medline' object.
+HourAccepted-methods    ~~ Methods for Function 'HourAccepted' in
+                        Package 'RISmed' ~~
+HourEpublish            Extracts 'HourEpublish' from 'Medline' object.
+HourEpublish-methods    ~~ Methods for Function 'HourEpublish' in
+                        Package 'RISmed' ~~
+HourPmc                 Extracts 'HourPmc' from 'Medline' object.
+HourPmc-methods         ~~ Methods for Function 'HourPmc' in Package
+                        'RISmed' ~~
+HourPpublish            Extracts 'HourPpublish' from 'Medline' object.
+HourPpublish-methods    ~~ Methods for Function 'HourPpublish' in
+                        Package 'RISmed' ~~
+HourPubmed              Extracts 'HourPubmed' from 'Medline' object.
+HourPubmed-methods      ~~ Methods for Function 'HourPubmed' in Package
+                        'RISmed' ~~
+HourReceived            Extracts 'HourReceived' from 'Medline' object.
+HourReceived-methods    ~~ Methods for Function 'HourReceived' in
+                        Package 'RISmed' ~~
+ISOAbbreviation         Extracts 'ISOAbbreviation' from 'Medline'
+                        object.
+ISOAbbreviation-methods
+                        ~~ Methods for Function 'ISOAbbreviation' in
+                        Package 'RISmed' ~~
+ISSN                    Extracts 'ISSN' from 'Medline' object.
+ISSN-methods            ~~ Methods for Function 'ISSN' in Package
+                        'RISmed' ~~
+ISSNLinking             Extracts 'ISSNLinking' from 'Medline' object.
+ISSNLinking-methods     ~~ Methods for Function 'ISSNLinking' in
+                        Package 'RISmed' ~~
+Issue                   Extracts 'Issue' from 'Medline' object.
+Issue-methods           ~~ Methods for Function 'Issue' in Package
+                        'RISmed' ~~
+Language                Extracts 'Language' from 'Medline' object.
+Language-methods        ~~ Methods for Function 'Language' in Package
+                        'RISmed' ~~
+Medline-class           Class '"Medline"'
+MedlinePgn              Extracts 'MedlinePgn' from 'Medline' object.
+MedlinePgn-methods      ~~ Methods for Function 'MedlinePgn' in Package
+                        'RISmed' ~~
+MedlineTA               Extracts 'MedlineTA' from 'Medline' object.
+MedlineTA-methods       ~~ Methods for Function 'MedlineTA' in Package
+                        'RISmed' ~~
+Mesh                    Extracts 'Mesh' headings from 'Medline' object.
+Mesh-methods            ~~ Methods for Function 'Mesh' in Package
+                        'RISmed' ~~
+MinuteAccepted          Extracts 'MinuteAccepted' from 'Medline'
+                        object.
+MinuteAccepted-methods
+                        ~~ Methods for Function 'MinuteAccepted' in
+                        Package 'RISmed' ~~
+MinuteEpublish          Extracts 'MinuteEpublish' from 'Medline'
+                        object.
+MinuteEpublish-methods
+                        ~~ Methods for Function 'MinuteEpublish' in
+                        Package 'RISmed' ~~
+MinutePmc               Extracts 'MinutePmc' from 'Medline' object.
+MinutePmc-methods       ~~ Methods for Function 'MinutePmc' in Package
+                        'RISmed' ~~
+MinutePpublish          Extracts 'MinutePpublish' from 'Medline'
+                        object.
+MinutePpublish-methods
+                        ~~ Methods for Function 'MinutePpublish' in
+                        Package 'RISmed' ~~
+MinutePubmed            Extracts 'MinutePubmed' from 'Medline' object.
+MinutePubmed-methods    ~~ Methods for Function 'MinutePubmed' in
+                        Package 'RISmed' ~~
+MinuteReceived          Extracts 'MinuteReceived' from 'Medline'
+                        object.
+MinuteReceived-methods
+                        ~~ Methods for Function 'MinuteReceived' in
+                        Package 'RISmed' ~~
+MonthAccepted           Extracts 'MonthAccepted' from 'Medline' object.
+MonthAccepted-methods   ~~ Methods for Function 'MonthAccepted' in
+                        Package 'RISmed' ~~
+MonthEpublish           Extracts 'MonthEpublish' from 'Medline' object.
+MonthEpublish-methods   ~~ Methods for Function 'MonthEpublish' in
+                        Package 'RISmed' ~~
+MonthPmc                Extracts 'MonthPmc' from 'Medline' object.
+MonthPmc-methods        ~~ Methods for Function 'MonthPmc' in Package
+                        'RISmed' ~~
+MonthPpublish           Extracts 'MonthPpublish' from 'Medline' object.
+MonthPpublish-methods   ~~ Methods for Function 'MonthPpublish' in
+                        Package 'RISmed' ~~
+MonthPubmed             Extracts 'MonthPubmed' from 'Medline' object.
+MonthPubmed-methods     ~~ Methods for Function 'MonthPubmed' in
+                        Package 'RISmed' ~~
+MonthReceived           Extracts 'MonthReceived' from 'Medline' object.
+MonthReceived-methods   ~~ Methods for Function 'MonthReceived' in
+                        Package 'RISmed' ~~
+NlmUniqueID             Extracts 'NlmUniqueID' from 'Medline' object.
+NlmUniqueID-methods     ~~ Methods for Function 'NlmUniqueID' in
+                        Package 'RISmed' ~~
+PMID                    Extracts 'PMID' from 'Medline' object.
+PMID-methods            ~~ Methods for Function 'PMID' in Package
+                        'RISmed' ~~
+PublicationStatus       Extracts 'PublicationStatus' from 'Medline'
+                        object.
+PublicationStatus-methods
+                        ~~ Methods for Function 'PublicationStatus' in
+                        Package 'RISmed' ~~
+PublicationType         Extracts 'PublicationType' from 'Medline'
+                        object.
+PublicationType-methods
+                        ~~ Methods for Function 'PublicationType' in
+                        Package 'RISmed' ~~
+Query                   Extract 'Query' from 'Medline' object.
+Query-methods           ~~ Methods for Function 'Query' in Package
+                        'RISmed' ~~
+QueryCount              Count of record results for EUtilsQuery
+QueryId                 Get ids from EUtilsQuery
+QueryTranslation        Get the NCBI query translation from EUtilsQuery
+RISmed-package          Download content from NCBI databases.
+RefSource               Extracts 'RefSource' from 'Medline' object.
+RefSource-methods       ~~ Methods for Function 'RefSource' in Package
+                        'RISmed' ~~
+RegistryNumber          Extracts 'RegistryNumber' from 'Medline'
+                        object.
+RegistryNumber-methods
+                        ~~ Methods for Function 'RegistryNumber' in
+                        Package 'RISmed' ~~
+Title                   Extracts 'Title' from 'Medline' object.
+Title-methods           ~~ Methods for Function 'Title' in Package
+                        'RISmed' ~~
+Volume                  Extracts 'Volume' from 'Medline' object.
+Volume-methods          ~~ Methods for Function 'Volume' in Package
+                        'RISmed' ~~
+YearAccepted            Extracts 'YearAccepted' from 'Medline' object.
+YearAccepted-methods    ~~ Methods for Function 'YearAccepted' in
+                        Package 'RISmed' ~~
+YearEpublish            Extracts 'YearEpublish' from 'Medline' object.
+YearEpublish-methods    ~~ Methods for Function 'YearEpublish' in
+                        Package 'RISmed' ~~
+YearPmc                 Extracts 'YearPmc' from 'Medline' object.
+YearPmc-methods         ~~ Methods for Function 'YearPmc' in Package
+                        'RISmed' ~~
+YearPpublish            Extracts 'YearPpublish' from 'Medline' object.
+YearPpublish-methods    ~~ Methods for Function 'YearPpublish' in
+                        Package 'RISmed' ~~
+YearPubmed              Extracts 'YearPubmed' from 'Medline' object.
+YearPubmed-methods      ~~ Methods for Function 'YearPubmed' in Package
+                        'RISmed' ~~
+YearReceived            Extracts 'YearReceived' from 'Medline' object.
+YearReceived-methods    ~~ Methods for Function 'YearReceived' in
+                        Package 'RISmed' ~~
+c,Medline-method        Concatenate Medline
+myeloma                 Example of results from 'EUtilsGet'
+print,Medline-method    Print method for Medline object
+print-methods           Print method for EUtilsSummary object
+show,Medline-method     Show method for Medline object
+show-methods            Show method for EUtilsSummary object
+summary-methods         Summary method for EUtilsSummary object

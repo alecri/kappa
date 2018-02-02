@@ -1,0 +1,6 @@
+callr                   Call R from R
+r                       Evaluate an expression in another R session
+r_safe                  Run an R child process in safe mode
+r_vanilla               Run an R child process, with no configuration
+rcmd                    Run an R CMD command
+rcmd_safe               Call R CMD <command> safely

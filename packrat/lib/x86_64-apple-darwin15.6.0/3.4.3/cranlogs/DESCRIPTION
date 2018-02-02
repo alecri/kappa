@@ -1,0 +1,22 @@
+Package: cranlogs
+Title: Download Logs from the 'RStudio' 'CRAN' Mirror
+Version: 2.1.1
+Maintainer: Gabor Csardi <csardi.gabor@gmail.com>
+Author: Gabor Csardi [aut, cre]
+Description: 'API' to the database of 'CRAN' package downloads from the
+    'RStudio' 'CRAN mirror'. The database itself is at
+    <http://cranlogs.r-pkg.org>, see
+    <https://github.com/metacran/cranlogs.app> for the raw 'API'.
+License: MIT + file LICENSE
+URL: https://github.com/metacran/cranlogs
+BugReports: https://github.com/metacran/cranlogs/issues
+Imports: httr, jsonlite
+RoxygenNote: 5.0.1
+GithubRepo: cranlogs
+GithubUsername: metacran
+GithubRef: master
+GithubSHA1: 554a99ef6089d5618e6fe64d580aa217bb7558e3
+Built: R 3.4.3; ; 2017-12-11 09:40:45 UTC; unix
+InstallAgent: packrat 0.4.8.1
+InstallSource: github
+Hash: 6811357ef92c6f13a4a1c3d1cfc0a9e2

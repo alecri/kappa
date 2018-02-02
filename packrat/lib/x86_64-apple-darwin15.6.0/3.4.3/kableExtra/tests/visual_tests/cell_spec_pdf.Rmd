@@ -1,0 +1,23 @@
+---
+title: "cell_formatter_pdf"
+author: "Hao"
+date: "10/11/2017"
+output: pdf_document
+---
+
+```{r, include=F}
+library(knitr)
+library(kableExtra)
+library(dplyr)
+```
+
+```{r}
+iris[1:10, 1:4] %>%
+  mutate_all(function(x){
+    cell_spec(x, "latex", 
+              background = spec_color(x), 
+              font_size = spec_font_size(x),
+              color = "white", bold = T)
+    }) %>%
+  kable("latex", escape = F, booktabs = T, linesep = "", align = "c") 
+```

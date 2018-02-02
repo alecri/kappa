@@ -1,0 +1,5 @@
+cran_downloads          Daily package downloads from the RStudio CRAN
+                        mirror
+cran_top_downloads      Top downloaded packages from the RStudio CRAN
+                        mirror
+cranlogs                Download Logs from the RStudio CRAN Mirror

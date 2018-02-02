@@ -1,0 +1,66 @@
+addMapLegend            Add a legend to a map
+addMapLegendBoxes       Add a legend of coloured boxes to a map
+aggregateHalfDegreeGridToCountries
+                        Aggregates global half degree gridded data to
+                        countries
+barplotCountryData      Barplot country-level data.
+coastsCoarse            A map of world coasts at coarse resolution.
+countriesCoarse         a coarse resolution world map, a vector map of
+                        244 country boundaries,suitable for global maps
+countriesCoarseLessIslands
+                        a coarse resolution world map, a vector map of
+                        177 country boundaries, suitable for global
+                        maps
+countriesLow            a low resolution world map, a vector map of 244
+                        country boundaries, suitable for zooming in on
+                        regions or large global maps
+country2Region          Produce regional data from country level data
+countryExData           Example dataset for country level data (2008
+                        Environmental Performance Index)
+countryRegions          Regional Classification Table
+countrySynonyms         Synonyms of country names for each ISO 3 letter
+                        country code to enable conversion.
+getMap                  A simple way to access maps stored in the
+                        package.
+gridCountriesDegreesHalf
+                        A gloabl half degree grid specifying the
+                        country at each cell
+gridCountriesNumeric    A gloabl half degree grid specifying the
+                        country at each cell
+gridExData              Example half degree grid data : population
+                        estimates for 2000 from IIASA
+identifyCountries       a function that will print country name and
+                        attribute values when a user clicks on the map
+isoToName               Returns the country name corresponding to the
+                        passed iso code (3 letter, 2 letter or
+                        numeric).
+joinCountryData2Map     Joins user country referenced data to a map
+joinData2Map            Joins user polygon attribute data to a map
+labelCountries          to print country labels on a world map
+mapBars                 function to produce bar plots on a map
+mapBubbles              function to produce bubble plots on a map, size
+                        and colour determined by attribute data
+mapByRegion             Produce maps of regional level data from
+                        country level data
+mapCountryData          Map country-level data.
+mapDevice               Creates a plot device set up for maps
+mapGriddedData          Produce maps of global gridded data at half
+                        degree resolution
+mapHalfDegreeGridToCountries
+                        Maps user half degree gridded data at country
+                        level by first aggregating.
+mapPies                 function to produce pie charts on a map
+mapPolys                Map polygon data.
+rwmCheckAndLoadInput    internal function to check and load input data
+                        to mapping functions
+rwmGetClassBreaks       Internal function to set the numeric values for
+                        the breaks between data categories
+rwmGetColours           to choose map colours for classified data
+rwmGetISO3              Internal function for getting the ISO3 country
+                        code for a country name synonymn.
+rwmNewMapPlot           Internal function to set up an existing device
+                        for plotting maps
+rworldmap-package       For mapping global data.
+rworldmapExamples       Example code for plot creation
+setMapExtents           Internal function allowing map extents to be
+                        set from area names

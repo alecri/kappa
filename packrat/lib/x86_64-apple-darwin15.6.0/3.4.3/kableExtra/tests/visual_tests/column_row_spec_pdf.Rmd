@@ -1,0 +1,55 @@
+---
+title: "Untitled"
+output: 
+  pdf_document:
+    keep_tex: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+library(knitr)
+library(kableExtra)
+library(xml2)
+
+dt <- data.frame(
+  row_id = c("abb", "xxx", "aaa"),
+  contents = c(
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula tempor ex. Morbi malesuada sagittis turpis, at venenatis nisl luctus a. ",
+    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit varius, posuere risus et, cursus augue. Duis eleifend aliquam ante, a aliquet ex tincidunt in.", 
+    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi. "
+  ),
+  contents2 = c(
+    "Lorem {ipsum} dolor",
+    "In eu urna ", 
+    "Vivamus venenatis"
+  ),
+  contents3 = c(
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula tempor ex. Morbi malesuada sagittis turpis, at venenatis nisl luctus a. ",
+    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit varius, posuere risus et, cursus augue. Duis eleifend aliquam ante, a aliquet ex tincidunt in. ", 
+    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi. Aliquam molestie erat et sollicitudin venenatis. In ac lacus at velit scelerisque mattis. "
+  )
+)
+
+kable(dt, "latex", booktabs = T, align = "r") %>%
+  column_spec(2, "3cm", bold = T, border_right = T) %>%
+  column_spec(3, monospace = T)%>%
+  column_spec(4, "3cm", italic = T, color = "red", border_left = T, background = "blue")  %>%
+  row_spec(0, bold = T, italic = T, align = "l", font_size = 20) %>%
+  row_spec(3, monospace = T, color = "yellow", background = "black")
+```
+
+```{r}
+kable(mtcars[1:5, 1:5], "latex", booktabs = T) %>%
+  row_spec(2, extra_latex_after = "\\cline{2-6}") %>%
+  row_spec(4, hline_after = T)
+```
+

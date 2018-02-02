@@ -1,0 +1,5 @@
+confint.hetmeta         Confidence Intervals for 'hetmeta' Objects
+hetmeta                 Deriving Measures Of Heterogeneity
+hetmeta-package         Heterogeneity Measures In Meta-Analysis
+hetmetaObject           hetmeta Object
+print.hetmeta           Printing hetmeta Results

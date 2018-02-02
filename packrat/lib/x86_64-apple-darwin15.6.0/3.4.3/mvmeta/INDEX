@@ -1,0 +1,39 @@
+berkey98                Five Published Trials on Periodontal Disease
+blup.mvmeta             Best Linear Unbiased Predictions from mvmeta
+                        Models
+coef.mvmeta             Extract Coefficients and (Co)Variance Matrix
+                        from mvmeta Objects
+fibrinogen              Fibrinogen Studies Collaboration
+hsls                    High School Longitudinal Study
+hyp                     Ten Studies Assessing an Hypertension Treatment
+inputcov                Input (Co)Variance Matrices
+inputna                 Input Missing Values
+logLik.mvmeta           Extract Log-Likelihood from mvmeta Objects
+mlprof.fn               Likelihood Functions for mvmeta Models
+model.frame.mvmeta      Extract Model Frame and Design Matrix from
+                        mvmeta Objects
+mvmeta                  Fitting Multivariate and Univariate
+                        Meta-Analysis and Meta-Regression Models
+mvmeta-package          Multivariate and Univariate Meta-Analysis and
+                        Meta-Regression
+mvmeta.control          Ancillary Parameters for Controlling the Fit in
+                        mvmeta Models
+mvmeta.fixed            Fixed-Effects Estimator for mvmeta Models
+mvmeta.ml               ML and REML Estimators for mvmeta Models
+mvmeta.mm               Method of Moments Estimator for mvmeta Models
+mvmeta.vc               Variance Components Estimator for mvmeta Models
+mvmetaCovStruct         Covariance Structures for mvmeta Models
+mvmetaObject            mvmeta Objects
+mvmetaSim               Simulating Responses for mvmeta Models
+na.omit.data.frame.mvmeta
+                        Handling Missing Values in mvmeta Models
+p53                     Mutant p53 Gene and Squamous Cell Carcinoma
+predict.mvmeta          Predicted Values from mvmeta Models
+qtest                   Cochran Q Test of Heterogeneity
+qtest.mvmeta            Cochran Q Test of Heterogeneity for mvmeta
+                        Models
+smoking                 Meta-Analysis of Interventions to Promote
+                        Smoking Cessation
+summary.mvmeta          Summarizing mvmeta Models
+vechMat                 Vectorization and expansion of symmetric
+                        matrices

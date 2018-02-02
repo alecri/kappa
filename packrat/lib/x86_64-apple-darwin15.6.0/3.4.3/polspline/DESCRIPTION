@@ -1,0 +1,21 @@
+Package: polspline
+Version: 1.1.12
+Date: 2015-07-14
+Title: Polynomial Spline Routines
+Author: Charles Kooperberg <clk@fredhutch.org>
+Maintainer: Charles Kooperberg <clk@fredhutch.org>
+Description: Routines for the polynomial spline fitting routines hazard
+    regression, hazard estimation with flexible tails, logspline,
+    lspec, polyclass, and polymars, by C. Kooperberg and co-authors.
+Imports: stats, graphics
+License: GPL (>= 2)
+Packaged: 2015-07-14 17:49:13 UTC; clk
+NeedsCompilation: yes
+Repository: CRAN
+Date/Publication: 2015-07-14 21:44:12
+Built: R 3.4.0; x86_64-apple-darwin15.6.0; 2017-04-21 23:58:30 UTC;
+    unix
+Archs: polspline.so.dSYM
+InstallAgent: packrat 0.4.8.1
+InstallSource: CRAN
+Hash: c9ad03d865465be2354a2189f3d66901

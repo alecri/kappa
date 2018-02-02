@@ -1,0 +1,25 @@
+---
+title: "test_doc"
+author: "Jake Thompson"
+date: "6/30/2017"
+output:
+  bookdown::pdf_document2:
+    toc: false
+---
+
+```{r}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+table1 <- tribble(~Term, ~Definition,
+                         "Adverse event (AE)", " Any untoward medical occurrence in a subject to whom a medicinal product has been administered including occurrences which are not necessarily caused by or related to that product.",
+                         "Adverse reaction (AR)", "Any untoward and unintended response in a subject to an investigational medicinal product, which is related to any dose administered to that subject.",
+                         "Unexpected adverse reaction (UAR)", " An adverse reaction the nature and severity of which is not consistent with the information about the medicinal product in question set out in: The SPC for that product (for products with a marketing authorisation); The Investigator's Brochure (IB) relating to the trial in question (for any other investigational product)",
+                         "Serious adverse event (SAE); Serious adverse reaction (SAR); Suspected unexpected serious adverse reaction (SUSAR)", "Respectively, any adverse event, adverse reaction or unexpected adverse reaction that: results in death; is life-threatening; requires hospitalisation or prolongation of existing hospitalisation; results in persistent or significant disability or incapacity; consists of a congenital anomaly or birth defect; other important medical event(s)"
+)
+
+knitr::kable(table1, caption = "Terms and definitions for adverse events", booktabs=TRUE) %>%
+  kable_styling(full_width=F, latex_options = "scale_down") %>%
+  column_spec(column = 2, width = "30em")
+```

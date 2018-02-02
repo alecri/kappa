@@ -1,0 +1,34 @@
+---
+title: "add_footnote_adv"
+author: "Hao"
+date: "1/5/2018"
+output: html_document
+---
+
+```{r}
+library(knitr)
+library(kableExtra)
+
+mtcars[1:5, 1:5] %>%
+  kable("html", caption = paste0("test", footnote_marker_alphabet(1))) %>%
+  kable_styling() %>%
+  footnote(general = "ccc", 
+           number = c("number 1; ", "number 2. "), 
+           alphabet = c("a 1; ", "a 2."), 
+           symbol = c("s 1; ", "s 2."))
+```
+
+```{r}
+mtcars[1:5, 1:5] %>%
+  kable("html", caption = paste0("test", footnote_marker_alphabet(1))) %>%
+  kable_styling() %>%
+  footnote(general = "ccc", 
+           number = c("number 1; ", "number 2. "), 
+           alphabet = c("a 1; ", "a 2."), 
+           symbol = c("s 1; ", "s 2."),
+           general_title = "",
+           number_title = "special: ", 
+           alphabet_title = "abc: ", 
+           symbol_title = "triangle: ",
+           footnote_as_chunk = T)
+```

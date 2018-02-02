@@ -1,0 +1,24 @@
+---
+title: "Untitled"
+author: "Hao"
+date: "10/15/2017"
+output: 
+  html_document:
+    theme: simplex
+---
+
+<script>
+$(document).ready(function(){
+    $('[tooltip-toggle="tooltip"]').tooltip(); 
+});
+</script>
+
+
+
+
+
+```{r}
+library(kableExtra)
+```
+
+`r cell_spec("hover over me", tooltip = spec_tooltip("Hello world", position = "right"))`

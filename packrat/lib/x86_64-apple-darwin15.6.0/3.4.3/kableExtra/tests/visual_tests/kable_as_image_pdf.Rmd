@@ -1,0 +1,17 @@
+---
+title: "kable_as_image"
+author: "Hao"
+date: "8/22/2017"
+output:
+  word_document: default
+---
+
+```{r, fig.width=3}
+library(knitr)
+library(kableExtra)
+
+kable(mtcars, format = "latex", booktabs=TRUE, caption="hello") %>% 
+  kable_styling(latex_options=c("scale_down", "hold_position")) %>%
+  add_header_above(c(" ", "Group A" = 5, "Group B" = 6)) %>%
+  kable_as_image("sss")
+```

@@ -1,0 +1,36 @@
+Package: Epi
+Version: 2.12
+Date: 2017-04-14
+Title: A Package for Statistical Analysis in Epidemiology
+Authors@R: c(person("Bendix", "Carstensen", role = c("aut", "cre"),
+    email = "b@bxc.dk"), person("Martyn", "Plummer", role = "aut",
+    email = "plummerm@iarc.fr"), person("Esa", "Laara", role = "ctb"),
+    person("Michael", "Hills", role = "ctb"))
+Depends: R (>= 3.0.0), utils
+Imports: cmprsk, etm, splines, MASS, survival, plyr, Matrix, numDeriv,
+    data.table
+Suggests: mstate, nlme, lme4
+Description: Functions for demographic and epidemiological analysis in
+    the Lexis diagram, i.e. register and cohort follow-up data, in
+    particular representation, manipulation and simulation of multi
+    state data - the Lexis suite of functions, which includes
+    interfaces to 'mstate', 'etm' and 'cmprsk' packages. Also contains
+    functions for Age-Period-Cohort and Lee-Carter modeling and a
+    function for interval censored data and some useful functions for
+    tabulation and plotting, as well as a number of epidemiological
+    data sets.
+License: GPL-2
+URL: http://BendixCarstensen.com/Epi/
+NeedsCompilation: yes
+Packaged: 2017-04-14 16:55:22 UTC; bendix
+Author: Bendix Carstensen [aut, cre], Martyn Plummer [aut], Esa Laara
+    [ctb], Michael Hills [ctb]
+Maintainer: Bendix Carstensen <b@bxc.dk>
+Repository: CRAN
+Date/Publication: 2017-04-16 10:57:29 UTC
+Built: R 3.4.0; x86_64-apple-darwin15.6.0; 2017-04-20 21:14:46 UTC;
+    unix
+Archs: Epi.so.dSYM
+InstallAgent: packrat 0.4.8.1
+InstallSource: CRAN
+Hash: 4d4d9a6bddeaf2acf4bed50917a7a61e

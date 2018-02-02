@@ -1,0 +1,8 @@
+figure
+*.html
+*.md
+*.pdf
+*.log
+*.tex
+*.synctex.gz
+*.lot

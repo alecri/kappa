@@ -1,0 +1,68 @@
+Version 2.0
+------------------------------------------------------------------------------
+
+Because of the limitations of calling through hubmed.org, RISmed now downloads
+content directly from NCBI. This has required major revisions to the package including the 
+dropping of the Reference class and export functions. 
+
+The name of the package will be retained but its design will focus on getting NCBI content for analysis not for reference management.
+
+The current version has the main advantages of no longer having a reference limit to downloaded records. It also can access any valid Entrez database. It still sucks because there is not much processing of content so 2.0 should be considered an alpha version.
+
+------------------------------------------------------------------------------
+
+Version 2.0.1
+
+Changed id, count, translation to QueryID, QueryCount, and QueryTranslation so that there would be no naming conflict with the plyr package.
+
+Created Medline class to process output for E-fetch from PubMed database.
+
+Usage disclaimer added.
+
+-------------------------------------------------------------------------------
+
+Version 2.1.0
+
+Corrected web link; Added MeSH Terms for MEDLINE object
+
+-------------------------------------------------------------------------------
+
+Version 2.1.1
+
+Revised fields to accept bracketed (foreign-language) titles.
+
+-------------------------------------------------------------------------------
+
+Version 2.1.2
+
+Fixed bug with author field for cases with missing forename/middle name; Fixed error message for queries with no result and instead return EUtilsSummary object with "0" record count.
+
+-------------------------------------------------------------------------------
+
+Version 2.1.3
+
+Corrected problem with extraction of publication date.
+
+-------------------------------------------------------------------------------
+
+Version 2.1.4
+
+Changed Publication Type to list to allow for multiple types to be extracted from Pubmed records.
+
+-------------------------------------------------------------------------------
+
+Version 2.1.5
+
+Add method Cited for Medline and EUtilsSummary classes. Fixed bug with Day extractor. Expanded date extractors for Medline object (Year, Month, Day, Hour, Minute) to allow dates for the following events in article publication history: accepted, received, epublish, ppublish, pmc, and pubmed. Corrected issue with structured abstracts.
+
+-------------------------------------------------------------------------------
+
+Version 2.1.6
+
+Added concatenate method for Medline class.
+
+-------------------------------------------------------------------------------
+
+Version 2.1.7
+
+Added additional Affiliations to Affiliation method, now returns a list of all affiliations in the same order as the authors.

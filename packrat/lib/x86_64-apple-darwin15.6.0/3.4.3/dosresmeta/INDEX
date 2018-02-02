@@ -1,0 +1,79 @@
+alcohol_crc             Eight published studies on the relation between
+                        alcohol intake and colon-rectal cancer.
+alcohol_cvd             Six published studies on the relation between
+                        alcohol intake and cardiovascular disease risk.
+alcohol_esoph           Fourteen case-control studies on the relation
+                        between alcohol consumption and esophageal
+                        cancer
+alcohol_lc              Four published studies on the relation between
+                        alcohol intake and lung cancer.
+ari                     Five clinical trials on the relation between
+                        aripiprazole and schizophrenia
+blup.dosresmeta         Best Linear Unbiased Predictions from
+                        dosresmeta Models
+bmi_rc                  Four case-control studies on the relation
+                        between Body Mass Index and renal cell cancer
+cc_ex                   Case-control data on alcohol and breast cancer
+                        risk
+ci_ex                   Cumulative incidence data on high-fat dairy
+                        food and colorectal cancer risk
+coef.dosresmeta         Extract Coefficients and (Co)Variance Matrix
+                        from dosresmeta Objects
+coffee_cancer           Eight prospective studies on the relation
+                        between coffee consumption and cancer mortality
+coffee_cvd              Thirteen prospective studies on the relation
+                        between coffee consumption and cardiovascular
+                        mortality
+coffee_mort             Twenty-one prospective studies on the relation
+                        between coffee consumption and all-cause
+                        mortality
+coffee_stroke           Eleven prospective studies on the relation
+                        between coffee consumption and stroke risk
+covar.logrr             Computes the covariance matrix for a set of log
+                        relative risks
+covar.smd               Computes mean and standardized mean differences
+                        for continuous outcome with corresponding
+                        co(variance) matrix
+dosresmeta              Multivariate Dose-Response Meta-Analysis
+dosresmeta-package      Multivariate dose-response meta-analysis
+dosresmeta.control      Ancillary Parameters for Controlling the Fit in
+                        dosresmeta Models
+dosresmeta.fixed        Fixed-Effects Estimator for dosresmeta Models
+dosresmeta.ml           ML and REML Estimators for dosresmeta Models
+dosresmetaObject        dosresmeta Object
+fish_ra                 Six studies on the relation between fish
+                        consumption and rheumatoid arthritis risk
+fpgrid                  Grid with combinations of p for two-order
+                        fractional polynomials
+fracpol                 Fractional Polynomials
+gof                     Computes statistics to evaluate the
+                        goodness-of-fit from dosresmeta Objects
+grl                     Approximating effective-counts as proposed by
+                        Greenland & Longnecker
+hamling                 Approximating effective-counts as proposed by
+                        Hamling
+ir_ex                   Incidence-rate data on fiber intake and
+                        coronary heart disease risk
+logLik.dosresmeta       Extract Log-Likelihood from dosresmeta Objects
+milk_mort               Eleven prospective studies on the relation
+                        between milk consumption and all-cause
+                        mortality
+milk_ov                 Nine studies on the relation between milk
+                        consumption and ovarian cancer
+mlprof.fun              Likelihood Functions for dosresmeta Models
+oc_breast               Twenty-two case-control studies on the relation
+                        between oral contraceptives use and breast
+                        cancer
+predict.dosresmeta      Predicted Values from dosresmeta Models
+print.dosresmeta        Summarizing dosresmeta Models
+process_bc              Ten studies on the relation between processed
+                        meat and bladder cancer
+qtest.dosresmeta        Cochran Q Test of Heterogeneity for dosresmeta
+                        Models
+red_bc                  Twelve studies on the relation between red meat
+                        and bladder cancer
+sim_os                  Simulated data for one-stage dose-response
+                        meta-analysis
+vpc                     Variance Partition Components for dosresmeta
+                        Objects
+waldtest                Wald Test for Model Coefficients

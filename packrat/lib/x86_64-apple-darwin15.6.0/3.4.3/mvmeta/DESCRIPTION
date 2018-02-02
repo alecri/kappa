@@ -1,0 +1,24 @@
+Package: mvmeta
+Type: Package
+Title: Multivariate and Univariate Meta-Analysis and Meta-Regression
+Version: 0.4.7
+Date: 2015-05-05
+Author: Antonio Gasparrini
+Maintainer: Antonio Gasparrini <antonio.gasparrini@lshtm.ac.uk>
+Depends: R (>= 2.13.0)
+Imports: stats, graphics, grDevices, utils
+Suggests: metafor, meta, rmeta, nlme, MASS, dlnm
+Description: Collection of functions to perform fixed and
+    random-effects multivariate and univariate meta-analysis and
+    meta-regression.
+URL: http://www.ag-myresearch.com/package-mvmeta
+License: GPL (>= 2)
+LazyData: yes
+NeedsCompilation: no
+Packaged: 2015-05-05 17:06:35 UTC; EMSUAGAS
+Repository: CRAN
+Date/Publication: 2015-05-22 18:55:37
+Built: R 3.4.0; ; 2017-04-20 15:36:39 UTC; unix
+InstallAgent: packrat 0.4.8.1
+InstallSource: CRAN
+Hash: 781752c30e79fa43d41cd227d501139a

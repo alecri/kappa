@@ -1,0 +1,27 @@
+Package: rworldmap
+Type: Package
+Title: Mapping Global Data
+Version: 1.3-6
+Date: 2016-02-03
+Author: Andy South
+Maintainer: Andy South <southandy@gmail.com>
+Description: Enables mapping of country level and gridded user
+    datasets.
+License: GPL (>= 2)
+Depends: R (>= 2.10.0), sp
+Imports: maptools, fields, methods
+Suggests: rgdal, rworldxtra, RColorBrewer, classInt
+LazyData: true
+URL: https://github.com/AndySouth/rworldmap/,
+    https://groups.google.com/forum/#!forum/rworldmap,
+    http://andysouth.co.uk/
+BugReports: https://github.com/AndySouth/rworldmap/issues
+RoxygenNote: 5.0.1
+NeedsCompilation: no
+Packaged: 2016-02-03 10:04:28 UTC; andy
+Repository: CRAN
+Date/Publication: 2016-02-03 12:26:35
+Built: R 3.4.0; ; 2017-04-20 17:49:01 UTC; unix
+InstallAgent: packrat 0.4.8.1
+InstallSource: CRAN
+Hash: be6e37948fed2728262e0dba532da868
