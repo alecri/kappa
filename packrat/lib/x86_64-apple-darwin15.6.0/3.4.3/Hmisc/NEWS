@@ -1,3 +1,42 @@
+Changes in version 4.1-1 (2018-01-03))
+   * describe: quit rounding values when <= 20 distinct values no matter how far apart any two values are spaced.  https://stackoverflow.com/questions/47679551
+   * summaryM: fixed to handle character variables properly, by converting them to factors.  Thanks: Matt Shotwell
+   * Fortran/ratfor routines hoeffd, jacklins, largrec, rcorr, wclosest: fixed errors where some scalars were single precision, got rid of some warnings
+
+Changes in version 4.1-0 (2017-12-19)
+   * latex.default: insert spaces between multiple entries in bottom index in latex tables (thanks: ecortens https://github.com/harrelfe/Hmisc/pull/73)
+   * latex.summary.formula.reverse,latex.summaryM: fix double replacement of ampersand (Thanks: Evan Cortens https://github.com/harrelfe/Hmisc/pull/72)
+   * fit.mult.impute: verified dfmi formula, added comment
+   * dotchartpl: added refgroup, sortdiff, conf.int arguments to allow inclusion of difference in two proportions across levels of the group variable
+   * plot.summaryP: for plotly, added refgroup to pass to dotchartpl so that differences in proportions can be handled; also passed ... arguments
+   * dotchartpl: added minkeep argument (used by hreport eReport)
+   * markupSpecs$html: added function uncover for hiding chunks; fixed typo in definiton of larger function
+   * knitrSet: when lang='markdown' sets up hook option uncover
+   * knitrSet: added aliases ho for out.height, wo for out.width, added knitrSet arguments ho, wo
+   * wtd.var: replaced with fixed verion by Benjamin Tyner <btyner@gmail.com>
+   * inst/tests/example.Rmd: added example with simple caption and font size change for caption
+   * pomodm: new function to work with popower/posamsize to assist translating odds ratios to means and medians for proportional odds model
+   * histboxp: added wmax, mult arguments to tweak margin set-aside
+   * describe: fixed bug in html.describe when there is only one variable
+   * simRegOrd: new function to simulate covariate-adjusted ordinal model two-sample test power
+   * html: use htmlSpecialType for functions calling htmlSpecial, htmlGreek
+   * htmlSpecialType: new function to check options('htmlSpecialType') and use as a default '&' for special symbols
+   * htmlSpecial: added new characters, cleaned up code
+   * impute.transcan: if original variable was logical, convert 0/1 imputations to FALSE/TRUE; design matrix column names were problematic with fit.mult.impute in this case
+   * impute.transcan: converted character variables on input dataset to factor so can replace NAs with imputed codes
+   * htmlTranslate: fixed bug when unicode was in effect: characters were shifted;fixed &# code for pound sign
+   * errbar: properly passed arguments main and sub to plot
+   * html markupSpecs: added sectionNumberDepth function
+   * wtd.quantile: remove zero weight observations early
+   * latexCheckOptions: new function from Richard Heiberger
+   * htmlSN: used new HTML specials mechanism for times symbol
+   * summaryM: added escape.html=FALSE to htmlTable calls
+   * combine, combine<-: removed (were deprecated long time ago)
+   * removed inc-dec.s which defined unused inc<- and dec<- for increment and decrement
+   * NAMESPACE: removed exportPattern("^([^.]|\\..+\\.)") and explicitly exported everything, stopping export of methods
+   * round.POSIXt,trunc.POSIXt: changed to roundPOSIXt, trunPOSIXt to avoid conflicts with R base
+   * asNumericMatrix, matrix2dataFrame: changed to respect original storage.mode.  Thanks: Andre Mikulec
+	 
 Changes in version 4.0-3 (2017-04-30)
    * bpplot: added plotopts argument
    * describe, histboxp: improved logic to still slighty round numeric variables with fewer than 100 distinct values, in case some values are really close, when computing frequency distribution (for spike histograms in plot.describe)

@@ -1,0 +1,25 @@
+Package: countrycode
+Maintainer: Vincent Arel-Bundock <vincent.arel-bundock@umontreal.ca>
+License: GPL-3
+Title: Convert Country Names and Country Codes
+LazyData: yes
+Type: Package
+LazyLoad: yes
+Encoding: UTF-8
+Author: Vincent Arel-Bundock <vincent.arel-bundock@umontreal.ca>
+Description: Standardize country names, convert them into one of eleven
+    coding schemes, convert between coding schemes, and assign region
+    descriptors.
+Version: 0.19
+URL: https://github.com/vincentarelbundock/countrycode
+Date: 2017-02-06
+Suggests: testthat (>= 0.5)
+RoxygenNote: 5.0.1
+NeedsCompilation: no
+Packaged: 2017-02-06 16:55:34 UTC; docker
+Repository: CRAN
+Date/Publication: 2017-02-06 21:36:27
+Built: R 3.4.0; ; 2017-04-20 15:28:23 UTC; unix
+InstallAgent: packrat 0.4.8.1
+InstallSource: CRAN
+Hash: edf948180dbf4105b2ca27f3f8d269f1

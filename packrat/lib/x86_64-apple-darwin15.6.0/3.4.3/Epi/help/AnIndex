@@ -1,3 +1,4 @@
+addCov.Lexis	addCov.Lexis
 apc.fit	apc.fit
 apc.frame	apc.frame
 apc.LCa	apc.LCa
@@ -62,6 +63,7 @@ exit	start.Lexis
 expand.data	expand.data
 factorize	transform.Lexis
 factorize.Lexis	transform.Lexis
+fgrep	lgrep
 fillarr	boxes.MS
 fit.add	fit.add
 fit.baseline	fit.baseline
@@ -78,6 +80,7 @@ levels.Lexis	transform.Lexis
 Lexis	Lexis
 Lexis.diagram	Lexis.diagram
 Lexis.lines	Lexis.lines
+lgrep	lgrep
 Life.lines	Life.lines
 lines.apc	lines.apc
 lines.Lexis	plot.Lexis
@@ -87,7 +90,6 @@ lls	lls
 lungDK	lungDK
 M.dk	M.dk
 mcutLexis	mcutLexis
-merge.data.frame	merge.data.frame
 merge.Lexis	merge.Lexis
 mh	mh
 mortDK	mortDK
@@ -97,11 +99,13 @@ N.dk	N.dk
 N2Y	N2Y
 NArray	NArray
 ncut	ncut
+ngrep	lgrep
 nice	nice
 nickel	nickel
 Ns	Ns
 nState	simLexis
 occup	occup
+order.Lexis	transform.Lexis
 pc.lines	pc.lines
 pc.matlines	pc.lines
 pc.matpoints	pc.lines
@@ -112,6 +116,7 @@ plot.apc	plot.apc
 plot.LCa	LCa.fit
 plot.Lexis	plot.Lexis
 plot.pState	simLexis
+plotCIF	plotCIF
 plotEst	plotEst
 plotevent	plotevent
 points.Lexis	plot.Lexis
@@ -138,8 +143,10 @@ ROC	ROC
 S.typh	S.typh
 show.apc.LCa	apc.LCa
 simLexis	simLexis
+sort.Lexis	transform.Lexis
 splitLexis	splitLexis
 stack.Lexis	stack.Lexis
+stackedCIF	plotCIF
 stat.table	stattable
 status	start.Lexis
 subset.Lexis	subset.Lexis

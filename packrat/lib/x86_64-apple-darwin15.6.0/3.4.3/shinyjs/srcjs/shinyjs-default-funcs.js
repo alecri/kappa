@@ -1,4 +1,4 @@
-// shinyjs 0.9 by Dean Attali
+// shinyjs 1.0 by Dean Attali
 // Perform common JavaScript operations in Shiny apps using plain R code
 
 shinyjs = function() {
@@ -309,7 +309,7 @@ shinyjs = function() {
           selectedEls.each(function() {
             selected.push($(this).val());
           });
-          inputValue = selected.join(",");
+          inputValue = JSON.stringify(selected);
         }
         // radioButtons
         else if (input.hasClass("shiny-input-radiogroup")) {
@@ -332,9 +332,8 @@ shinyjs = function() {
           inputValue = input.val();
           if (inputValue === null) {
             inputValue = "";
-          } else if (inputValue instanceof Array) {
-            inputValue = inputValue.join(",");
           }
+          inputValue = JSON.stringify(inputValue);
         }
         // colourInput
         else if (input.children("input.shiny-colour-input").length > 0) {
@@ -755,11 +754,10 @@ shinyjs = function() {
           // file inputs need to be reset manually since shiny doesn't have an
           // update function for them
           if (type == "File") {
-            id = "#" + id;
-            $(id).val('');
-            $(id + "_progress").css("visibility", "hidden");
-            $(id + "_progress").find(".progress-bar").css("width", "0");
-            $(id).closest(".input-group").find("input[type='text']").val('');
+            _jqid(id).val('');
+            _jqid(id + "_progress").css("visibility", "hidden");
+            _jqid(id + "_progress").find(".progress-bar").css("width", "0");
+            _jqid(id).closest(".input-group").find("input[type='text']").val('');
           } else {
             messages[id] = { 'type' : type, 'value' : value };
           }
@@ -770,8 +768,8 @@ shinyjs = function() {
       Shiny.onInputChange(params.shinyInputId, messages);
     },
 
-   // run an R function after an asynchronous delay
-   delay : function(params) {
+    // run an R function after an asynchronous delay
+    delay : function(params) {
       var defaultParams = {
         ms : null,
         shinyInputId : null
@@ -782,7 +780,19 @@ shinyjs = function() {
       setTimeout(function() {
         Shiny.onInputChange(params.shinyInputId, params.ms);
       }, params.ms);
-   }
+    },
+
+    // click on a button
+    click : function(params) {
+      var defaultParams = {
+        id : null
+      };
+      params = shinyjs.getParams(params, defaultParams);
+
+      var $el = _getElements(params);
+      if ($el === null) return;
+      $el.click();
+    }
   };
 }();
 

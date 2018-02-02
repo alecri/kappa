@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
@@ -12,7 +12,7 @@
 
 <meta name="author" content="Kirill Müller" />
 
-<meta name="date" content="2017-01-16" />
+<meta name="date" content="2018-01-03" />
 
 <title>Finding files in project subdirectories</title>
 
@@ -70,11 +70,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Finding files in project subdirectories</h1>
 <h4 class="author"><em>Kirill Müller</em></h4>
-<h4 class="date"><em>2017-01-16</em></h4>
+<h4 class="date"><em>2018-01-03</em></h4>
 
 
 
-<p>The <code>rprojroot</code> package solves a seemingly trivial but annoying problem that occurs sooner or later in any largish project: How to find files in subdirectories? Ideally, file paths are relative to the <em>project root</em>.</p>
+<p>The <em>rprojroot</em> package solves a seemingly trivial but annoying problem that occurs sooner or later in any largish project: How to find files in subdirectories? Ideally, file paths are relative to the <em>project root</em>.</p>
 <p>Unfortunately, we cannot always be sure about the current working directory: For instance, in RStudio it’s sometimes:</p>
 <ul>
 <li>the project root (when running R scripts),</li>
@@ -88,35 +88,35 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="tldr" class="section level2">
 <h2>TL;DR</h2>
 <p>What is your project: An R package?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rprojroot::is_r_package</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rprojroot<span class="op">::</span>is_r_package</code></pre></div>
 <pre><code>## Root criterion: contains a file `DESCRIPTION` with contents matching `^Package: `</code></pre>
 <p>Or an RStudio project?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rprojroot::is_rstudio_project</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rprojroot<span class="op">::</span>is_rstudio_project</code></pre></div>
 <pre><code>## Root criterion: contains a file matching `[.]Rproj$` with contents matching `^Version: ` in the first line</code></pre>
 <p>Or something else?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rprojroot::<span class="kw">has_file</span>(<span class="st">&quot;.git/index&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rprojroot<span class="op">::</span><span class="kw">has_file</span>(<span class="st">&quot;.git/index&quot;</span>)</code></pre></div>
 <pre><code>## Root criterion: contains a file `.git/index`</code></pre>
 <p>For now, we assume it’s an R package:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">root &lt;-<span class="st"> </span>rprojroot::is_r_package</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">root &lt;-<span class="st"> </span>rprojroot<span class="op">::</span>is_r_package</code></pre></div>
 <p>The <code>root</code> object contains a function that helps locating files below the root of your package, regardless of your current working directory. If you are sure that your working directory is somewhere below your project’s root, use the <code>root$find_file()</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readLines</span>(root$<span class="kw">find_file</span>(<span class="st">&quot;DESCRIPTION&quot;</span>), <span class="dv">3</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">readLines</span>(root<span class="op">$</span><span class="kw">find_file</span>(<span class="st">&quot;DESCRIPTION&quot;</span>), <span class="dv">3</span>)</code></pre></div>
 <pre><code>## [1] &quot;Package: rprojroot&quot;                            
 ## [2] &quot;Title: Finding Files in Project Subdirectories&quot;
-## [3] &quot;Version: 1.2&quot;</code></pre>
+## [3] &quot;Version: 1.3-2&quot;</code></pre>
 <p>You can also construct an accessor to your root using the <code>root$make_fix_file()</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">root_file &lt;-<span class="st"> </span>root$<span class="kw">make_fix_file</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">root_file &lt;-<span class="st"> </span>root<span class="op">$</span><span class="kw">make_fix_file</span>()</code></pre></div>
 <p>Note that <code>root_file()</code> is a <em>function</em> that works just like <code>$find_file()</code> but will find the files even if the current working directory is outside your project:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">withr::<span class="kw">with_dir</span>(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">withr<span class="op">::</span><span class="kw">with_dir</span>(
   <span class="st">&quot;../..&quot;</span>,
   <span class="kw">readLines</span>(<span class="kw">root_file</span>(<span class="st">&quot;DESCRIPTION&quot;</span>), <span class="dv">3</span>)
 )</code></pre></div>
 <pre><code>## [1] &quot;Package: rprojroot&quot;                            
 ## [2] &quot;Title: Finding Files in Project Subdirectories&quot;
-## [3] &quot;Version: 1.2&quot;</code></pre>
+## [3] &quot;Version: 1.3-2&quot;</code></pre>
 <p>If you know the absolute path of some directory below your project, but cannot be sure of your current working directory, pass that absolute path to <code>root$make_fix_file()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">root_file &lt;-<span class="st"> </span>root$<span class="kw">make_fix_file</span>(<span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">User Name</span><span class="ch">\\</span><span class="st">...&quot;</span>)</code></pre></div>
-<p>Get the path of standalone R scripts or vignettes using the <code>thisfile()</code> function in the <code>kimisc</code> package:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">root_file &lt;-<span class="st"> </span>root$<span class="kw">make_fix_file</span>(<span class="kw">dirname</span>(kimisc::<span class="kw">thisfile</span>()))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">root_file &lt;-<span class="st"> </span>root<span class="op">$</span><span class="kw">make_fix_file</span>(<span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">User Name</span><span class="ch">\\</span><span class="st">...&quot;</span>)</code></pre></div>
+<p>As a last resort, you can get the path of standalone R scripts or vignettes using the <code>thisfile()</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">root_file &lt;-<span class="st"> </span>root<span class="op">$</span><span class="kw">make_fix_file</span>(<span class="kw">dirname</span>(<span class="kw">thisfile</span>()))</code></pre></div>
 <p>The remainder of this vignette describes implementation details and advanced features.</p>
 </div>
 <div id="project-root" class="section level2">
@@ -139,12 +139,57 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##  [7] &quot;README.md&quot;        &quot;_pkgdown.yml&quot;     &quot;appveyor.yml&quot;    
 ## [10] &quot;cran-comments.md&quot; &quot;docs&quot;             &quot;inst&quot;            
 ## [13] &quot;man&quot;              &quot;readme&quot;           &quot;revdep&quot;          
-## [16] &quot;rprojroot.Rproj&quot;  &quot;tests&quot;            &quot;tic.R&quot;           
-## [19] &quot;vignettes&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Find a file relative to the root</span>
-<span class="kw">file.exists</span>(<span class="kw">find_root_file</span>(<span class="st">&quot;R&quot;</span>, <span class="st">&quot;root.R&quot;</span>, <span class="dt">criterion =</span> <span class="kw">has_file</span>(<span class="st">&quot;DESCRIPTION&quot;</span>)))</code></pre></div>
+## [16] &quot;rprojroot.Rcheck&quot; &quot;rprojroot.Rproj&quot;  &quot;tests&quot;           
+## [19] &quot;tic.R&quot;            &quot;vignettes&quot;</code></pre>
+<div id="relative-paths-to-a-stable-root" class="section level4">
+<h4>Relative paths to a stable root</h4>
+<p>Here we illustrate the power of <em>rprojroot</em> by demonstrating how to access the same file from two different working directories. Let your project be a package called <code>pkgname</code> and consider the desired file <code>rrmake.R</code> at <code>pkgname/R/rrmake.R</code>. First, we show how to access from the <code>vignettes</code> directory, and then from the <code>tests/testthat</code> directory.</p>
+<div id="example-a-from-vignettes" class="section level5">
+<h5>Example A: From <code>vignettes</code></h5>
+<p>When your working directory is <code>pkgname/vignettes</code>, you can access the <code>rrmake.R</code> file by:</p>
+<ol style="list-style-type: decimal">
+<li>Supplying a pathname relative to your working directory. Here’s two ways to do that:</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rel_path_from_vignettes &lt;-<span class="st"> &quot;../R/rrmake.R&quot;</span>
+rel_path_from_vignettes &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="st">&quot;..&quot;</span>, <span class="st">&quot;R&quot;</span>, <span class="st">&quot;rrmake.R&quot;</span>) ##identical</code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Supplying a pathname to the file relative from the root of the package, e.g.,</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rel_path_from_root &lt;-<span class="st"> &quot;R/rrmake.R&quot;</span>
+rel_path_from_root &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="st">&quot;R&quot;</span>, <span class="st">&quot;rrmake.R&quot;</span>) ##identical</code></pre></div>
+<p>This second method requires finding the root of the package, which can be done with the <code>has_file()</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">has_file</span>(<span class="st">&quot;DESCRIPTION&quot;</span>)</code></pre></div>
+<pre><code>## Root criterion: contains a file `DESCRIPTION`</code></pre>
+<p>So, using <em>rprojroot</em> you can specify the path relative from root in the following manner:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Specify a path/to/file relative to the root</span>
+rel_path_from_root &lt;-<span class="st"> </span><span class="kw">find_root_file</span>(<span class="st">&quot;R&quot;</span>, <span class="st">&quot;rrmake.R&quot;</span>, <span class="dt">criterion =</span> <span class="kw">has_file</span>(<span class="st">&quot;DESCRIPTION&quot;</span>))</code></pre></div>
+</div>
+<div id="example-b-from-teststestthat" class="section level5">
+<h5>Example B: From <code>tests/testthat</code></h5>
+<p>When your working directory is <code>pkgname/tests/testthat</code>, you can access the <code>rrmake.R</code> file by:</p>
+<ol style="list-style-type: decimal">
+<li>Supplying a pathname relative to your working directory.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rel_path_from_testthat &lt;-<span class="st"> &quot;../../R/rrmake.R&quot;</span></code></pre></div>
+<p>Note that this is different than in the previous example! However, the second method is the same…</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Supplying a pathname to the file relative from the root of the package. With <em>rprojroot</em>, this is the exact same as in the previous example.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Specify a path/to/file relative to the root</span>
+rel_path_from_root &lt;-<span class="st"> </span><span class="kw">find_root_file</span>(<span class="st">&quot;R&quot;</span>, <span class="st">&quot;rrmake.R&quot;</span>, <span class="dt">criterion =</span> <span class="kw">has_file</span>(<span class="st">&quot;DESCRIPTION&quot;</span>))</code></pre></div>
+</div>
+<div id="summary-of-examples-a-and-b" class="section level5">
+<h5>Summary of Examples A and B</h5>
+<p>Since Examples A and B used different working directories, <code>rel_path_from_vignettes</code> and <code>rel_path_from_testthat</code> were different. This is an issue when trying to re-use the same code. This issue is solved by using <em>rprojroot</em>: the function <code>find_root_file()</code> finds a file relative from the root, where the root is determined from checking the criterion with <code>has_file()</code>.</p>
+<p>Note that the follow code produces identical results when building the vignette <em>and</em> when sourcing the chunk in RStudio, provided that the current working directory is the project root or anywhere below. So, we can check to make sure that <em>rprojroot</em> has succesfully determined the correct path:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Specify a path/to/file relative to the root</span>
+rel_path_from_root &lt;-<span class="st"> </span><span class="kw">find_root_file</span>(<span class="st">&quot;R&quot;</span>, <span class="st">&quot;rrmake.R&quot;</span>, <span class="dt">criterion =</span> <span class="kw">has_file</span>(<span class="st">&quot;DESCRIPTION&quot;</span>))
+
+<span class="co"># Find a file relative to the root</span>
+<span class="kw">file.exists</span>(rel_path_from_root)</code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<p>Note that the following code produces identical results when building the vignette <em>and</em> when sourcing the chunk in RStudio, provided that the current working directory is the project root or anywhere below.</p>
+</div>
+</div>
 </div>
 <div id="criteria" class="section level3">
 <h3>Criteria</h3>
@@ -169,7 +214,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## Root criterion: contains a file `.projectile`
 ## 
 ## $is_git_root
-## Root criterion: contains a directory `.git`
+## Root criterion: one of
+## - contains a directory `.git`
+## - contains a file `.git` with contents matching `^gitdir: `
 ## 
 ## $is_svn_root
 ## Root criterion: contains a directory `.svn`
@@ -177,6 +224,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## $is_vcs_root
 ## Root criterion: one of
 ## - contains a directory `.git`
+## - contains a file `.git` with contents matching `^gitdir: `
 ## - contains a directory `.svn`
 ## 
 ## $is_testthat
@@ -195,7 +243,7 @@ has_license</code></pre></div>
 is_projecttemplate_project</code></pre></div>
 <pre><code>## Root criterion: contains a file `config/global.dcf` with contents matching `^version: `</code></pre>
 <p>You can also combine criteria via the <code>|</code> operator:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_r_package |<span class="st"> </span>is_rstudio_project</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_r_package <span class="op">|</span><span class="st"> </span>is_rstudio_project</code></pre></div>
 <pre><code>## Root criterion: one of
 ## - contains a file `DESCRIPTION` with contents matching `^Package: `
 ## - contains a file matching `[.]Rproj$` with contents matching `^Version: ` in the first line</code></pre>
@@ -219,29 +267,29 @@ is_projecttemplate_project</code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Each criterion actually contains a function that allows finding a file below the root specified by this criterion. As our project does not have a file named <code>LICENSE</code>, querying the root results in an error:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use the has_license criterion to find the root</span>
-R &lt;-<span class="st"> </span>has_license$find_file
+R &lt;-<span class="st"> </span>has_license<span class="op">$</span>find_file
 R</code></pre></div>
 <pre><code>## function (..., path = &quot;.&quot;) 
 ## {
 ##     find_root_file(..., criterion = criterion, path = path)
 ## }
-## &lt;environment: 0x55ca0ef0cf10&gt;</code></pre>
+## &lt;environment: 0x55721401cd30&gt;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Our package does not have a LICENSE file, trying to find the root results in an error</span>
 <span class="kw">R</span>()</code></pre></div>
-<pre><code>## Error: No root directory found in /tmp/Rtmp76Lko7/Rbuild36db711fd839/rprojroot/vignettes or its parent directories. Root criterion: contains a file `LICENSE`</code></pre>
+<pre><code>## Error: No root directory found in /tmp/RtmpIOVFMP/Rbuild4ab6ad646f7/rprojroot/vignettes or its parent directories. Root criterion: contains a file `LICENSE`</code></pre>
 </div>
 <div id="fixed-root" class="section level3">
 <h3>Fixed root</h3>
 <p>We can also create a function that computes a path relative to the root <em>at creation time</em>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a function that computes file paths below the current root</span>
-F &lt;-<span class="st"> </span>is_r_package$<span class="kw">make_fix_file</span>()
+F &lt;-<span class="st"> </span>is_r_package<span class="op">$</span><span class="kw">make_fix_file</span>()
 F</code></pre></div>
 <pre><code>## function (...) 
 ## {
-##     file.path(&quot;/tmp/Rtmp76Lko7/Rbuild36db711fd839/rprojroot&quot;, 
+##     file.path(&quot;/tmp/RtmpIOVFMP/Rbuild4ab6ad646f7/rprojroot&quot;, 
 ##         ...)
 ## }
-## &lt;environment: 0x55ca0cd18718&gt;</code></pre>
+## &lt;environment: 0x5572140051a8&gt;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Show contents of the NAMESPACE file in our project</span>
 <span class="kw">readLines</span>(<span class="kw">F</span>(<span class="st">&quot;NAMESPACE&quot;</span>))</code></pre></div>
 <pre><code>##  [1] &quot;# Generated by roxygen2: do not edit by hand&quot;
@@ -277,17 +325,23 @@ F</code></pre></div>
 ## [31] &quot;export(is_testthat)&quot;                         
 ## [32] &quot;export(is_vcs_root)&quot;                         
 ## [33] &quot;export(root_criterion)&quot;                      
-## [34] &quot;import(backports)&quot;                           
-## [35] &quot;importFrom(utils,str)&quot;</code></pre>
+## [34] &quot;export(thisfile)&quot;                            
+## [35] &quot;export(thisfile_knit)&quot;                       
+## [36] &quot;export(thisfile_r)&quot;                          
+## [37] &quot;export(thisfile_rscript)&quot;                    
+## [38] &quot;export(thisfile_source)&quot;                     
+## [39] &quot;import(backports)&quot;                           
+## [40] &quot;importFrom(utils,str)&quot;                       
+## [41] &quot;importFrom(utils,tail)&quot;</code></pre>
 <p>This is a more robust alternative to <code>$find_file()</code>, because it <em>fixes</em> the project directory when <code>$make_fix_file()</code> is called, instead of searching for it every time. (For that reason it is also slightly faster, but I doubt this matters in practice.)</p>
 <p>This function can be used even if we later change the working directory to somewhere outside the project:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Print the size of the namespace file, working directory outside the project</span>
-withr::<span class="kw">with_dir</span>(
+withr<span class="op">::</span><span class="kw">with_dir</span>(
   <span class="st">&quot;../..&quot;</span>,
   <span class="kw">file.size</span>(<span class="kw">F</span>(<span class="st">&quot;NAMESPACE&quot;</span>))
 )</code></pre></div>
-<pre><code>## [1] 880</code></pre>
-<p>The <code>make_fix_file()</code> member function also accepts an optional <code>path</code> argument, in case you know your project’s root but the current working directory is somewhere outside. Take a look at the <code>thisfile()</code> function in the <code>kimisc</code> package for getting the path to the current script or <code>knitr</code> document.</p>
+<pre><code>## [1] 1010</code></pre>
+<p>The <code>make_fix_file()</code> member function also accepts an optional <code>path</code> argument, in case you know your project’s root but the current working directory is somewhere outside. The path to the current script or <code>knitr</code> document can be obtained using the <code>thisfile()</code> function, but it’s much easier and much more robust to just run your scripts with the working directory somewhere below your project root.</p>
 </div>
 </div>
 <div id="testthat-files" class="section level2">
@@ -302,13 +356,56 @@ withr::<span class="kw">with_dir</span>(
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_testthat</code></pre></div>
 <pre><code>## Root criterion: directory name is `testthat` (also look in subdirectories: `tests/testthat`, `testthat`)</code></pre>
 <p>The example code below lists all files in the <a href="https://github.com/krlmlr/rprojroot/tree/master/tests/testthat/hierarchy">hierarchy</a> test directory. It uses two project root lookups in total, so that it also works when rendering the vignette (<em>sigh</em>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dir</span>(is_testthat$<span class="kw">find_file</span>(<span class="st">&quot;hierarchy&quot;</span>, <span class="dt">path =</span> is_r_package$<span class="kw">find_file</span>()))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dir</span>(is_testthat<span class="op">$</span><span class="kw">find_file</span>(<span class="st">&quot;hierarchy&quot;</span>, <span class="dt">path =</span> is_r_package<span class="op">$</span><span class="kw">find_file</span>()))</code></pre></div>
 <pre><code>## [1] &quot;DESCRIPTION&quot;     &quot;a&quot;               &quot;b&quot;               &quot;c&quot;              
 ## [5] &quot;hierarchy.Rproj&quot;</code></pre>
+<div id="another-example-custom-testing-utilities" class="section level3">
+<h3>Another example: custom testing utilities</h3>
+<p>The hassle of using saved data files for testing is made even easier by using <em>rprojroot</em> in a utility function. For example, suppose you have a testing file at <code>tests/testthat/test_my_fun.R</code> which tests the <code>my_fun()</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_fun_run &lt;-<span class="st"> </span><span class="kw">do.call</span>(my_fun, my_args)
+
+testthat<span class="op">::</span><span class="kw">test_that</span>(
+  <span class="st">&quot;my_fun() returns expected output&quot;</span>,
+  testthat<span class="op">::</span><span class="kw">expect_equal</span>(
+    my_fun_run,
+    expected_output
+  )
+)</code></pre></div>
+<p>There are two pieces of information that you’ll need every time <code>test_my_fun.R</code> is run: <code>my_args</code> and <code>expected_output</code>. Typically, these objects are saved to <code>.Rdata</code> files and saved to the same subdirectory. For example, you could save them to <code>my_args.Rdata</code> and <code>expected_output.Rdata</code> under the <code>tests/testthat/testing_data</code> subdirectory. And, to find them easily in any contexts, you can use <em>rprojroot</em>!</p>
+<p>Since all of the data files live in the same subdirectory, you can create a utility function <code>get_my_path()</code> that will always look in that directory for these types of files. And, since the <em>testthat</em> package will look for and source the <code>tests/testthat/helper.R</code> file before running any tests, you can place a <code>get_my_path()</code> in this file and use it throughout your tests:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## saved to tests/testthat/helper.R
+get_my_path &lt;-<span class="st"> </span><span class="cf">function</span>(file_name) {
+  rprojroot<span class="op">::</span><span class="kw">find_testthat_root_file</span>(
+    <span class="st">&quot;testing_data&quot;</span>, filename
+  )
+}</code></pre></div>
+<p>Now you can ask <code>get_my_path()</code> to find your important data files by using the function within your test scripts!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Find the correct path with your custom rprojroot helper function
+path_to_my_args_file &lt;-<span class="st"> </span><span class="kw">get_my_path</span>(<span class="st">&quot;my_args.Rdata&quot;</span>)
+
+## Load the input arguments
+<span class="kw">load</span>(<span class="dt">file =</span> path_to_my_args_file)
+
+## Run the function with those arguments
+my_fun_run &lt;-<span class="st"> </span><span class="kw">do.call</span>(my_fun,my_args)
+
+## Load the historical expectation with the helper
+<span class="kw">load</span>(<span class="dt">file =</span> <span class="kw">get_my_path</span>(<span class="st">&quot;expected_output.Rdata&quot;</span>))
+
+## Pass all tests and achieve nirvana
+testthat<span class="op">::</span><span class="kw">test_that</span>(
+  <span class="st">&quot;my_fun() returns expected output&quot;</span>,
+  testthat<span class="op">::</span><span class="kw">expect_equal</span>(
+    my_fun_run,
+    expected_output
+  )
+)</code></pre></div>
+<p>For an example in the wild, see the <a href="https://github.com/tidyverse/readxl/blob/0d9ad4f570f6580ff716e0e9ba5048447048e9f0/tests/testthat/helper.R#L1-L3"><code>test_sheet()</code> function</a> in the <em>readxl</em> package.</p>
+</div>
 </div>
 <div id="summary" class="section level2">
 <h2>Summary</h2>
-<p>The <code>rprojroot</code> package allows easy access to files below a project root if the project root can be identified easily, e.g. if it is the only directory in the whole hierarchy that contains a specific file. This is a robust solution for finding files in largish projects with a subdirectory hierarchy if the current working directory cannot be assumed fixed. (However, at least initially, the current working directory must be somewhere below the project root.)</p>
+<p>The <em>rprojroot</em> package allows easy access to files below a project root if the project root can be identified easily, e.g. if it is the only directory in the whole hierarchy that contains a specific file. This is a robust solution for finding files in largish projects with a subdirectory hierarchy if the current working directory cannot be assumed fixed. (However, at least initially, the current working directory must be somewhere below the project root.)</p>
 </div>
 <div id="acknowledgement" class="section level2">
 <h2>Acknowledgement</h2>
@@ -322,7 +419,7 @@ withr::<span class="kw">with_dir</span>(
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

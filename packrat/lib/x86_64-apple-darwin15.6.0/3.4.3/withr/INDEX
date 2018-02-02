@@ -5,6 +5,7 @@ with_connection         Connections which close themselves
 with_db_connection      DBMS Connections which disconnect themselves.
 with_dir                Working directory
 with_envvar             Environment variables
+with_file               Files which delete themselves
 with_gctorture2         Torture Garbage Collector
 with_libpaths           Library paths
 with_locale             Locale settings

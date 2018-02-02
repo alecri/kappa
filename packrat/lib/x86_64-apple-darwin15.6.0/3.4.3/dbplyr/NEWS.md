@@ -1,8 +1,120 @@
-# dbplyr 1.0.0.9000
+# dbplyr 1.2.0
+
+## New top-level translations
+
+* New translations for 
+    
+    * MS Access (#2946) (@DavisVaughan)
+    * Oracle, via odbc or ROracle (#2928, #2732, @edgararuiz)
+    * Teradata. 
+    * Redshift.
+
+* dbplyr now supplies appropriate translations for the RMariaDB and 
+  RPostgres packages (#3154). We generally recommend using these packages
+  in favour of the older RMySQL and RPostgreSQL packages as they are
+  fully DBI compliant and tested with DBItest.
 
 ## New features
 
+* `copy_to()` can now "copy" tbl_sql in the same src, providing another
+  way to cache a query into a temporary table (#3064). You can also 
+  `copy_to` tbl_sqls from another source, and `copy_to()` will automatically
+  collect then copy.
+
+* Initial support for stringr functions: `str_length()`, `str_to_upper()`,
+  `str_to_lower()`, `str_replace_all()`, `str_detect()`, `str_trim()`. 
+  Regular expression support varies from database to database, but most 
+  simple regular expressions should be ok.
+
+## Tools for developers
+
+* `db_compute()` gains an `analyze` argument to match `db_copy_to()`.
+
+* New `remote_name()`, `remote_con()`, `remote_src()`, `remote_query()` and 
+  `remote_query_plan()` provide a standard API for get metadata about a 
+  remote tbl (#3130, #2923, #2824).
+
+* New `sql_expr()` is a more convenient building block for low-level SQL
+  translation (#3169).
+
+* New `sql_aggregate()` and `win_aggregate()` for generating SQL and windowed
+  SQL functions for aggregates. These take one argument, `x`, and warn if 
+  `na.rm` is not `TRUE` (#3155). `win_recycled()` is equivalent to 
+  `win_aggregate()` and has been soft-deprecated.
+  
+* `db_write_table` now needs to return the table name
+
+## Minor improvements and bug fixes
+
+* Multiple `head()` calls in a row now collapse to a single call. This avoids 
+  a printing problem with MS SQL (#3084).
+
+* `escape()` now works with integer64 values from the bit64 package (#3230)
+
+* `if`, `ifelse()`, and `if_else()` now correctly scope the false condition
+  so that it only applies to non-NULL conditions (#3157)
+
+* `ident()` and `ident_q()` handle 0-length inputs better, and should
+  be easier to use with S3 (#3212)
+
+* `in_schema()` should now work in more places, particularly in `copy_to()` 
+   (#3013, @baileych)
+
+* SQL generation for joins no longer gets stuck in a endless loop if you
+  request an empty suffix (#3220).
+
+* `mutate()` has better logic for splitting a single mutate into multiple
+  subqueries (#3095).
+
+* Improved `paste()` and `paste0()` support in MySQL, PostgreSQL (#3168),
+  and RSQLite (#3176). MySQL and PostgreSQL gain support for `str_flatten()` 
+  which behaves like `paste(x, collapse = "-")` (but for technical reasons 
+  can't be implemented as a straightforward translation of `paste()`).
+
+* `same_src.tbl_sql()` now performs correct comparison instead of always 
+  returning `TRUE`. This means that `copy = TRUE` once again allows you to
+  perform cross-database joins (#3002).
+
+* `select()` queries no longer alias column names unnecessarily 
+  (#2968, @DavisVaughan).
+
+* `select()` and `rename()` are now powered by tidyselect, 
+  fixing a few renaming bugs (#3132, #2943, #2860).
+
+* `summarise()` once again performs partial evaluation before database 
+  submission (#3148).
+
+* `test_src()` makes it easier to access a single test source.
+
+## Database specific improvements
+
+*   MS SQL
+  
+    * Better support for temporary tables (@Hong-Revo)
+    
+    * Different translations for filter/mutate contexts for: `NULL` evaluation
+      (`is.na()`, `is.null()`), logical operators (`!`, `&`, `&&`, `|`, `||`),
+      and comparison operators (`==`, `!=`, `<`, `>`, `>=`, `<=`)
+
+*   MySQL: `copy_to()` (via `db_write_table()`) correctly translates logical 
+    variables to integers (#3151).
+  
+*   odbc: improved `n()` translation in windowed context.
+
+*   SQLite: improved `na_if` translation (@cwarden)
+
+*   PostgreSQL: translation for `grepl()` added (@zozlak)
+
+# dbplyr 1.1.0
+
+## New features
+
+* `full_join()` over non-overlapping columns `by = character()` translated to
+  `CROSS JOIN` (#2924).
+
 * `case_when()` now translates to SQL "CASE WHEN" (#2894)
+
+* `x %in% c(1)` now generates the same SQL as `x %in% 1` (#2898).
 
 * New `window_order()` and `window_frame()` give you finer control over 
   the window functions that dplyr creates (#2874, #2593).

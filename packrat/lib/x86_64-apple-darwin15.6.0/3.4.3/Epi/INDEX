@@ -33,6 +33,9 @@ Termplot                A wrapper for 'termplot' that optionally (but
                         on a common log-scale. Also scales x-axes to
                         the same physical scale.
 Y.dk                    Population risk time in Denmark
+addCov.Lexis            Add covariates (typically clinical
+                        measurements) taken at known times to a Lexis
+                        object.
 apc.LCa                 Fit Age-Period-Cohort models and Lee-Carter
                         models with effects modeled by natural splines.
 apc.fit                 Fit an Age-Period-Cohort model to tabular data.
@@ -96,12 +99,12 @@ gmortDK                 Population mortality rates for Denmark in
 hivDK                   hivDK: seroconversion in a cohort of Danish men
 lep                     An unmatched case-control study of leprosy
                         incidence
+lgrep                   Convenience versions of grep
 lls                     Functions to manage and explore the workspace
 lungDK                  Male lung cancer incidence in Denmark
 mcutLexis               Cut follow-up at multiple event dates and keep
                         track of order of events
 merge.Lexis             Merge a Lexis object with a data frame
-merge.data.frame        Merge data frame with a Lexis object
 mh                      Mantel-Haenszel analyses of cohort and
                         case-control studies
 mortDK                  Population mortality rates for Denmark in
@@ -117,6 +120,8 @@ pctab                   Create percentages in a table
 plot.Lexis              Lexis diagrams
 plot.apc                Plot the estimates from a fitted
                         Age-Period-Cohort model
+plotCIF                 Plotting Aalen-Johansen curves for competing
+                        events
 plotEst                 Plot estimates with confidence limits (forest
                         plot)
 plotevent               Plot Equivalence Classes

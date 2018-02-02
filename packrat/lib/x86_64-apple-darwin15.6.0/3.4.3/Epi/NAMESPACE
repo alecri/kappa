@@ -41,6 +41,11 @@ lines.apc,
   fit.add,
   fit.mult,
   ftrend,
+  fgrep,
+  ngrep,
+  lgrep,
+      plotCIF,
+   stackedCIF,
  show.apc.LCa,
       apc.LCa,
           LCa.fit,
@@ -80,6 +85,7 @@ lines.apc,
             etm.Lexis,
             crr.Lexis,
              simLexis,
+         addCov.Lexis,
          subset.stacked.Lexis,
       transform.stacked.Lexis,
            plot.pState,
@@ -90,7 +96,6 @@ lines.apc,
   timeBand,
   timeScales,
   breaks,
-  merge.data.frame,
   tbox,
   dbox,
   fillarr,
@@ -139,6 +144,7 @@ importFrom( MASS, mvrnorm )
 importFrom( survival, clogit )
 importFrom( numDeriv, hessian )
 importFrom( Matrix, nearPD )
+importFrom( zoo, na.locf )
 importFrom("grDevices", "gray", "rainbow")
 importFrom("graphics", "abline", "arrows", "axis", "box", "layout",
            "lines", "locator", "matlines", "matplot", "matpoints",
@@ -151,7 +157,7 @@ importFrom("stats", ".getXlevels", "addmargins", "anova", "approx",
            "is.empty.model", "median", "model.extract", "model.matrix",
            "model.offset", "model.response", "nlm", "pchisq", "pnorm",
            "poisson", "predict", "qnorm", "qt", "quantile", "runif",
-           "termplot", "update", "vcov", "weighted.mean", "xtabs")
+           "termplot", "update", "vcov", "weighted.mean", "xtabs" )
 importFrom("utils", "flush.console", "str")
 
 # register S3 methods
@@ -180,6 +186,7 @@ S3method(  Relevel, Lexis)
 S3method(  Relevel, factor)
 S3method(  Relevel, default)
 S3method(factorize, Lexis)
+S3method(   addCov, Lexis)
 S3method(    stack, Lexis)
 S3method(     tmat, Lexis)
 S3method(    boxes, Lexis)
@@ -191,7 +198,6 @@ S3method(    print, LCa)
 S3method(  summary, LCa)
 S3method(  predict, LCa)
 S3method(     plot, LCa)
-S3method(    merge, data.frame)
 S3method(    print, stat.table)
 S3method(    print, clogistic)
 S3method(     coef, clogistic)

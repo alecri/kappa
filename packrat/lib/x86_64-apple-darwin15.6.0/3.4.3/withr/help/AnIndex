@@ -12,6 +12,7 @@ local_db_connection	with_db_connection
 local_dir	with_dir
 local_environment	with_package
 local_envvar	with_envvar
+local_file	with_file
 local_jpeg	devices
 local_libpaths	with_libpaths
 local_locale	with_locale
@@ -43,6 +44,7 @@ with_device	devices
 with_dir	with_dir
 with_environment	with_package
 with_envvar	with_envvar
+with_file	with_file
 with_gctorture2	with_gctorture2
 with_jpeg	devices
 with_libpaths	with_libpaths

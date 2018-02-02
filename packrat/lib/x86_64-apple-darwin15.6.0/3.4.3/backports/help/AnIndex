@@ -1,5 +1,6 @@
 ...elt	dotsElt
 ...length	dotsLength
+.valid.factor	valid.factor
 anyNA	anyNA
 dir.exists	dir.exists
 endsWith	endsWith

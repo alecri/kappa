@@ -11,7 +11,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;Hmisc&rsquo; version 4.0-3</h2>
+</div><h2>Documentation for package &lsquo;Hmisc&rsquo; version 4.1-1</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../NEWS">Package NEWS</a>.</li>
@@ -130,11 +130,11 @@
 <tr><td style="width: 25%;"><a href="xYplot.html">Cbind</a></td>
 <td>xyplot and dotplot with Matrix Variables to Plot Error Bars and Bands</td></tr>
 <tr><td style="width: 25%;"><a href="trunc.POSIXt.html">ceil</a></td>
-<td>return the floor, ceiling, or rounded value of date or time to specified unit.</td></tr>
+<td>Return the floor, ceiling, or rounded value of date or time to specified unit.</td></tr>
 <tr><td style="width: 25%;"><a href="trunc.POSIXt.html">ceil.default</a></td>
-<td>return the floor, ceiling, or rounded value of date or time to specified unit.</td></tr>
+<td>Return the floor, ceiling, or rounded value of date or time to specified unit.</td></tr>
 <tr><td style="width: 25%;"><a href="trunc.POSIXt.html">ceil.POSIXt</a></td>
-<td>return the floor, ceiling, or rounded value of date or time to specified unit.</td></tr>
+<td>Return the floor, ceiling, or rounded value of date or time to specified unit.</td></tr>
 <tr><td style="width: 25%;"><a href="show.pch.html">character.table</a></td>
 <td>Display Colors, Plotting Symbols, and Symbol Numeric Equivalents</td></tr>
 <tr><td style="width: 25%;"><a href="biVar.html">chiSquare</a></td>
@@ -202,8 +202,6 @@
 <td>Update a Data Frame or Cleanup a Data Frame after Importing</td></tr>
 <tr><td style="width: 25%;"><a href="dataRep.html">dataRep</a></td>
 <td>Representativeness of Observations in a Data Set</td></tr>
-<tr><td style="width: 25%;"><a href="inc-dec.html">dec&lt;-</a></td>
-<td>Increment and Decrement</td></tr>
 <tr><td style="width: 25%;"><a href="deff.html">deff</a></td>
 <td>Design Effect and Intra-cluster Correlation</td></tr>
 <tr><td style="width: 25%;"><a href="describe.html">describe</a></td>
@@ -384,6 +382,8 @@
 <td>Summarize Mixed Data Types vs. Groups</td></tr>
 <tr><td style="width: 25%;"><a href="latex.html">htmlSN</a></td>
 <td>Convert an S object to LaTeX, and Related Utilities</td></tr>
+<tr><td style="width: 25%;"><a href="Misc.html">htmlSpecialType</a></td>
+<td>Miscellaneous Functions</td></tr>
 <tr><td style="width: 25%;"><a href="latex.html">htmlTranslate</a></td>
 <td>Convert an S object to LaTeX, and Related Utilities</td></tr>
 <tr><td style="width: 25%;"><a href="html.html">htmlVerbatim</a></td>
@@ -401,8 +401,6 @@
 <td>Generic Functions and Methods for Imputation</td></tr>
 <tr><td style="width: 25%;"><a href="transcan.html">impute.transcan</a></td>
 <td>Transformations/Imputations using Canonical Variates</td></tr>
-<tr><td style="width: 25%;"><a href="inc-dec.html">inc&lt;-</a></td>
-<td>Increment and Decrement</td></tr>
 <tr><td style="width: 25%;"><a href="mChoice.html">inmChoice</a></td>
 <td>Methods for Storing and Analyzing Multiple Choice Variables</td></tr>
 <tr><td style="width: 25%;"><a href="Misc.html">inverseFunction</a></td>
@@ -506,6 +504,8 @@
 <td>Multi-way Summary of Proportions</td></tr>
 <tr><td style="width: 25%;"><a href="Misc.html">latexBuild</a></td>
 <td>Miscellaneous Functions</td></tr>
+<tr><td style="width: 25%;"><a href="latexCheckOptions.html">latexCheckOptions</a></td>
+<td>Check whether the options for latex functions have been specified.</td></tr>
 <tr><td style="width: 25%;"><a href="latexDotchart.html">latexDotchart</a></td>
 <td>Enhanced Dot Chart for LaTeX Picture Environment with epic</td></tr>
 <tr><td style="width: 25%;"><a href="latexTherm.html">latexNeedle</a></td>
@@ -708,6 +708,8 @@
 <td>Plot smoothed estimates</td></tr>
 <tr><td style="width: 25%;"><a href="latexTherm.html">pngNeedle</a></td>
 <td>Create LaTeX Thermometers and Colored Needles</td></tr>
+<tr><td style="width: 25%;"><a href="popower.html">pomodm</a></td>
+<td>Power and Sample Size for Ordinal Response</td></tr>
 <tr><td style="width: 25%;"><a href="popower.html">popower</a></td>
 <td>Power and Sample Size for Ordinal Response</td></tr>
 <tr><td style="width: 25%;"><a href="popower.html">posamsize</a></td>
@@ -882,10 +884,10 @@
 <td>Bootstrap Repeated Measurements Model</td></tr>
 <tr><td style="width: 25%;"><a href="rMultinom.html">rMultinom</a></td>
 <td>Generate Multinomial Random Variables with Varying Probabilities</td></tr>
-<tr><td style="width: 25%;"><a href="trunc.POSIXt.html">round.POSIXt</a></td>
-<td>return the floor, ceiling, or rounded value of date or time to specified unit.</td></tr>
 <tr><td style="width: 25%;"><a href="dataRep.html">roundN</a></td>
 <td>Representativeness of Observations in a Data Set</td></tr>
+<tr><td style="width: 25%;"><a href="trunc.POSIXt.html">roundPOSIXt</a></td>
+<td>Return the floor, ceiling, or rounded value of date or time to specified unit.</td></tr>
 </table>
 
 <h2><a name="S">-- S --</a></h2>
@@ -925,6 +927,8 @@
 <td>Display image from psfrag LaTeX strings</td></tr>
 <tr><td style="width: 25%;"><a href="simplifyDims.html">simplifyDims</a></td>
 <td>List Simplification</td></tr>
+<tr><td style="width: 25%;"><a href="simRegOrd.html">simRegOrd</a></td>
+<td>Simulate Power for Adjusted Ordinal Regression Two-Sample Test</td></tr>
 <tr><td style="width: 25%;"><a href="legendfunctions.html">sKey</a></td>
 <td>Legend Creation Functions</td></tr>
 <tr><td style="width: 25%;"><a href="smean.sd.html">smean.cl.boot</a></td>
@@ -1048,8 +1052,8 @@
 <td>Miscellaneous Functions</td></tr>
 <tr><td style="width: 25%;"><a href="Misc.html">trellis.strip.blank</a></td>
 <td>Miscellaneous Functions</td></tr>
-<tr><td style="width: 25%;"><a href="trunc.POSIXt.html">trunc.POSIXt</a></td>
-<td>return the floor, ceiling, or rounded value of date or time to specified unit.</td></tr>
+<tr><td style="width: 25%;"><a href="trunc.POSIXt.html">truncPOSIXt</a></td>
+<td>Return the floor, ceiling, or rounded value of date or time to specified unit.</td></tr>
 </table>
 
 <h2><a name="U">-- U --</a></h2>

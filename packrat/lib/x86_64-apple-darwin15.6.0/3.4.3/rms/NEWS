@@ -1,3 +1,25 @@
+Changes in version 5.1-2 (2018-01-06)
+   * plot.pentrace: corrected lty for AIC if ! add, interchanged lty for AIC and BIC.  Thanks: Ferenci Tamas
+   * removeFormulaTerms: added width.cutoff=500 to deparse call to avoid problems with long variable names.  Thanks: Ferenci Tamas
+   * removeFormulaTerms: changed above fix to use paste collapse instead (Thanks: Tamas)
+   * Design: mmnames function: escaped <= like >= already escaped.  See https://github.com/harrelfe/rms/issues/29#issuecomment-303423887
+   * groupkm: speed improvement (helps calibrate*; thanks Cole Beck)
+   * fastbw: improved messages for rule and type
+   * prModFit: changed to have htmlSpecial, htmlTranslate do all the html special character coding, allowing default to unicode
+   * lrm, lrm.fit: for rank correlation measures, made more accurate by binning probabilities into bins of width 0.0002 instead of 0.002
+   * ggplot.Predict: fixed case of empty labels when defining pmlabel
+   * vcov.orm: fixed bug when intercepts longer than 1
+   * lrm.fit, orm.fit: diag(1 / sd) not returning matrix if sd is a matrix and not a vector
+   * ols: respected data in terms call, for case where formula is .
+   * robcov: removed warning in help file about printed standard errors (Thanks: Ferenci Tamás)
+   * anova, rmsMisc, survplotp.npsurv: changed nbsp to htmlSpecial version
+   * prModStat, anova, latex.cph, latex.rms, summary, validate.ols: added escape.html=FALSE to htmlTable
+   * print.summary.rms: for html returned HTML object instead of invisible
+   * validate.ols, calibrate.default: fixed fitter so that NA coefficient results in fail=TRUE
+   * Gls: fixed major bug where correlation pattern was being ignored if not corAR1,corCAR1,corCompSymm.  Thanks: Tamas Ferenci
+   * latex.cph.s: changed to use latex instead of latex.default
+   * ggplot.Predict: added conflinetype parameter (thanks: jphdotam; https://github.com/harrelfe/rms/pull/54)
+
 Changes in version 5.1-1 (2017-05-01)
    * latex.anova.rms: if table.env is FALSE but caption is specified, passes caption as insert.top argument to latex.default; when options(prType='latex') you can do print(anova(), caption=) to use this
    * prModFit: fixed one latex to lang=='latex' bug

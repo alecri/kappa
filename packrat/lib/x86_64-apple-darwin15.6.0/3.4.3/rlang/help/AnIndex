@@ -196,6 +196,7 @@ is_quosure	is_quosure
 is_quosureish	is_quosure
 is_quosures	quosures
 is_raw	type-predicates
+is_reference	is_reference
 is_scalar_atomic	scalar-type-predicates
 is_scalar_bytes	scalar-type-predicates
 is_scalar_character	scalar-type-predicates

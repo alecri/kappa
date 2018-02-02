@@ -26,4 +26,9 @@ is_testthat	criteria
 is_vcs_root	criteria
 root_criterion	root_criterion
 rprojroot	rprojroot-package
+thisfile	thisfile
+thisfile_knit	thisfile
+thisfile_r	thisfile
+thisfile_rscript	thisfile
+thisfile_source	thisfile
 |.root_criterion	root_criterion

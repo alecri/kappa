@@ -3,16 +3,27 @@ title: "Examples for rms Package"
 author: "FE Harrell"
 date: '`r Sys.Date()`'
 output:
-  html_notebook:
-    toc: yes
-    toc_float:
-      collapsed: yes
   html_document:
     toc: yes
+    toc_depth: 3
+    number_sections: true
+    toc_float: 
+      collapsed: false
+    code_folding: hide
+    theme: cerulean
+css: stewarttoc.css
 ---
+<button id="toc-toggle" type="button" class="btn btn-default btn-xs code-folding-btn pull-right collapsed" onclick="toggletoc()"><span>Outline</span></button>
+
+<script>
+function toggletoc(){
+$("#TOC").toggle();
+}
+</script>
+
 # Introduction
 ## Markdown
-This is an R Markdown html notebookdocument. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+This is an R Markdown html document using the template that is [here](http://biostat.mc.vanderbilt.edu/KnitrHtmlTemplate). Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
 ```{r, results='hide'}
 require(rms)
@@ -38,7 +49,7 @@ html(contents(titanic3), maxlevels=10, levelType='table')
 # For certain print methods set to use html
 options(grType='plotly', prType='html')
 s <- summaryM(age + pclass ~ sex, data=titanic3)
-s
+html(s)
 plot(s)
 d <- describe(titanic3)
 plot(d)
@@ -53,13 +64,13 @@ plotly::subplot(p[[1]], p[[2]],
 ```
 
 # Logistic Regression Model
-```{r lrmt}
+```{r lrmt,results='asis'}
 dd <- datadist(titanic3); options(datadist='dd')
 f <- lrm(survived ~ rcs(sqrt(age),5) * sex, data=titanic3)
-f
+print(f)
 latex(f)
 a <- anova(f)
-a
+print(a)
 plot(a)
 ```
 
@@ -90,5 +101,5 @@ survplotp(f, time.inc=1, times=c(5, 10))
 
 
 <!---
-To update html notebook on the server: cdatar examples.nb.html rms
+To update html notebook on the server: cdatar examples.html rms
 -->

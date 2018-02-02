@@ -1,6 +1,7 @@
 ## ---- echo = FALSE, message = FALSE--------------------------------------
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 library(xml2)
+library(magrittr)
 
 ## ------------------------------------------------------------------------
 x <- read_xml("<p>This is some <b>text</b>. This is more.</p>")
@@ -21,10 +22,10 @@ xml_structure(x)
 x <- read_xml("<a href='invalid!'>xml2</a>")
 xml_attr(x, "href")
 
-xml_attr(x, "href") <- "https://github.com/hadley/xml2"
+xml_attr(x, "href") <- "https://github.com/r-lib/xml2"
 xml_attr(x, "href")
 
-xml_attrs(x) <- c(id = "xml2", href = "https://github.com/hadley/xml2")
+xml_attrs(x) <- c(id = "xml2", href = "https://github.com/r-lib/xml2")
 xml_attrs(x)
 x
 
@@ -82,7 +83,25 @@ xml_add_child(t1, read_xml("<test/>"))
 x
 
 ## ------------------------------------------------------------------------
-library(magrittr)
+x <- read_xml("<foo><bar><baz/></bar></foo>")
+x1 <- x %>% xml_children() %>% .[[1]]
+x2 <- x1 %>% xml_children() %>% .[[1]]
+
+xml_remove(x1)
+rm(x1)
+gc()
+
+x2
+
+## ------------------------------------------------------------------------
+x <- read_xml("<a><b /><b><b /></b></a>")
+bees <- xml_find_all(x, "//b")
+xml_remove(xml_child(x), free = TRUE)
+# bees[[1]] is no longer valid!!!
+rm(bees)
+gc()
+
+## ------------------------------------------------------------------------
 d <- xml_new_root("sld",
     xmlns = "http://www.o.net/sld",
     "xmlns:ogc" = "http://www.o.net/ogc",

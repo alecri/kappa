@@ -3,6 +3,64 @@
 \newcommand{\ghpr}{\href{https://github.com/RcppCore/Rcpp/pull/#1}{##1}}
 \newcommand{\ghit}{\href{https://github.com/RcppCore/Rcpp/issues/#1}{##1}}
 
+\section{Changes in Rcpp version 0.12.15 (2018-01-16)}{
+  \itemize{
+    \item Changes in Rcpp API:
+    \itemize{
+      \item Calls from exception handling to \code{Rf_warning()} now correctly
+      set an initial format string (Dirk in \ghpr{777} fixing \ghit{776}).
+      \item The 'new' Date and Datetime vectors now have \code{is_na} methods
+      too. (Dirk in \ghpr{783} fixing \ghit{781}).
+      \item Protect more temporary \code{SEXP} objects produced by \code{wrap}
+      (Kevin in \ghpr{784}).
+      \item Use public R APIs for \code{new_env} (Kevin in \ghpr{785}).
+      \item Evaluation of R code is now safer when compiled against R
+      3.5 (you also need to explicitly define \code{RCPP_PROTECTED_EVAL}
+      before including \code{Rcpp.h}). Longjumps of all kinds (condition
+      catching, returns, restarts, debugger exit) are appropriately
+      detected and handled, e.g. the C++ stack unwinds correctly
+      (Lionel in \ghpr{789}). [ Committed but subsequently disabled in release
+      0.12.15 ]  
+      \item The new function \code{Rcpp_fast_eval()} can be used for
+      performance-sensitive evaluation of R code. Unlike
+      \code{Rcpp_eval()}, it does not try to catch errors with
+      \code{tryEval} in order to avoid the catching overhead. While this
+      is safe thanks to the stack unwinding protection, this also means
+      that R errors are not transformed to an \code{Rcpp::exception}. If
+      you are relying on error rethrowing, you have to use the slower
+      \code{Rcpp_eval()}. On old R versions \code{Rcpp_fast_eval()}
+      falls back to \code{Rcpp_eval()} so it is safe to use against any
+      versions of R  (Lionel in \ghpr{789}). [ Committed but subsequently
+      disabled in release 0.12.15 ]  
+      \item Overly-clever checks for \code{NA} have been removed (Kevin in
+      \ghpr{790}).
+      \item The included tinyformat has been updated to the current version,
+      Rcpp-specific changes are now more isolated (Kirill in \ghpr{791}).
+      \item Overly picky \emph{fall-through} warnings by gcc-7 regarding
+      \code{switch} statements are now pre-empted (Kirill in \ghpr{792}).
+      \item Permit compilation on ANDROID (Kenny Bell in \ghpr{796}).
+      \item Improve support for NVCC, the CUDA compiler (Iñaki Ucar in
+      \ghpr{798} addressing \ghit{797}).
+      \item Speed up tests for NA and NaN (Kirill and Dirk in \ghpr{799} and
+      \ghpr{800}).
+      \item Rearrange stack unwind test code, keep test disabled for now (Lionel
+      in \ghpr{801}).
+      \item Further condition away protect unwind behind #define (Dirk in
+      \ghpr{802}). 
+    }
+    \item Changes in Rcpp Attributes:
+    \itemize{
+      \item Addressed a missing Rcpp namespace prefix when generating a C++
+      interface (James Balamuta in \ghpr{779}).
+    }
+    \item Changes in Rcpp Documentation:
+    \itemize{
+      \item The Rcpp FAQ now shows \code{Rcpp::Rcpp.plugin.maker()} and not the
+      outdated \code{:::} use applicable non-exported functions.
+    }
+  }
+}
+
 \section{Changes in Rcpp version 0.12.14 (2017-11-17)}{
   \itemize{
     \item Changes in Rcpp API:

@@ -1,15 +1,17 @@
 Package: rpart
 Priority: recommended
-Version: 4.1-11
-Date: 2017-03-12
-Authors@R: c(person("Terry", "Therneau", role = "aut", email =
-    "therneau@mayo.edu"), person("Beth", "Atkinson", role = "aut",
-    email = "atkinson@mayo.edu"), person("Brian", "Ripley", role =
-    c("aut", "trl", "cre"), email = "ripley@stats.ox.ac.uk", comment =
-    "author of initial R port"))
-Description: Recursive partitioning for classification, regression and
-    survival trees.  An implementation of most of the functionality of
-    the 1984 book by Breiman, Friedman, Olshen and Stone.
+Version: 4.1-12
+Date: 2018-01-08
+Authors@R: c(person("Terry", "Therneau", role = "aut",
+	            email = "therneau@mayo.edu"),
+             person("Beth", "Atkinson", role = "aut",	
+	            email = "atkinson@mayo.edu"),
+             person("Brian", "Ripley", role = c("trl", "cre"),
+                    email = "ripley@stats.ox.ac.uk",
+		    comment = "producer of the initial R port"))
+Description: Recursive partitioning for classification, 
+  regression and survival trees.  An implementation of most of the 
+  functionality of the 1984 book by Breiman, Friedman, Olshen and Stone.
 Title: Recursive Partitioning and Regression Trees
 Depends: R (>= 2.15.0), graphics, stats, grDevices
 Suggests: survival
@@ -17,17 +19,14 @@ License: GPL-2 | GPL-3
 LazyData: yes
 ByteCompile: yes
 Note: Maintainers are not available to give advice on using a package
-    they did not author.
+        they did not author.
 NeedsCompilation: yes
-Packaged: 2017-03-12 21:36:08 UTC; ripley
-Author: Terry Therneau [aut], Beth Atkinson [aut], Brian Ripley [aut,
-    trl, cre] (author of initial R port)
+Packaged: 2018-01-10 10:15:56 UTC; ripley
+Author: Terry Therneau [aut],
+  Beth Atkinson [aut],
+  Brian Ripley [trl, cre] (producer of the initial R port)
 Maintainer: Brian Ripley <ripley@stats.ox.ac.uk>
 Repository: CRAN
-Date/Publication: 2017-03-13 08:01:12
-Built: R 3.4.0; x86_64-apple-darwin15.6.0; 2017-04-21 21:25:50 UTC;
-    unix
+Date/Publication: 2018-01-12 09:58:15 UTC
+Built: R 3.4.3; x86_64-apple-darwin15.6.0; 2018-01-15 21:38:10 UTC; unix
 Archs: rpart.so.dSYM
-InstallAgent: packrat 0.4.8.1
-InstallSource: CRAN
-Hash: 3516bc1f3ef8bc532ac4194a2007ac19

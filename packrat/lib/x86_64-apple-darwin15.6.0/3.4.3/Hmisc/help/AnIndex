@@ -78,7 +78,6 @@ dataDensityString	Hmisc-internal
 dataframeReduce	upData
 dataRep	dataRep
 ddmmmyy	Hmisc-internal
-dec<-	inc-dec
 deff	deff
 describe	describe
 describe.data.frame	describe
@@ -185,6 +184,7 @@ html.summaryM	summaryM
 htmlGreek	Hmisc-internal
 htmlSN	latex
 htmlSpecial	Hmisc-internal
+htmlSpecialType	Misc
 htmlTranslate	latex
 htmlVerbatim	html
 importConvertDateTime	Hmisc-internal
@@ -192,7 +192,6 @@ improveProb	rcorrp.cens
 impute	impute
 impute.default	impute
 impute.transcan	transcan
-inc<-	inc-dec
 inmChoice	mChoice
 inverseFunction	Misc
 invertTabulated	transcan
@@ -239,6 +238,7 @@ latex.summary.formula.reverse	summary.formula
 latex.summaryM	summaryM
 latex.summaryP	summaryP
 latexBuild	Misc
+latexCheckOptions	latexCheckOptions
 latexDotchart	latexDotchart
 latexNeedle	latexTherm
 latexSN	latex
@@ -348,6 +348,7 @@ plotMultSim	varclus
 plotpsummaryM	Hmisc-internal
 plsmo	plsmo
 pngNeedle	latexTherm
+pomodm	popower
 popower	popower
 posamsize	popower
 predict.areg	areg
@@ -436,8 +437,8 @@ rlegend	rlegend
 rlegendg	rlegend
 rm.boot	rm.boot
 rMultinom	rMultinom
-round.POSIXt	trunc.POSIXt
 roundN	dataRep
+roundPOSIXt	trunc.POSIXt
 rowsumFast	Hmisc-internal
 samplesize.bin	samplesize.bin
 sas.codes	sas.get
@@ -458,6 +459,7 @@ show.latex	latex
 show.pch	show.pch
 showPsfrag	showPsfrag
 simplifyDims	simplifyDims
+simRegOrd	simRegOrd
 sKey	legendfunctions
 smean.cl.boot	smean.sd
 smean.cl.normal	smean.sd
@@ -524,7 +526,7 @@ transcan	transcan
 translate	translate
 trap.rule	Misc
 trellis.strip.blank	Misc
-trunc.POSIXt	trunc.POSIXt
+truncPOSIXt	trunc.POSIXt
 uncbind	Hmisc-internal
 units	units
 units.default	units

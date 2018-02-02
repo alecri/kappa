@@ -44,3 +44,16 @@ colnames(model.matrix(~ x1 + x4 + x1 %ia% x4))
 cph(S ~ x1 + x4 + x1 %ia% x4)
 
 
+## From https://github.com/harrelfe/rms/issues/29#issuecomment-303423887
+## https://github.com/harrelfe/rms/issues/29#issuecomment-328581864
+d <- expand.grid(
+X1 = factor(c('05: X1 <= 178','01: X1 <= 6', '03: X1 <= 52', '05: X1 <= 178')),
+X2 = factor(c('04: X2 <= 75','01: X2 <= 6', '05: X2 > 75', '05: X2 > 75')),
+X3 = factor(c('04: X3 <= 552','01: X3 <= 1', '04: X3 <= 552', '06: X3 > 1313')),
+rep = 1 : 100)
+set.seed(1)
+d$TARGET <- sample(0 : 1, nrow(d), replace=TRUE)
+
+lrm(TARGET ~ ., data = d)
+options(debug=TRUE)
+cph(Surv(TARGET) ~ ., data=d)

@@ -31,8 +31,36 @@ library(rprojroot)
 # List all files and directories below the root
 dir(find_root(has_file("DESCRIPTION")))
 
+
+## ---- eval = FALSE-------------------------------------------------------
+#  rel_path_from_vignettes <- "../R/rrmake.R"
+#  rel_path_from_vignettes <- file.path("..", "R", "rrmake.R") ##identical
+#  
+
+## ---- eval = FALSE-------------------------------------------------------
+#  rel_path_from_root <- "R/rrmake.R"
+#  rel_path_from_root <- file.path("R", "rrmake.R") ##identical
+
+## ------------------------------------------------------------------------
+has_file("DESCRIPTION")
+
+## ------------------------------------------------------------------------
+# Specify a path/to/file relative to the root
+rel_path_from_root <- find_root_file("R", "rrmake.R", criterion = has_file("DESCRIPTION"))
+
+## ---- eval = FALSE-------------------------------------------------------
+#  rel_path_from_testthat <- "../../R/rrmake.R"
+
+## ------------------------------------------------------------------------
+# Specify a path/to/file relative to the root
+rel_path_from_root <- find_root_file("R", "rrmake.R", criterion = has_file("DESCRIPTION"))
+
+## ------------------------------------------------------------------------
+# Specify a path/to/file relative to the root
+rel_path_from_root <- find_root_file("R", "rrmake.R", criterion = has_file("DESCRIPTION"))
+
 # Find a file relative to the root
-file.exists(find_root_file("R", "root.R", criterion = has_file("DESCRIPTION")))
+file.exists(rel_path_from_root)
 
 ## ------------------------------------------------------------------------
 has_file("DESCRIPTION")
@@ -91,4 +119,45 @@ is_testthat
 
 ## ------------------------------------------------------------------------
 dir(is_testthat$find_file("hierarchy", path = is_r_package$find_file()))
+
+## ---- eval = FALSE-------------------------------------------------------
+#  my_fun_run <- do.call(my_fun, my_args)
+#  
+#  testthat::test_that(
+#    "my_fun() returns expected output",
+#    testthat::expect_equal(
+#      my_fun_run,
+#      expected_output
+#    )
+#  )
+
+## ---- eval = FALSE-------------------------------------------------------
+#  ## saved to tests/testthat/helper.R
+#  get_my_path <- function(file_name) {
+#    rprojroot::find_testthat_root_file(
+#      "testing_data", filename
+#    )
+#  }
+
+## ---- eval = FALSE-------------------------------------------------------
+#  ## Find the correct path with your custom rprojroot helper function
+#  path_to_my_args_file <- get_my_path("my_args.Rdata")
+#  
+#  ## Load the input arguments
+#  load(file = path_to_my_args_file)
+#  
+#  ## Run the function with those arguments
+#  my_fun_run <- do.call(my_fun,my_args)
+#  
+#  ## Load the historical expectation with the helper
+#  load(file = get_my_path("expected_output.Rdata"))
+#  
+#  ## Pass all tests and achieve nirvana
+#  testthat::test_that(
+#    "my_fun() returns expected output",
+#    testthat::expect_equal(
+#      my_fun_run,
+#      expected_output
+#    )
+#  )
 

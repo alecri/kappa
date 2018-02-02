@@ -74,7 +74,7 @@ con <- DBI::dbConnect(RMySQL::MySQL(),
 )
 ```
 
-(If you're not using RStudio, you'll need some other way to securely retrieve your password. You should never record it in your analysis scripts or type it into the console.)
+(If you're not using RStudio, you'll need some other way to securely retrieve your password. You should never record it in your analysis scripts or type it into the console. [Securing Credentials](https://db.rstudio.com/best-practices/managing-credentials) provides some best practices.)
 
 Our temporary database has no data in it, so we'll start by copying over `nycflights13::flights` using the convenient `copy_to()` function. This is a quick and dirty way of getting data into a database and is useful primarily for demos and other small jobs.
 
@@ -90,7 +90,7 @@ copy_to(con, nycflights13::flights, "flights",
 )
 ```
 
-As you can see, the `copy_to()` operation has an additional argument that allows you to supply indexes for the table. Here we set up indexes that will allow us to quickly process the data by day, carrier, plane, and destination. Creating the write indices is key to good database performance, but is unfortunately beyond the scope of this article.
+As you can see, the `copy_to()` operation has an additional argument that allows you to supply indexes for the table. Here we set up indexes that will allow us to quickly process the data by day, carrier, plane, and destination. Creating the right indices is key to good database performance, but is unfortunately beyond the scope of this article.
 
 Now that we've copied the data, we can use `tbl()` to take a reference to it:
 
@@ -124,7 +124,7 @@ flights_db %>%
 
 However, in the long-run, I highly recommend you at least learn the basics of SQL. It's a valuable skill for any data scientist, and it will help you debug problems if you run into problems with dplyr's automatic translation. If you're completely new to SQL you might start with this [codeacademy tutorial](https://www.codecademy.com/learn/learn-sql). If you have some familiarity with SQL and you'd like to learn more, I found [how indexes work in SQLite](http://www.sqlite.org/queryplanner.html) and [10 easy steps to a complete understanding of SQL](http://blog.jooq.org/2016/03/17/10-easy-steps-to-a-complete-understanding-of-sql) to be particularly helpful.
 
-The most important difference between ordinary data frames and remote database queries is that your R code is translated into SQL and executed in the database, not in R. When working with databases, dplyr tries to be as lazy as possible:
+The most important difference between ordinary data frames and remote database queries is that your R code is translated into SQL and executed in the database on the remote server, not in R on your local machine. When working with databases, dplyr tries to be as lazy as possible:
 
 * It never pulls data into R unless you explicitly ask for it.
 
@@ -195,9 +195,9 @@ In terms of functionality, MySQL lies somewhere between SQLite and PostgreSQL. I
 
 PostgreSQL is a considerably more powerful database than SQLite. It has:
 
-* a much wider range of [built-in functions](http://www.postgresql.org/docs/9.3/static/functions.html), and
+* a much wider range of [built-in functions](http://www.postgresql.org/docs/current/static/functions.html), and
 
-* support for [window functions](http://www.postgresql.org/docs/9.3/static/tutorial-window.html), which allow grouped subset and mutates to work.
+* support for [window functions](http://www.postgresql.org/docs/current/static/tutorial-window.html), which allow grouped subset and mutates to work.
 
 ### BigQuery
 

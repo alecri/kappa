@@ -1,3 +1,34 @@
+# haven 1.1.1
+
+* Update to latest readstat. Includes:
+
+  * SPSS: empty charater columns now read as character (#311)
+  * SPSS: now write long strings (#266)
+  * Stata: reorder labelled vectors on write (#327)
+  * State: `encoding` now affects value labels (#325)
+  * SAS: can now write wide/long rows (#272, #335).
+  * SAS: can now handle Windows Vietnamese character set (#336)
+
+* `read_por()` and `read_xpt()` now correctly preserve attributes if
+  output needs to be reallocated (which is typical behaviour) (#313)
+
+* `read_sas()` recognises date/times format with trailing separator and width
+  specifications (#324)
+  
+* `read_sas()` gains a `catalog_encoding` argument so you can independently
+  specify encoding of data and catalog (#312)
+
+* `write_*()` correctly measures lengths of non-ASCII labels (#258): this
+  fixes the cryptic error "A provided string value was longer than the 
+  available storage size of the specified column."
+
+* `write_dta()` now checks for bad labels in all columns, not just the first
+  (#326).
+
+* `write_sav()` no longer fails on empty factors or factors with an `NA`
+  level (#301) and writes out more metadata for `labelled_spss` vectors 
+  (#334).
+ 
 # haven 1.1.0
 
 * Update to latest readstat. Includes:

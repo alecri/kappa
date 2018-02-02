@@ -3,8 +3,9 @@ addClass	classFuncs
 addCssClass	classFuncs
 alert	messageFuncs
 classFuncs	classFuncs
-colourInput	colourInput
-colourPicker	colourPicker
+click	click
+colourInput	shinyjs-defunct
+colourPicker	shinyjs-defunct
 delay	delay
 disable	stateFuncs
 disabled	disabled
@@ -30,6 +31,7 @@ runcodeUI	runcode
 runExample	runExample
 runjs	runjs
 shinyjs	shinyjs
+shinyjs-defunct	shinyjs-defunct
 show	visibilityFuncs
 showElement	visibilityFuncs
 showLog	showLog
@@ -39,6 +41,6 @@ toggleClass	classFuncs
 toggleCssClass	classFuncs
 toggleElement	visibilityFuncs
 toggleState	stateFuncs
-updateColourInput	updateColourInput
+updateColourInput	shinyjs-defunct
 useShinyjs	useShinyjs
 visibilityFuncs	visibilityFuncs

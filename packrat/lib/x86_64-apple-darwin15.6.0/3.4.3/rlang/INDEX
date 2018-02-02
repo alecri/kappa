@@ -71,6 +71,7 @@ is_lang                 Is object a call?
 is_named                Is object named?
 is_pairlist             Is object a node or pairlist?
 is_quosure              Is an object a quosure or quosure-like?
+is_reference            Is an object referencing another?
 is_stack                Is object a stack?
 is_symbol               Is object a symbol?
 is_true                 Is object identical to TRUE or FALSE?

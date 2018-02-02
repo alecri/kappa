@@ -1,5 +1,7 @@
 as_list	as_list
 as_xml_document	as_xml_document
+download_html	download_xml
+download_xml	download_xml
 html_structure	xml_structure
 read_html	read_xml
 read_xml	read_xml
@@ -15,6 +17,7 @@ write_html	write_xml
 write_html.xml_document	write_xml
 write_xml	write_xml
 write_xml.xml_document	write_xml
+xml2_example	xml2_example
 xml_add_child	xml_replace
 xml_add_parent	xml_replace
 xml_add_sibling	xml_replace
