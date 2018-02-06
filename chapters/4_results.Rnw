@@ -31,15 +31,15 @@ head(coffee_mort)
 
 <<legrady, echo=TRUE>>=
 legrady <- subset(coffee_mort, id == 1)
-covar.logrr(cases = cases, n = n, y = logrr, v = I(se^2), type = type, 
+covar.logrr(cases = cases, n = n, y = logrr, v = se^2, type = type, 
             data = legrady)
 @
 
-\noindent The alternative method by \cite{hamling2008facilitating} can be used by specifying \texttt{covariance = "h"} in the \texttt{covar.logrr} function. The reconstructed covariance matrix is used to efficiently estimate the dose--response association. For example, a linear trend $y_{1j} = \beta_1 (x_{1j} - x_{10})$ can be estimated with
+\noindent The alternative method by \cite{hamling2008facilitating} can be used by specifying \texttt{covariance = "h"} in the \texttt{covar.logrr} function. The reconstructed covariance matrix is used to efficiently estimate the dose--response association. For example, a linear trend $y_{1j} = \beta_1 (x_{1j} - x_{10}) + \varepsilon_{1j}$ can be estimated with
 
 <<lin_le, echo=TRUE>>=
-lin_le <- dosresmeta(logrr ~ dose, se = se, type = type, cases = cases, 
-                     n = n, data = legrady)
+lin_le <- dosresmeta(logrr ~ dose, se = se, type = type, cases = cases, n = n, 
+                     data = legrady)
 lin_le
 @
 <<>>=
@@ -60,7 +60,7 @@ pred_le <- round(predict(lin_le, delta = 3, expo = TRUE)[-1], 2)
 
 \noindent every 3 cups/day increase in coffee consumption was associate with a \Sexpr{100*(pred_le[1] - 1)}\% (95\% CI: \Sexpr{paste(pred_le[-1], collapse = ", ")}) higher mortality risk.
 
-Alternative curves can be specified in the formula argument. For example, a quadratic trend $y_{1j} = \beta_1 (x_{1j} - x_{10}) + \beta_2 (x_{1j}^2 - x_{10}^2)$ can be estimated.
+Alternative curves can be specified in the formula argument. For example, a quadratic trend $y_{1j} = \beta_1 (x_{1j} - x_{10}) + \beta_2 (x_{1j}^2 - x_{10}^2) + \varepsilon_{1j}$ can be estimated.
 <<quadr_le, echo = TRUE>>=
 quadr_le <- dosresmeta(logrr ~ dose + I(dose^2), se = se, type = type,
                      cases = cases, n = n, data = legrady)
@@ -74,7 +74,7 @@ predict(quadr_le, newdata = data.frame(dose = 0:6), expo = TRUE)
 
 \subsection{Multiple studies}
 
-The chosen curves can be estimated also for the other studies. One possibility is to use the \pkg{tidyverse} package in order to obtain the linear trends and corresponding variances
+The chosen curves can be estimated also for the other studies. One possibility is to use the \pkg{tidyverse} package \citep{tidyverse} in order to obtain the linear trends and corresponding variances
 
 <<lin_bi, echo=T>>=
 library(tidyverse)
@@ -87,7 +87,7 @@ lin_vi <- map_dbl(lin_i, ~ vcov(.x))
 head(cbind(bi = lin_bi, vi = lin_vi))
 @
 
-\noindent The mean linear trend can be calculated with standard packages for meta-analysis such as the \pkg{mvmeta} package
+\noindent The mean linear trend can be calculated with standard packages for meta-analysis such as the \pkg{mvmeta} package \citep{gasparrini2012multivariate}
 <<lin_b_mv, echo = T>>=
 mvmeta(lin_bi, lin_vi)
 @
@@ -109,7 +109,7 @@ sum_lin <- summary(lin)
 predict(lin, delta = 3, expo = T)
 @
 
-\noindent The linear trend appeared to be heterogeneous as indicated by both the $Q$~test ($Q$ = \Sexpr{round(sum_lin$qstat$Q)}, $p$~value < 0.01) and $I^2 = \Sexpr{round(100*(sum_lin$qstat$Q - sum_lin$qstat$df)/sum_lin$qstat$Q)}$.
+\noindent The linear trend appeared to be heterogeneous as indicated by both the $Q$~test ($Q$ = \Sexpr{round(sum_lin$qstat$Q)}, $p$~value < 0.01) and $I^2 = \Sexpr{round(100*(sum_lin$qstat$Q - sum_lin$qstat$df)/sum_lin$qstat$Q)}$\%.
 A possible alternative for both reducing the observed heterogeneity and relaxing the linearity assumption is to model the dose--response as a quadratic curve.
 <<quadr, echo=-3>>=
 quadr <- dosresmeta(logrr ~ dose + I(dose^2), id = id, se = se, type = type,
@@ -118,9 +118,9 @@ summary(quadr)
 sum_quadr <- summary(quadr)
 @
 
-\noindent The overall test $H_0: \beta_1 = \beta_2 = 0$ (\texttt{Chi2 model}) indicated that the mortality risk significantly varies according to coffee consumption levels. The quadratic model reduces to the simpler linear trend analysis when $\beta_2 = 0$. Thus, the univariate test for $\beta_2$ ($z$ = \Sexpr{round(sum_quadr$coefficients[2, "z"], 2)}, $p$~value < 0.01) suggested that the all-cause mortality risk is related in a non-linear fashion with coffee consumption. The heterogeneity in the study-specific regression coefficients reduced but its impact was still important, with the multivariate $I^2$ = \Sexpr{round(100*(sum_quadr$qstat$Q[1] - sum_quadr$qstat$df[1])/sum_quadr$qstat$Q[1])}\%. 
+\noindent The overall test $H_0: \beta_1 = \beta_2 = 0$ (\texttt{Chi2 model}) indicated that the mortality risk significantly varied according to coffee consumption levels. The quadratic model reduces to the simpler linear trend analysis when $\beta_2 = 0$. Thus, the univariate test for $\beta_2$ ($z$ = \Sexpr{round(sum_quadr$coefficients[2, "z"], 2)}, $p$~value < 0.01) suggested that the all-cause mortality risk was related in a non-linear fashion with coffee consumption. The heterogeneity in the study-specific regression coefficients reduced but its impact was still important, with the multivariate $I^2$ = \Sexpr{round(100*(sum_quadr$qstat$Q[1] - sum_quadr$qstat$df[1])/sum_quadr$qstat$Q[1])}\%. 
 
-The predicted log relative risks from the linear and quadratic analysis can be presented in a graphical format using $x_\mathrm{ref} = 0$ cups/day as referent (figure~\ref{fig:pred_fig}).
+The predicted log relative risks from the linear and quadratic analyses can be presented in a graphical format using $x_\mathrm{ref} = 0$ cups/day as referent (Figure~\ref{fig:pred_fig}).
 
 <<pred_fig, echo=T, fig.cap="Combined dose--response association between coffee consumption and all-cause mortality (solid line) with 95\\% confidence intervals (shaded area). Coffee consumption was modelled with a quadratic curve in a two-stage random-effects meta-analysis. Dashed line represents the combined linear trend. The value 0 cups/day serves as referent. The relative risks are plotted on the log scale.">>=
 xref <- 0
@@ -142,7 +142,7 @@ filter(pred, dose %in% 0:5) %>%
   unique() %>% round(3)
 @
 
-\noindent The previous predictions can be easily re-expressed using a different exposure value such as 1.5 cup/day by changing \texttt{xref <- 1.5} and rerunning the previous code to produce a new figure or table.
+\noindent The previous predictions can be easily re-expressed using a different exposure value as referent, e.g. 1.5 cup/day, by changing \texttt{xref <- 1.5} and rerunning the previous code to produce a new figure or table.
 
 The study-specific dose--response coefficients and related covariance matrices are stored in the results and can be easily accessed. For example, the $\boldsymbol{\hat \beta}_i$ and $\widehat{\Var} \left( \boldsymbol{\hat \beta}_i \right)$ for the quadratic model in the first two studies are
 
@@ -151,7 +151,7 @@ quadr$bi[1:2, ]
 quadr$Si[1:2]
 @
 
-\noindent and can be used to plot the individual curves in figure~\ref{fig:p_indiv}.
+\noindent and can be used to plot the individual curves in Figure~\ref{fig:p_indiv}.
 <<individual_curves, echo=TRUE>>=
 newd <- data.frame(dose = c(xref, seq(0, 6, .1)))
 p_indiv <- newd %>%
@@ -186,17 +186,17 @@ tab_gof <- data.frame(
   )
 @
 
-We use the tools presented in section~\ref{sec:gof} to evaluate the goodness-of-fit of the previous analyses. The \texttt{gof} function returns a display of the quantities of interest, namely the deviance test and the adjusted and unadjusted $R^2$. 
+We used the tools presented in Section~\ref{sec:gof} to evaluate the goodness-of-fit of the previous analyses. The \texttt{gof} function returns a display of the quantities of interest, namely the deviance test and the adjusted and unadjusted $R^2$. 
 We started with the simpler linear trend estimated in a fixed-effect analysis.
 <<gof_stat, echo=TRUE>>=
 gof(lin, fixed = TRUE)
 @
 
-\noindent The fit for the model assuming a linear relationship was poor (analysis A in table~\ref{tab:gof_tab}). In particular, the deviance test rejected the null hypothesis that the model was properly specified ($D$ = \Sexpr{round(tab_gof$deviance[1], 1)}, $p$~value < 0.001) while the percentage of the accounted variation by the analysis was \Sexpr{round(100*tab_gof$R2[1])}\%. In addition, the decorrelated residuals vs exposure plot in panel A of figure~\ref{fig:gof_pic} indicated a specific pattern with negative residuals for low values of the exposure (before 5 cups/day) and positive ones for high levels of coffee consumption.
+\noindent The fit for the model assuming a linear relationship was poor (Analysis A in Table~\ref{tab:gof_tab}). In particular, the deviance test rejected the null hypothesis that the model was properly specified ($D$ = \Sexpr{round(tab_gof$deviance[1], 1)}, $p$~value < 0.001) while the percentage of the accounted variation by the analysis was \Sexpr{round(100*tab_gof$R2[1])}\%. In addition, the decorrelated residuals vs exposure plot in panel A of Figure~\ref{fig:gof_pic} indicated a specific pattern with negative residuals for low values of the exposure (before 5 cups/day) and positive ones for high levels of coffee consumption.
 
-\noindent A possible solution for addressing the lack of fit of the previous analysis is to consider a non-linear example such as a quadratic curve (analysis B). The fit slightly improved as indicated by \textrm{$\mathrm{R^2}$} which increased to \Sexpr{round(100*tab_gof$R2[2])}\% (\textrm{$\mathrm{R_{\textrm{adj}}^2}$} = \Sexpr{round(tab_gof$R2adj[2], 2)}). The deviance test, however, still showed evidence of lack of fit ($D$ = \Sexpr{round(tab_gof$deviance[2], 1)}, $p$~value < 0.001). Furthermore, even if the variability of the residuals around reduced (panel B of figure~\ref{fig:gof_pic}), the LOWESS smoother showed again a tendency to be more likely positive for low and extreme high exposure values.
+\noindent A possible solution for addressing the lack of fit of the previous analysis is to consider a non-linear example such as a quadratic curve (Analysis B). The fit slightly improved as indicated by \textrm{$\mathrm{R^2}$} which increased to \Sexpr{round(100*tab_gof$R2[2])}\% (\textrm{$\mathrm{R_{\textrm{adj}}^2}$} = \Sexpr{round(tab_gof$R2adj[2], 2)}). The deviance test, however, still showed evidence of lack of fit ($D$ = \Sexpr{round(tab_gof$deviance[2], 1)}, $p$~value < 0.001). Furthermore, even if the variability of the residuals reduced (panel B of Figure~\ref{fig:gof_pic}), the LOWESS smoother showed a tendency for the residuals to be more likely negative for low and very high exposure values.
 
-<<gof_pic, fig.height=5.5, fig.cap="Decorrelated residuals versus exposure plots with LOWESS smother for different modelling strategies in a dose--response meta-analysis between coffee consumption and all-cause mortality \\citep{crippa2014coffee}">>=
+<<gof_pic, fig.height=5.5, fig.cap="Decorrelated residuals versus exposure plots with LOWESS smother for different modelling strategies in a dose--response meta-analysis between coffee consumption and all-cause mortality \\citep{crippa2014coffee}.">>=
 pglin <- gof(lin)$tdata %>%
   mutate(dose = coffee_mort$dose[coffee_mort$se != 0]) %>%
   ggplot(aes(dose, tresiduals)) +
@@ -225,9 +225,9 @@ plot_grid(pglin, pgquadr, pgspl, pgspl_reg,
   align = 'vh', labels = c("A", "B", "C", "D"), ncol = 2, nrow = 2)
 @
 
-\noindent An alternative strategy (analysis C) was to model coffee consumption using RCS with 3 knots located at the fixed quantiles 0.10, 0.5, and 0.9 corresponding to \Sexpr{paste(k, collapse = ", ")} cups/day. Since the number of parameters is the same as in the analysis B ($p$ = 2), the \textrm{$\mathrm{R^2}$} can be used to compare the fit of the two strategies. In particular, the RCS analysis had a better fit, as indicated by the higher \textrm{$\mathrm{R^2}$} = \Sexpr{round(tab_gof$R2[3], 2)} (\textrm{$\mathrm{R_{\textrm{adj}}^2}$} = \Sexpr{round(tab_gof$R2adj[3], 2)}). The pattern in the residuals was also leveled off around zero with the exception for the 3 highest dose levels. The deviance test, however, rejected again the null hypothesis for model specification, possibly because of the heterogeneity in the individual curves. 
+\noindent An alternative strategy (Analysis C) was to model coffee consumption using RCS with 3 knots located at the fixed quantiles 0.10, 0.5, and 0.9 corresponding to \Sexpr{paste(k, collapse = ", ")} cups/day. Since the number of parameters is the same as in the Analysis B ($p$ = 2), the \textrm{$\mathrm{R^2}$} can be used to compare the fit of the two strategies. In particular, the RCS analysis had a better fit, as indicated by the higher \textrm{$\mathrm{R^2}$} = \Sexpr{round(tab_gof$R2[3], 2)} (\textrm{$\mathrm{R_{\textrm{adj}}^2}$} = \Sexpr{round(tab_gof$R2adj[3], 2)}). The pattern in the residuals was also leveled off around zero with the exception for the 3 highest dose levels. The deviance test, however, rejected again the null hypothesis for model specification, possibly because of the heterogeneity in the individual curves. 
 
-\noindent To address this variability, we employed meta-regression models to explain differences across the studies (analysis D). We included two study-level covariates indicating the geographical area where the study was conducted (Europa, USA, and Japan) and the sex of the participants (only men, only women, and both sexes). Both the decorellated vs exposure plot and \textrm{$\mathrm{R_{\textrm{adj}}^2}$} = \Sexpr{round(tab_gof$R2adj[4], 2)} indicated an improvement in the overall fit of the analysis even if the $p$~value for the deviance test was below the nominal value ($D$ = \Sexpr{round(tab_gof$deviance[4], 1)}, $p$~value = \Sexpr{round(tab_gof$p[4], 3)}).
+\noindent To address this variability, we employed meta-regression models to explain differences across the studies (Analysis D). We included two study-level covariates indicating the geographical area where the study was conducted (Europa, USA, and Japan) and the sex of the participants (only men, only women, and both sexes). Both the decorellated vs exposure plot and \textrm{$\mathrm{R_{\textrm{adj}}^2}$} = \Sexpr{round(tab_gof$R2adj[4], 2)} indicated an improvement in the overall fit of the analysis even if the $p$~value for the deviance test was below the nominal value ($D$ = \Sexpr{round(tab_gof$deviance[4], 1)}, $p$~value = \Sexpr{round(tab_gof$p[4], 3)}).
 
 <<gof_tab, results='asis'>>=
 kable(tab_gof, "latex", align = "c", booktabs = T, escape = F, digits = 3,
@@ -314,15 +314,15 @@ tab_rb <- data_frame(
   )
 @
 
-The aim of \citetalias{crippa2016new} was to develop an alternative measure of heterogeneity for meta-analysis that did not depend on the distribution of the within-study error terms. We illustrate how to employ the new measure reanalyzing aggregated dose--response data on the association between meat and bladder cancer \citep{crippa2016red}. Five cohort and 8 case-control studies reported results for either red or processed meat and bladder cancer risk including a total of 10,271 cases and 1,066,027 participants. The data for both the associations are also included in the \texttt{dosresmeta} package.
+The aim of \citetalias{crippa2016new} was to develop an alternative measure of heterogeneity for meta-analysis that did not depend on the distribution of the within-study error terms. We illustrated how to employ the new measure reanalyzing aggregated dose--response data on the association between meat and bladder cancer \citep{crippa2016red}. Five cohort and 8 case-control studies reported results for either red or processed meat and bladder cancer risk including a total of 10,271 cases and 1,066,027 participants. The data for both the associations are also included in the \texttt{dosresmeta} package.
 
 \subsection{Processed meat and bladder cancer}
 
-\noindent We started considering a linear trend analysis for the association between processed meat and bladder cancer risk. The effect sizes for the meta-analysis in the second part of a two-stage dose--response meta-analysis were the linear trends for a 50 g per day increase in processed meat consumption (figure~\ref{fig:forest_pr}). The combined relative risk was \Sexpr{pred_pr[1]} (95\% CI \Sexpr{paste(pred_pr[2:3], collapse = ", ")}). The $Q$~test provided some indication of presence of statistical heterogeneity ($Q $ = \Sexpr{round(lin_pr$QE, 1)}, $p$~value = \Sexpr{round(lin_pr$QEp, 2)}). The $\hat R_b$ = \Sexpr{round(hetmes_pr[1, 1])}\% (95\% CI \Sexpr{paste(round(hetmes_pr[1, 3:4]), collapse = ", ")}) indicated that the contribution of heterogeneity in the pooled analysis was limited (table~1), as also suggested by the alternative measures $I^2$ = \Sexpr{ round(hetmes_pr[2, 1])}\% (95\% CI \Sexpr{paste(round(hetmes_pr[2, 3:4]), collapse = ", ")}) and $R_I$ = \Sexpr{ round(hetmes_pr[3, 1])}\% (95\% CI \Sexpr{paste(round(hetmes_pr[3, 3:4]), collapse = ", ")}). Because the within-study variances were substantial homogenous the differences between the alternative measures were negligible. 
+\noindent We started considering a linear trend analysis for the association between processed meat and bladder cancer risk. The effect sizes for the meta-analysis in the second part of a two-stage dose--response meta-analysis were the linear trends for a 50 g per day increase in processed meat consumption (Figure~\ref{fig:forest_pr}). The combined relative risk was \Sexpr{pred_pr[1]} (95\% CI \Sexpr{paste(pred_pr[2:3], collapse = ", ")}). The $Q$~test provided some indication of presence of statistical heterogeneity ($Q $ = \Sexpr{round(lin_pr$QE, 1)}, $p$~value = \Sexpr{round(lin_pr$QEp, 2)}). The $\hat R_b$ = \Sexpr{round(hetmes_pr[1, 1])}\% (95\% CI \Sexpr{paste(round(hetmes_pr[1, 3:4]), collapse = ", ")}) indicated that the contribution of heterogeneity in the pooled analysis was limited (Table~\ref{tab:tab_rb}), as also suggested by the alternative measures $I^2$ = \Sexpr{ round(hetmes_pr[2, 1])}\% (95\% CI \Sexpr{paste(round(hetmes_pr[2, 3:4]), collapse = ", ")}) and $R_I$ = \Sexpr{ round(hetmes_pr[3, 1])}\% (95\% CI \Sexpr{paste(round(hetmes_pr[3, 3:4]), collapse = ", ")}). Because the within-study variances were substantial homogenous the differences between the alternative measures were negligible. 
 
-\noindent No evidence of non-linearity was observed using either a quadratic curve ($p$~value = \Sexpr{round(p_pr_quadr, 3)}) or a RCS model with 3 knots located at fixed percentiles ($p$~value = \Sexpr{round(p_pr_spline, 3)}).
+\noindent No evidence of non-linearity was observed using either a quadratic curve ($p$~value = \Sexpr{round(p_pr_quadr, 2)}) or a RCS model with 3 knots located at fixed percentiles ($p$~value = \Sexpr{round(p_pr_spline, 2)}).
 
-<<forest_pr, warning=FALSE, fig.cap="Relative risks of bladder cancer for every 50 g increase per day in processed meat consumption">>=
+<<forest_pr, warning=FALSE, fig.cap="Relative risks of bladder cancer for every 50 g increase per day in processed meat consumption.">>=
 old <- par()
 xlim <- c(-1.3, 2.25)
 par(bg = "white", cex = 1, font = 1, las = 1)
@@ -390,11 +390,11 @@ hetmes_redcc <- confint(lin_het_redcc)
 hetmes_redci <- confint(lin_het_redci)
 @
 
-An analogous analysis was conducted for the association between red meat consumption and bladder cancer risk, with the estimated linear trends expressed for a 100 g per day increase. The pooled relative risk was \Sexpr{pred_red[1]} (95\% CI \Sexpr{paste(pred_red[2:3], collapse = ", ")})). The study-specific associations in figure~\ref{fig:forest_red}, however, appeared to be heterogeneous ($Q $ = \Sexpr{round(lin_red$QE, 1)}, $p$~value < 0.01). In particular, the contribution of the heterogeneity in determining the variance of the combined effect was $\hat R_b$ = \Sexpr{round(hetmes_red[1, 1])}\%, indicating a moderate impact. Given that the distribution of within-error terms was higher as compared to the previous analysis (figure~\ref{fig:fig_dist_vi}), the differences with the alternative measures were substantially higher: $I^2$ = \Sexpr{ round(hetmes_red[2, 1])}\% (95\% CI \Sexpr{paste(round(hetmes_red[2, 3:4]), collapse = ", ")}) and $R_I$ = \Sexpr{ round(hetmes_red[3, 1])}\% (95\% CI \Sexpr{paste(round(hetmes_red[3, 3:4]), collapse = ", ")}), which suggested a larger impact of the heterogeneity. 
+An analogous analysis was conducted for the association between red meat consumption and bladder cancer risk, with the estimated linear trends expressed for a 100 g per day increase. The pooled relative risk was \Sexpr{pred_red[1]} (95\% CI \Sexpr{paste(pred_red[2:3], collapse = ", ")})). The study-specific associations in Figure~\ref{fig:forest_red}, however, appeared to be heterogeneous ($Q $ = \Sexpr{round(lin_red$QE, 1)}, $p$~value < 0.01). In particular, the contribution of the heterogeneity in determining the variance of the combined effect was $\hat R_b$ = \Sexpr{round(hetmes_red[1, 1])}\%, indicating a moderate impact. Given that the distribution of within-error terms was higher as compared to the previous analysis (Figure~\ref{fig:fig_dist_vi}), the differences with the alternative measures were substantially higher: $I^2$ = \Sexpr{ round(hetmes_red[2, 1])}\% (95\% CI \Sexpr{paste(round(hetmes_red[2, 3:4]), collapse = ", ")}) and $R_I$ = \Sexpr{ round(hetmes_red[3, 1])}\% (95\% CI \Sexpr{paste(round(hetmes_red[3, 3:4]), collapse = ", ")}), which suggested a larger impact of the heterogeneity. 
 
 \noindent Similarly to the case of processed meat, no evidence of non-linearity was found ($p$~value equal to \Sexpr{round(p_red_quadr, 2)} and \Sexpr{round(p_red_spline, 2)} for $\beta_2$ in the quadratic and RCS model.)
 
-<<forest_red, fig.height=6.5, fig.cap = "Relative risks of bladder cancer for every 50 g increase per day in red meat consumption separately for cohort and case-control studies">>=
+<<forest_red, fig.height=6.5, fig.cap = "Relative risks of bladder cancer for every 50 g increase per day in red meat consumption separately for cohort and case-control studies.">>=
 a <- table(red$type)["cc"]
 b <- sum(table(red$type)[c("ir", "ci")])
 xlim <- c(-1.75, 2.75)
@@ -418,7 +418,7 @@ mtext("Red meat and bladder cancer", side = 3, line = 2, cex = 1.25)
 mtext("for every 100 g per day increment", side = 3, line = 1, cex = 1.25)
 @
 
-The variability across the linear trends could be related to differences in the study design. Figure~\ref{fig:forest_red} reports also the results separately for cohort and case-control studies. No association was observed in the subset of the prospective studies (combined RR = \Sexpr{pred_redci[1]} (95\% CI \Sexpr{paste(pred_redci[2:3], collapse = ", ")})). The individual associations were homogenous ($Q $ = \Sexpr{round(lin_redci$QE, 1)}, $p$~value = \Sexpr{round(lin_redci$QEp, 2)}), with $\hat R_b$ = \Sexpr{round(hetmes_pr[1, 1])}\%. The results for case-control studies, instead, largely varied across studies $Q $ = \Sexpr{round(lin_redcc$QE, 1)}, $p$~value < 0.01 and $\hat R_b$ = \Sexpr{round(hetmes_redcc[1, 1])}\%. A summary of the results for the alternative measures of heterogeneity in the different analyses is presented in table~\ref{tab:tab_rb}.
+The variability across the linear trends could be related to differences in the study design. Figure~\ref{fig:forest_red} reports also the results separately for cohort and case-control studies. No association was observed in the subset of the prospective studies (combined RR = \Sexpr{pred_redci[1]} (95\% CI \Sexpr{paste(pred_redci[2:3], collapse = ", ")})). The individual associations were homogenous ($Q $ = \Sexpr{round(lin_redci$QE, 1)}, $p$~value = \Sexpr{round(lin_redci$QEp, 2)}), with $\hat R_b$ = \Sexpr{round(hetmes_pr[1, 1])}\%. The results for case-control studies, instead, largely varied across studies $Q $ = \Sexpr{round(lin_redcc$QE, 1)}, $p$~value < 0.01 and $\hat R_b$ = \Sexpr{round(hetmes_redcc[1, 1])}\%. A summary of the results for the alternative measures of heterogeneity in the different analyses is presented in Table~\ref{tab:tab_rb}.
 
 <<tab_rb, results='asis'>>=
 tab_rb <- rbind(tab_rb,
@@ -444,7 +444,7 @@ tab_rb <- rbind(tab_rb,
 
 tab_rb %>%
   kable("latex", align = "c", booktabs = T, escape = F,
-        caption = "Measures of heterogeneity for dose--response meta-analysis between processed and red meat and bladder cancer risk \\citep{crippa2016red}", 
+        caption = "Measures of heterogeneity for dose--response meta-analysis between processed and red meat and bladder cancer risk \\citep{crippa2016red}.", 
         col.names = c("Analysis", "$\\hat \\beta$ (95\\% CI)", "$Q$~test, $p$~values", 
                       "$CV_{v_i}$", "$\\hat R_b$ (95\\% CI)" , "$I^2$ (95\\% CI)",
                       "$\\hat R_I$ (95\\% CI)")) %>%
@@ -452,11 +452,12 @@ tab_rb %>%
 @
 
 <<dist_vi>>=
-dist_vi <- ggplot(NULL, aes(lin_pr$vi, linetype = "Processed meat")) +
+dist_vi <- ggplot(NULL, aes(lin_pr$vi, col = "Processed meat")) +
   geom_line(stat = "density", adjust = 2.5) +
-  geom_line(aes(lin_red$vi, linetype = "Read meat"), 
+  geom_line(aes(lin_red$vi, col = "Read meat"), 
             stat = "density", adjust = 2.5) +
-  labs(x = "Within-study error variance", linetype = "Exposure")
+  labs(x = "Within-study error variance", col = "Exposure") +
+  scale_color_manual(values = c(`Processed meat` = "blue", `Read meat` = "red"))
 @
 
 
@@ -562,7 +563,7 @@ pbi_plot_red <- Map(function(d, m, m1){
     cbind(predict(m, newdata = ., expo = T)) %>%
     mutate(pred1 = predict(m1, newdata = ., expo = T)$pred)
   ggplot(subset(newd, dose <= max(d$dose)), aes(dose, pred)) +
-    geom_line() +
+    geom_line(col = "blue") +
     geom_line(aes(y = pred1), col = "red") +
     geom_line(data = subset(newd, dose > max(d$dose)), linetype = "dashed") +
     geom_line(data = subset(newd, dose >= max(d$dose)-1), aes(y = pred1), col = "red", linetype = "dashed") +
@@ -576,7 +577,7 @@ pbi_plot_red <- Map(function(d, m, m1){
 }, split(red_bc, red_bc$id), mod_pb_red, Map(function(x) x[[which.min(sapply(mod_pi1_red, AIC))]], mod_pi_red))
 @
 
-<<pbi_plot_red, fig.height=9, fig.cap="Study-specific dose--response curve between red meat consumption and bladder cancer risk. Black and red solid lines are the predicted relative risks based, respectively, on the best fitting fractional polynomial (FP2) and on a common FP2 with p = (-1, -.5) limited to the observed exposure range. Dashed lines indicate extrapolated predicted relative. Confidence intervals for best fitting FP2 are represented by shaded areas (lighter colors correspond to extrapolated prediction). All predicted relative risk are presented on the log scale using the study-specific reference values as comparators", fig.pos="h">>=
+<<pbi_plot_red, fig.height=9, fig.cap="Study-specific dose--response curve between red meat consumption and bladder cancer risk. Blue and red solid lines are the predicted relative risks based, respectively, on the best fitting fractional polynomial (FP2) and on a common FP2 with p = (-1, -.5) limited to the observed exposure range. Dashed lines indicate extrapolated predicted relative risks. Confidence intervals for best fitting FP2 are represented by shaded areas (lighter colors correspond to extrapolations). All predicted relative risks are presented on the log scale using the study-specific reference values as comparators.", fig.pos="h">>=
 layout <- matrix(c(1:13, NA, NA), nrow = 5, ncol = 3, byrow = TRUE)
 grid.arrange(grobs = pbi_plot_red, nrow = 5, ncol = 3, as.table = FALSE, 
              layout_matrix = layout)
@@ -586,40 +587,39 @@ grid.arrange(grobs = pbi_plot_red, nrow = 5, ncol = 3, as.table = FALSE,
 
 \section{Paper IV}\label{sec:res_paperIV}
 
-\noindent The proposed and alternative measures of between-studies variability can not capture the heterogeneity related to differences in the exposure range distributions. We present the implementation of a pointwise strategy as a possible remedy, reanalyzing the data between red meat consumption and bladder cancer risk described in the previous section.
-The data consists of 13 independent studies where the the exposure varies across studies not only in terms of definition and measurement but also in terms of range of assessment. For example, the minimum red meat consumption in one study (\Sexpr{red_bc$dose[red_bc$id == 7][1]} g per day in study ID 7) is higher then the maximum exposure value in other studies (\Sexpr{round(red_bc$dose[red_bc$id == 3][4], 1)} g per day in study ID 3). Furthermore, only 3 out 13 studies reported relative risks for meat consumption greater than 150 grams/day. Descriptive measures of red meat consumption across studies are reported in table~\ref{tab:chr_redtab} and graphically presented in figure~\ref{fig:p_chr}.
+\noindent The proposed and alternative measures of between-studies variability can not capture the heterogeneity related to differences in the exposure range distributions. We presented the implementation of a point-wise strategy as a possible remedy, reanalyzing the data between red meat consumption and bladder cancer risk described in the previous section.
+The data consists of 13 independent studies where the the exposure varied across studies not only in terms of definition and measurement but also in terms of range of assessment. For example, the minimum red meat consumption in one study (\Sexpr{red_bc$dose[red_bc$id == 7][1]} g per day in study ID 7) was higher then the maximum exposure value in other studies (\Sexpr{round(red_bc$dose[red_bc$id == 3][4], 1)} g per day in study ID 3). Furthermore, only 3 out 13 studies reported relative risks for meat consumption greater than 150 grams/day. Descriptive measures of red meat consumption across studies are reported in Table~\ref{tab:chr_redtab} and graphically presented in Figure~\ref{fig:p_chr}.
 
-\noindent We decided to model the association under investigation using fractional polynomials of order 2. To allow for differential dose--response relationships, we fitted the FP2 models for different combination of power terms separately in each studies and selected the study-specific best fitting polynomials as the model with the lowest AIC. As expected, the best study-specific power terms varied across studies (table~\ref{tab:AIC_pi_red}), with the most common polynomial defined by $p = c(-2, -2)$ (8 out of 13 studies). Interestingly, the corresponding analysis using the AIC for the analysis based on a one-stage model selected $p = c(-1, -0.5)$ as the best FP2, a combination of terms that was not preferred in none of the individual dose--response analyses. Figure~\ref{fig:pbi_plot_red} displays the predicted curves based on the best FP2 for each study, limited to the observed exposure range (black solid lines). Extrapolation are represented by dashed lines while the red curves represent the predicted association from the one-stage model, which imposed the common power terms $p = c(-1, -0.5)$ across the studies. While the alternative strategies gave similar results in the observed exposure range, larger differences were observed for high levels of red meat consumption. Taking study ID 5 as example, the predicted relative risks for 150 g compared to 15 g of red meat consumption per day were \Sexpr{pred_exi$pred[2]} (95\% CI \Sexpr{paste(pred_exi$ci.lb[2], pred_exi$ci.ub[2], sep = ", ")}) and \Sexpr{pred_ex$pred[2]} (95\% CI \Sexpr{paste(pred_ex$ci.lb[2], pred_ex$ci.ub[2], sep = ", ")}) for the FP2 with the study specific $p_5 = (3, 3)$ and the common $p = (-1, -0.5)$, respectively. 
+\noindent We decided to model the association under investigation using second-degree fractional polynomials. To allow for differential dose--response relationships, we fitted the FP2 models for different combination of power terms separately in each studies and selected the study-specific best fitting polynomials as the model with the lowest AIC. As expected, the best study-specific power terms varied across studies (Table~\ref{tab:AIC_pi_red}), with the most common polynomial defined by $p = c(-2, -2)$ (8 out of 13 studies). Interestingly, the corresponding analysis using the AIC from the corresponding one-stage model selected $p = c(-1, -0.5)$ as the best FP2, a combination of power terms that was not preferred in none of the individual dose--response analyses. Figure~\ref{fig:pbi_plot_red} displays the predicted curves based on the best FP2 for each study, limited to the observed exposure range (blue solid lines). Extrapolation are represented by dashed lines while the red curves represent the predicted association from the one-stage model, which imposed the common power terms $p = c(-1, -0.5)$ across the studies. While the alternative strategies gave similar results in the observed exposure range, larger differences were observed for high levels of red meat consumption. Taking study ID 5 as example, the predicted relative risks for 150 g compared to 15 g of red meat consumption per day were \Sexpr{pred_exi$pred[2]} (95\% CI \Sexpr{paste(pred_exi$ci.lb[2], pred_exi$ci.ub[2], sep = ", ")}) and \Sexpr{pred_ex$pred[2]} (95\% CI \Sexpr{paste(pred_ex$ci.lb[2], pred_ex$ci.ub[2], sep = ", ")}) for the FP2 with the study specific $p_5 = (3, 3)$ and the common $p = (-1, -0.5)$, respectively. 
 
-\noindent In a pointwise dose--response meta-analysis we chose to predict the study specific log relative risks of a fine grid of exposure values ranging from 5 g to 300 g with step by 5 g, using 85 g/day (median reference dose value) as referent. The study-specific predictions were limited to the observed exposure range so that study ID 3, for example, predicted log RRs for dose values up to 70 g/days. Thus, the number of study-specific predicted log RRs varies across the selected red meat consumption levels. 
-The combined results from the \Sexpr{length(newd[-1, ])} meta-analyses can be presented pointwisely. 
+\noindent In a point-wise dose--response meta-analysis we chose to predict the study specific log relative risks for a fine grid of exposure values ranging from 5 g to 300 g with step by 5 g, using 85 g/day (median reference dose value) as referent. The study-specific predictions were limited to the observed exposure range so that study ID 3, for example, predicted log RRs for dose values up to 70 g/days. Thus, the number of study-specific predicted log RRs varies across the selected red meat consumption levels. 
 
-<<pwa, fig.cap = "Comparison between pointwise and one-stage predicted relative risks for the association between red meat consumption (g per day) and bladder cancer risk. The step function at the bottom indicate the number of studies contributing to the prediction in the pointwise analysis. The relative risks are presented on the log scale using 85 g per day as referent", fig.pos="h">>=
+<<pwa, fig.cap = "Comparison between pointwise and one-stage predicted relative risks for the association between red meat consumption (g per day) and bladder cancer risk. The step function at the bottom indicate the number of studies contributing to the prediction in the pointwise analysis. The relative risks are presented on the log scale using 85 g per day as referent.", fig.pos="h">>=
 n <- sapply(metamodi_extr, function(m) m$k)
 i <- which(predavg_extr$x %in% seq(0, 300, 25))
 predfp1 <- cbind(dose = newd$dose, predict(mod_pb1_red, newd, expo = T))[-1, ]
 par(mar = c(5, 4, 4, 4) + 0.5)  # Leave space for the new axis
 with(predavg_extr, errbar(x[i], pred[i], ci.lb[i], ci.ub[i],
-                          log = "y", las = 1, bty = "n", col = c("black"), 
+                          log = "y", las = 1, bty = "n", col = "blue", 
                           lwd = c(1.25), pch = 19, cap = 0.01, xlim = c(0, 300),
-                          ylim = c(.5, 3),
+                          ylim = c(.5, 3), errbar.col = "blue",
                           xlab = "Red meat consumption (g per day)", ylab = "Risk ratio"))
 with(subset(predfp1, dose %in% seq(0, 350, 25)),
-     errbar(dose + 5, pred, ci.lb, ci.ub, col = c("black"), add = T,
-            lty = 2, lwd = c(1.25), cap = 0.01))
+     errbar(dose + 5, pred, ci.lb, ci.ub, col = "red", errbar.col = "red", add = T,
+            lty = 1, lwd = c(1.25), cap = 0.01))
 par(new = TRUE)
 plot(newd$dose[-1], n, axes = F, ylim = c(3, 120), xlab = "", cex = .2)
 axis(side = 4, at = c(3, 7, 12), las = 1)
 mtext("Number of studies                                    ", 
       side = 4, line = 3)
-legend("topleft", exp(4), c("Point-wise average", "Two-stage"), lty = c("solid", "dashed"), 
-       bty = "n", cex = 1.1, lwd = 2)
+legend("topleft", exp(4), c("Point-wise average", "Two-stage"), col = c("blue", "red"), 
+       pch = c(19, 19), bty = "n", cex = 1.1, lwd = 2)
 par(old)
 @
 
-\noindent Figure~\ref{fig:pwa} plots the combined predicted relative risk from a pointwise strategy, and compare them with the corresponding one-stage analysis. In the reanalyzed data, the two strategies provided similar point estimates. However, the confidence intervals from the pointwise analysis was larger as compared to the corresponding one-stage model, reflecting the higher uncertainty in the predictions. For example, for 100 g the predicted RRs were \Sexpr{round(pred_ex_pwa[2], 2)} (95\% CI \Sexpr{paste(round(pred_ex_pwa[3:4], 2), collapse = ", ")}) for the pointwise strategy and \Sexpr{round(pred_ex_os[2], 4)} (95\% CI \Sexpr{paste(round(pred_ex_os[5:6], 2), collapse = ", ")}) for the one-stage model. Similarly, for 250 g the two predictions were \Sexpr{round(pred_ex_pwa2[2], 2)} (95\% CI \Sexpr{paste(round(pred_ex_pwa2[3:4], 2), sep = ", ") }) and \Sexpr{round(pred_ex_os2[4], 2)} (95\% CI \Sexpr{paste(round(pred_ex_os2[5:6], 2), sep = ", ") }).
+\noindent The combined results from the \Sexpr{length(newd[-1, ])} meta-analyses can be presented pointwisely. Figure~\ref{fig:pwa} plots the combined predicted relative risk from a point-wise strategy, and compare them with the corresponding one-stage analysis. In the reanalyzed data, the two strategies provided similar point estimates. However, the confidence intervals from the point-wise analysis was larger as compared to the corresponding one-stage model, reflecting the higher uncertainty in the predictions. For example, for 100 g the predicted RRs were \Sexpr{round(pred_ex_pwa[2], 2)} (95\% CI \Sexpr{paste(round(pred_ex_pwa[3:4], 2), collapse = ", ")}) for the point-wise strategy and \Sexpr{round(pred_ex_os[2], 4)} (95\% CI \Sexpr{paste(round(pred_ex_os[5:6], 2), collapse = ", ")}) for the one-stage model. Similarly, for 250 g the two predictions were \Sexpr{round(pred_ex_pwa2[2], 2)} (95\% CI \Sexpr{paste(round(pred_ex_pwa2[3:4], 2), sep = ", ") }) and \Sexpr{round(pred_ex_os2[4], 2)} (95\% CI \Sexpr{paste(round(pred_ex_os2[5:6], 2), sep = ", ") }).
 
-<<pwa_results, fig.cap = "Pointwise results for the meta-analysis between red meat consumption (g per day) and bladder cancer risk: estimates of $\\hat \\tau^2$ (A), random-effects weights for three studies (B), $p$~value for ther $Q$~test (C), and $\\hat R_b$ (D)">>=
+<<pwa_results, fig.cap = "Point-wise results for a meta-analysis between red meat consumption (g per day) and bladder cancer risk: estimates of $\\hat \\tau^2$ (A), random-effects weights for three studies (B), $p$~value for ther $Q$~test (C), and $\\hat R_b$ (D).">>=
 xlim <- 250
 p_pwa1 <- subset(metamodi_res, dose < xlim) %>%
   ggplot(aes(dose, tau2)) +
@@ -652,7 +652,7 @@ p_pwa4 <- subset(metamodi_res, dose < xlim) %>%
 plot_grid(p_pwa1, p_pwa2, p_pwa3, p_pwa4, align = 'vh', labels = c("A", "B", "C", "D"))
 @
 
-One advantage of a pointwise strategy is that also additional statistics from the meta-analytic models can be presented pointwisely (figure). For example, the estimates for the between-study heterogeneity, $\hat \tau^2$, were lower than 0.02 for red meat consumption between 20 g and 150 g per day, while largely increased for higher values (panel A). The weight of the individual study changes over the selected exposure values. Panel B displays the standardized weights for three of the included studies. The percentage weight for study ID 5 was very large for red meat consumption lower than 30 g, while it stabilized around 15\% after that. For study ID 10, the weight declined from 20\% to 5\% as the dose value increased, while it remained constant around 3\% for study ID 1. The results from the $Q$~test in panel C indicated presence of statistical heterogeneity for dose value lower than 100 g and higher than 200 g of red meat consumption. The impact of heterogeneity quantified by the $\hat R_b$ varied from 25\% to 60\% for exposure values below 75 g per day, while it reached 85\% for higher dose levels.
+One advantage of a point-wise strategy is that also additional statistics from the meta-analytic models can be presented pointwisely (Figure~\ref{fig:pwa_results}). For example, the estimates for the between-study heterogeneity, $\hat \tau^2$, were lower than 0.02 for red meat consumption between 20 g and 150 g per day, while largely increased for higher values (panel A). The weights of the individual studies changed over the selected exposure values. Panel B displays the standardized weights for three of the included studies. The percentage weight for study ID 5 was very large for red meat consumption lower than 30 g, while it stabilized around 15\% after that. For study ID 10, the weight declined from 20\% to 5\% as the dose value increased, while it remained constant around 3\% for study ID 1. The results from the $Q$~test in panel C indicated presence of statistical heterogeneity for dose value lower than 100 g and higher than 200 g of red meat consumption. The impact of heterogeneity quantified by the $\hat R_b$ varied between 25\% and 60\% for exposure values below 75 g per day, while it reached 85\% for higher dose levels.
 
 
 <<add_material_red>>=
@@ -731,11 +731,11 @@ predi <- data.frame(
 )
 @
 
-A common limitation of a two-stage and pointwise approach is that the dose--response analyses are limited by the low number of data points in each study, usually $J_i \le 3$. We demonstrate an alternative one-stage model for dose--response meta-analysis using a subset of the data on coffee consumption and all-cause mortality presented in sections~\ref{sec:res_paperI} and \ref{sec:res_paperII}. The data consists of the results for 12 independent populations including 5508 cases and 750959 participants. The results for two cohorts \citep{nilsson2012traditional} were excluded in the initial analysis of a non-linear trend because they only reported 1 non-referent risk. We performed a one-stage random-effects meta-analysis assuming a quadratic relationship on the whole data set and compared the results with the corresponding two-stage analysis which excluded the results by \cite{nilsson2012traditional}. 
+A common limitation of a two-stage and point-wise approach is that the dose--response analyses are limited by the low number of data points in each study, usually $J_i \le 3$. We demonstrated an alternative one-stage model for dose--response meta-analysis using a subset of the data on coffee consumption and all-cause mortality presented in Sections~\ref{sec:res_paperI} and \ref{sec:res_paperII}. The data consists of the results for 12 independent populations including 5508 cases and 750959 participants. The results for two cohorts \citep{nilsson2012traditional} were excluded in the initial analysis of a non-linear trend because they only reported 1 non-referent risk. We performed a one-stage random-effects meta-analysis assuming a quadratic relationship on the whole data set and compared the results with the corresponding two-stage analysis which excluded the results by \cite{nilsson2012traditional}. 
 
-\noindent Although both the analyses suggested a U-shaped association between increasing levels of coffee consumption and mortality risk, the predicted curve from a two-stage model provided lower relative risk estimates. Using 0 cups/day, the predicted RRs for 2 cups/day were \Sexpr{tab_coffee[3, 2]} (95\% CI \Sexpr{paste(tab_coffee[3, 3:4], collapse = ", ")}) for the two-stage analysis, and \Sexpr{tab_coffee[3, 5]} (95\% CI \Sexpr{paste(tab_coffee[3, 6:7], collapse = ", ")}) for the one-stage model. Similarly, for 5 cups/day the corresponding numbers were \Sexpr{tab_coffee[6, 2]} (95\% CI \Sexpr{paste(tab_coffee[6, 3:4], collapse = ", ")}) and \Sexpr{tab_coffee[6, 5]} (95\% CI \Sexpr{paste(tab_coffee[6, 6:7], collapse = ", ")}). Interestingly, the standard errors for the beta coefficients were lower in the two stage analysis ($\SE \left(\hat \beta_1 \right)$ = \Sexpr{se_ts[1]}, $\SE \left(\hat \beta_2 \right) = \Sexpr{se_ts[2]}$), even if the corresponding estimates form the one-stager analysis were based on a larger number of data points ($\SE \left(\hat \beta_1 \right)$ = \Sexpr{se_os[1]}, $\SE \left(\hat \beta_2 \right) = \Sexpr{se_os[2]}$). As a consequence, the confidence intervals for the reported predicted relative risks were larger in the one-stage analysis, while the $p$ value for non-linearity $H_0: \beta_2 = 0$ was lower in a two-stage analysis: $p$ = \Sexpr{p_ts} compared to $p$ = \Sexpr{p_os} from the alternative one-stage model.
+\noindent Although both the analyses suggested a U-shaped association between increasing levels of coffee consumption and mortality risk, the predicted curve from a two-stage model provided lower relative risk estimates (Figure~\ref{fig:comp_osts}). Using 0 cups/day, the predicted RRs for 2 cups/day were \Sexpr{tab_coffee[3, 2]} (95\% CI \Sexpr{paste(tab_coffee[3, 3:4], collapse = ", ")}) for the two-stage analysis, and \Sexpr{tab_coffee[3, 5]} (95\% CI \Sexpr{paste(tab_coffee[3, 6:7], collapse = ", ")}) for the one-stage model. Similarly, for 5 cups/day the corresponding numbers were \Sexpr{tab_coffee[6, 2]} (95\% CI \Sexpr{paste(tab_coffee[6, 3:4], collapse = ", ")}) and \Sexpr{tab_coffee[6, 5]} (95\% CI \Sexpr{paste(tab_coffee[6, 6:7], collapse = ", ")}). Interestingly, the standard errors for the beta coefficients were lower in the two-stage analysis ($\SE \left(\hat \beta_1 \right)$ = \Sexpr{se_ts[1]}, $\SE \left(\hat \beta_2 \right) = \Sexpr{se_ts[2]}$), even if the corresponding estimates from the one-stage analysis were based on a larger number of data points ($\SE \left(\hat \beta_1 \right)$ = \Sexpr{se_os[1]}, $\SE \left(\hat \beta_2 \right) = \Sexpr{se_os[2]}$). As a consequence, the confidence intervals for the reported predicted relative risks were larger in the one-stage analysis, while the $p$ value for non-linearity $H_0: \beta_2 = 0$ was lower in a two-stage analysis: $p$ = \Sexpr{p_ts} compared to $p$ = \Sexpr{p_os} from the alternative one-stage model.
 
-<<comp_osts, fig.cap="Combined quadratic association between coffee consumption (cups/day) and all-cause mortality estimated using a one-stage (solid line) and two-stage (dashed line) approach. The predicted relative risks are plotted on the scale using 0 cups/day as referent">>=
+<<comp_osts, fig.cap="Combined quadratic association between coffee consumption (cups/day) and all-cause mortality estimated using a one-stage (blue line) and two-stage (red line) approach. The predicted relative risks are plotted on the scale using 0 cups/day as referent.">>=
 newd %>%
   mutate(
     twostage = predict(twostage, ., expo = T)$pred,
@@ -743,30 +743,31 @@ newd %>%
   ) %>%
   gather(analysis, pred, -dose) %>%
   mutate(analysis = factor(analysis, labels = c("One-stage", "Two-stage"))) %>%
-  ggplot(aes(dose, pred, linetype = analysis)) +
+  ggplot(aes(dose, pred, col = analysis)) +
   geom_line() +
   scale_y_continuous(trans = "log", breaks = pretty_breaks()) + 
-  labs(x = "Coffee consumption (cups/day)", y = "Relative risk", linetype = "Curve") +
-  scale_linetype_manual(values = c(`One-stage` = "solid", `Two-stage` = "dashed"))
+  labs(x = "Coffee consumption (cups/day)", y = "Relative risk", col = "Curve") +
+  scale_color_manual(values = c(`One-stage` = "blue", `Two-stage` = "red"))
 @
 
-\noindent The exclusion of 2 studies affected also the estimation of the variance components in $\boldsymbol{\Psi}$. For example, the variance of the random-effects based on 10 out of the 12 studies (two-stage) were \Sexpr{psi_ts[1]} for $b_1$ and \Sexpr{psi_ts[1]} for $b_2$, while were \Sexpr{psi_os[1]} and \Sexpr{psi_os[1]} in the alternative model. The $I^2$ = \Sexpr{round(100*(sum_ts$qstat$Q[1] - sum_ts$qstat$df[1])/sum_ts$qstat$Q[1])} from the multivariate two-stage analysis indicated a moderate impact of the heterogeneity. The same question can be addressed in a one-stage analysis by looking at the variance partition coefficients for the observed dose values. The VPC plot suggested a limited impact of heterogeneity between 20 and 40\% for coffee consumption below 7 cups/day, while it become substantial for higher exposure values (figure~\ref{fig:p_coffee_vpc}).
+\noindent The exclusion of 2 studies affected also the estimation of the variance components in $\boldsymbol{\Psi}$. For example, the variance of the random-effects based on 10 out of the 12 studies (two-stage) were \Sexpr{psi_ts[1]} for $b_1$ and \Sexpr{psi_ts[2]} for $b_2$, while were \Sexpr{psi_os[1]} and \Sexpr{psi_os[2]} in the alternative model. The $I^2$ = \Sexpr{round(100*(sum_ts$qstat$Q[1] - sum_ts$qstat$df[1])/sum_ts$qstat$Q[1])}\% from the multivariate two-stage analysis indicated a moderate impact of the heterogeneity. The same question can be addressed in a one-stage analysis by looking at the variance partition coefficients for the observed dose values. The VPC plot suggested a limited impact of heterogeneity between 20 and 40\% for coffee consumption below 7 cups/day, while it become substantial for higher exposure values (Figure~\ref{fig:p_coffee_vpc}).
 
-Oftentimes it can be informative to provide a graphical presentation not only of the marginal association but also of the study-specific or conditional curves. The multivariate normal distribution for the random-effects is used to predict the study-specific regression coefficients, exploiting the information from the between-studies heterogeneity matrix (table~\ref{tab:blup_tab}). 
-It is worth to notice that the non-linear curves in the one-stage approach can be predicted also for those studies providing only one non-referent log RR (study ID 27 and 28), which were instead excluded in the traditional approach. The predicted conditional curves are graphically presented in figure~\ref{fig:p_grid_coffee}.
+Oftentimes it can be informative to provide a graphical presentation not only of the marginal association but also of the study-specific or conditional curves. The multivariate normal distribution for the random-effects is used to predict the study-specific regression coefficients, exploiting the information from the between-studies heterogeneity matrix (Table~\ref{tab:blup_tab}). 
+It is worth to notice that the non-linear curves in the one-stage approach can be predicted also for those studies providing only one non-referent log RR (study ID 27 and 28), which were instead excluded in the traditional approach. The predicted conditional curves are graphically presented in Figure~\ref{fig:p_grid_coffee}.
 
-<<p_grid_coffee, fig.cap="Best linear unbiased predicted quadratic curves for the association between coffee consumption and all-cause mortality in a one-stage (solid lines) and two-stage (dashed lines) approach. The relative risks are presented on the log scale using the study-specific reference categories as comparator", fig.height=9>>=
+<<p_grid_coffee, fig.cap="Best linear unbiased predicted quadratic curves for the association between coffee consumption and all-cause mortality in a one-stage (blue lines) and two-stage (red lines) approach. The relative risks are presented on the log scale using the study-specific reference categories as comparator.", fig.height=9>>=
 p_coffee <- lapply(seq_along(unique(coffee$id)), function(i){
   idi <- unique(coffee$id)[i]
   ggplot(subset(coffee, id == idi), aes(x = dose, y = exp(logrr))) + 
     geom_errorbar(aes(ymin = exp(logrr - 1.96*se), ymax = exp(logrr + 1.96*se)), width = .3) +
-    geom_line(data = predi, aes_string(x = "x", y = paste0("y_os.pred", i), lty = "'One-stage'"), lwd = 1) +
-    geom_line(data = predi, aes_string(x = "x", y = paste0("y_ts.pred", i), lty = "'Two-stage'"), lwd = 1) +
+    geom_line(data = predi, aes_string(x = "x", y = paste0("y_os.pred", i), col = "'One-stage'"), lwd = 1) +
+    geom_line(data = predi, aes_string(x = "x", y = paste0("y_ts.pred", i), col = "'Two-stage'"), lwd = 1) +
     scale_y_continuous(trans = "log", breaks = pretty_breaks()) + xlim(c(0, 8)) +
     theme(legend.position = "none", axis.title.y = element_text(size = rel(.8)),
           axis.title.x = element_text(size = rel(.8))) + 
     labs(title = paste0("Study ID ", idi), x = "Coffee consumption, cups/day", 
-         y = "Relative Risk", lty = "Curve")
+         y = "Relative Risk", col = "Curve") +
+  scale_color_manual(values = c(`One-stage` = "blue", `Two-stage` = "red"))
 })
 grid_coffee <- plot_grid(plotlist = p_coffee, nrow = 4, ncol = 3, 
                            align = 'vh', hjust = -1)
@@ -809,17 +810,17 @@ comp <- rbind(xref, newd) %>%
     spike = predict(spk_ml, ., expo = T)$pred,
     categories = predict(categ, ., expo = T)$pred
   )
-p_comp <- ggplot(comp, aes(dose, quadr, linetype = "Quadratic")) +
+p_comp <- ggplot(comp, aes(dose, quadr, col = "Quadratic")) +
   geom_line() +
-  geom_line(data = subset(comp, dose < 1), aes(y = spike, linetype = "Spike at 0")) +
-  geom_line(data = subset(comp, dose >= 1), aes(y = spike, linetype = "Spike at 0")) +
+  geom_line(data = subset(comp, dose < 1), aes(y = spike, col = "Spike at 0")) +
+  geom_line(data = subset(comp, dose >= 1), aes(y = spike, col = "Spike at 0")) +
   scale_y_continuous(trans = "log", breaks = pretty_breaks()) + 
-  labs(x = "Coffee consumption (cups/day)", y = "Relative risk", linetype = "Model") +
-  scale_linetype_manual(values = c(`Quadratic` = "dashed", `Spike at 0` = "solid",
-                                   `Categories` = "longdash"))
+  labs(x = "Coffee consumption (cups/day)", y = "Relative risk", col = "Model") +
+  scale_color_manual(values = c(`Quadratic` = "blue", `Spike at 0` = "red",
+                                   `Categories` = "green"))
 for (i in seq_along(k2[-1])){
   p_comp <- p_comp + geom_line(data = subset(comp, dose >= k2[i] & dose < k2[i+1]), 
-                     aes(y = categories, linetype = "Categories"))
+                     aes(y = categories, col = "Categories"))
 }
 @
 
@@ -836,10 +837,10 @@ Different strategies can be chosen to model the dose--response association of in
 (\beta_3 + b_{i3}) (\mathbf{x_3}_{i} - {x_3}_{i0}) + \\  + (\beta_4 + b_{i4}) (\mathbf{x_4}_{i} - {x_4}_{i0}) + \boldsymbol{\epsilon}_{i}
 \end{multline*}
 
-\noindent The two models are parameterized, respectively, by $p = 3$ and $p = 4$ parameters. It is unlikely to have enough data points (at least 4 non referent log RRs) for estimating the previous models in a two-stage analysis. Using a one-stage approach, instead, the predicted curve from those alternative analyses are presented graphically in figure~\ref{fig:p_comp_os} together with the quadratic model described before. 
-In the spike at 0 model, the predicted mortality risk for the unexposed participants was \Sexpr{100*(pred_spk1[1] - 1)}\% higher (95\% CI \Sexpr{ paste(pred_spk1[2:3], collapse = ", ")}) as compared to participants drinking 1 cup/day. Every one cup per day increase in coffee consumption was associated with \Sexpr{100*(1 - pred_spk2[1])} (95\% CI \Sexpr{ paste(pred_spk2[2:3], collapse = ", ")}) reduction in all-risk mortality, whereas the same number was less pronounced ($\beta_3$ = \Sexpr{pred_spk3a[1]}) for coffee consumption higher than 4 cups/day, with a decreased risk of \Sexpr{ 100*(1 - pred_spk3b[1])} \% (95\% CI \Sexpr{paste(pred_spk3b[2:3], collapse = ", ")}). 
+\noindent The two models are parameterized, respectively, by $p = 3$ and $p = 4$ parameters. It is unlikely to have enough data points (at least 4 non referent log RRs) for estimating the previous models in a two-stage analysis. Using a one-stage approach, instead, the predicted curve from those alternative analyses are presented graphically in Figure~\ref{fig:p_comp_os} together with the quadratic model described before. 
+In the spike at 0 model, the predicted mortality risk for the unexposed participants was \Sexpr{100*(pred_spk1[1] - 1)}\% higher (95\% CI \Sexpr{ paste(pred_spk1[2:3], collapse = ", ")}) as compared to participants drinking 1 cup/day. Every one cup per day increase in coffee consumption was associated with \Sexpr{100*(1 - pred_spk2[1])}\% (95\% CI \Sexpr{ paste(pred_spk2[2:3], collapse = ", ")}) reduction in all-risk mortality, whereas the same number was less pronounced ($\beta_3$ = \Sexpr{pred_spk3a[1]}) for coffee consumption higher than 4 cups/day, with a decreased risk of \Sexpr{ 100*(1 - pred_spk3b[1])}\% (95\% CI \Sexpr{paste(pred_spk3b[2:3], collapse = ", ")}). 
 The categorical model provided similar results with a \Sexpr{100*(pred_cat_os[1, 1] - 1)}\% (95\% CI \Sexpr{ paste(pred_cat_os[1, 2:3], sep = ", ")}) higher mortality risk for never drinkers compared to the category $[1, 3)$ of coffee consumption. Categories for coffee consumption greater or equal to 3 cup/day indicated a decreased mortality risk. We can evaluate if this further decline is significant by testing $H_0: \beta_2 = \beta_3 = \beta_4 = 0$. The multivariate Wald test did non provide enough evidence to reject the null hypothesis ($\chi_3^2$ = \Sexpr{ categ_test[1]}, $p$~value = \Sexpr{categ_test[2]}).
-The fit of the alternative analyses can be compared by looking at the AIC. We selected the quadratic curve as the best fitting model since it had the lowest AIC (\Sexpr{AIC_os[1]}), as compared to the spike at 0 (\Sexpr{AIC_os[2]}) and categorical model (\Sexpr{AIC_os[3]}).
+The fit of the alternative analyses can be compared by looking at the AIC. We selected the quadratic curve as the best fitting model since it had the lowest AIC (\Sexpr{AIC_os[1]}), as compared to the spike at 0 (\Sexpr{AIC_os[2]}) and the categorical model (\Sexpr{AIC_os[3]}).
 
 <<meta-regression_coffee>>=
 quadr_reg <- dosresmeta(logrr ~ dose + I(dose^2), id = id, se = se, data = coffee, 
@@ -855,9 +856,10 @@ coffee_vpc <- coffee %>%
   gather(curve, vpc, Quadratic:`Quadratic meta-regression`)
 
 p_coffee_vpc <- ggplot(coffee_vpc, aes(dose, vpc, group = curve)) +
-  geom_point(aes(shape = curve)) +
-  geom_smooth(aes(linetype = curve), method = "loess", se = F, col = "black") +
-  labs(y = "VPC", x = "Coffee consumption (cups/day)", shape = "Curve", linetype = "Curve") + 
+  geom_point(aes(shape = curve, col = curve)) +
+  geom_smooth(aes(col = curve), method = "loess", se = F) +
+  labs(y = "VPC", x = "Coffee consumption (cups/day)", shape = "Curve", col = "Curve") +
+  scale_color_manual(values = c(`Quadratic` = "blue", `Quadratic meta-regression` = "red")) +
   theme(legend.position = "top")
 @
 
@@ -869,4 +871,4 @@ After choosing the quadratic curve as the basis for modelling the dose--response
 \boldsymbol{\epsilon}_{i}
 \end{multline*}
 
-\noindent The meta-regression model simplifies to the quadratic model when the coefficients for the interaction terms are equal to 0. A test for $H_0: \beta_3 = \beta_4 = \beta_5 = \beta_6 = 0$ is equivalent to test if the dose--response associations differ according to sex of the participants.  The multivariate Wald test ($\chi_3^2$ = \Sexpr{chitest_reg[1]}, $p$~value = \Sexpr{ chitest_reg[2]}) did not reject the null hypothesis. Furthermore, the meta-regression model was not able to explain the observed residual heterogeneity (figure~\ref{fig:p_coffee_vpc}).
+\noindent The meta-regression model simplifies to the quadratic model when the coefficients for the interaction terms are equal to 0. A test for $H_0: \beta_3 = \beta_4 = \beta_5 = \beta_6 = 0$ is equivalent to test if the dose--response associations differ according to sex of the participants.  The multivariate Wald test ($\chi_3^2$ = \Sexpr{chitest_reg[1]}, $p$~value = \Sexpr{ chitest_reg[2]}) did not reject the null hypothesis. Furthermore, the meta-regression model was not able to explain the observed residual heterogeneity (Figure~\ref{fig:p_coffee_vpc}).

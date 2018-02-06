@@ -11,11 +11,11 @@
 
 \chapter{Supplementary figures}
 
-<<p_indiv, fig.cap="Study-specific quadratic associations between coffee consumption and all-cause mortality. The relative risks are presented on a log scale using 0 cups/day as referent.">>=
+<<p_indiv, fig.cap="Study-specific quadratic associations between coffee consumption and all-cause mortality. The relative risks are presented on a log scale using 0 cups/day as referent \\citep{crippa2016red}.">>=
 p_indiv
 @
 
-<<fig_dist_vi, fig.cap="Estimated distribution for within-error terms in a dose--response meta-analysis between processed and red meat and bladder cancer risk \\citep{crippa2016red}">>=
+<<fig_dist_vi, fig.cap="Empirical distribution for within-error terms for the study-specific linear trend in a dose--response meta-analysis between processed and red meat and bladder cancer risk \\citep{crippa2016red}.">>=
 dist_vi
 @
 
@@ -23,11 +23,11 @@ dist_vi
 p_chr
 @
 
-<<p_comp_os, fig.cap="Comparison of different strategies (quadratic, spike at 0, and categorical models) in a dose--response meta-analysis of coffee consumption (cups/day) and all-cause mortality. The relative risks are presented on the log scale using 1 cup/day as referent">>=
+<<p_comp_os, fig.cap="Comparison of different strategies (quadratic, spike at 0, and categorical models) in a dose--response meta-analysis of coffee consumption (cups/day) and all-cause mortality. The relative risks are presented on the log scale using 1 cup/day as referent.">>=
 p_comp
 @
 
-<<p_coffee_vpc, fig.cap="Variance Partition Coefficients, $\textrm{VPC}_{ij}$ versus observed dose levels plot and LOWESS smoother for dose--response meta-analysis between coffee consumption (cusp/day) and all-cause mortality using a quadratic and meta-regression model.">>=
+<<p_coffee_vpc, fig.cap="Variance Partition Coefficient, $\\textrm{VPC}_{ij}$, versus observed dose levels plot and LOWESS smoother for dose--response meta-analysis between coffee consumption (cusp/day) and all-cause mortality using a quadratic and meta-regression model.">>=
 p_coffee_vpc
 @
 
@@ -40,7 +40,7 @@ kable(chr_red, "latex", align = "c", booktabs = T, digits = 1,
       col.names = c("ID", "Referent", "Min", "P25", "Median", "P75", "Max"), 
       caption = "Descriptive statistics of the assigned dose levels for 13 studies 
       included in a dose--response meta-analysis between red meat consumption (g per day) and bladder
-      cancer risk") %>%
+      cancer risk.") %>%
   kable_styling(latex_options = c("hold_position"))
 @
 
@@ -50,21 +50,23 @@ lapply(AIC_pi_red, round, 2) %>%
   do.call("cbind", .) %>%
   `rownames<-`(apply(fpgrid, 1, function(f) paste0("(", paste(f, collapse = ", "), ")"))) %>%
   rbind(
-    `best p` = apply(fpgrid[unlist(pb_red), ], 1, function(f) paste(f, collapse = ", "))
+    `Best p` = apply(fpgrid[unlist(pb_red), ], 1, function(f) paste(f, collapse = ", "))
   ) %>%
   as.data.frame() %>%
   rownames_to_column(var = "p") %>%
-  kable("latex", align = "c", booktabs = T, escape = F, 
-        caption = "AIC for the study-specific fractional polynomials of order two with power terms specified by $p$. The last row reports the power term corresponding to the lowest AIC.
-") %>%
-  kable_styling(font_size = 8)
+  kable("latex", align = "c", booktabs = T, escape = F, longtable = T,
+        caption = "AIC for the study-specific second-degree fractional polynomials with power terms specified by $p$ in a dose-response meta-analysis between red mead consumption (g per day) and bladder cancer risk. The last row reports the power term corresponding to the lowest AIC.") %>%
+  add_header_above(c(" " = 1, "Study ID" = 13)) %>%
+  kable_styling(latex_options = c("repeat_header")) %>%
+  landscape()
 @
+
 
 <<blup_tab, results='asis'>>=
 bi %>%
   select(id, bi.1.x:bi.2.y) %>%
   kable("latex", align = "c", booktabs = T, escape = F, digits = 3, linesep = c(""), 
-        caption = "Conditional predicted coefficients for quadratic curves in 12 studies on the association between coffee consumption (cups/day) and all-cause mortality based on a one-stage (os) and two-stage (ts) approach", 
+        caption = "Conditional predicted coefficients for quadratic curves in 12 studies on the association between coffee consumption (cups/day) and all-cause mortality based on a one-stage (os) and two-stage (ts) approach.", 
         col.names = c("ID", "$\\hat \\beta_{1\\textrm{os}}$", "$\\hat \\beta_{2\\textrm{os}}$",
                       "$\\hat \\beta_{1\\textrm{ts}}$", "$\\hat \\beta_{2\\textrm{ts}}$")) %>%
   kable_styling(position = "center", latex_options = c("hold_position")) 

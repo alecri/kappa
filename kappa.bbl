@@ -1,4 +1,4 @@
-\begin{thebibliography}{71}
+\begin{thebibliography}{80}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -175,8 +175,14 @@ Goldstein H, Browne W, Rasbash J (2002).
 \newblock \emph{Understanding Statistics: Statistical Issues in Psychology,
   Education, and the Social Sciences}, \textbf{1}(4), 223--231.
 
-\bibitem[{Greenland(1995)}]{greenland1995dose}
-Greenland S (1995).
+\bibitem[{Greenland(1995{\natexlab{a}})}]{greenland1995avoiding}
+Greenland S (1995{\natexlab{a}}).
+\newblock \enquote{Avoiding power loss associated with categorization and
+  ordinal scores in dose-response and trend analysis.}
+\newblock \emph{Epidemiology}, pp. 450--454.
+
+\bibitem[{Greenland(1995{\natexlab{b}})}]{greenland1995dose}
+Greenland S (1995{\natexlab{b}}).
 \newblock \enquote{Dose-response and trend analysis in epidemiology:
   alternatives to categorical analysis.}
 \newblock \emph{Epidemiology}, pp. 356--365.
@@ -206,6 +212,11 @@ Hamling J, Lee P, Weitkunat R, Amb{\"u}hl M (2008).
   precision estimates for alternative comparisons from a set of estimates
   presented by exposure level or disease category.}
 \newblock \emph{Statistics in medicine}, \textbf{27}(7), 954--970.
+
+\bibitem[{Harrell(2013)}]{harrell2013regression}
+Harrell F (2013).
+\newblock \enquote{Regression modeling strategies.}
+\newblock \emph{as implemented in R package ‘rms’ version}, \textbf{3}(3).
 
 \bibitem[{Harrell~Jr(2015)}]{harrell2015regression}
 Harrell~Jr FE (2015).
@@ -298,6 +309,12 @@ Legrady D, Dyer AR, Shekelle RB, Stamler J, Liu K, Paul O, Lepper M, Shryock AM
   Electric Company study.}
 \newblock \emph{American journal of epidemiology}, \textbf{126}(5), 803--812.
 
+\bibitem[{Li and Spiegelman(2010)}]{li2010sas}
+Li R, Spiegelman D (2010).
+\newblock \enquote{The SAS\% metadose Macro.}
+\newblock \emph{URL http://www. hsph. harvard.
+  edu/donna-spiegelman/software/metadose}.
+
 \bibitem[{Liu \emph{et~al.}(2009)Liu, Cook, Bergstr{\"o}m, and
   Hsieh}]{liu2009two}
 Liu Q, Cook NR, Bergstr{\"o}m A, Hsieh CC (2009).
@@ -362,6 +379,18 @@ Ritz J, Demidenko E, Spiegelman D (2008).
 \newblock \emph{Journal of Statistical Planning and Inference},
   \textbf{138}(7), 1919--1933.
 
+\bibitem[{Royston(2000)}]{royston2000strategy}
+Royston P (2000).
+\newblock \enquote{A strategy for modelling the effect of a continuous
+  covariate in medicine and epidemiology.}
+\newblock \emph{Statistics in medicine}, \textbf{19}(14), 1831--1847.
+
+\bibitem[{Royston(2001)}]{royston2001flexible}
+Royston P (2001).
+\newblock \enquote{Flexible parametric alternatives to the Cox model, and
+  more.}
+\newblock \emph{Stata J}, \textbf{1}(1), 1--28.
+
 \bibitem[{Royston and Altman(1994)}]{royston1994regression}
 Royston P, Altman DG (1994).
 \newblock \enquote{Regression using fractional polynomials of continuous
@@ -375,11 +404,26 @@ Royston P, Altman DG, Sauerbrei W (2006).
   a bad idea.}
 \newblock \emph{Statistics in medicine}, \textbf{25}(1), 127--141.
 
+\bibitem[{Royston \emph{et~al.}(1999)Royston, Ambler, and
+  Sauerbrei}]{royston1999use}
+Royston P, Ambler G, Sauerbrei W (1999).
+\newblock \enquote{The use of fractional polynomials to model continuous risk
+  variables in epidemiology.}
+\newblock \emph{International journal of epidemiology}, \textbf{28}(5),
+  964--974.
+
 \bibitem[{Sauerbrei and Royston(2011)}]{sauerbrei2011new}
 Sauerbrei W, Royston P (2011).
 \newblock \enquote{A new strategy for meta-analysis of continuous covariates in
   observational studies.}
 \newblock \emph{Statistics in medicine}, \textbf{30}(28), 3341--3360.
+
+\bibitem[{Schmid \emph{et~al.}(1998)Schmid, Lau, McIntosh, and
+  Cappelleri}]{schmid1998empirical}
+Schmid CH, Lau J, McIntosh MW, Cappelleri JC (1998).
+\newblock \enquote{An empirical study of the effect of the control rate as a
+  predictor of treatment efficacy in meta-analysis of clinical trials.}
+\newblock \emph{Statistics in medicine}, \textbf{17}(17), 1923--1942.
 
 \bibitem[{Shi and Copas(2004)}]{shi2004meta}
 Shi JQ, Copas J (2004).
@@ -464,5 +508,18 @@ Whitehead A, Whitehead J (1991).
 \newblock \enquote{A general parametric approach to the meta-analysis of
   randomized clinical trials.}
 \newblock \emph{Statistics in medicine}, \textbf{10}(11), 1665--1677.
+
+\bibitem[{Wickham(2017)}]{tidyverse}
+Wickham H (2017).
+\newblock \emph{tidyverse: Easily Install and Load the 'Tidyverse'}.
+\newblock R package version 1.2.1,
+  \urlprefix\url{https://CRAN.R-project.org/package=tidyverse}.
+
+\bibitem[{Yu \emph{et~al.}(2013)Yu, Schmid, Lichtenstein, Lau, and
+  Trikalinos}]{yu2013empirical}
+Yu WW, Schmid CH, Lichtenstein AH, Lau J, Trikalinos TA (2013).
+\newblock \enquote{Empirical evaluation of meta-analytic approaches for
+  nutrient and health outcome dose-response data.}
+\newblock \emph{Research synthesis methods}, \textbf{4}(3), 256--268.
 
 \end{thebibliography}

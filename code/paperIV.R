@@ -211,3 +211,33 @@ p_pwa4 <- subset(metamodi_res, dose < xlim) %>%
 
 #grid.arrange(p_pwa1, p_pwa2, p_pwa3, p_pwa4, ncol = 2, nrow = 2)
 plot_grid(p_pwa1, p_pwa2, p_pwa3, p_pwa4, align = 'vh', labels = c("A", "B", "C", "D"))
+
+
+# table for appendix
+lapply(AIC_pi_red, round, 2) %>%
+  do.call("cbind", .) %>%
+  `rownames<-`(apply(fpgrid, 1, function(f) paste0("(", paste(f, collapse = ", "), ")"))) %>%
+  rbind(
+    `Best p` = apply(fpgrid[unlist(pb_red), ], 1, function(f) paste(f, collapse = ", "))
+  ) %>%
+  as.data.frame() %>%
+  rownames_to_column(var = "p") %>%
+  kable("latex", align = "c", booktabs = T, escape = F, longtable = T,
+        caption = "AIC for the study-specific second-degree fractional polynomials with power terms specified by $p$ in a dose-response meta-analysis between red mead consumption (g per day) and bladder cancer risk. The last row reports the power term corresponding to the lowest AIC.") %>%
+  add_header_above(c(" " = 1, "Study ID" = 13)) %>%
+  kable_styling(latex_options = c("repeat_header")) %>%
+  landscape()
+
+# old backup
+lapply(AIC_pi_red, round, 2) %>%
+  do.call("cbind", .) %>%
+  `rownames<-`(apply(fpgrid, 1, function(f) paste0("(", paste(f, collapse = ", "), ")"))) %>%
+  rbind(
+    `best p` = apply(fpgrid[unlist(pb_red), ], 1, function(f) paste(f, collapse = ", "))
+  ) %>%
+  as.data.frame() %>%
+  rownames_to_column(var = "p") %>%
+  kable("latex", align = "c", booktabs = T, escape = F, 
+        caption = "AIC for the study-specific second-degree fractional polynomials with power terms specified by $p$ in a dose-response meta-analysis between red mead consumption (g per day) and bladder cancer risk. The last row reports the power term corresponding to the lowest AIC.") %>%
+  kable_styling(font_size = 8)
+

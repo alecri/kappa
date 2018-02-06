@@ -76,6 +76,8 @@ theme_set(theme_kappa)
 \usepackage{etoolbox}
 \usepackage{tabularx}
 \usepackage{rotating}
+\usepackage{lscape}
+\usepackage{longtable}
 \usepackage[font={small}]{caption}
 \usepackage{chngcntr}
 \usepackage{booktabs}

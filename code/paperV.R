@@ -74,11 +74,11 @@ bi_os <- data.frame(
   xmin = tapply(coffee$dose, coffee$id, min),
   xref = tapply(coffee$dose, coffee$id, head, 1),
   xmax = tapply(coffee$dose, coffee$id, max),
-  bi = t(apply(blup(onestage), 1, function(x) x + rbind(coef(onestage))))
+  bi = t(apply(dosresmeta:::blup.dosresmeta(onestage), 1, function(x) x + rbind(coef(onestage))))
 )
 bi_ts <- data.frame(
   id = setdiff(unique(coffee$id), c(28, 29)),
-  bi = t(apply(blup(twostage), 1, function(x) x + rbind(coef(twostage))))
+  bi = t(apply(dosresmeta:::blup.dosresmeta(twostage), 1, function(x) x + rbind(coef(twostage))))
 )
 bi <- merge(bi_os, bi_ts, by = "id", all = T)
 predi <- data.frame(
@@ -125,17 +125,17 @@ comp <- rbind(xref, newd) %>%
     spike = predict(spk_ml, ., expo = T)$pred,
     categories = predict(categ, ., expo = T)$pred
   )
-p_comp <- ggplot(comp, aes(dose, quadr, linetype = "Quadratic")) +
+p_comp <- ggplot(comp, aes(dose, quadr, col = "Quadratic")) +
   geom_line() +
-  geom_line(data = subset(comp, dose < 1), aes(y = spike, linetype = "Spike at 0")) +
-  geom_line(data = subset(comp, dose >= 1), aes(y = spike, linetype = "Spike at 0")) +
+  geom_line(data = subset(comp, dose < 1), aes(y = spike, col = "Spike at 0")) +
+  geom_line(data = subset(comp, dose >= 1), aes(y = spike, col = "Spike at 0")) +
   scale_y_continuous(trans = "log", breaks = pretty_breaks()) + 
-  labs(x = "Coffee consumption (cups/day)", y = "Relative risk", linetype = "Model") +
-  scale_linetype_manual(values = c(`Quadratic` = "dashed", `Spike at 0` = "solid",
-                                   `Categories` = "longdash"))
+  labs(x = "Coffee consumption (cups/day)", y = "Relative risk", col = "Model") +
+  scale_color_manual(values = c(`Quadratic` = "blue", `Spike at 0` = "red",
+                                `Categories` = "green"))
 for (i in seq_along(k2[-1])){
   p_comp <- p_comp + geom_line(data = subset(comp, dose >= k2[i] & dose < k2[i+1]), 
-                     aes(y = categories, linetype = "Categories"))
+                               aes(y = categories, col = "Categories"))
 }
 p_comp
 
@@ -155,8 +155,10 @@ coffee_vpc <- coffee %>%
   ) %>%
   gather(curve, vpc, Quadratic:`Quadratic meta-regression`)
 
-ggplot(coffee_vpc, aes(dose, vpc, group = curve)) +
-  geom_point(aes(shape = curve)) +
-  geom_smooth(aes(linetype = curve), method = "loess", se = F, col = "black") +
-  labs(y = "VPC", x = "Coffee consumption (cups/day)", shape = "Curve", linetype = "Curve") + 
+p_coffee_vpc <- ggplot(coffee_vpc, aes(dose, vpc, group = curve)) +
+  geom_point(aes(shape = curve, col = curve)) +
+  geom_smooth(aes(col = curve), method = "loess", se = F) +
+  labs(y = "VPC", x = "Coffee consumption (cups/day)", shape = "Curve", col = "Curve") +
+  scale_color_manual(values = c(`Quadratic` = "blue", `Quadratic meta-regression` = "red")) +
   theme(legend.position = "top")
+p_coffee_vpc
