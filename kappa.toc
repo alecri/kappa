@@ -46,7 +46,7 @@
 \contentsline {chapter}{\numberline {6}Discussion}{59}{chapter.6}
 \contentsline {section}{\numberline {6.1}Goodness-of-fit}{59}{section.6.1}
 \contentsline {section}{\numberline {6.2}A new measure of heterogeneity}{60}{section.6.2}
-\contentsline {section}{\numberline {6.3}A pointwise approach}{61}{section.6.3}
+\contentsline {section}{\numberline {6.3}A point-wise approach}{61}{section.6.3}
 \contentsline {section}{\numberline {6.4}A one-stage model}{62}{section.6.4}
 \contentsline {chapter}{\numberline {7}Conclusions}{64}{chapter.7}
 \contentsline {chapter}{\numberline {8}Future research}{66}{chapter.8}
