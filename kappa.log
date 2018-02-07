@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.7.31)  7 FEB 2018 09:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.7.31)  7 FEB 2018 14:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2081,27 +2081,27 @@ Overfull \hbox (1.10829pt too wide) in paragraph at lines 351--355
 ation of approximations, and software.''
  []
 
-[78] [79]) [80]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2541.
- [81
+[78] [79]) [80] [81
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2541.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2561.
+ [82]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2561.
  (./kappa.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2541.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2541.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2561.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2561.
 
 Package rerunfilecheck Info: File `kappa.out' has not changed.
 (rerunfilecheck)             Checksum: 0FCF2BCF59A6771200878A7D57E81FDE;3873.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2541.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2561.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 380 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 16353 strings out of 492995
- 251648 string characters out of 6132704
+ 16354 strings out of 492995
+ 251655 string characters out of 6132704
  388683 words of memory out of 5000000
  18787 multiletter control sequences out of 15000+600000
  171486 words of font info for 447 fonts, out of 8000000 for 9000
@@ -2130,10 +2130,10 @@ chri8t.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/tex-gyre/qhvb
 /usr/local/texlive/2017/texmf-dist/fonts/type1/public/cm-super/sftt0900.pfb></u
 sr/local/texlive/2017/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></usr
 /local/texlive/2017/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on kappa.pdf (97 pages, 813676 bytes).
+Output written on kappa.pdf (98 pages, 819794 bytes).
 PDF statistics:
- 1632 PDF objects out of 1728 (max. 8388607)
- 1445 compressed objects within 15 object streams
- 326 named destinations out of 1000 (max. 500000)
+ 1636 PDF objects out of 1728 (max. 8388607)
+ 1448 compressed objects within 15 object streams
+ 327 named destinations out of 1000 (max. 500000)
  75316 words of extra memory for PDF output out of 89155 (max. 10000000)
 
