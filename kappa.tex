@@ -49,6 +49,7 @@
 \usepackage{enumerate, mdwlist}
 \usepackage{etoolbox}
 \usepackage{tabularx}
+\usepackage{float}
 \usepackage{rotating}
 \usepackage{lscape}
 \usepackage{longtable}
@@ -56,6 +57,8 @@
 \usepackage{chngcntr}
 \usepackage{booktabs}
 \counterwithout{footnote}{chapter}
+
+
 
 %---begin see http://www.khirevich.com/latex/font/
 \usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100, stretch=10,shrink=10]{microtype}
@@ -1173,6 +1176,59 @@ R> ls("package:dosresmeta")
 
 \noindent Use \texttt{ls(getNamespace("dosresmeta"), all.names=TRUE)} for a complete list including hidden auxiliary functions.
 
+\subsection{Data Sets}
+
+\noindent Several data sets from published dose-response meta-analyses and methodological articles have been included in the \pkg{dosresmeta} package. To get a list as in Table~\ref{tab:data_table} with the names and description type
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+R> data(package = "dosresmeta")
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{table}
+
+\caption{\label{tab:data_table}Data sets available in the \pkg{dosresmeta} $\R$ package.}
+\centering
+\begin{tabular}[t]{l>{\raggedright\arraybackslash}p{32em}}
+\toprule
+Name & Description\\
+\midrule
+alcohol\_crc & Eight published studies on the relation between alcohol intake and colon-rectal cancer.\\
+alcohol\_cvd & Six published studies on the relation between alcohol intake and cardiovascular disease risk.\\
+alcohol\_esoph & Fourteen case-control studies on the relation between alcohol consumption and esophageal cancer\\
+alcohol\_lc & Four published studies on the relation between alcohol intake and lung cancer.\\
+ari & Five clinical trials on the relation between aripiprazole and schizophrenia\\
+\addlinespace
+bmi\_rc & Four case-control studies on the relation between Body Mass Index and renal cell cancer\\
+cc\_ex & Case-control data on alcohol and breast cancer risk\\
+ci\_ex & Cumulative incidence data on high-fat dairy food and colorectal cancer risk\\
+coffee\_cancer & Eight prospective studies on the relation between coffee consumption and cancer mortality\\
+coffee\_cvd & Thirteen prospective studies on the relation between coffee consumption and cardiovascular mortality\\
+\addlinespace
+coffee\_mort & Twenty-one prospective studies on the relation between coffee consumption and all-cause mortality\\
+coffee\_mort\_add & \\
+coffee\_stroke & Eleven prospective studies on the relation between coffee consumption and stroke risk\\
+fish\_ra & Six studies on the relation between fish consumption and rheumatoid arthritis risk\\
+ir\_ex & Incidence-rate data on fiber intake and coronary heart disease risk\\
+\addlinespace
+milk\_mort & Eleven prospective studies on the relation between milk consumption and all-cause mortality\\
+milk\_ov & Nine studies on the relation between milk consumption and ovarian cancer\\
+oc\_breast & Twenty-two case-control studies on the relation between oral contraceptives use and breast cancer\\
+process\_bc & Ten studies on the relation between processed meat and bladder cancer\\
+red\_bc & Twelve studies on the relation between red meat and bladder cancer\\
+sim\_os & Simulated data for one-stage dose-response meta-analysis\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\end{knitrout}
+
+
 
 \section{Goodness-of-fit}\label{sec:gof}
 
@@ -2190,11 +2246,11 @@ More specifically we conclude the following:
 
 \item Goodness-of-fit should be regularly evaluated in applied dose--response meta-analysis. The proposed solutions consist of descriptive measures to summarize the agreement between fitted and observed data (the deviance and the coefficient of determination), and graphical tools to visualize the fit of the model (decorrelated residuals-versus-exposure plot). These tools can be employed to identify systematic dose--response patterns and possible source of heterogeneity, and to support the conclusions in applied meta-analyses (\citetalias{discacciati2015goodness}).
 
-\item The new measure of heterogeneity, $R_b$, quantifies the proportion of the variance of the pooled estimate attributable to the between-study heterogeneity. Contrary to the available measures of heterogeneity, it does not make any assumption about the distribution of the within-study error variances, nor does it require specification of a typical value for these quantities. Therefore, we recommend the use of the $R_b$ as preferred measure for quantifying the impact of heterogeneity (\citetalias{crippa2016new}). 
+\item The new measure of heterogeneity, $\hat R_b$, quantifies the proportion of the variance of the pooled estimate attributable to the between-study heterogeneity. Contrary to the available measures of heterogeneity, it does not make any assumption about the distribution of the within-study error variances, nor does it require specification of a typical value for these quantities. Therefore, we recommend the use of the $\hat R_b$ as preferred measure for quantifying the impact of heterogeneity (\citetalias{crippa2016new}). 
 
 \item A point-wise strategy for dose--response meta-analysis does not require the specification of a unique model as in the traditional approaches, and therefore allows for more flexibility in modeling the individual curves. In addition, the extent of extrapolation is limited by predicting the study-specific relative risk based on the observe exposure range. The use of the described strategy may improve the robustness of the results, especially in case of heterogeneous exposure range (\citetalias{crippa2018pointwise}).
 
-\item A one-stage approach for dose--response meta-analysis consists of a linear mixed-effects model, which offer useful tools for describing the impact of heterogeneity over the exposure range, for comparing the fit of different models, and for predicting individual dose--response associations. Thhe main advantage is that flexible curves can be estimated regardless of the number of data-points in the individual analyses (\citetalias{crippa2018one}).
+\item A one-stage approach for dose--response meta-analysis consists of a linear mixed-effects model, which offer useful tools for describing the impact of heterogeneity over the exposure range, for comparing the fit of different models, and for predicting individual dose--response associations. The main advantage is that flexible curves can be estimated regardless of the number of data-points in the individual analyses (\citetalias{crippa2018one}).
 
 \end{itemize}
 

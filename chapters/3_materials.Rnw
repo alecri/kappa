@@ -66,6 +66,23 @@ ls("package:dosresmeta")
 
 \noindent Use \texttt{ls(getNamespace("dosresmeta"), all.names=TRUE)} for a complete list including hidden auxiliary functions.
 
+\subsection{Data Sets}
+
+\noindent Several data sets from published dose-response meta-analyses and methodological articles have been included in the \pkg{dosresmeta} package. To get a list as in Table~\ref{tab:data_table} with the names and description type
+
+<<data, echo = TRUE>>=
+data(package = "dosresmeta")
+@
+
+<<data_table>>=
+d <- data(package = "dosresmeta")$results
+cbind(Name = d[, "Item"], Description = d[, "Title"]) %>%
+  kable(format = "latex", booktabs = T, caption = "Data sets available in the \\pkg{dosresmeta} $\\R$ package.") %>%
+  kable_styling(full_width = F) %>%
+  column_spec(2, width = "32em")
+@
+
+
 
 \section{Goodness-of-fit}\label{sec:gof}
 

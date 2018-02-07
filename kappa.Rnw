@@ -11,10 +11,10 @@
 <<global_option, echo=FALSE, include=FALSE>>=
 library(knitr)
 opts_knit$set(self.contained=FALSE, out.format = "latex")
-opts_chunk$set(echo = FALSE, message = TRUE, comment = NA, fig.path = "../figure/",
-               out.width = "\\textwidth", cache = TRUE, highlight = F, background = "white",
+opts_chunk$set(echo = FALSE, message = FALSE, comment = NA, fig.path = "../figure/",
+               out.width = "\\textwidth", cache = FALSE, highlight = F, background = "white",
                fig.align = "center", fig.width = 7, fig.height = 4.5, fig.pos= "ht!",
-               prompt = TRUE, size = "footnotesize", warning=FALSE)
+               prompt = TRUE, size = "footnotesize", warning = FALSE)
 options(prompt ="R> ", width = 85, show.signif.stars = FALSE, knitr.kable.NA = '')
 knit_theme$set("print")
 
@@ -75,6 +75,7 @@ theme_set(theme_kappa)
 \usepackage{enumerate, mdwlist}
 \usepackage{etoolbox}
 \usepackage{tabularx}
+\usepackage{float}
 \usepackage{rotating}
 \usepackage{lscape}
 \usepackage{longtable}
@@ -82,6 +83,8 @@ theme_set(theme_kappa)
 \usepackage{chngcntr}
 \usepackage{booktabs}
 \counterwithout{footnote}{chapter}
+
+
 
 %---begin see http://www.khirevich.com/latex/font/
 \usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100, stretch=10,shrink=10]{microtype}
