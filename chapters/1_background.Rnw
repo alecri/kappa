@@ -495,7 +495,7 @@ A popular alternative for flexibly model the dose--response association is repre
 \mathrm{RCS}(x) = \beta_1 x + \beta_2 \left[ \left( x - k_1 \right)_{+}^3 - \frac{k_3 - k_1}{k_3 - k_2} \left( x - k_2  \right)_{+}^3 + \frac{k_2 - k_1}{k_3 - k_2} \left(x - k_3 \right)_{+}^3\right]
 \label{eq:rcs}
 \end{equation}
-\noindent The second transformation is generally divided by $(k_3 - k_1)^2$ to improve the numerical behavior and to put the spline transformations on the same scale \citep{harrell2015regression}.
+\noindent The second transformation is generally divided by $(k_3 - k_1)^2$ to improve the numerical behavior and to put the spline transformations on the same scale \citep{harrell2015regression} (see Appendix~\ref{sec:rcs} for the derivation of a RCS model).
 
 The previous strategies have been often presented for exposures where 0 was the natural reference categories (e.g. alcohol consumption). \cite{liu2009two} extended the methodology for handling non-zero reference categories, as in the case of Body Mass Index. In particular, they first described how to construct the design matrix in terms of contrasts, as clarified in Equation~\ref{eq:des.matrix}. Misspecification of the design matrix (e.g. $\log \mathrm{RR} = \beta_1 (x_1 - x_0) + \beta_2 (x_1 - x_0)^2$ instead of $\log \mathrm{RR} = \beta_1 (x_1 - x_0) + \beta_2 (x_1^2 - x_0^2)$) may increase the risk of generating artifacts and misleading conclusions. Note that for zero exposure categories the problem is generally not relevant since many functions return zero for $x = 0$ ($g(0) = 0$).
 

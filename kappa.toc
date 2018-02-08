@@ -51,7 +51,8 @@
 \contentsline {section}{\numberline {6.4}A one-stage model}{63}{section.6.4}
 \contentsline {chapter}{\numberline {7}Conclusions}{65}{chapter.7}
 \contentsline {chapter}{\numberline {8}Future research}{67}{chapter.8}
-\contentsline {chapter}{\numberline {A}Supplementary figures}{68}{appendix.A}
-\contentsline {chapter}{\numberline {B}Supplementary tables}{71}{appendix.B}
-\contentsline {chapter}{References}{75}{appendix.C}
-\contentsline {chapter}{Acknowledgements}{81}{appendix*.37}
+\contentsline {chapter}{\numberline {A}Restricted cubic splines}{68}{appendix.A}
+\contentsline {chapter}{\numberline {B}Supplementary figures}{70}{appendix.B}
+\contentsline {chapter}{\numberline {C}Supplementary tables}{73}{appendix.C}
+\contentsline {chapter}{References}{77}{appendix.D}
+\contentsline {chapter}{Acknowledgements}{83}{appendix*.37}
