@@ -35,7 +35,8 @@ The main folders are:
 Alessio Crippa, Karolinska Institutet, Stockholm, Sweden
 
 ### Session Info
-`
+
+``` r
 R> sessionInfo()
 R version 3.4.3 (2017-11-30)
 Platform: x86_64-apple-darwin15.6.0 (64-bit)
@@ -82,4 +83,4 @@ loaded via a namespace (and not attached):
 [69] gtable_0.2.0        etm_0.6-2           assertthat_0.2.0    broom_0.4.3        
 [73] viridisLite_0.2.0   fields_9.6          bindrcpp_0.2        cluster_2.0.6      
 [77] TH.data_1.0-8    
-`
+```
