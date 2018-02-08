@@ -20,7 +20,7 @@ Meta-analysis, or more generally quantitative review synthesis, is the statistic
 The classical approach for meta-analysis consists of a weighted average of the study-specific results or estimates. A fixed-effect model for meta-analysis assumes that all the studies estimate a single common parameter \citep{rice2017re}. The hypothesis of homogeneity of the estimates is rarely applicable in biomedical and social sciences where studies typically differ in terms of design, disease classification, exposure measurement, and implemented statistical analyses \citep{colditz1995heterogeneity}. In such cases, heterogeneity across estimates is expected and should be considered in the analysis \citep{higgins2008commentary}. If the parameters estimated in the studies are not identical but related, a random-effects models can be used to identify those similarities or to explain the observed heterogeneity \citep{higgins2009re}.
 
 
-<<num_meta-analysis, fig.cap='Number of publications about meta-analysis (results from Medline search using text "meta-analysis" until December 2017).'>>=
+<<num_meta-analysis, fig.cap='Number of publications about meta-analysis (results from Medline search using text "meta-analysis" until January 2018).'>>=
 # code: num_meta-analysis.R
 count_meta %>%
   subset(year <= 2017) %>%
@@ -170,10 +170,10 @@ The aim of a dose--response meta-analysis is to reconstruct the shape of the ass
 \noindent The methodology for dose--response meta-analysis was first presented by \cite{greenland1992methods} in their seminal paper, which quickly became a standard reference for applied works. Indeed, the number of published dose--response meta-analyses increased exponentially from 9 in 2000 to 172 in 2016 (Figure~\ref{fig:cite_grl}).
 The most popular fields of application include oncology, environmental and public health, nutrition epidemiology, and general internal medicine. Dose--response meta-analyses are published in many leading medical and epidemiological journals, including JAMA, Lancet, Stroke, Gastroenterology, American J of Medicine, American J of Clinical Nutrition, American J Epidemiology, International J Epidemiology, Journal National Cancer Institute, International J of Cancer, Statistics in Medicine and many others. The method is also used by the World Cancer Research Fund/American Institute for Cancer Research for reviewing the evidence on the relations between life-style factors (e.g. diet and physical activity) and cancer. Guidelines based on these quantitative reviews are central to promote the overall health and prevent many chronic diseases.
 
-<<cite_grl, fig.cap='Number of citations of the paper by Greenland and Longnecker (1992) obtained from Google Scholar 1992-2017 (until December 2017).'>>=
+<<cite_grl, fig.cap='Number of citations of the paper by Greenland and Longnecker (1992) obtained from Google Scholar 1992-2017 (until January 2018).'>>=
 # code: num_cit_grl.R
 count_grl %>%
-  #subset(year < 2017) %>%
+  subset(year <= 2017) %>%
   ggplot(aes(year, cites)) + 
   geom_point(size = 2) + geom_line() +
   scale_x_continuous(breaks = seq(1992, 2017, 4)) +

@@ -12,7 +12,7 @@
 library(knitr)
 opts_knit$set(self.contained=FALSE, out.format = "latex")
 opts_chunk$set(echo = FALSE, message = FALSE, comment = NA, fig.path = "../figure/",
-               out.width = "\\textwidth", cache = FALSE, highlight = F, background = "white",
+               out.width = "\\textwidth", cache = TRUE, highlight = F, background = "white",
                fig.align = "center", fig.width = 7, fig.height = 4.5, fig.pos= "ht!",
                prompt = TRUE, size = "footnotesize", warning = FALSE)
 options(prompt ="R> ", width = 85, show.signif.stars = FALSE, knitr.kable.NA = '')
