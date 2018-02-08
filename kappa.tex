@@ -1274,7 +1274,7 @@ Possibly, a low $R^2$ may indicate that more flexible transformations of the exp
 The visual assessment of the goodness-of-fit may reveal specific patterns in the data that might otherwise go undetected by only looking at summary measures such as the deviance and the coefficient of variation \citep{kvaalseth1985cautionary}. The graphical comparison can sometimes be cumbersome because different factors may affect such analysis. The aggregated dose--response data are presented using one group as comparison. This feature has two important consequences when deducing an overall trend from the reported (log) relative risks. The former is that different parameterizations, or models, can be graphically compared only if the predicted risk for the reference category is similar. The latter, instead, involves the correlation of the modelled data points which makes even harder to evaluate if a specific model fits the reported data. To illustrate both the problems we consider IPD from one of the registers involved in the Surveillance, Epidemiology, and End Results (SEER) Program (\url{https://seer.cancer.gov}), and focus on the association between age at diagnosis and breast cancer mortality. 
 
 % latex table generated in R 3.4.3 by xtable 1.8-2 package
-% Thu Feb  8 10:04:19 2018
+% Tue Jan 23 14:55:38 2018
 \begin{table}[ht]
 \centering
 \caption{Aggregated dose-response data on the adjusted association between age and breast cancer mortality based on one registry from the SEER program using the first age category as referent.
@@ -1323,7 +1323,7 @@ The residuals can be decorrelated using the Cholesky factorization of the covari
 One of the possible reasons for large values of $D$ or similarly small values of $R^2$ is presence of heterogeneity in the dose--response associations. The measures of heterogeneity presented in Section~\ref{sec:measures_het}, namely $\hat R_I$ and $I^2$ were derived based on the assumption of homogeneity for the error variance terms $v_i$, which is unlikely to be met in applications. To illustrate this point, let us consider the two hypothetical distributions for the within-study error terms in Table~\ref{tab:hyp_vi}. The distribution of $v_i$ in the first example (Analysis A) is much more homogeneous compared to the second scenario (Analysis B). The coefficient of variation for the $v_i$ in the second example is 20 times higher than the corresponding number in the first scenario. While it seems reasonable to assume homogeneity of the $v_i$ for the Analysis A, in the second case this hypothesis is not appropriate. Nonetheless both $\hat R_I$ and $I^2$ would summarize the two distributions with a single common number. 
 
 % latex table generated in R 3.4.3 by xtable 1.8-2 package
-% Thu Feb  8 10:04:19 2018
+% Tue Jan 23 14:55:39 2018
 \begin{table}[ht]
 \centering
 \caption{Hypothetical distributions of within-study errors 
@@ -2303,26 +2303,26 @@ A Restricted Cubic Splines (RCS) model with 3 knots $\mathbf{k} = \left(k_1, \do
 \noindent The CS model with 3 knots $\mathbf{k}$ is defined as  
 \begin{equation}
 \mathrm{CS}(x) = \beta_1 x + \beta_2x^2 + \beta_3x^3 + \beta_4\left(x - k_1 \right)_{+}^3 + \beta_5\left( x - k_2\right)_{+}^3 + \beta_6\left( x - k_3\right)_{+}^3
-\label{eq:cs}
+\label{eq:csa}
 \end{equation}
 \noindent where the `+' notation has been used ($u_+ = u$ if $u \ge 0$ and $u_+ = 0$ otherwise).
 
-\noindent A RCS model restricts the CS function in equation~\ref{eq:cs} to be linear before the first knot ($k_1$) and after the last knot ($k_3$). 
-The first linearity constraint requires the model~\ref{eq:cs} to be linear for $x \le k_1$ 
+\noindent A RCS model restricts the CS function in equation~\ref{eq:csa} to be linear before the first knot ($k_1$) and after the last knot ($k_3$). 
+The first linearity constraint requires the model~\ref{eq:csa} to be linear for $x \le k_1$ 
 \begin{equation*}
 \mathrm{CS}(x) = \beta_1 x + \beta_2x^2 + \beta_3x^3
-\label{eq:cs_k1}
+\label{eq:cs_k1a}
 \end{equation*}
 
 \noindent Hence, $\beta_2 = 0 \land \beta_3 = 0$.
 
-\noindent The second linearity constraint requires the model~\ref{eq:cs} to be linear for $x \ge k_3$ 
+\noindent The second linearity constraint requires the model~\ref{eq:csa} to be linear for $x \ge k_3$ 
 \begin{align*}
 \mathrm{CS}(x) =  & \beta_1 x + \beta_4\left( x^3 - 3x^2k_1 + 3xk_1^2- k_1^3 \right) + \beta_5\left( x^3 - 3x^2k_2 + 3xk_2^2- k_2^3 \right) + \nonumber \\
 	&+ \beta_6\left( x^3 - 3x^2k_3 + 3xk_3^2- k_3^3 \right) =  \nonumber \\
 	&= - \left(\beta_4k_1^3 + \beta_5k_2^3 + \beta_6k_3^3 \right) + \left( \beta_1 + 3\beta_4k_1^2 + 3\beta_5k_2^2 + 3\beta_6k_3^2\right)x +  \nonumber \\
 	&- 3\left( \beta_4k_1 + \beta_5k_2 + \beta_6k_3\right)x^2 - \left( \beta_4 + \beta_5 + \beta_6\right)x^3
-\label{eq:cs_k3}
+\label{eq:cs_k3a}
 \end{align*}
  
 \begin{equation*}
@@ -2338,14 +2338,14 @@ The first linearity constraint requires the model~\ref{eq:cs} to be linear for $
 \beta_6 = -\beta_4 + \beta_4\frac{k_3 - k_1}{k_3 - k_2} \end{cases}
 \begin{cases}\beta_5 = -\beta_4\frac{k_3 - k_1}{k_3 - k_2} \\ 
 \beta_6 = \beta_4 \frac{k_2 - k_1}{k_3 - k_2} \end{cases}
-\label{eq:system}
+\label{eq:systema}
 \end{equation}
 
-\noindent We can rewrite equation~\ref{eq:cs} with $\beta_2 = 0 \land \beta_3 = 0$ and equations~\ref{eq:system}
+\noindent We can rewrite equation~\ref{eq:csa} with $\beta_2 = 0 \land \beta_3 = 0$ and equations~\ref{eq:systema}
 
 \begin{equation}
 \mathrm{RCS}(x) = \beta_1 x + \beta_4 \left[ \left( x - k_1 \right)_{+}^3 - \frac{k_3 - k_1}{k_3 - k_2} \left( x - k_2  \right)_{+}^3 + \frac{k_2 - k_1}{k_3 - k_2} \left(x - k_3 \right)_{+}^3\right]
-\label{eq:rcs}
+\label{eq:rcsfina}
 \end{equation}
 
 \noindent that is a function of two variables: the quantitative exposure $x$ and a transformation of $x$.

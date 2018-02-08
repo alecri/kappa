@@ -16,26 +16,26 @@ A Restricted Cubic Splines (RCS) model with 3 knots $\mathbf{k} = \left(k_1, \do
 \noindent The CS model with 3 knots $\mathbf{k}$ is defined as  
 \begin{equation}
 \mathrm{CS}(x) = \beta_1 x + \beta_2x^2 + \beta_3x^3 + \beta_4\left(x - k_1 \right)_{+}^3 + \beta_5\left( x - k_2\right)_{+}^3 + \beta_6\left( x - k_3\right)_{+}^3
-\label{eq:cs}
+\label{eq:csa}
 \end{equation}
 \noindent where the `+' notation has been used ($u_+ = u$ if $u \ge 0$ and $u_+ = 0$ otherwise).
 
-\noindent A RCS model restricts the CS function in equation~\ref{eq:cs} to be linear before the first knot ($k_1$) and after the last knot ($k_3$). 
-The first linearity constraint requires the model~\ref{eq:cs} to be linear for $x \le k_1$ 
+\noindent A RCS model restricts the CS function in equation~\ref{eq:csa} to be linear before the first knot ($k_1$) and after the last knot ($k_3$). 
+The first linearity constraint requires the model~\ref{eq:csa} to be linear for $x \le k_1$ 
 \begin{equation*}
 \mathrm{CS}(x) = \beta_1 x + \beta_2x^2 + \beta_3x^3
-\label{eq:cs_k1}
+\label{eq:cs_k1a}
 \end{equation*}
 
 \noindent Hence, $\beta_2 = 0 \land \beta_3 = 0$.
 
-\noindent The second linearity constraint requires the model~\ref{eq:cs} to be linear for $x \ge k_3$ 
+\noindent The second linearity constraint requires the model~\ref{eq:csa} to be linear for $x \ge k_3$ 
 \begin{align*}
 \mathrm{CS}(x) =  & \beta_1 x + \beta_4\left( x^3 - 3x^2k_1 + 3xk_1^2- k_1^3 \right) + \beta_5\left( x^3 - 3x^2k_2 + 3xk_2^2- k_2^3 \right) + \nonumber \\
 	&+ \beta_6\left( x^3 - 3x^2k_3 + 3xk_3^2- k_3^3 \right) =  \nonumber \\
 	&= - \left(\beta_4k_1^3 + \beta_5k_2^3 + \beta_6k_3^3 \right) + \left( \beta_1 + 3\beta_4k_1^2 + 3\beta_5k_2^2 + 3\beta_6k_3^2\right)x +  \nonumber \\
 	&- 3\left( \beta_4k_1 + \beta_5k_2 + \beta_6k_3\right)x^2 - \left( \beta_4 + \beta_5 + \beta_6\right)x^3
-\label{eq:cs_k3}
+\label{eq:cs_k3a}
 \end{align*}
  
 \begin{equation*}
@@ -51,14 +51,14 @@ The first linearity constraint requires the model~\ref{eq:cs} to be linear for $
 \beta_6 = -\beta_4 + \beta_4\frac{k_3 - k_1}{k_3 - k_2} \end{cases}
 \begin{cases}\beta_5 = -\beta_4\frac{k_3 - k_1}{k_3 - k_2} \\ 
 \beta_6 = \beta_4 \frac{k_2 - k_1}{k_3 - k_2} \end{cases}
-\label{eq:system}
+\label{eq:systema}
 \end{equation}
 
-\noindent We can rewrite equation~\ref{eq:cs} with $\beta_2 = 0 \land \beta_3 = 0$ and equations~\ref{eq:system}
+\noindent We can rewrite equation~\ref{eq:csa} with $\beta_2 = 0 \land \beta_3 = 0$ and equations~\ref{eq:systema}
 
 \begin{equation}
 \mathrm{RCS}(x) = \beta_1 x + \beta_4 \left[ \left( x - k_1 \right)_{+}^3 - \frac{k_3 - k_1}{k_3 - k_2} \left( x - k_2  \right)_{+}^3 + \frac{k_2 - k_1}{k_3 - k_2} \left(x - k_3 \right)_{+}^3\right]
-\label{eq:rcs}
+\label{eq:rcsfina}
 \end{equation}
 
 \noindent that is a function of two variables: the quantitative exposure $x$ and a transformation of $x$.
