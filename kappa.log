@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.7.31)  9 FEB 2018 09:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.7.31)  13 FEB 2018 13:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1658,7 +1658,7 @@ LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
 (Font)              scaled to size 8.64006pt on input line 530.
 Package color Info: Redefining color shadecolor on input line 531.
 
-<../figure/num_meta-analysis-1.pdf, id=431, 505.89pt x 325.215pt>
+<../figure/num_meta-analysis-1.pdf, id=430, 505.89pt x 325.215pt>
 File: ../figure/num_meta-analysis-1.pdf Graphic file (type pdf)
 
 <use ../figure/num_meta-analysis-1.pdf>
@@ -2134,7 +2134,7 @@ chri8t.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/tex-gyre/qhvb
 /usr/local/texlive/2017/texmf-dist/fonts/type1/public/cm-super/sftt0900.pfb></u
 sr/local/texlive/2017/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></usr
 /local/texlive/2017/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on kappa.pdf (100 pages, 824416 bytes).
+Output written on kappa.pdf (100 pages, 824290 bytes).
 PDF statistics:
  1657 PDF objects out of 1728 (max. 8388607)
  1467 compressed objects within 15 object streams
