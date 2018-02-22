@@ -5,24 +5,25 @@ Title: Regression Modeling Strategies
 Author: Frank E Harrell Jr <f.harrell@vanderbilt.edu>
 Maintainer: Frank E Harrell Jr <f.harrell@vanderbilt.edu>
 Depends: Hmisc (>= 4.1-0), survival (>= 2.40-1), lattice, ggplot2 (>=
-        2.2), SparseM
+    2.2), SparseM
 Imports: methods, quantreg, rpart, nlme (>= 3.1-123), polspline,
-        multcomp, htmlTable (>= 1.11.0), htmltools
+    multcomp, htmlTable (>= 1.11.0), htmltools
 Suggests: boot, tcltk, plotly (>= 4.5.6)
 Description: Regression modeling, testing, estimation, validation,
-	graphics, prediction, and typesetting by storing enhanced model design
-	attributes in the fit.  'rms' is a collection of functions that
-	assist with and streamline modeling.  It also contains functions for
-	binary and ordinal logistic regression models, ordinal models for
-  continuous Y with a variety of distribution families, and the Buckley-James
-	multiple regression model for right-censored responses, and implements
-	penalized maximum likelihood estimation for logistic and ordinary
-	linear models.  'rms' works with almost any regression model, but it
-	was especially written to work with binary or ordinal regression
-	models, Cox regression, accelerated failure time models,
-	ordinary linear models,	the Buckley-James model, generalized least
-	squares for serially or spatially correlated observations, generalized
-	linear models, and quantile regression.
+    graphics, prediction, and typesetting by storing enhanced model
+    design attributes in the fit.  'rms' is a collection of functions
+    that assist with and streamline modeling.  It also contains
+    functions for binary and ordinal logistic regression models,
+    ordinal models for continuous Y with a variety of distribution
+    families, and the Buckley-James multiple regression model for
+    right-censored responses, and implements penalized maximum
+    likelihood estimation for logistic and ordinary linear models.
+    'rms' works with almost any regression model, but it was especially
+    written to work with binary or ordinal regression models, Cox
+    regression, accelerated failure time models, ordinary linear
+    models, the Buckley-James model, generalized least squares for
+    serially or spatially correlated observations, generalized linear
+    models, and quantile regression.
 License: GPL (>= 2)
 URL: http://biostat.mc.vanderbilt.edu/rms
 LazyLoad: yes
@@ -30,5 +31,9 @@ NeedsCompilation: yes
 Packaged: 2018-01-07 18:46:22 UTC; harrelfe
 Repository: CRAN
 Date/Publication: 2018-01-07 22:27:43 UTC
-Built: R 3.4.3; x86_64-apple-darwin15.6.0; 2018-01-11 21:09:15 UTC; unix
+Built: R 3.4.3; x86_64-apple-darwin15.6.0; 2018-01-11 21:09:15 UTC;
+    unix
 Archs: rms.so.dSYM
+InstallAgent: packrat 0.4.8.1
+InstallSource: CRAN
+Hash: 3ccafd46ad3d9755996eb498e052f84c

@@ -3,34 +3,34 @@ Version: 2.24
 Date: 2018-01-27
 Title: A Package for Statistical Analysis in Epidemiology
 Authors@R: c(person("Bendix", "Carstensen", role = c("aut", "cre"),
-                    email = "b@bxc.dk"),
-             person("Martyn", "Plummer", role = "aut",
-                    email = "plummerm@iarc.fr"),
-             person("Esa", "Laara", role = "ctb"),
-             person("Michael", "Hills", role = "ctb"))
+    email = "b@bxc.dk"), person("Martyn", "Plummer", role = "aut",
+    email = "plummerm@iarc.fr"), person("Esa", "Laara", role = "ctb"),
+    person("Michael", "Hills", role = "ctb"))
 Depends: R (>= 3.0.0), utils
 Imports: cmprsk, etm, splines, MASS, survival, plyr, Matrix, numDeriv,
-        data.table, zoo
+    data.table, zoo
 Suggests: mstate, nlme, lme4, popEpi
 Description: Functions for demographic and epidemiological analysis in
-  the Lexis diagram, i.e. register and cohort follow-up data, in
-  particular representation, manipulation and simulation of multistate 
-  data - the Lexis suite of functions, which includes interfaces to
-  'mstate', 'etm' and 'cmprsk' packages. 
-  Also contains functions for Age-Period-Cohort and Lee-Carter
-  modeling and a function for interval censored data and some useful
-  functions for tabulation and plotting, as well as a number of
-  epidemiological data sets. 
+    the Lexis diagram, i.e. register and cohort follow-up data, in
+    particular representation, manipulation and simulation of
+    multistate data - the Lexis suite of functions, which includes
+    interfaces to 'mstate', 'etm' and 'cmprsk' packages. Also contains
+    functions for Age-Period-Cohort and Lee-Carter modeling and a
+    function for interval censored data and some useful functions for
+    tabulation and plotting, as well as a number of epidemiological
+    data sets.
 License: GPL-2
 URL: http://BendixCarstensen.com/Epi/
 NeedsCompilation: yes
 Packaged: 2018-01-30 20:16:00 UTC; bendix
-Author: Bendix Carstensen [aut, cre],
-  Martyn Plummer [aut],
-  Esa Laara [ctb],
-  Michael Hills [ctb]
+Author: Bendix Carstensen [aut, cre], Martyn Plummer [aut], Esa Laara
+    [ctb], Michael Hills [ctb]
 Maintainer: Bendix Carstensen <b@bxc.dk>
 Repository: CRAN
 Date/Publication: 2018-01-30 22:54:11 UTC
-Built: R 3.4.3; x86_64-apple-darwin15.6.0; 2018-01-31 05:29:25 UTC; unix
+Built: R 3.4.3; x86_64-apple-darwin15.6.0; 2018-01-31 05:29:25 UTC;
+    unix
 Archs: Epi.so.dSYM
+InstallAgent: packrat 0.4.8.1
+InstallSource: CRAN
+Hash: 90b741f759d87e7138d6e86795389fb1

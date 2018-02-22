@@ -4,11 +4,11 @@ Title: Multivariate Dose-Response Meta-Analysis
 Version: 2.1.0
 Date: 2017-09-12
 Authors@R: person("Alessio", "Crippa", email = "alessio.crippa@ki.se",
-    role = c("aut", "cre"))
+                  role = c("aut", "cre"))
 Maintainer: Alessio Crippa <alessio.crippa@ki.se>
-Description: Estimates dose-response relations from summarized
-    dose-response data and to combines them according to principles of
-    (multivariate) random-effects models.
+Description: Estimates dose-response relations from summarized dose-response
+    data and to combines them according to principles of (multivariate)
+    random-effects models.  
 URL: https://alecri.github.io/software/dosresmeta.html
 BugReports: https://github.com/alecri/dosresmeta/issues
 License: GPL-2
@@ -17,17 +17,14 @@ RoxygenNote: 6.0.1
 Suggests: knitr, rmarkdown, rms
 VignetteBuilder: knitr
 Author: Alessio Crippa [aut, cre]
-Built: R 3.4.3; ; 2018-01-24 10:11:23 UTC; unix
+Built: R 3.4.3; ; 2018-02-22 15:09:11 UTC; unix
 RemoteType: github
 RemoteHost: https://api.github.com
 RemoteRepo: dosresmeta
 RemoteUsername: alecri
 RemoteRef: master
-RemoteSha: 285e790f26b98d81bafe4e5bcef8f7e789269fd4
+RemoteSha: 6eb4787b5b6399460f499afaa7c05a5f0c93a5d3
 GithubRepo: dosresmeta
 GithubUsername: alecri
 GithubRef: master
-GithubSHA1: 285e790f26b98d81bafe4e5bcef8f7e789269fd4
-InstallAgent: packrat 0.4.8.1
-InstallSource: github
-Hash: e81a88a1e843c7a95cb5685666fcd58f
+GithubSHA1: 6eb4787b5b6399460f499afaa7c05a5f0c93a5d3

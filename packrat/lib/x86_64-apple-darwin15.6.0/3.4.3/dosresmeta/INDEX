@@ -1,12 +1,12 @@
 alcohol_crc             Eight published studies on the relation between
-                        alcohol intake and colon-rectal cancer.
+                        alcohol intake and colon-rectal cancer
 alcohol_cvd             Six published studies on the relation between
-                        alcohol intake and cardiovascular disease risk.
+                        alcohol intake and cardiovascular disease risk
 alcohol_esoph           Fourteen case-control studies on the relation
                         between alcohol consumption and esophageal
                         cancer
 alcohol_lc              Four published studies on the relation between
-                        alcohol intake and lung cancer.
+                        alcohol intake and lung cancer
 ari                     Five clinical trials on the relation between
                         aripiprazole and schizophrenia
 blup.dosresmeta         Best Linear Unbiased Predictions from
@@ -27,6 +27,9 @@ coffee_cvd              Thirteen prospective studies on the relation
 coffee_mort             Twenty-one prospective studies on the relation
                         between coffee consumption and all-cause
                         mortality
+coffee_mort_add         Additional 3 prospective studies on the
+                        relation between coffee consumption and
+                        all-cause mortality
 coffee_stroke           Eleven prospective studies on the relation
                         between coffee consumption and stroke risk
 covar.logrr             Computes the covariance matrix for a set of log

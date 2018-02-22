@@ -19,4 +19,8 @@ NeedsCompilation: yes
 Packaged: 2018-01-30 11:56:21 UTC; gaborcsardi
 Repository: CRAN
 Date/Publication: 2018-01-30 17:16:53 UTC
-Built: R 3.4.3; x86_64-apple-darwin15.6.0; 2018-01-31 05:44:18 UTC; unix
+Built: R 3.4.3; x86_64-apple-darwin15.6.0; 2018-01-31 05:44:18 UTC;
+    unix
+InstallAgent: packrat 0.4.8.1
+InstallSource: CRAN
+Hash: 8fb1501f3f3ea3ca74f154853fde5fef

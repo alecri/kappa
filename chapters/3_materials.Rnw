@@ -13,16 +13,63 @@
 
 \section{The \pkg{dosresmeta} \textsf{R} package}
 
-The first version of the \pkg{dosresmeta} $\R$ package was released on the Comprehensive R Archive Network (CRAN) on September 9, 2013. It is listed in the CRAN task view Meta-Analysis (\url{https://CRAN.R-project.org/view=MetaAnalysis}), a guide that covers the vast collection of $\R$ packages for facilitating meta-analysis of summary statistics.
-New features and some minor bug fixes were implemented in further versions, including the major release (2.0.0 version) in August 17, 2017. The implementation of the package is presented in \citetalias{crippa2016dosresmeta}, which is also offered as a free guide for the package in a vignette accessible by typing \texttt{browseVignettes("dosresmeta")} from the $\R$ console.
+The first version of the \pkg{dosresmeta} $\R$ package was released on the Comprehensive R Archive Network (CRAN) on September 2013. It is listed in the CRAN task view Meta-Analysis (\url{https://CRAN.R-project.org/view=MetaAnalysis}), a guide that covers the vast collection of $\R$ packages for facilitating meta-analysis of summary statistics.
 
-\subsection{Implementation}
+<<dosresmeta_ts, fig.cap='Monthly number of downloads of the dosresmeta R package from the RStudio CRAN mirror September 2013 - December 2017.'>>=
+# code: dosresmeta_downloads.R
+ggplot(dosresmeta_count, aes(month, n)) + 
+  geom_point(size = 2) + geom_line() +
+  scale_x_date(date_breaks = "6 month", date_minor_breaks = "6 month", date_labels = "%b %Y") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(y = "Number of downloads of dosresmeta per month", x = "")
+@
 
-The initial version 1.0 of the \pkg{dosresmeta} $\R$ package implemented the two-stage approach for dose--response meta-analysis described in Sections~\ref{sec:1st_stage} and~\ref{sec:2nd_stage}. The package included some facilities for efficiently estimating the dose--response associations across the included studies and used the \pkg{mvmeta} package for combining the study-specific regression coefficients \citep{gasparrini2012multivariate}. The main novelty of the version 1.0 was the implementation of \texttt{gl} and \texttt{hamling} functions for reconstructing the covariance matrices among set of log relative risks using the methods developed by \cite{greenland1992methods} and \cite{hamling2008facilitating}. 
-In version 1.3 dedicated functions were written for summarizing and displaying results, and for predicting the pooled dose--response association as described in Section~\ref{sec:pred}. Compared to other routines, the \texttt{predict} function offers the possibility of deriving the predicted curve also for dose levels that are not observed in the analyzed data. The same applies for the choice of the reference dose value. The main advantage is that nice curves and tables (i.e. combined results for desired dose values) can be easily obtained with a few lines of code. Practical examples are available at \url{https://alecri.github.io/software/dosresmeta.html}.
-Furhtermore, the \texttt{center} argument was added in the main function for centering the design matrix as described by \cite{liu2009two}. The argument has been set to \texttt{TRUE} by default for preventing possible errors when modelling non-linear curves, especially in case of non-zero exposure reference categories. Finally, additional arguments were introduced for allowing the specification of a list of covariance matrices directly by the user.
+\noindent The \pkg{dosresmeta} package is now available in the updated version 2.0.1 and new features are being implemented in the version under development on GitHub (\url{https://github.com/alecri/dosresmeta}). Currently, the \pkg{dosresmeta} package is downloaded and used worldwide, with a median number of 260 downloads/month (Figure~\ref{fig:dosresmeta_ts}). The countries where it has been downloaded most are Great Britain (4005), United States (3905), and China (1605) (Figure~\ref{fig:dosresmeta_map}). Working examples, codes, and data are available at \url{http://alecri.github.io/software} to fully reproduce figures and numbers presented in both applied and theoretical papers.
+
+<<dosresmeta_map, fig.cap='Total number of downloads of the doseresmeta R package worldwide from the RStudio CRAN mirror September 2013 - December 2017.', results='hide'>>=
+# code: dosresmeta_downloads.R
+map <- joinCountryData2Map(dosresmeta_map, joinCode = "ISO2", nameJoinColumn = "country")
+par(mai = c(0, 0, 0.2, 0), xaxs = "i", yaxs = "i")
+op <- palette(heat.colors(5)[5:1])
+cutVector <- c(1, 50, 100, 500, 1500, 4100)
+#classify the data to a factor
+map@data[["n_cat"]] <- cut(map@data[["n"]], cutVector, include.lowest = TRUE, right = F)
+#rename the categories
+levels(map@data[["n_cat"]]) <- c("1-50", "50-100", "100-500", "500-1500", ">1500")
+mapParams <- mapCountryData(map, nameColumnToPlot = "n_cat", catMethod = "categorical",
+                            mapTitle = "", addLegend = FALSE, oceanCol = "azure",
+                            colourPalette = "palette", missingCountryCol = "white")
+do.call(addMapLegendBoxes, c(mapParams, x = 'left', horiz = F, bg = NA, bty = "n",
+                             title = ""))
+suppressWarnings(par(old))
+@
+
+\noindent The implementation of the package is presented in \citetalias{crippa2016dosresmeta}, which is also offered as a free guide for the package in a vignette accessible by typing \texttt{browseVignettes("dosresmeta")} from the $\R$ console.
+
+\subsection{Architecture and design of the package}
+
+The initial version 1.0 of the \pkg{dosresmeta} $\R$ package implemented the two-stage approach for dose--response meta-analysis described in Sections~\ref{sec:1st_stage} and~\ref{sec:2nd_stage}. The package included some facilities for efficiently estimating the dose--response associations across the included studies and used the \pkg{mvmeta} package for combining the study-specific regression coefficients \citep{gasparrini2012multivariate}. The main novelty of the version 1.0 was the implementation of \texttt{gl} and \texttt{hamling} functions for reconstructing the covariance matrices among set of log relative risks using the methods developed by \cite{greenland1992methods} and \cite{hamling2008facilitating} (Figure~\ref{fig:drm_versions}). 
+In version 1.3 dedicated functions were written for summarizing and displaying results, and for predicting the pooled dose--response association as described in Section~\ref{sec:pred}. Compared to other routines, the \texttt{predict} function offers the possibility of deriving the predicted curve also for dose levels that are not observed in the analyzed data. The same applies for the choice of the reference dose value. The main advantage is that publication quality curves and tables (i.e. combined results for desired dose values) can be easily obtained with a few lines of code. Practical examples are available at \url{https://alecri.github.io/software/dosresmeta.html}.
+Furhtermore, the \texttt{center} argument was added in the main function for centering the design matrix as described by \cite{liu2009two}. The argument has been set to \texttt{TRUE} by default for preventing possible errors when modelling non-linear curves, especially in case of non-zero exposure reference categories. Finally, additional arguments were introduced for allowing the specification of a list of covariance matrices directly by the user. This can be useful in pooling projects where the principle investigators share the results of harmonized analyses.
 
 \noindent New capabilities and functions were written in the version under development available on GitHub and were finally included in the major release version 2.0 on CRAN. The \pkg{dosresmeta} package was largely redesigned in the internal functions but kept unchanged the external form and arguments for backward compatibility. Three main features were introduced: the extension of the two-stage approach for dose--response meta-analysis of differences in means (rather than log relative risks) \citep{crippa2016dose}, the  possibility of fitting meta-regression models and the implementation of an alternative one-stage approach. The first was achieved by extending the choices of the \texttt{covariance} argument for results presented in terms of mean and standardized mean differences, which related to the \texttt{covar.smd} function. The alternative \texttt{covariance == "indep"} can be specified for assuming independence of the log relative risks or differences in means. This is particularly useful when the information for reconstructing the covariances is not available (see additional (useful) code section on the referenced site for examples).
+
+<<drm_versions, fig.cap="Development of the dosresmeta R package over time.", fig.height=3.5>>=
+drm_versions <- data.frame(
+  Events = c("First release (v 1.0) \n 'gl' and 'hamling' functions \n",
+             "Introduction of S3 methods \n and documentation in roxygen2 \n",
+             "First development version on GitHub \n", 
+             "Shiny app \n",
+             "Major release (v 2.0) \n one-stage, meta-regression, \n differences in means \n"),
+  Event_Dates = as.Date(c("2013-09-09", "2014-01-17", "2015-08-06", "2017-07-31", "2017-08-17"))
+)
+
+par(mar = c(0, 4.1, 0, 2.1))
+timelineS(drm_versions[1:5, ], 
+          label.direction = "updown", label.position = c(3, 1, 3, 1, 3),
+          label.length = c(.1, .4, .6, .5, .1))
+par(old)
+@
 
 \noindent The implementation of the one-stage approach and related functions is discussed in more details in the methods for \citetalias{crippa2018one}. 
 The updated \pkg{dosresmeta} package implements also functions to facilitate specific aspects of a dose--response meta-analysis. These includes the assessment of goodness-of-fit discussed in \citetalias{discacciati2015goodness}, tests for fixed- and random-effects coefficients, conditional and marginal predictions, and the use of fractional polynomials.
@@ -46,9 +93,9 @@ devtools::install_github("alecri/dosresmeta")
 str(dosresmeta)
 @
 
-\noindent The dose--response model is specified in the \texttt{formula} argument in a symbolic representation. For example, if logrr and dose are the variable names for the log relative risk and assigned doses, a linear trend is specified as \texttt{logrr $\sim$ dose} while a quadratic curve as \texttt{logrr $\sim$ dose + I(dose)\^{}2}. The variable are defined in a data.frame whose name in specified in the \texttt{data} argument. By default \texttt{intercept = FALSE} does not include the intercept term in the covariance matrix, which is constructed in terms of contrasted unless \texttt{center = FALSE}. The \texttt{id} argument specifies the name for the study id variable (can be omitted for single study analysis). 
-The standard errors for the log relative risks are specified in the \texttt{se} argument, or alternatively, either the variances (\texttt{v}) or the lower (\texttt{lb}) and upper bounds (\texttt{ub}) of the relative risks need to be specified. The additional information about the study-design (\texttt{type}), the number of cases (\texttt{cases}), and participants or amount of person-time (\texttt{n}) is used for reconstructed the covariance of the log relative risk (or mean differences) using the method specified in the \texttt{covariance} argument (default is the Greenland and Longnecker’s method). In alternatively, a list of covariance matrices can be passed to the \texttt{Slist} argument when \texttt{covariance = "user"}.
-As defaults, a two-stage procedure with REML estimation methods (\texttt{method}) are selected. Alternatives are a one-stage procedure (\texttt{proc = "1stage"}) and either ML estimators \texttt{method = "ml"} or a fixed-effect analysis \texttt{method = "fixed"}. Residual heterogeneity can be modeled in a meta-regression analysis specified in the \texttt{mods} argument. For example, a different curve depending on the study design can be specified with \texttt{mods = $\sim$ type}. Finally, a list of parameters can be passed to the \texttt{control} argument to control the fitting process.
+\noindent The dose--response model is specified in the \texttt{formula} argument in a symbolic representation. For example, if logrr and dose are the variable names for the log relative risk and assigned doses, a linear trend is specified as \texttt{logrr $\sim$ dose} while a quadratic curve as \texttt{logrr $\sim$ dose + I(dose)\^{}2}. The variable are defined in a \texttt{data.frame} whose name in specified in the \texttt{data} argument. By default \texttt{intercept = FALSE} does not include the intercept term in the covariance matrix, which is constructed in terms of contrasts unless \texttt{center = FALSE}. The \texttt{id} argument specifies the name for the study id variable (can be omitted for single study analysis). 
+The standard errors for the log relative risks are specified in the \texttt{se} argument, or alternatively, either the variances (\texttt{v}) or the lower (\texttt{lb}) and upper bounds (\texttt{ub}) of the relative risks need to be specified. The additional information about the study-design (\texttt{type}), the number of cases (\texttt{cases}), and participants or amount of person-time (\texttt{n}) is used for reconstructed the covariance of the log relative risk (or mean differences) using the method specified in the \texttt{covariance} argument (default is the Greenland and Longnecker’s method). A list of covariance matrices can be passed to the \texttt{Slist} argument when \texttt{covariance = "user"}.
+A two-stage procedure with REML estimation method (\texttt{method}) is the default. A one-stage procedure (\texttt{proc = "1stage"}) and either ML estimator \texttt{method = "ml"} or a fixed-effect analysis \texttt{method = "fixed"} can be adopted. Residual heterogeneity can be modeled in a meta-regression analysis by specifying covariates in the \texttt{mods} argument. For example, a different curve depending on the study design can be specified with \texttt{mods = $\sim$ type}. Finally, a list of parameters can be passed to the \texttt{control} argument to control the fitting process.
 
 The \texttt{dosresmeta} function returns an object of class ``\texttt{dosresmeta}'' with the information from the dose--response meta-analytic model. The \texttt{print} and \texttt{summary} methods display and produce a summary of the content of a \texttt{dosresmeta} object. The \texttt{predict} method facilitates the presentation of the results of a dose--response meta-analysis
 
@@ -56,7 +103,7 @@ The \texttt{dosresmeta} function returns an object of class ``\texttt{dosresmeta
 str(dosresmeta:::predict.dosresmeta)
 @
 
-\noindent where object contains the results of the \texttt{dosresmeta} function. A new data.frame with the desired doses can be passed to the \texttt{newdata} argument for obtaining the corresponding predicted log relative risks. If not provided, the predictions will be calculated for the assigned dose values across the studies. The \texttt{expo} argument can be set to \texttt{TRUE} to predict log relative risk and confidence intervals (unless \texttt{ci.incl = FALSE}) on the exponential scale. The referent value can be specified with the \texttt{xref} argument, or better, specifying the line of the newdata which serves as referent (\texttt{xref\_pos} argument). For non-linear models a vector need to be provided in \texttt{xref\_vec} instead of \texttt{xref}. The \texttt{delta} argument is useful for predicting the linear increase in the outcome for a delta increase in the exposure, and is thus only appropriate in a linear trend analysis. In the updated version of the \pkg{dosresmeta} package, a \texttt{blup} method has also been implemented for predicting the study-specific random-effects and hence the conditional curves.
+\noindent where object contains the results of the \texttt{dosresmeta} function. A new data.frame with the desired doses can be passed to the \texttt{newdata} argument for obtaining the corresponding predicted log relative risks. If not provided, the predictions will be calculated for the assigned dose values available from the studies. The \texttt{expo} argument can be set to \texttt{TRUE} to predict log relative risk and confidence intervals (unless \texttt{ci.incl = FALSE}) on the exponential scale. The reference value can be specified with the \texttt{xref} argument, or better, specifying the line of the newdata which serves as referent (\texttt{xref\_pos} argument). For non-linear models a vector needs to be provided in \texttt{xref\_vec} instead of \texttt{xref}. The \texttt{delta} argument is useful for predicting the linear increase in the outcome for a delta increase in the exposure, and is thus only appropriate in a linear trend analysis. In the updated version of the \pkg{dosresmeta} package, a \texttt{blup} method has also been implemented for predicting the study-specific random-effects and hence the conditional curves.
 
 Additional functions can be listed
 
@@ -66,9 +113,9 @@ ls("package:dosresmeta")
 
 \noindent Use \texttt{ls(getNamespace("dosresmeta"), all.names=TRUE)} for a complete list including hidden auxiliary functions.
 
-\subsection{Data Sets}
+\subsection{Datasets}
 
-\noindent Several data sets from published dose-response meta-analyses and methodological articles have been included in the \pkg{dosresmeta} package. To get a list as in Table~\ref{tab:data_table} with the names and description type
+\noindent Several datasets from published dose-response meta-analyses and methodological articles have been included in the \pkg{dosresmeta} package. To get a list as in Table~\ref{tab:data_table} with the names and description type
 
 <<data, echo = TRUE>>=
 data(package = "dosresmeta")
@@ -76,21 +123,32 @@ data(package = "dosresmeta")
 
 <<data_table>>=
 d <- data(package = "dosresmeta")$results
-cbind(Name = d[, "Item"], Description = d[, "Title"]) %>%
-  kable(format = "latex", booktabs = T, caption = "Data sets available in the \\pkg{dosresmeta} $\\R$ package.") %>%
+Item <- gsub("_", "\\\\_", d[, "Item"])
+cit <- c("\\citep{orsini2011meta}", "\\citep{liu2009two}", "\\citep{rota2010random}",
+         "\\citep{orsini2011meta}", "\\citep{crippa2016dose}", "\\citep{liu2009two}",
+         "\\citep{greenland1992methods}", "\\citep{orsini2006generalized}",
+         "\\citep{crippa2014coffee}", "\\citep{crippa2014coffee}", "\\citep{crippa2014coffee}",
+                  "\\cite{nilsson2012traditional}", "\\citep{larsson2011coffee}", "\\citep{di2014fish}",
+         "\\citep{orsini2006generalized}", "\\citep{larsson2015milk}", "\\citep{larsson2006milk}",
+         "\\citep{berlin1993meta}", "\\citep{crippa2016red}", "\\citep{crippa2016red}",
+         "\\citep{crippa2018one}")
+cbind(Name = Item, 
+           Description = paste(d[, "Title"], cit)) %>%
+    kable(format = "latex", booktabs = T, caption = "Data sets available in the \\pkg{dosresmeta} $\\R$ package.", escape = FALSE) %>%
   kable_styling(full_width = F) %>%
   column_spec(2, width = "32em")
 @
 
 
-
 \section{Goodness-of-fit}\label{sec:gof}
 
-The aim of \citetalias{discacciati2015goodness} was to address how to evaluate the goodness-of-fit in dose--response meta-analysis. The issue is particularly relevant in a dose--response analysis where the predicted curve should be a reasonably good summary of the modelled log relative risks. However, different features of aggregated dose--response data can complicate this comparison. The predicted curve is presented using a referent, $x_\mathrm{ref}$, which may differ from the study-specific reference values. Thus the predicted and observed log relative risks can no longer be directly compared because their baseline group is not the same. Even in the case where the reference values are all the same and equal to $x_\mathrm{ref}$, the covariance among the study-specific RRs and the heterogeneity across the studies add further difficulties in evaluating if the chosen model provides a good summary of the observed data. Therefore, the proposed tools for assessing the goodness-of-fit are presented in a fixed-effect analysis where meta-regression models as in~\ref{eq:rmmra2} are typically employed to explain the observed heterogeneity. We consider relevant measures, tests, and graphical tools that take into account the correlation of the observed data.
+The aim of \citetalias{discacciati2015goodness} was to address how to evaluate the goodness-of-fit in dose--response meta-analysis.
+The distance between observed and predicted data is often at the heart of model checking.
+Although we are working with linear regression models, features of aggregated dose--response data can complicate this comparison. The predicted curve is presented using a referent, $x_\mathrm{ref}$, which may differ from the study-specific reference values. Thus the predicted and observed log relative risks can no longer be directly compared because their baseline group is not the same. Even in the case where the reference values are all the same and equal to $x_\mathrm{ref}$, the covariance among the study-specific RRs and the heterogeneity across the studies adds further difficulties in evaluating if the chosen model provides a good summary of the observed data. The proposed tools for assessing the goodness-of-fit are presented in a fixed-effect analysis where meta-regression models as in~\ref{eq:rmmra2} are typically employed to explain the observed heterogeneity. We consider relevant measures, tests, and graphical tools that take into account the correlation of the observed data.
 
 \subsection{Deviance} 
 
-The first natural measure of goodness-of-fit is a comparison between the predicted and observed data points, i.e. the non-referent log relative risks. This can be done by analyzing the residual term errors, which is defined by the difference between the observed log RRs, $\mathbf{y}_i$, and the marginal prediction
+The first natural measure of goodness-of-fit is a comparison between the predicted and observed data points, i.e. the non-referent log relative risks. This can be done by analyzing the residual term errors, which are defined by the difference between the observed log RRs, $\mathbf{y}_i$, and the marginal prediction
 \begin{equation}
 \boldsymbol{\hat e_i} = \mathbf{y}_i - \mathbf{X}_i \widetilde{\mathbf{X}}_i \boldsymbol{\hat \beta}
 \label{eq:residual}
@@ -135,7 +193,8 @@ cat_1501 <- glm(Y ~ relevel(age_cat, 1) + histology + maritalStatus + race +
 cat_res <- ci.exp(cat_1501)[1:4,] %>% 
   data.frame() %>%
   mutate(
-    ci = paste0("(", round(X2.5., 2), ", ", round(X97.5., 2), ")"),
+    ci = paste0("(", format(round(X2.5., 2), nsmall = 2), ", ", 
+                format(round(X97.5., 2), nsmall = 2), ")"),
     logrr = coef(cat_1501)[1:4],
     se = diag(vcov(cat_1501))[1:4]^.5,
     refpos = c(pos, setdiff(1:4, pos))
@@ -167,16 +226,17 @@ The visual assessment of the goodness-of-fit may reveal specific patterns in the
 <<breast_ad, results='asis'>>=
 # code: breast_SEER_visual agreement.R
 tab_1501 %>%
+  mutate(ci = replace(ci, se == 0, "---")) %>%
   select(-`X2.5.`, -`X97.5.`, -refpos) %>%
   `colnames<-`(c("Age category", "Mean age", "Cases",
                  "Person-years", "IRR", "95% CI", "log IRR", "SE")) %>%
-  xtable(digits = c(2,0,1,0,1,2,2,2,2), align = "ccccccccc", label = "tab:breast_ad",
+  xtable(digits = c(2,0,1,0,1,2,0,2,2), align = "ccccccccc", label = "tab:breast_ad",
          caption = "Aggregated dose-response data on the adjusted association between age and breast cancer mortality based on one registry from the SEER program using the first age category as referent.
          ") %>%
   print(include.rownames = FALSE, caption.placement = "top")
 @
 
-Using 35, 60, 70 years as cut points, we modelled age using 5 categories in a Poisson model adjusting for potential confounders and produced aggregated dose--response results in Table~\ref{tab:breast_ad}, where the first category worked as referent. Using the methodology presented in Section~\ref{sec:1st_stage}, we estimated a linear trend a graphically compared the predicted curve and the modelled data (left panel of Figure~\ref{fig:visual_problem}). While the reported log RRs suggest an inverse association between age and breast cancer mortality, the estimated linear trend indicates opposite conclusions (a \Sexpr{round(100*(delta_lin$pred-1), 2)}\% increase in mortality for every 5-year increase of age at diagnosis). The linear trend does not seem to properly fit the data since the fitted line doesn't event pass through the reported log RRs. The problem is that there are few cases in the reference age category and so the log RRs are more unstable. By changing the group comparison to the second age category, this issue is partially solved (right panel of Figure~\ref{fig:visual_problem}). To address the further issue of the covariance, we proposed graphical tools based on the analysis of the decorrelated residuals.
+Using 35, 60, 70 years as cut points, we modelled age using 5 categories in a Poisson model adjusting for potential confounders and produced aggregated dose--response results in Table~\ref{tab:breast_ad}, where the first category served as referent. Using the methodology presented in Section~\ref{sec:1st_stage}, we estimated a linear trend and graphically compared the predicted curve and the modelled data (left panel of Figure~\ref{fig:visual_problem}). While the empirical log RRs may suggest an inverse association between age and breast cancer mortality, the estimated linear trend indicates opposite conclusions (a \Sexpr{round(100*(delta_lin$pred-1), 2)}\% increase in mortality for every 5-year increase of age at diagnosis). The linear trend does not seem to properly fit the data since the fitted line doesn't event pass through the reported log RRs. The problem is that there are few cases in the reference age category and so the log RRs are typically larger. By changing the group comparison to the second age category, this issue is partially solved (right panel of Figure~\ref{fig:visual_problem}). To address the further issue of the covariance, we proposed graphical tools based on the analysis of the decorrelated residuals.
 
 <<visual_problem, fig.cap = 'Comparison between observed and fitted data using changing the comparison group from the first age category (left panel) to the second one (right panel) based on the aggregated data on the association between age and breast cancer mortality presented in Table~\\ref{tab:breast_ad}.', fig.height=4>>=
 # code: breast_SEER_visual agreement.R
@@ -203,13 +263,13 @@ The residuals can be decorrelated using the Cholesky factorization of the covari
 \label{eq:decor_res}
 \end{equation}
 
-\noindent and plotted against the exposure. Such a graphical analysis is the equivalent of a residual vs. predictors/predicted outcome plot after a model estimated through ordinary least squares. Since the variables in the plot are transformed, the actual value of the decorellated residuals is not directly interpretable. However, it is still possible to detect specific patterns for the residuals over the exposure range. In such a case, the plot can indicate lack of fit of the chosen model for select exposure values. Overlaying a locally weighted scatterplot smoothing (LOWESS) may help to visualize possible patterns, while a different shape or color for the residuals can distinguish them according to study-level covariates in case of meta-regression models.
+\noindent and plotted against the exposure. Such a graphical analysis is the equivalent to a residual vs. predictors/predicted outcome plot after a model estimated through ordinary least squares. Since the variables in the plot are transformed, the actual value of the decorellated residuals is not directly interpretable. However, it is still possible to detect specific patterns for the residuals over the exposure range. In such a case, the plot can indicate lack of fit of the chosen model for select exposure values. Overlaying a locally weighted scatterplot smoothing (LOWESS) may help to visualize possible patterns, while a different shape or color for the residuals can distinguish them according to study-level covariates in case of meta-regression models.
 
 
 
 \section{A new measure of heterogeneity}\label{sec:Rb}
 
-One of the possible reasons for large values of $D$ or similarly small values of $R^2$ is presence of heterogeneity in the dose--response associations. The measures of heterogeneity presented in Section~\ref{sec:measures_het}, namely $\hat R_I$ and $I^2$ were derived based on the assumption of homogeneity for the error variance terms $v_i$, which is unlikely to be met in applications. To illustrate this point, let us consider the two hypothetical distributions for the within-study error terms in Table~\ref{tab:hyp_vi}. The distribution of $v_i$ in the first example (Analysis A) is much more homogeneous compared to the second scenario (Analysis B). The coefficient of variation for the $v_i$ in the second example is 20 times higher than the corresponding number in the first scenario. While it seems reasonable to assume homogeneity of the $v_i$ for the Analysis A, in the second case this hypothesis is not appropriate. Nonetheless both $\hat R_I$ and $I^2$ would summarize the two distributions with a single common number. 
+One of the possible reasons for large values of $D$ or similarly small values of $R^2$ is the presence of heterogeneity in the dose--response associations. The measures of heterogeneity presented in Section~\ref{sec:measures_het}, namely $\hat R_I$ and $I^2$ were derived based on the assumption of homogeneity for the error variance terms $v_i$, which is unlikely to be met in applications. To illustrate this point, let us consider the two hypothetical distributions for the within-study error terms in Table~\ref{tab:hyp_vi}. The distribution of $v_i$ in the first example (Analysis A) is much more homogeneous compared to the second scenario (Analysis B). The coefficient of variation for the $v_i$ in the second example is 20 times higher than the corresponding number in the first scenario. While it seems reasonable to assume homogeneity of the $v_i$ for the Analysis A, in the second case this hypothesis is not appropriate. Nonetheless both $\hat R_I$ and $I^2$ would summarize the two distributions with a single common number. 
 
 <<hyp_vi, results='asis'>>=
 # code: hypothetical_vi.R
@@ -237,7 +297,7 @@ In the more realistic case where $v_i > 0$, the variance of $\hat \beta$ will in
 \noindent The $\hat R_b$ is a dimensionless number that can be expressed as a percentage, ranging from 0\% (corresponding to $\hat \tau^2 = 0$, i.e. no observed heterogeneity) to 100\%, for the hypothetical case where all the effects are estimated with no error. The proposed measure is defined as a function of the estimated heterogeneity ($\hat \tau^2$), the number of studies (I), and the within-study error terms ($v_i$). It satisfies the criteria required for a measure of heterogeneity \citep{higgins2002quantifying}: it is a non-decreasing function of $\hat \tau^2$, it is invariant to scale transformation of the estimates, and is not intrinsically affected by the number of studies included in the analysis. Similarly to $\hat R_I$ and $I^2$, the proposed measure is a function on the within-error terms $v_i$ and so it tends to 1 in case of meta-analysis of very precise estimates, even for relative small values of $\hat \tau^2$. As already mentioned in Section~\ref{sec:measures_het}, the use of the between-studies coefficient of variation can complement these measures \citep{takkouche1999evaluation}.
 The right hand of Equation~\ref{eq:Rb} expresses $\hat R_b$ as an average of the ratios of the $\hat \tau^2$ to the study-specific overall variance $v_i + \hat \tau^2$. It is easy to derive that $\hat R_b$ coincides with the definition of $\hat R_I$ and $I^2$ in case of homogeneity of the $v_i$. When the within-errors vary across study, the difference between $\hat R_b$ and $I^2$ will depend on the actual values of $v_i$, while it can be proven that $\hat R_b \le \hat R_I$.
 
-An estimate of the between-study heterogeneity is required for the computation of $\hat R_b$ as well for the alternative measures $\hat R_I$ and $I^2$. The moment-based estimator presented in Equation~\ref{eq:tau2DL} is a standard choice in many applied meta-analyses and has the advantage of having a closed formulation. In addition, the estimator is asymptotically consistent \citep{jackson2010extending}. Using this estimation method, $\hat R_b$ can be expressed as a function of the $Q$~statistic
+An estimate of the between-study heterogeneity is required for the computation of $\hat R_b$ as well for the alternative measures $\hat R_I$ and $I^2$. The moment-based estimator presented in Equation~\ref{eq:tau2DL} is a standard choice in many applied meta-analyses and it has the advantage of having a closed formulation. In addition, the estimator is consistent \citep{jackson2010extending}. Using this estimation method, $\hat R_b$ can be expressed as a function of the $Q$~statistic
 \begin{equation}
 \hat R_b = \frac{1}{I} \sum_{i = 1}^I \frac{Q - (I-1)}{Q + a_i - (I - 1)} 
 \label{eq:RbQ}
@@ -250,7 +310,7 @@ An estimate of the between-study heterogeneity is required for the computation o
 
 \noindent The formula for $\Var(Q) = 2(I-1) + 4\left(S_1 - \frac{S_2}{S_1}\right)\tau^2 + 2\left(S_2 - 2\frac{S_3}{S_1} + \frac{S_2^2}{S_1^2} \right)$, with $S_r = \sum_{i = 1}^I w_i^r$, was first presented by \cite{ biggerstaff1997incorporating}.
 
-\noindent When the number of studies is large, $\hat R_b$ is asymptotically distributed and thus Wald-type confidence interval can be constructed $\hat R_b \pm z_{1-\alpha/2} \sqrt{ \widehat{\Var} \left(\hat R_b \right)}$.
+\noindent When the number of studies is large, $\hat R_b$ is asymptotically distributed and thus Wald-type confidence interval can be constructed $\hat R_b \mp z_{1-\alpha/2} \sqrt{ \widehat{\Var} \left(\hat R_b \right)}$.
 
 
 
@@ -288,14 +348,13 @@ p_milk <- Map(function(d, m, p){
 }, d = split(milk_sub, milk_sub$id), m = modi_milk_sel, p = split(fpbest, 1:nrow(fpbest)))
 @
 
-Measures of heterogeneity are frequently employed in applied works and in applications of meta-regression models. In a dose--response meta-analysis, however, there are two aspects of heterogeneity that can not be captured using standard methods. More specifically, in a two-stage analysis the same functional transformations $g_1, \dots, g_p$ need to be defined for all the studies so that the regression coefficients can be properly combined by meta-analysis.
 This may have important consequences in case the chosen dose--response model adequately fits only a subset of the analyzed studies. To illustrate this aspect, we consider a subset of 4 studies on the association between milk consumption (ml/day) and all-cause mortality \citep{larsson2015milk}. We modelled the individual curves using FP2 and selected in each study the combination of power terms which maximized the log likelihood (or equivalently with the minimum AIC). The chosen power terms in the individual analyses differ although the predicted curves describe a similar association (Figure~\ref{fig:milk_sub}). Forcing a unique set of power terms may decrease the fit of some of the study-specific analyses and thus produce more unstable estimates for the dose--response parameters.
 
-\noindent An other difficulty may be encountered in uniformly defining the $g$ transformations across the studies. For instance, we might decide to model the previous association between milk consumption and mortality using RCS. A percentile approach is commonly adopted for choosing where to place the $\mathbf{k}$ in Equation~\ref{eq:rcs} \citep{harrell2013regression}. The first and third knots at located at the extremes, generally at the 10-th and 90-th percentiles of the exposure distribution, while the median exposure value is chosen for the remaining knot.
-If the exposure distributions largely vary (especially in terms of range definition), as it is in this case, it may not be possible to equally locate the knots in all the studies. Indeed, in our example only one study considered dose levels higher than the upper knot (\Sexpr{q_milk[3]} ml/day). As a consequence, the second spline transformation for the other studies will is equal 0 and the model is not estimable (the design matrix is not invertible). 
+\noindent Another difficulty may be encountered in uniformly defining the $g$ transformations across the studies. For instance, we might decide to model the previous association between milk consumption and mortality using RCS. A percentile approach is commonly adopted for choosing where to place the $\mathbf{k}$ in Equation~\ref{eq:rcs} \citep{harrell2013regression}. The first and third knots are located at fixed percentiles, generally at the 10-th and 90-th percentiles of the exposure distribution, while the median exposure value is chosen for the remaining knot.
+If the exposure distributions largely vary (especially in terms of range definition), as it is in this case, it may not be possible to equally locate the knots in all the studies. Indeed, in our example only one study considered dose levels higher than the upper knot (\Sexpr{q_milk[3]} ml/day). As a consequence, the second spline transformation for the other studies will be equal 0 and the model is not estimable (the design matrix is not invertible). 
 
 \noindent A second related problem directly affects the prediction of the pooled log relative risks. The maximum dose levels varies largely across studies, with values \Sexpr{paste(max_dose, collapse = ", ")} ml/day. 
-The predictions from the second stage analysis, however, are obtained using the combined $\boldsymbol{\hat \beta}$, which disregards the information about the exposure ranges. All the studies contribute in predicting the log relative risks, even if some of them only reported results for low exposure values. In such a way, the combined curve may severely affected by these extrapolations.
+The predictions from the second stage analysis, however, are obtained using the combined $\boldsymbol{\hat \beta}$, which disregards the information about the exposure. All the studies contribute in predicting the log relative risks, even if some of them only reported results for low exposure values. In such a way, the combined curve may severely affected by these extrapolations.
 
 A point-wise approach for meta-analysis of aggregated dose--response data may properly address the described issues.
 
@@ -304,7 +363,7 @@ A point-wise approach for meta-analysis of aggregated dose--response data may pr
 marrangeGrob(grobs = p_milk, ncol = 2, nrow = 2, top = NULL)
 @
 
-A point-wise approach was first presented by \cite{sauerbrei2011new} for meta-analysis of continuous covariates based on IPD. The strategy consists of separately estimating the study-specific curves and, based on them, calculating the predicted log relative risks for selected exposure values. The combined curve is obtained by pooling the predicted relative risks instead of calculating them from the combined regression coefficients. The described methodology has the advantage of fitting potential diverse curves across the studies, and limiting the study-specific predicted log relative risks to the observed exposure range.   
+A point-wise approach was first presented by \cite{sauerbrei2011new} for meta-analysis of continuous covariates based on IPD. The strategy consists of separately estimating the study-specific curves and, based on them, calculating the predicted log relative risks for selected exposure values. The combined curve is obtained by averaging the predicted relative risks instead of calculating them from the combined regression coefficients. The described methodology has the advantage of fitting potential diverse curves across the studies, and limiting the study-specific predicted log relative risks to the observed exposure range.   
 
 \subsection{Estimation and prediction of study-specific curves}
 
@@ -321,7 +380,7 @@ g_{i1}(x_{iJ_i}) -  g_{i1}(x_{i0}) & \hdots & g_{ip_i}(x_{iJ_i}) -  g_{ip_i}(x_{
 \end{equation}
 \noindent For example, different power terms for FP2 can be chosen or, for a RCS analysis, the knots can be located separately in each study. Potentially, a mixed of curves could be also estimated across the study in order to improve the fit of the individual dose--response analyses. The regression coefficients are then estimated using generalized least squares estimators presented in Equation~\ref{eq:gls}.
 
-Once the curves have been estimated, the results of the first step analysis are presented in terms of predicted log relative risks for a set of $n_i$ exposure values $\mathbf{x}_{n_i}$ using a suitable value $x_\mathrm{ref}$ as comparator. The $i$ indexed is used to highlight that the chosen dose values may differ across the studies. In particular, the predictions in each study can be limited to the observed exposure range $\max \left( \mathbf{x}_{n_i} \right) \le \max \left( \mathbf{x_i} \right)$.
+Once the curves have been estimated, the results of the first step analysis are presented in terms of predicted log relative risks for a set of $n_i$ exposure values $\mathbf{x}_{n_i}$ using a suitable common value $x_\mathrm{ref}$ as comparator. The index $i$ is used to highlight that the chosen dose values may differ across the studies. In particular, the predictions in each study can be limited to the observed exposure range $\max \left( \mathbf{x}_{n_i} \right) \le \max \left( \mathbf{x_i} \right)$.
 \begin{align}
 \hat {\boldsymbol y}_i &= \mathbf{X}_{n_i} \boldsymbol{\hat \beta_i}
 \label{eq:pred_pwa} \\
@@ -330,9 +389,9 @@ Once the curves have been estimated, the results of the first step analysis are 
 \end{align}
 \noindent with formulas similar to those presented in Equation~\ref{eq:pred} and ~\ref{eq:varpred}, with the notable difference that the predictions are based on the study-specific $\boldsymbol{\hat \beta_i}$ rather than the mean $\boldsymbol{\hat \beta}$ coefficients.
 
-\subsection{Averaging of dose--response prediction}
+\subsection{Averaging of dose--response predictions}
 
-In a point-wise strategy the combined dose--response curve is derived by pooling the study-specific predicted log relative risks derived in Equation~\ref{eq:pred_pwa}. The second step analysis consists of $n = \max(n_i)$ univariate meta-analyses where the effect sizes are the elements in $\hat {\boldsymbol y}_i$ with the within-error variances $\hat{\boldsymbol{v}}_i$.
+In a point-wise strategy the combined dose--response curve is derived by pooling the study-specific predicted log RRs derived in Equation~\ref{eq:pred_pwa}. The second step consists of $n = \max(n_i)$ univariate meta-analyses where the effect sizes are the elements in $\hat {\boldsymbol y}_i$ with the within-error variances $\hat{\boldsymbol{v}}_i$.
 The combined predicted relative risks are estimated using the weighted average presented in Equation~\ref{eq:avgbeta}.
 
 As a final result, the combined dose--response curve is graphically presented as a smooth function of the combined predicted relative risks for the chosen $n$ dose levels. In addition, all the results of the univariate meta-analyses can be pointwisely presented, such as estimates of the heterogeneity $\tau^2$ and related measures ($R_b$, $I^2$, and $R_i$), the $Q$~statistic, and the study-specific weights, with the potential of a much richer set of results.
@@ -342,7 +401,7 @@ As a final result, the combined dose--response curve is graphically presented as
 
 The study-specific dose--response analyses in a standard two-stage or alternative point-wise approach suffer from the limited number of data points. Most of the individual studies present results for 2 to 4 non-referent exposure categories, but cases where dichotomization of the exposure occurred are not rare \citep{turner2010categorisation}. In the latter case, only dose--response models parameterized by $p = 1$ coefficient can be estimated (e.g. linear trend). Indeed, a standard requirement for meta-analysis of non-linear curves is that the studies provide at least two non-referent relative risks.
 
-The extension of the one-stage approach to a random-effects meta-analysis may overcome the constrain from the limited number of individual data points. A one-stage approach is conceptually easier since the entire analysis can be formulated in a single statistical model. Flexible curves characterized by multiple parameters ($p > 3$) can also be easily accommodated, so that more elaborate research questions can be answered, without loosing the information from those studies usually excluded in a two-stage analysis.
+The extension of the one-stage approach to a random-effects meta-analysis may overcome the exclusions of studies with limited number of individual data points. A one-stage approach is conceptually easier since the entire analysis can be formulated in a single statistical model. Flexible curves characterized by multiple parameters ($p > 3$) can also be easily accommodated, so that more elaborate research questions can be answered, without loosing the information from those studies usually excluded in a two-stage analysis.
 
 \subsection{Model definition}
 
@@ -351,8 +410,8 @@ A one-stage dose--response meta-analysis can be written in the form of a linear 
 \mathbf{y}_{i} = \mathbf{X}_{i} \boldsymbol{\beta} + \mathbf{Z}_{i}  \mathbf{b}_i + \boldsymbol{\varepsilon}_{i}
 \label{eq:onestage}
 \end{equation}
-\noindent where the terms $\mathbf{y}_{i}$, $\mathbf{X}_{i}$, and $\boldsymbol{\varepsilon}_{i}$ are defined exactly as those presented in the first step of a two-stage analysis (Equation~\ref{eq:drmodel}). The quantities $\boldsymbol{\beta}$ and $\mathbf{b}_i$, instead, are the population average parameter and unobserved random-effects as defined in second step (Equation~\ref{eq:rmma}). The additional $\mathbf{Z}_{i}$ is the $n_i \times p$ design matrix for the random-effects and coincides with the definition of $\mathbf{X}_{i}$.
-Placing the multivariate distribution for the random-effects terms, the marginal model for a one stage analysis is
+\noindent where the terms $\mathbf{y}_{i}$, $\mathbf{X}_{i}$, and $\boldsymbol{\varepsilon}_{i}$ are defined exactly as those presented in the first step of a two-stage analysis (Equation~\ref{eq:drmodel}). The quantities $\boldsymbol{\beta}$ and $\mathbf{b}_i$, instead, are the population average parameter and unobserved random-effects as defined in the second step (Equation~\ref{eq:rmma}). The additional $\mathbf{Z}_{i}$ is the $n_i \times p$ design matrix for the random-effects and coincides with $\mathbf{X}_{i}$.
+Assuming a multivariate distribution for the random-effects terms, the marginal model for a one-stage analysis is
 \begin{equation}
 \mathbf{y}_{i} \sim \mathcal{N} \left( \mathbf{X}_{i} \boldsymbol{\beta},  \mathbf{Z}_{i} \boldsymbol{\Psi} \mathbf{Z}_{i}^\top  + \mathbf{S}_i \right)
 \label{eq:marginal_os}
@@ -396,16 +455,18 @@ The parameters to be estimated are the $m\times p$ fixed effects and the $p \tim
 \begin{equation}
 \begin{split}
 \ell_R \left( \boldsymbol{\xi} \right) = & 
- -\frac{1}{2} (n - p) \log(2\pi)  - \frac{1}{2} \sum_{i=1}^I \log | \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) |  - \frac{1}{2} \log \left| \sum_{i=1}^I \mathbf{X}_i^T \left( \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) \right)^{-1}  \mathbf{X}_i  \right| + \\
+ -\frac{1}{2} (n - p) \log(2\pi)  - \frac{1}{2} \sum_{i=1}^I \log | \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) |  - \frac{1}{2} \log \left| \sum_{i=1}^I \mathbf{X}_i^\top \left( \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) \right)^{-1}  \mathbf{X}_i  \right| + \\
 &-\frac{1}{2}\sum_{i=1}^I \left[ \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\hat \beta} \right)^\top \left( \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) \right)^{-1} \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\hat \beta} \right) \right]
 \end{split}
 \label{eq:logLikR_os}
 \end{equation}
 
-\noindent As in case of multivariate meta-analysis, likelihood estimators requires iterative algorithms in optimizing the functions~\ref{eq:logLik_os} and ~\ref{eq:logLikR_os}. 
+\noindent As in case of multivariate meta-analysis, likelihood estimators requires iterative algorithms to optimize the functions~\ref{eq:logLik_os} and ~\ref{eq:logLikR_os}. 
 In particular, the Nelder-Mead method can be employed to find the maximum for the parameters in the multidimensional domain. For ease of computation, both likelihoods are expressed as function of only the $\boldsymbol{\xi}$ parameters, which corresponds to the elements of the lower triangular Cholesky decomposition of $\boldsymbol{\Psi}$. The algorithms start with an initial guess for $\boldsymbol{\Psi}$, obtain an estimate for $\boldsymbol{\beta}$ using GLS estimators and maximize the objective function in terms of $\boldsymbol{\xi}$. The steps are iterated until convergence.
 
-Test of hypothesis and confidence intervals are based on the established theory for mixed models. Inference on the fixed-effects coefficients is conducted in a similar way as presented in Section~\ref{sec:2nd_stage}, using the asymptotic normal distribution for the estimator of $\boldsymbol{\beta}$. Tests for the variance components, instead, generally require a mixture of $\chi^2$ because the coefficients to be tested can only be positive. When $p \ge 2$, however, the distribution of the test statistic is difficult to implement, so that alternative measures can be instead applied. Following the idea behind the definition of the ICC, the marginal variance in~\ref{eq:marginal_os} can also be decomposed in the within-study and between-studies components. The dose--response model~\ref{eq:onestage} is a mixed model with random-effects for the slope terms and with no intercept. Thus, the between-studies variance is a quadratic function of the assigned dose values. For this setting \cite{goldstein2002partitioning} defined the Variance Partition Coefficient (VPC) as the ratio of the between-studies component by the total residual variability
+Test of hypothesis and confidence intervals are based on the established theory for mixed models. Inference on the fixed-effects coefficients is conducted in a similar way as presented in Section~\ref{sec:2nd_stage}, using the asymptotic normal distribution for the estimator of $\boldsymbol{\beta}$. Tests for the variance components, instead, generally require a mixture of $\chi^2$ because the coefficients to be tested can only be positive. When $p \ge 2$, however, the distribution of the test statistic is difficult to implement, so that alternative measures can be instead applied. 
+
+\noindent Following the idea behind the definition of the ICC, the marginal variance in~\ref{eq:marginal_os} can also be decomposed in the within-study and between-study components. The dose--response model~\ref{eq:onestage} is a mixed model with random-effects for the slope terms and with no intercept. Thus, the between-study variance is a quadratic function of the assigned dose values. For this setting \cite{goldstein2002partitioning} defined the Variance Partition Coefficient (VPC) as the ratio of the between-studies component by the total residual variability
 \begin{equation}
 \textrm{VPC}_{ij} = \frac{\mathbf{z}_{ij} \boldsymbol{\Psi} \mathbf{z}_{ij}^\top}{\mathbf{z}_{ij} \boldsymbol{\Psi} \mathbf{z}_{ij}^\top  + s_{ij}^2}
 \label{eq:vpc}
@@ -420,7 +481,7 @@ Information criteria based on the log-likelihood~\ref{eq:logLik_os} can be used 
 
 Predictions for the combined, or marginal, curve are obtained as in Equation~\ref{eq:pred}, where now the $\boldsymbol{\hat \beta}$ coefficients were estimated using the log relative risks as outcome variables rather than the study-specific $\boldsymbol{\hat \beta}_i$. 
 
-\noindent Predictions are also available for study-specific curves. Using the normality distribution for the random-effects, \cite{henderson1959estimation} compute the asymptotic best linear unbiased prediction (BLUP) of the random-effects $\boldsymbol{b}$ as
+\noindent Predictions are also available for study-specific curves. Using the normality distribution for the random-effects, \cite{henderson1959estimation} computed the asymptotic best linear unbiased prediction (BLUP) of the random-effects $\boldsymbol{b}$ as
 \begin{equation}
 \hat {\mathbf{b}}_i = \hat{\boldsymbol{\Psi}} \mathbf{Z}_i^\top \hat{\boldsymbol{\Sigma}}_i^{-1}\left( \mathbf{y}_i - \mathbf{X}_i\hat{\boldsymbol{\beta}} \right)
 \label{eq:blup_os}

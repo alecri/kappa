@@ -1,0 +1,10 @@
+durCalc                 Filter Dataset by Date Duration
+durPlot                 Graphs and Summary for Date Durations
+durSummary              Summary for Date Duration Data
+life_country            Data for timelineGroup function example in
+                        timelineS package
+life_exp                Data for examples in timelineS package
+mj_life                 Data for timelineS function example in
+                        timelineS package
+timelineG               Faceted Timelines for Grouped Data
+timelineS               Timeline with Event Labels

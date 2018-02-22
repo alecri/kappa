@@ -30,12 +30,6 @@ Berkey C, Hoaglin D, Antczak-Bouckoms A, Mosteller F, Colditz G (1998).
   effects.}
 \newblock \emph{Statistics in medicine}, \textbf{17}(22), 2537--2550.
 
-\bibitem[{Berkey \emph{et~al.}(1995)Berkey, Hoaglin, Mosteller, and
-  Colditz}]{berkey1995random}
-Berkey CS, Hoaglin DC, Mosteller F, Colditz GA (1995).
-\newblock \enquote{A random-effects regression model for meta-analysis.}
-\newblock \emph{Statistics in medicine}, \textbf{14}(4), 395--411.
-
 \bibitem[{Berlin \emph{et~al.}(1993)Berlin, Longnecker, and
   Greenland}]{berlin1993meta}
 Berlin JA, Longnecker MP, Greenland S (1993).
@@ -142,12 +136,19 @@ DerSimonian R, Laird N (1986).
 \newblock \enquote{Meta-analysis in clinical trials.}
 \newblock \emph{Controlled clinical trials}, \textbf{7}(3), 177--188.
 
-\bibitem[{Discacciati \emph{et~al.}(2015)Discacciati, Crippa, and
+\bibitem[{Di~Giuseppe \emph{et~al.}(2014)Di~Giuseppe, Crippa, Orsini, and
+  Wolk}]{di2014fish}
+Di~Giuseppe D, Crippa A, Orsini N, Wolk A (2014).
+\newblock \enquote{Fish consumption and risk of rheumatoid arthritis: a
+  dose-response meta-analysis.}
+\newblock \emph{Arthritis research \& therapy}, \textbf{16}(5), 446.
+
+\bibitem[{Discacciati \emph{et~al.}(2017)Discacciati, Crippa, and
   Orsini}]{discacciati2015goodness}
-Discacciati A, Crippa A, Orsini N (2015).
+Discacciati A, Crippa A, Orsini N (2017).
 \newblock \enquote{Goodness of fit tools for dose--response meta-analysis of
   binary outcomes.}
-\newblock \emph{Research synthesis methods}.
+\newblock \emph{Research Synthesis Methods}, \textbf{8}(2), 149.
 
 \bibitem[{Draper and Smith(2014)}]{draper2014applied}
 Draper NR, Smith H (2014).
@@ -174,18 +175,6 @@ Goldstein H, Browne W, Rasbash J (2002).
 \newblock \enquote{Partitioning variation in multilevel models.}
 \newblock \emph{Understanding Statistics: Statistical Issues in Psychology,
   Education, and the Social Sciences}, \textbf{1}(4), 223--231.
-
-\bibitem[{Greenland(1995{\natexlab{a}})}]{greenland1995avoiding}
-Greenland S (1995{\natexlab{a}}).
-\newblock \enquote{Avoiding power loss associated with categorization and
-  ordinal scores in dose-response and trend analysis.}
-\newblock \emph{Epidemiology}, pp. 450--454.
-
-\bibitem[{Greenland(1995{\natexlab{b}})}]{greenland1995dose}
-Greenland S (1995{\natexlab{b}}).
-\newblock \enquote{Dose-response and trend analysis in epidemiology:
-  alternatives to categorical analysis.}
-\newblock \emph{Epidemiology}, pp. 356--365.
 
 \bibitem[{Greenland and Longnecker(1992)}]{greenland1992methods}
 Greenland S, Longnecker MP (1992).
@@ -262,6 +251,10 @@ Higgins JP (2008).
 \newblock \emph{International journal of epidemiology}, \textbf{37}(5),
   1158--1160.
 
+\bibitem[{Hill(1965)}]{hill1965environment}
+Hill AB (1965).
+\newblock \enquote{The environment and disease: association or causation?}
+
 \bibitem[{Jackson \emph{et~al.}(2011)Jackson, Riley, and
   White}]{jackson2011multivariate}
 Jackson D, Riley R, White IR (2011).
@@ -300,6 +293,19 @@ Larsson SC, Crippa A, Orsini N, Wolk A, Micha{\"e}lsson K (2015).
 \newblock \enquote{Milk consumption and mortality from all causes,
   cardiovascular disease, and cancer: a systematic review and meta-analysis.}
 \newblock \emph{Nutrients}, \textbf{7}(9), 7749--7763.
+
+\bibitem[{Larsson and Orsini(2011)}]{larsson2011coffee}
+Larsson SC, Orsini N (2011).
+\newblock \enquote{Coffee consumption and risk of stroke: a dose-response
+  meta-analysis of prospective studies.}
+\newblock \emph{American Journal of Epidemiology}, \textbf{174}(9), 993--1001.
+
+\bibitem[{Larsson \emph{et~al.}(2006)Larsson, Orsini, and
+  Wolk}]{larsson2006milk}
+Larsson SC, Orsini N, Wolk A (2006).
+\newblock \enquote{Milk, milk products and lactose intake and ovarian cancer
+  risk: a meta-analysis of epidemiological studies.}
+\newblock \emph{International journal of cancer}, \textbf{118}(2), 431--441.
 
 \bibitem[{Legrady \emph{et~al.}(1987)Legrady, Dyer, Shekelle, Stamler, Liu,
   Paul, Lepper, and Shryock}]{legrady1987coffee}
@@ -379,6 +385,15 @@ Ritz J, Demidenko E, Spiegelman D (2008).
 \newblock \emph{Journal of Statistical Planning and Inference},
   \textbf{138}(7), 1919--1933.
 
+\bibitem[{Rota \emph{et~al.}(2010)Rota, Bellocco, Scotti, Tramacere, Jenab,
+  Corrao, La~Vecchia, Boffetta, and Bagnardi}]{rota2010random}
+Rota M, Bellocco R, Scotti L, Tramacere I, Jenab M, Corrao G, La~Vecchia C,
+  Boffetta P, Bagnardi V (2010).
+\newblock \enquote{Random-effects meta-regression models for studying nonlinear
+  dose--response relationship, with an application to alcohol and esophageal
+  squamous cell carcinoma.}
+\newblock \emph{Statistics in medicine}, \textbf{29}(26), 2679--2687.
+
 \bibitem[{Royston(2000)}]{royston2000strategy}
 Royston P (2000).
 \newblock \enquote{A strategy for modelling the effect of a continuous
@@ -396,21 +411,6 @@ Royston P, Altman DG (1994).
 \newblock \enquote{Regression using fractional polynomials of continuous
   covariates: parsimonious parametric modelling.}
 \newblock \emph{Applied statistics}, pp. 429--467.
-
-\bibitem[{Royston \emph{et~al.}(2006)Royston, Altman, and
-  Sauerbrei}]{royston2006dichotomizing}
-Royston P, Altman DG, Sauerbrei W (2006).
-\newblock \enquote{Dichotomizing continuous predictors in multiple regression:
-  a bad idea.}
-\newblock \emph{Statistics in medicine}, \textbf{25}(1), 127--141.
-
-\bibitem[{Royston \emph{et~al.}(1999)Royston, Ambler, and
-  Sauerbrei}]{royston1999use}
-Royston P, Ambler G, Sauerbrei W (1999).
-\newblock \enquote{The use of fractional polynomials to model continuous risk
-  variables in epidemiology.}
-\newblock \emph{International journal of epidemiology}, \textbf{28}(5),
-  964--974.
 
 \bibitem[{Sauerbrei and Royston(2011)}]{sauerbrei2011new}
 Sauerbrei W, Royston P (2011).

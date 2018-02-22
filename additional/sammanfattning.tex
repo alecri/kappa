@@ -1,0 +1,27 @@
+% ---------------------------------------------------------
+% Project: PhD KAPPA
+% File: sammanfattning.tex
+% Author: Alessio Crippa
+%
+% Purpose: Sammanfattning frontmatter
+% ---------------------------------------------------------
+
+
+\noindent {\Large \textsf{\textbf{{Sammanfattning}}}
+\bigskip
+\small
+\par Dos-respons meta-analys är ett statistiskt förförande för att kombinera och jämföra resultat från flera olika studier där sambandet mellan en kontinuerlig variabel och en hälsorisk undersöks.  Införandet av flexibla strategier och att utökning av modellerna till multivariat meta-analys är exempel av metoder som avser förfina denna typ av analys  men flera relevanta frågor kvarstår. Denna avhandling bidrar till att besvara dessa frågor genom att utveckla och presentera nya strategier och ad-hoc modeller (Artikel 1); redskap för att beräkna goodness-of-fit (Artikel 2);  ett nytt mått för att kvantifiera betydelsen av heterogenitet (Artikel 3);  en strategi för att hantera storleksskillnader i exponeringar mellan studier (Artikel 4); en-stegs metod för att estimera komplexa modeller utan att exkludera relevanta studier (Artikel 5).
+
+I Artikel 1 beskrivs  hur huvudaspekten av metoderna infördes i R packetet  "dosersmeta", tillgängligt på CRAN. Nya funktioner utvecklades för att förenkla metoderna, så som att definiera en design matris och att prediktera sammanslagna resultat. I artikeln beräkningen av linjära och icke-linjära kurvor illustreras, samt, hypotes tester, och presentation av resultat i tabeller och grafer genom att återanalysera publicerat resultat från aggregat dos-respons data.
+
+I Artikel 2 avhandlades hur man värderar goodness-of-fit testet. Lösningen som föreslås består av beräkning av deskriptiva mätvärden för att summera likheter och skillnader mellan predikterade och observerade data (avvikelse och bestämningskoefficient) och att med grafiska verktyg visualisera den predikterade modellen. Hur dessa redskap kan förbättra användandet av kvantitativ syntes av aggregerad dos-responsdata illusterars genom återanalys av två tidigare publicerade metanalyser.
+
+I Artikel 3 presenteras ett nytt mått (Rb) för att kvantifiera andelen varians i den sammanslagna skattningen, som kan härledas till heterogeniteten mellan olika studier.  I motsats till tidigare mått på heterogenitet kräver Rb varken något antagande av fördelning av inom-studiefelvariationer eller någon specifikation av värden för dessa. Resultatet av det föreslagna måttet utvärderades i en omfattande simuleringsstudie.
+
+I Artikel 4 utökade vi ett punktvist tillvägagångssätt för meta-analys med dos-respons för aggregerad data. Metoden kombinerar predikterade relativa risker för finfördelade exponeringsvärden baserat på potentiellt olika dosresponsmodeller. Ett punktvist tillvägagångssätt kan förbättra flexibiliteten i modellering av studiespecifika kurvor och minska påverkan av extrapolering genom att prediktera studiespecifika relativa risker baserat på observerad exponeringsstorlek. 
+
+I Artikel 5 presenteras ett en-stegs tillvägagångsätt för att estimera dos-respons meta-analys för linjära "mixed models", vilket vanligtvis genomförs som en två-stegs analys . Fördelar med ett en-stegs tillvägagångsätt presenteras, exempelvis underlättad  bedömning av heterogenitet över exponeringsområde, modell jämförelse och förutsägelse av individuella dos-responsföreningar. 
+
+Sammanfattningsvis metoderna som presenterats in denna avhandling avser utöka verktygen för dos-respons meta-analys. Metoderna har illustrerats med hjälp av data från befintliga studier och är implementerade i lätt tillgängliga R packeten.
+
+\normalsize

@@ -11,37 +11,37 @@
 \contentsline {section}{\numberline {2.3}Dose--response meta-analysis}{9}{section.2.3}
 \contentsline {subsection}{\numberline {2.3.1}First stage: study-specific trends}{10}{subsection.2.3.1}
 \contentsline {subsection}{\numberline {2.3.2}Second stage: multivariate meta-analysis}{13}{subsection.2.3.2}
-\contentsline {subsection}{\numberline {2.3.3}Methodological research}{18}{subsection.2.3.3}
-\contentsline {subsection}{\numberline {2.3.4}Research questions}{20}{subsection.2.3.4}
+\contentsline {subsection}{\numberline {2.3.3}History of previous methodological research}{17}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.4}Description of current practice}{20}{subsection.2.3.4}
 \contentsline {section}{\numberline {2.4}Software}{21}{section.2.4}
-\contentsline {chapter}{\numberline {3}Aims of the thesis}{24}{chapter.3}
-\contentsline {chapter}{\numberline {4}Methods}{25}{chapter.4}
-\contentsline {section}{\numberline {4.1}The {\fontseries {b}\selectfont dosresmeta} \textsf {R} package}{25}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Implementation}{25}{subsection.4.1.1}
+\contentsline {chapter}{\numberline {3}Aims of the thesis}{22}{chapter.3}
+\contentsline {chapter}{\numberline {4}Methods}{23}{chapter.4}
+\contentsline {section}{\numberline {4.1}The {\fontseries {b}\selectfont dosresmeta} \textsf {R} package}{23}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Architecture and design of the package}{24}{subsection.4.1.1}
 \contentsline {subsection}{\numberline {4.1.2}Description of the package}{26}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}Data Sets}{28}{subsection.4.1.3}
-\contentsline {section}{\numberline {4.2}Goodness-of-fit}{28}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Deviance}{28}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.1.3}Datasets}{27}{subsection.4.1.3}
+\contentsline {section}{\numberline {4.2}Goodness-of-fit}{29}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Deviance}{29}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {4.2.2}Coefficient of determination}{30}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Visual tools}{31}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.3}Visual tools}{30}{subsection.4.2.3}
 \contentsline {section}{\numberline {4.3}A new measure of heterogeneity}{32}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Definition and properties}{33}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.1}Definition and properties}{32}{subsection.4.3.1}
 \contentsline {section}{\numberline {4.4}A point-wise approach}{34}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Estimation and prediction of study-specific curves}{36}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Averaging of dose--response prediction}{36}{subsection.4.4.2}
-\contentsline {section}{\numberline {4.5}A one-stage model}{37}{section.4.5}
+\contentsline {subsection}{\numberline {4.4.1}Estimation and prediction of study-specific curves}{35}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Averaging of dose--response predictions}{36}{subsection.4.4.2}
+\contentsline {section}{\numberline {4.5}A one-stage model}{36}{section.4.5}
 \contentsline {subsection}{\numberline {4.5.1}Model definition}{37}{subsection.4.5.1}
 \contentsline {subsection}{\numberline {4.5.2}Estimation, hypothesis testing, and model comparison}{38}{subsection.4.5.2}
 \contentsline {subsection}{\numberline {4.5.3}Prediction}{39}{subsection.4.5.3}
-\contentsline {subsection}{\numberline {4.5.4}Comparison with two-stage analysis}{40}{subsection.4.5.4}
-\contentsline {chapter}{\numberline {5}Results}{41}{chapter.5}
-\contentsline {section}{\numberline {5.1}Paper~I}{41}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}Single study analysis}{41}{subsection.5.1.1}
-\contentsline {subsection}{\numberline {5.1.2}Multiple studies}{43}{subsection.5.1.2}
-\contentsline {section}{\numberline {5.2}Paper~II}{47}{section.5.2}
-\contentsline {section}{\numberline {5.3}Paper~III}{49}{section.5.3}
-\contentsline {subsection}{\numberline {5.3.1}Processed meat and bladder cancer}{49}{subsection.5.3.1}
-\contentsline {subsection}{\numberline {5.3.2}Red meat and bladder cancer}{50}{subsection.5.3.2}
+\contentsline {subsection}{\numberline {4.5.4}Comparison with two-stage analysis}{39}{subsection.4.5.4}
+\contentsline {chapter}{\numberline {5}Results}{40}{chapter.5}
+\contentsline {section}{\numberline {5.1}Paper~I}{40}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Single study analysis}{40}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Multiple studies}{42}{subsection.5.1.2}
+\contentsline {section}{\numberline {5.2}Paper~II}{46}{section.5.2}
+\contentsline {section}{\numberline {5.3}Paper~III}{48}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Processed meat and bladder cancer}{48}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}Red meat and bladder cancer}{49}{subsection.5.3.2}
 \contentsline {section}{\numberline {5.4}Paper IV}{53}{section.5.4}
 \contentsline {section}{\numberline {5.5}Paper~V}{55}{section.5.5}
 \contentsline {chapter}{\numberline {6}Discussion}{60}{chapter.6}
@@ -55,4 +55,4 @@
 \contentsline {chapter}{\numberline {B}Supplementary figures}{70}{appendix.B}
 \contentsline {chapter}{\numberline {C}Supplementary tables}{73}{appendix.C}
 \contentsline {chapter}{References}{77}{appendix.D}
-\contentsline {chapter}{Acknowledgements}{83}{appendix*.37}
+\contentsline {chapter}{Acknowledgements}{83}{appendix*.38}

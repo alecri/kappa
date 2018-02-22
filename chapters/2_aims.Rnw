@@ -19,14 +19,14 @@ The overall aims of this thesis were to develop and implement new methods for do
 More specifically, the aims were:
 
 \begin{itemize}
-\item To describe the implementation of the main aspects of a dose--response meta-analysis and the usage of the \pkg{dosresmeta} \textsf{R} package.
+\item To develop, maintain, and share a package for dose--response meta-analysis in the open source and free \textsf{R} software.
 
-\item To present and discuss relevant measures and graphical tools to assess the goodness-of-fit in dose--response meta-analysis.
+\item To present and discuss relevant measures and graphical tools to assess the goodness-of-fit in dose--response meta-analytical models, which is often neglected.
 
-\item To develop a new measure of between-study heterogeneity in the broader context of meta-analysis and assess its properties as compared to other available measures. 
+\item To develop a new measure of between-study heterogeneity in the broader context of meta-analysis that does not make any assumption about the distribution of the within-study error variances.
 
-\item To explore possible advantages of a point-wise approach, especially, in case of dose--response meta-analysis where the exposure range varies substantially across the studies.
+\item To move beyond the specification of a unique model across the studies exploring possible advantages of a point-wise approach, especially in case of dose--response meta-analysis where the exposure range varies substantially across the studies.
 
-\item To formalize and present an alternative one-stage random-effects model for dose--response meta-analysis of aggregated data, formulating the meta-analytic model in terms of a general linear mixed-effect model. 
+\item To avoid exclusion of studies in order to fit more complex and informative models in an alternative one-stage approach for dose--response meta-analysis.
 
 \end{itemize}

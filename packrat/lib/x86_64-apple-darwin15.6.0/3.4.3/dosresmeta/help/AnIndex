@@ -12,6 +12,7 @@ coef.dosresmeta	coef.dosresmeta
 coffee_cancer	coffee_cancer
 coffee_cvd	coffee_cvd
 coffee_mort	coffee_mort
+coffee_mort_add	coffee_mort_add
 coffee_stroke	coffee_stroke
 covar.logrr	covar.logrr
 covar.smd	covar.smd

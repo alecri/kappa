@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>PCA (主成分分析)</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{\u4e00\u884cR\u4ee3\u7801\u6765\u5b9e\u73b0\u7e41\u7410\u7684\u53ef\u89c6\u5316 (Introduction in Chinese)}
+-->
+
+<p>author: &ldquo;唐源&rdquo;</p>
+
+<p><a href="https://github.com/sinhrks/ggfortify">ggfortify</a> 有着简单易用的统一的界面来用一行代码来对许多受欢迎的R软件包结果进行二维可视化的一个R工具包。这让许多的统计学家以及数据科学家省去了许多繁琐和重复的过程，不用对结果进行任何处理就能以 <code>{ggplot}</code> 的风格画出好看的图，大大地提高了工作的效率。</p>
+
+<p>虽然ggfortify已经在<a href="https://cran.r-project.org/package=ggfortify">CRAN</a>上，但是由于最近很多的功能都还在快速增加，还是推荐大家从<a href="https://github.com/sinhrks/ggfortify">Github</a>上下载和安装</p>
+
+<pre><code class="r">library(devtools)
+install_github(&#39;sinhrks/ggfortify&#39;)
+library(ggfortify)
+</code></pre>
+
+<p>接下来我将简单介绍一下怎么用 <code>{ggplot2}</code> 和 <code>{ggfortify}</code> 来很快的对PCA, clustering, 以及LFDA的结果进行可视化。然后将简单介绍用 <code>{ggfortify}</code> 来对时间序列进行迅速的可视化。请点击<a href="https://terrytangyuan.github.io/2015/11/24/ggfortify-intro/">这里</a>查看可视化结果。</p>
+
+<h1>PCA (主成分分析)</h1>
+
+<p><code>{ggfortify}</code> 使 <code>{ggplot2}</code> 知道怎么诠释PCA对象. 加载好 <code>{ggfortify}</code>包之后, 你可以对<code>stats::prcomp</code> 和 <code>stats::princomp</code>对象使用 <code>ggplot2::autoplot</code>。</p>
+
+<pre><code class="r">library(ggfortify)
+df &lt;- iris[c(1, 2, 3, 4)]
+autoplot(prcomp(df))
+</code></pre>
+
+<p>你还可以选择数据中的一列来给画出的点按类别自动分颜色。输入<code>help(autoplot.prcomp)</code> 可以了解到更多的其他选择。</p>
+
+<pre><code class="r">autoplot(prcomp(df), data = iris, colour = &#39;Species&#39;)
+</code></pre>
+
+<p>比如说给定<code>label = TRUE</code> 可以给每个点加上标识(以<code>rownames</code>为标准)，也可以调整标识的大小。</p>
+
+<pre><code class="r">autoplot(prcomp(df), data = iris, colour = &#39;Species&#39;, label = TRUE, label.size = 3)
+</code></pre>
+
+<p>给定 <code>shape = FALSE</code> 可以让所有的点消失，只留下标识，这样可以让图更清晰，辨识度更大。</p>
+
+<pre><code class="r">autoplot(prcomp(df), data = iris, colour = &#39;Species&#39;, shape = FALSE, label.size = 3)
+</code></pre>
+
+<p>给定 <code>loadings = TRUE</code> 可以很快的画出特征向量。</p>
+
+<pre><code class="r">autoplot(prcomp(df), data = iris, colour = &#39;Species&#39;, loadings = TRUE)
+</code></pre>
+
+<p>同样的，你也可以显示特征向量的标识以及调整他们的大小，更多选择请参考帮助文件。</p>
+
+<pre><code class="r">autoplot(prcomp(df), data = iris, colour = &#39;Species&#39;,
+         loadings = TRUE, loadings.colour = &#39;blue&#39;,
+         loadings.label = TRUE, loadings.label.size = 3)
+</code></pre>
+
+<h1>因素分析</h1>
+
+<p>和PCA类似，<code>ggfortify</code> 也支持 <code>stats::factanal</code> 对象。可调的选择也很广泛。以下给出了简单的例子：</p>
+
+<p><strong>注意</strong> 当你使用 <code>factanal</code> 来计算分数的话，你必须给定 <code>scores</code>的值。</p>
+
+<pre><code class="r">d.factanal &lt;- factanal(state.x77, factors = 3, scores = &#39;regression&#39;)
+autoplot(d.factanal, data = state.x77, colour = &#39;Income&#39;)
+autoplot(d.factanal, label = TRUE, label.size = 3,
+         loadings = TRUE, loadings.label = TRUE, loadings.label.size  = 3)
+</code></pre>
+
+<h1>K-均值</h1>
+
+<pre><code class="r">autoplot(kmeans(USArrests, 3), data = USArrests)
+
+autoplot(kmeans(USArrests, 3), data = USArrests, label = TRUE, label.size = 3)
+</code></pre>
+
+<h1>cluster(集群)</h1>
+
+<p><code>{ggfortify}</code> 也支持 <code>cluster::clara</code>, <code>cluster::fanny</code>, <code>cluster::pam</code>。</p>
+
+<pre><code class="r">library(cluster)
+autoplot(clara(iris[-5], 3))
+</code></pre>
+
+<p>给定 <code>frame = TRUE</code>，可以把<code>stats::kmeans</code> 和 <code>cluster::*</code> 的每个集群圈出来。</p>
+
+<pre><code class="r">autoplot(fanny(iris[-5], 3), frame = TRUE)
+</code></pre>
+
+<p>你也可以通过 <code>frame.type</code> 来选择圈的类型。更多选择请参照<a href="http://docs.ggplot2.org/dev/stat_ellipse.html"><code>ggplot2::stat_ellipse</code></a>里面的<code>frame.type</code>的<code>type</code>关键词。</p>
+
+<pre><code class="r">autoplot(pam(iris[-5], 3), frame = TRUE, frame.type = &#39;norm&#39;)
+</code></pre>
+
+<h1>lfda(Fisher局部判别分析)</h1>
+
+<p><a href="https://cran.r-project.org/package=lfda"><code>{lfda}</code></a>包支持一系列的Fisher局部判别分析方法，包括半监督lfda，非线性lfda。你也可以使用<code>{ggfortify}</code>来对他们的结果进行可视化。</p>
+
+<pre><code class="r">library(lfda)
+
+# Fisher局部判别分析 (LFDA)
+model &lt;- lfda(iris[-5], iris[, 5], 4, metric=&quot;plain&quot;)
+autoplot(model, data = iris, frame = TRUE, frame.colour = &#39;Species&#39;)
+</code></pre>
+
+<pre><code class="r"># 半监督Fisher局部判别分析 (SELF)
+model &lt;- self(iris[-5], iris[, 5], beta = 0.1, r = 3, metric=&quot;plain&quot;)
+autoplot(model, data = iris, frame = TRUE, frame.colour = &#39;Species&#39;)
+</code></pre>
+
+<p>更多关于集群方面的可视化请参考Github上的<a href="https://github.com/sinhrks/ggfortify/tree/master/vignettes">Vignette</a>或者<a href="http://rpubs.com/sinhrks/plot_pca">Rpubs</a>上的例子。</p>
+
+<h1>时间序列的可视化</h1>
+
+<p>用 <code>{ggfortify}</code> 使时间序列的可视化变得及其简单。接下来我将给出一些简单的例子。</p>
+
+<h1>ts对象</h1>
+
+<pre><code class="r">library(ggfortify)
+autoplot(AirPassengers)
+</code></pre>
+
+<p>可以使用 <code>ts.colour</code> 和 <code>ts.linetype</code>来改变线的颜色和形状。更多的选择请参考 <code>help(autoplot.ts)</code>。</p>
+
+<pre><code class="r">autoplot(AirPassengers, ts.colour = &#39;red&#39;, ts.linetype = &#39;dashed&#39;)
+</code></pre>
+
+<h1>多变量时间序列</h1>
+
+<pre><code class="r">library(vars)
+data(Canada)
+autoplot(Canada)
+</code></pre>
+
+<p>使用 <code>facets = FALSE</code> 可以把所有变量画在一条轴上。</p>
+
+<pre><code class="r">autoplot(Canada, facets = FALSE)
+</code></pre>
+
+<p><code>autoplot</code> 也可以理解其他的时间序列类别。可支持的R包有：</p>
+
+<ul>
+<li><code>zoo::zooreg</code></li>
+<li><code>xts::xts</code></li>
+<li><code>timeSeries::timSeries</code></li>
+<li><code>tseries::irts</code></li>
+</ul>
+
+<p>一些例子：</p>
+
+<pre><code class="r">library(xts)
+autoplot(as.xts(AirPassengers), ts.colour = &#39;green&#39;)
+
+library(timeSeries, eval=FALSE)
+autoplot(as.timeSeries(AirPassengers), ts.colour = (&#39;dodgerblue3&#39;))
+</code></pre>
+
+<p>你也可以通过 <code>ts.geom</code> 来改变几何形状，目前支持的有 <code>line</code>, <code>bar</code> and <code>point</code>.</p>
+
+<pre><code class="r">autoplot(AirPassengers, ts.geom = &#39;bar&#39;, fill = &#39;blue&#39;)
+</code></pre>
+
+<pre><code class="r">autoplot(AirPassengers, ts.geom = &#39;point&#39;, shape = 3)
+</code></pre>
+
+<h1>forecast包</h1>
+
+<pre><code class="r">library(forecast)
+d.arima &lt;- auto.arima(AirPassengers)
+d.forecast &lt;- forecast(d.arima, level = c(95), h = 50)
+autoplot(d.forecast)
+</code></pre>
+
+<p>有很多设置可供调整：</p>
+
+<pre><code class="r">autoplot(d.forecast, ts.colour = &#39;firebrick1&#39;, predict.colour = &#39;red&#39;,
+         predict.linetype = &#39;dashed&#39;, conf.int = FALSE)
+</code></pre>
+
+<h1>vars包</h1>
+
+<pre><code class="r">library(vars)
+d.vselect &lt;- VARselect(Canada, lag.max = 5, type = &#39;const&#39;)$selection[1]
+d.var &lt;- VAR(Canada, p = d.vselect, type = &#39;const&#39;)
+</code></pre>
+
+<p>更多可设置可供调整：</p>
+
+<pre><code class="r">autoplot(predict(d.var, n.ahead = 50), ts.colour = &#39;dodgerblue4&#39;,
+         predict.colour = &#39;blue&#39;, predict.linetype = &#39;dashed&#39;)
+</code></pre>
+
+<h1>changepoint包</h1>
+
+<pre><code class="r">library(changepoint)
+autoplot(cpt.meanvar(AirPassengers))
+</code></pre>
+
+<pre><code class="r">autoplot(cpt.meanvar(AirPassengers), cpt.colour = &#39;blue&#39;, cpt.linetype = &#39;solid&#39;)
+</code></pre>
+
+<h1>strucchange包</h1>
+
+<pre><code class="r">library(strucchange)
+autoplot(breakpoints(Nile ~ 1), ts.colour = &#39;blue&#39;, ts.linetype = &#39;dashed&#39;,
+         cpt.colour = &#39;dodgerblue3&#39;, cpt.linetype = &#39;solid&#39;)
+</code></pre>
+
+<h1>dlm包</h1>
+
+<pre><code class="r">library(dlm)
+form &lt;- function(theta){
+  dlmModPoly(order = 1, dV = exp(theta[1]), dW = exp(theta[2]))
+}
+
+model &lt;- form(dlmMLE(Nile, parm = c(1, 1), form)$par)
+filtered &lt;- dlmFilter(Nile, model)
+
+autoplot(filtered)
+</code></pre>
+
+<pre><code class="r">autoplot(filtered, ts.linetype = &#39;dashed&#39;, fitted.colour = &#39;blue&#39;)
+</code></pre>
+
+<pre><code class="r">smoothed &lt;- dlmSmooth(filtered)
+class(smoothed)
+autoplot(smoothed)
+</code></pre>
+
+<pre><code class="r">p &lt;- autoplot(filtered)
+autoplot(smoothed, ts.colour = &#39;blue&#39;, p = p)
+</code></pre>
+
+<h1>KFAS包</h1>
+
+<pre><code class="r">library(KFAS)
+model &lt;- SSModel(
+  Nile ~ SSMtrend(degree=1, Q=matrix(NA)), H=matrix(NA)
+)
+
+fit &lt;- fitSSM(model=model, inits=c(log(var(Nile)),log(var(Nile))), method=&quot;BFGS&quot;)
+smoothed &lt;- KFS(fit$model)
+autoplot(smoothed)
+</code></pre>
+
+<p>使用 <code>smoothing=&#39;none&#39;</code> 可以画出过滤后的结果。</p>
+
+<pre><code class="r">filtered &lt;- KFS(fit$model, filtering=&quot;mean&quot;, smoothing=&#39;none&#39;)
+autoplot(filtered)
+</code></pre>
+
+<pre><code class="r">trend &lt;- signal(smoothed, states=&quot;trend&quot;)
+class(trend)
+</code></pre>
+
+<pre><code class="r">p &lt;- autoplot(filtered)
+autoplot(trend, ts.colour = &#39;blue&#39;, p = p)
+</code></pre>
+
+<h1>stats包</h1>
+
+<p>可支持的stats包里的对象有：</p>
+
+<ul>
+<li><code>stl</code>, <code>decomposed.ts</code></li>
+<li><code>acf</code>, <code>pacf</code>, <code>ccf</code></li>
+<li><code>spec.ar</code>, <code>spec.pgram</code></li>
+<li><code>cpgram</code> </li>
+</ul>
+
+<pre><code class="r">autoplot(stl(AirPassengers, s.window = &#39;periodic&#39;), ts.colour = &#39;blue&#39;)
+</code></pre>
+
+<pre><code class="r">autoplot(acf(AirPassengers, plot = FALSE))
+</code></pre>
+
+<pre><code class="r">autoplot(acf(AirPassengers, plot = FALSE), conf.int.fill = &#39;#0000FF&#39;, conf.int.value = 0.8, conf.int.type = &#39;ma&#39;)
+</code></pre>
+
+<pre><code class="r">autoplot(spec.ar(AirPassengers, plot = FALSE))
+</code></pre>
+
+<pre><code class="r">ggcpgram(arima.sim(list(ar = c(0.7, -0.5)), n = 50))
+</code></pre>
+
+<pre><code class="r">library(forecast)
+ggtsdiag(auto.arima(AirPassengers))
+</code></pre>
+
+<pre><code class="r">gglagplot(AirPassengers, lags = 4)
+</code></pre>
+
+<p>更多关于时间序列的例子，请参考<a href="http://rpubs.com/sinhrks/plot_ts">Rpubs</a>上的介绍。</p>
+
+<p>最近又多里许多额外的非常好用的功能，比如说现在已经支持<code>multiplot</code>同时画多个不同对象，强烈推荐参考<a href="http://rpubs.com/sinhrks/ggfortify_subplots">Rpubs</a> 以及关注我们<a href="https://github.com/sinhrks/ggfortify">Github</a>上的更新。</p>
+
+<p>祝大家使用愉快! 有问题请及时在Github上<a href="https://github.com/sinhrks/ggfortify/issues">submit an issue</a>。(可以使用中文)</p>
+
+</body>
+
+</html>

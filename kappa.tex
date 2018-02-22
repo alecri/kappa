@@ -269,7 +269,7 @@ Stockholm 2018
 \newpage
 \null
 \vfill
-\noindent All published papers reproduced with permission \\
+\noindent All previously published papers were reproduced with permission from the publisher. \\
 Published by Karolinska Institutet \\
 \bigskip
 Printed by E-Print AB 2018 \\
@@ -371,7 +371,8 @@ but to be wrong for more sophisticated reasons.''} \\
 % ---------------------------------------------------------
 % Project: PhD KAPPA
 % File: abstract.tex
-% Author: Andrea Discacciati
+% Author: Alessi Crippa
+% based on the template written by Andrea Discacciati
 %
 % Purpose: Abstract frontmatter
 % ---------------------------------------------------------
@@ -401,6 +402,35 @@ In conclusion, the methods presented in this thesis enrich the set of tools avai
 
 % ---------------------------------------------------------
 % Project: PhD KAPPA
+% File: sammanfattning.tex
+% Author: Alessio Crippa
+%
+% Purpose: Sammanfattning frontmatter
+% ---------------------------------------------------------
+
+
+\noindent {\Large \textsf{\textbf{{Sammanfattning}}}
+\bigskip
+\small
+\par Dos-respons meta-analys är ett statistiskt förförande för att kombinera och jämföra resultat från flera olika studier där sambandet mellan en kontinuerlig variabel och en hälsorisk undersöks.  Införandet av flexibla strategier och att utökning av modellerna till multivariat meta-analys är exempel av metoder som avser förfina denna typ av analys  men flera relevanta frågor kvarstår. Denna avhandling bidrar till att besvara dessa frågor genom att utveckla och presentera nya strategier och ad-hoc modeller (Artikel 1); redskap för att beräkna goodness-of-fit (Artikel 2);  ett nytt mått för att kvantifiera betydelsen av heterogenitet (Artikel 3);  en strategi för att hantera storleksskillnader i exponeringar mellan studier (Artikel 4); en-stegs metod för att estimera komplexa modeller utan att exkludera relevanta studier (Artikel 5).
+
+I Artikel 1 beskrivs  hur huvudaspekten av metoderna infördes i R packetet  "dosersmeta", tillgängligt på CRAN. Nya funktioner utvecklades för att förenkla metoderna, så som att definiera en design matris och att prediktera sammanslagna resultat. I artikeln beräkningen av linjära och icke-linjära kurvor illustreras, samt, hypotes tester, och presentation av resultat i tabeller och grafer genom att återanalysera publicerat resultat från aggregat dos-respons data.
+
+I Artikel 2 avhandlades hur man värderar goodness-of-fit testet. Lösningen som föreslås består av beräkning av deskriptiva mätvärden för att summera likheter och skillnader mellan predikterade och observerade data (avvikelse och bestämningskoefficient) och att med grafiska verktyg visualisera den predikterade modellen. Hur dessa redskap kan förbättra användandet av kvantitativ syntes av aggregerad dos-responsdata illusterars genom återanalys av två tidigare publicerade metanalyser.
+
+I Artikel 3 presenteras ett nytt mått (Rb) för att kvantifiera andelen varians i den sammanslagna skattningen, som kan härledas till heterogeniteten mellan olika studier.  I motsats till tidigare mått på heterogenitet kräver Rb varken något antagande av fördelning av inom-studiefelvariationer eller någon specifikation av värden för dessa. Resultatet av det föreslagna måttet utvärderades i en omfattande simuleringsstudie.
+
+I Artikel 4 utökade vi ett punktvist tillvägagångssätt för meta-analys med dos-respons för aggregerad data. Metoden kombinerar predikterade relativa risker för finfördelade exponeringsvärden baserat på potentiellt olika dosresponsmodeller. Ett punktvist tillvägagångssätt kan förbättra flexibiliteten i modellering av studiespecifika kurvor och minska påverkan av extrapolering genom att prediktera studiespecifika relativa risker baserat på observerad exponeringsstorlek. 
+
+I Artikel 5 presenteras ett en-stegs tillvägagångsätt för att estimera dos-respons meta-analys för linjära "mixed models", vilket vanligtvis genomförs som en två-stegs analys . Fördelar med ett en-stegs tillvägagångsätt presenteras, exempelvis underlättad  bedömning av heterogenitet över exponeringsområde, modell jämförelse och förutsägelse av individuella dos-responsföreningar. 
+
+Sammanfattningsvis metoderna som presenterats in denna avhandling avser utöka verktygen för dos-respons meta-analys. Metoderna har illustrerats med hjälp av data från befintliga studier och är implementerade i lätt tillgängliga R packeten.
+
+\normalsize
+\cleardoublepage
+
+% ---------------------------------------------------------
+% Project: PhD KAPPA
 % File: publications.tex
 % Author: Alessio Crippa
 % based on the template written by Andrea Discacciati
@@ -412,7 +442,7 @@ In conclusion, the methods presented in this thesis enrich the set of tools avai
 
 \begin{enumerate}[I.]
 \item Alessio~Crippa, and Nicola~Orsini \\ \textbf{Multivariate dose--response meta-analysis: the dosresmeta R Package} \\ \textit{Journal of Statistical Software, Code Snippets} 2016; 72(1), 1--15
-\item Andrea~Discacciati, Alessio~Crippa, and Nicola~Orsini \\ \textbf{Goodness of fit tools for dose--response meta-analysis of binary outcomes} \\ \textit{Research Synthesis Methods} 2015
+\item Andrea~Discacciati, Alessio~Crippa, and Nicola~Orsini \\ \textbf{Goodness of fit tools for dose--response meta-analysis of binary outcomes} \\ \textit{Research Synthesis Methods} 2017 Jun; 8(2):149.
 \item Alessio~Crippa, Polyna~Khudyakov, Molin~Wang, Nicola~Orsini, and Donna~Spiegelman \\ \textbf{A new measure of between-studies heterogeneity in meta-analysis} \\ \textit{Statistics in Medicine} 2016; 35(21), 3661--75
 \item Alessio~Crippa, Ilias~Thomas, and Nicola~Orsini \\ \textbf{A pointwise approach to dose-response meta-analysis of aggregated data} \\ \textit{Manuscript} 2018
 \item Alessio~Crippa, Andrea~Discacciati, Matteo~Bottai, Alicja~Wolk, and Nicola~Orsini \\ \textbf{One-stage dose--response meta-analysis for aggregated data} \\ \textit{Manuscript} 2018
@@ -422,12 +452,12 @@ In conclusion, the methods presented in this thesis enrich the set of tools avai
 
 \chapter*{Related publications}
 \begin{itemize}
-\item Ehimen~C.~Aneni, Alessio~Crippa, Chukwuemeka~U.~Osondu, Javier~Valero-Elizondo, Adnan~Younus, Khurram~Nasir, and Emir~Veledar \\ \textbf{Estimates of Mortality Benefit From Ideal Cardiovascular Health Metrics: A Dose Response Meta-Analysis} \\ \textit{Journal of the American Heart Association} 2017 Dec 1;6(12):e006904.
-\item Alessio~Crippa, Susanna~C.~Larsson, Andrea~Discacciati, Alicja~Wolk, and Nicola~Orsini \\ \textbf{Red and processed meat consumption and risk of bladder cancer: a dose--response meta-analysis of epidemiological studies} \\ \textit{European Journal of Nutrition} 2016, 1--13
-\item Andrea~D.~Smith, Alessio~Crippa, James~Woodcock, and S{\o}ren~Brage \\ \textbf{Physical activity and incident type 2 diabetes mellitus: a systematic review and dose--response meta-analysis of prospective cohort studies} \\ \textit{Diabetologia} 2016, 1--19
+\item Ehimen~C.~Aneni, Alessio~Crippa, Chukwuemeka~U.~Osondu, Javier~Valero-Elizondo, Adnan~Younus, Khurram~Nasir, and Emir~Veledar \\ \textbf{Estimates of Mortality Benefit From Ideal Cardiovascular Health Metrics: A Dose Response Meta-Analysis} \\ \textit{Journal of the American Heart Association} 2017 Dec 1, 6(12):e006904.
+\item Alessio~Crippa, Susanna~C.~Larsson, Andrea~Discacciati, Alicja~Wolk, and Nicola~Orsini \\ \textbf{Red and processed meat consumption and risk of bladder cancer: a dose--response meta-analysis of epidemiological studies} \\ \textit{European Journal of Nutrition} 2016 Dec, 22:1-3.
+\item Andrea~D.~Smith, Alessio~Crippa, James~Woodcock, and S{\o}ren~Brage \\ \textbf{Physical activity and incident type 2 diabetes mellitus: a systematic review and dose--response meta-analysis of prospective cohort studies} \\ \textit{Diabetologia} 2016;59(12):2527-45.
 \item Marco~Vinceti, Tommaso~Filippini, Alessio~Crippa, Agn{\`e}s~de~Sesmaisons, Lauren~A.~ Wise, and Nicola~Orsini \\ \textbf{Meta-Analysis of Potassium Intake and the Risk of Stroke} \\ \textit{Journal of the American Heart Association} 2016, 5(10), e004210
-\item Alessio~Crippa, and Nicola~Orsini \\ \textbf{Dose--response meta-analysis of differences in means} \\ \textit{BMC Medical Research Methodology} 2016, 16(1), 91
-\item Emir~Veledar, Alessio~Crippa, Chukwuemeka~U.~Osondu, Adnan~Younus, and Khurram~Nasir \\ \textbf{Letter to Editor: Ideal cardiovascular health metrics and risk of cardiovascular disease or mortality} \\ \textit{International Journal of Cardiology} 2016, 222, 737
+\item Alessio~Crippa, and Nicola~Orsini \\ \textbf{Dose--response meta-analysis of differences in means} \\ \textit{BMC Medical Research Methodology} 2016 Dec, 16(1):91.
+\item Emir~Veledar, Alessio~Crippa, Chukwuemeka~U.~Osondu, Adnan~Younus, and Khurram~Nasir \\ \textbf{Letter to Editor: Ideal cardiovascular health metrics and risk of cardiovascular disease or mortality} \\ \textit{International Journal of Cardiology} 2016 Nov 1, 222:737
 \item Alessio~Crippa, Andrea~Discacciati, Nicola~Orsini, and Viktor~Oskarsson \\ \textbf{Letter: coffee consumption and gallstone disease---a cautionary note on the assignment of exposure values in dose--response meta-analyses} \\ \textit{Alimentary Pharmacology \& Therapeutics} 2016, 43(1), 166-167
 \item Susanna~C.~Larsson, Alessio~Crippa, Nicola~Orsini, Alicja~Wolk, and Karl~Micha{\"e}lsson \\ \textbf{Milk consumption and mortality from all causes, cardiovascular disease, and cancer: a systematic review and meta-analysis} \\ \textit{Nutrients} 2016, 7(9), 7749-7763
 \item Daniela~Di~Giuseppe, Alessio~Crippa, Nicola~Orsini, and Alicja~Wolk \\ \textbf{Fish consumption and risk of rheumatoid arthritis: a dose-response meta-analysis} \\ \textit{Arthritis Research \& Therapy} 2014, 16(5), 446
@@ -466,9 +496,9 @@ FP2 & Second-degree Fractional Polynomials \\
 ICC & Intraclass Correlation Coefficient \\
 logRR & log--Relative Risk \\
 LOWESS & Locally Weighted Scatterplot Smoothing \\
-ML & maximum likelihood \\
+ML & Maximum Likelihood \\
 RCS & Restricted Cubic Splines \\
-REML & restricted maximum likelihood \\
+REML & Restricted Maximum Likelihood \\
 $R^2$ & Coefficient of Determination \\
 RR & Relative Risk \\
 VPC & Variance Partition Coefficient \\
@@ -495,15 +525,15 @@ WLS & Weighted Least Squares
 
 \chapter{Introduction}
 
-A single experiment can hardly provide a definitive answer to a scientific question. Science is oftentimes referred to as a cumulative process where results from many studies, aiming to address the common question of interest, contribute to create and update the scientific evidence. In the cumulative paradigm, meta-analysis is the statistical methodology to combine and compare the current evidence in the field. This process lies at the heart of the concept of evidence-based medicine and plays a major role in informing policy and practice.
+A single experiment can hardly provide a definitive answer to a scientific question. Science is oftentimes referred to as a cumulative process where results from many studies, aiming to address the common question of interest, contribute to create and update the scientific evidence. In the cumulative paradigm, meta-analysis is the statistical methodology to combine and compare the current evidence in the field. This process lies at the heart of the concept of evidence-based medicine and plays a major role in policy and decision making.
 
 Epidemiological studies often assess whether the occurrence of a health outcome (e.g. mortality, incidence of a disease) varies according to a quantitative exposure (e.g. amount of physical activity, alcohol intake). 
-The quantitative exposure is frequently divided in intervals and the results are expressed in a tabular format as relative risks for different exposure groups. A high versus low meta-analysis contrasts the relative risks for the highest exposure category compared to the lower one. This approach, however, discards the results for intermediate categories and thus provides only a limited picture. The information of the quantitative exposure is also lost and the estimates being compared may be associated to different exposure values.
+The quantitative exposure is frequently divided in intervals and the results are expressed in a tabular format as relative risks for different exposure groups. A high-versus-low meta-analysis contrasts the outcome risk in the highest exposure category relative to the lowest. This common approach, however, discards the results for intermediate categories and thus provides only a partial picture. The rich information of the quantitative exposure is lost and the contrasts may be related to different exposure intervals.
 
-A dose--response meta-analysis, instead, has the potential to be more informative and powerful since it uses the whole available information to estimate the dose--response association. Because the estimates are computed using a common reference group, it is not possible to regress the relative risks on the assigned dose using ordinary least squares. \cite{greenland1992methods} described in their seminal paper how to reconstruct the correlation within set of relative risks and incorporate it in the dose--response analysis using generalized least squares regression. Since then, the number of published dose--response meta-analyses has rapidly increased in many fields of application including oncology, public health, environmental sciences, nutrition, endocrinology, and internal medicine. 
-Additional papers refined selected aspects of the proposed methodology, mainly focusing on the implementation of flexible strategies in modeling non-linear associations and incorporating the advances of multivariate meta-analysis. However, there were still several relevant questions that needed to be addressed including how to assess the goodness-of-fit (\citetalias{discacciati2015goodness}), how to quantify the impact of heterogeneity (\citetalias{crippa2016new}), how to deal with differences in the exposure range across studies (\citetalias{crippa2018pointwise}), and how to estimate complex models without excluding relevant studies (\citetalias{crippa2018one}).
+A dose--response meta-analysis, instead, has the potential to be more informative and powerful since it uses the whole available information to estimate the dose--response association. Because the estimates are computed using a common reference group, it might not be appropriate to regress the relative risks on the assigned dose using ordinary least squares. \cite{greenland1992methods} described in their seminal paper how to reconstruct the correlation within set of relative risks and incorporate it in the dose--response analysis using generalized least squares regression. Since then, the number of published dose--response meta-analyses has rapidly increased in many fields of application including oncology, public health, environmental sciences, nutrition, endocrinology, and internal medicine. 
+Additional papers refined selected aspects of the proposed methodology, mainly focusing on the implementation of flexible strategies in modeling non-linear associations and incorporating the advancements of multivariate meta-analysis. However, there were still several relevant questions that needed to be addressed including how to assess the goodness-of-fit, how to quantify the impact of heterogeneity, how to deal with differences in the exposure range across studies, and how to estimate complex models without excluding relevant studies.
 
-This thesis aims to address these issues by developing and implementing new strategies and ad-hoc measures (\citetalias{crippa2016dosresmeta}). The proposed methodologies are demonstrated reanalyzing published meta-analyses and are implemented in user friendly packages written in the free and open source $\R$ language, in order to bridge the gap between theory and application.
+This thesis aims to address these issues by developing and implementing new strategies and ad-hoc measures. The proposed methodologies are demonstrated reanalyzing published meta-analyses and are implemented in user friendly packages written in the free and open source $\R$ language, in order to bridge the gap between theory and application.
 
 % !TeX root = ../kappa.Rnw  
 
@@ -524,8 +554,7 @@ Relevant research questions are typically addressed by independent investigators
 
 Meta-analysis, or more generally quantitative review synthesis, is the statistical methodology for integrating and synthetizing the information arising from multiple studies \citep{borenstein2009references}. Using appropriate statistical models, quantitative reviews contrast and pool results in the hope of identifying similarities or explain differences across study findings. Meta-analysis represents the state of the art for systematically reviewing the evidence, as indicated by the increasing number of published meta-analyses over the last 40 years (Figure~\ref{fig:num_meta-analysis}).
 
-The classical approach for meta-analysis consists of a weighted average of the study-specific results or estimates. A fixed-effect model for meta-analysis assumes that all the studies estimate a single common parameter \citep{rice2017re}. The hypothesis of homogeneity of the estimates is rarely applicable in biomedical and social sciences where studies typically differ in terms of design, disease classification, exposure measurement, and implemented statistical analyses \citep{colditz1995heterogeneity}. In such cases, heterogeneity across estimates is expected and should be considered in the analysis \citep{higgins2008commentary}. If the parameters estimated in the studies are not identical but related, a random-effects models can be used to identify those similarities or to explain the observed heterogeneity \citep{higgins2009re}.
-
+The classical approach for meta-analysis consists of an inverse variance weighted average of the study-specific results or estimates. A fixed-effect model for meta-analysis assumes that all the studies estimate a single common parameter \citep{rice2017re}. The hypothesis of homogeneity of the estimates is rarely applicable in biomedical and social sciences where studies typically differ in terms of design, disease classification, exposure measurement, and implemented statistical analyses \citep{colditz1995heterogeneity}. In such cases, heterogeneity across estimates is expected and should be considered in the analysis \citep{higgins2008commentary}. If the parameters estimated in the studies are not identical but related, a random-effects models can be used to identify those similarities or to explain the observed heterogeneity \citep{higgins2009re}.
 
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[ht!]
@@ -540,7 +569,6 @@ The classical approach for meta-analysis consists of a weighted average of the s
 
 \end{knitrout}
 
-
 \subsection{Random-effects meta-analysis}
 \label{sec:rma}
 
@@ -551,11 +579,13 @@ A random-effects model for meta-analysis can be written as
 \label{eq:rma}
 \end{equation}
 
-\noindent where $\beta$ is the underlying mean effect, oftentimes the main parameter of interest. The random-effects $b_i$ represent the study-specific deviations from the mean effect $\beta$. Each study is thus allowed to estimate a similar parameter $\beta_i$ defined as $\beta + b_i$. The random effects follow a generic $f$ distribution with mean 0 and variance equal to $\tau^2$, the between-studies heterogeneity. 
+\noindent where $\beta$ is the underlying mean effect, oftentimes the main parameter of interest. 
+%The random-effects $b_i$ represent the study-specific deviations from the mean effect $\beta$. Each study is thus allowed to estimate a similar parameter $\beta_i$ defined as $\beta + b_i$. The random effects follow a generic $f$ distribution with mean 0 and variance equal to $\tau^2$, the between-studies heterogeneity. 
+The random-effects $b_i$ represent the study-specific deviations from the mean effect $\beta$ and is assumed to follow a generic distribution $f$ with mean 0 and variance equal to $\tau^2$, the between-studies heterogeneity. 
 The within-study error components $\varepsilon_i$ have also mean 0 and variance equal to $\hat v_i$, an estimate of the sampling variance of $\hat \beta_i$.
 Because the sample size in the individual investigations is often large, the uncertainty around the estimates of the sampling variance is negligible. Therefore, $\hat v_i$ can be considered fixed and denoted as $v_i$. In addition, for the central limit theorem, $\varepsilon_i \sim  \mathcal{N}\left(0, v_i \right)$, or alternatively, $\hat \beta_i | b_i \sim \mathcal{N}\left(\beta+b_i, v_i \right)$.
 
-An inverse variance-weighted approach for meta-analysis estimates the mean effect $\beta$ as a weighted average of the $\hat \beta_i$ \citep{whitehead1991general, dersimonian1986meta}
+An inverse variance-weighted approach for meta-analysis estimates the mean effect $\beta$ as a weighted average of the study-specific effects $\hat \beta_i$ \citep{whitehead1991general, dersimonian1986meta}
 \begin{align}
 \hat \beta = \frac{\sum_{i = 1}^I \hat \beta_i \hat w_i}{\sum_{i = 1}^I \hat w_i} \label{eq:avgbeta} \\
 \widehat{\Var} \left(\hat \beta \right) = \left( \sum_{i = 1}^I \hat w_i \right)^{-1}
@@ -570,59 +600,61 @@ A second parameter of interest, often overlooked, is the between-study heterogen
 
 Presence of heterogeneity is frequently defined as the excess in the variability of $\hat \beta_i$ above that expected alone by chance. A summary measure of the observed variability is represented by the $Q$~statistic
 \begin{equation}
-Q = \sum_{i=1}^I \left(\hat \beta_i - \hat \beta_{\text{fe}} \right)^2
+Q = \sum_{i=1}^I \left(\hat \beta_i - \hat \beta_{\text{fe}} \right)^2 v_i^{-1}
 \label{eq:Q}
 \end{equation}
-\noindent where $\hat \beta_{\text{fe}} = \sum_{i=1}^I \hat \beta_i v_i^{-2}/ \sum_{i=1}^I v_i^{-2}$ is the estimate of $\beta$ in a fixed-effect model. Based on this statistic, \cite{cochran1954combination} developed a test for assessing the hypothesis of homogeneity of the study-specific estimates. Under the null hypothesis of no heterogeneity ($H_0: \tau^2 = 0$) the $Q$~statistic follows a $\chi^2$ distribution with $I-1$ degrees of freedom (df). A $p$~value less than 0.10 is oftentimes used as evidence for presence of between-studies variability. It is known, however, that the test is sensible to the number of studies, failing to reject the null hypothesis even for high value of $\tau^2$ when $I$ is small, and contrary, is more likely to reject $H_0$ for negligible between-studies variation when $I$ is big \citep{higgins2002quantifying, takkouche1999evaluation}. Therefore, failing to reject the null hypothesis does not provide evidence supporting homogeneity in the effect sizes \citep{biggerstaff1997incorporating}. In addition, the dichotomization heterogeneous/homogeneous is not very informative, especially because heterogeneity is almost always present \citep{higgins2008commentary}. 
+\noindent where $\hat \beta_{\text{fe}} = \sum_{i=1}^I \hat \beta_i v_i^{-1}/ \sum_{i=1}^I v_i^{-1}$ is the estimate of $\beta$ in a fixed-effect model. Based on this statistic, \cite{cochran1954combination} developed a test for assessing the hypothesis of homogeneity of the study-specific estimates. Under the null hypothesis of no heterogeneity ($H_0: \tau^2 = 0$) the $Q$~statistic follows a $\chi^2$ distribution with $I-1$ degrees of freedom (df). A $p$~value less than 0.10 is often used as a cut point for testing presence of between-studies variability. It is known, however, that the test is sensible to the number of studies, failing to reject the null hypothesis even for high value of $\tau^2$ when $I$ is small, and on the contrary, rejecting $H_0$ for negligible between-studies variation when $I$ is big \citep{higgins2002quantifying, takkouche1999evaluation}. Therefore, failing to reject the null hypothesis does not provide evidence supporting homogeneity in the effect sizes \citep{biggerstaff1997incorporating}. In addition, the dichotomization heterogeneous/homogeneous is not very informative, especially because heterogeneity is almost always present \citep{higgins2008commentary}. 
 
-An estimate of $\tau^2$, instead, directly provides information about the amount of heterogeneity and is thus the more natural measure of between-studies variability. Based on the expectation of $Q$, \cite{dersimonian1986meta} proposed the following estimator for $\tau^2$ using the method of moments 
+An estimate of $\tau^2$, instead, directly provides information about the amount of heterogeneity and is thus the most natural measure of between-studies variability. Based on the expectation of $Q$, \cite{dersimonian1986meta} proposed the following estimator for $\tau^2$ using the method of moments 
 \begin{equation}
-\hat \tau^2_{\text{DL}} = \max \left\{0, \frac{Q - (I-1)}{\sum_{i=1}^I v_i^{-2} - \sum_{i=1}^I v_i^{-4}/\sum_{i=1}^I v_i^{-2} } \right\}
+\hat \tau^2_{\text{DL}} = \max \left\{0, \frac{Q - (I-1)}{\sum_{i=1}^I v_i^{-1} - \sum_{i=1}^I v_i^{-2}/\sum_{i=1}^I v_i^{-1} } \right\}
 \label{eq:tau2DL}
 \end{equation}
 
-\noindent The moment-based estimator is one of the most popular estimators of $\tau^2$ because it has a simple non-iterative formulation and does not require any distributional assumption for the random-effects rather than having a finite first order moment. Other common non-iterative alternatives include estimators based on the variance components \citep{hedges1983random} and on methods for estimating the error variance in weighted linear models \citep{sidik2005simple}. Iterative methods based on maximizing the likelihood or restricted likelihood can also be used by specifying a distributional form for the random-effects. The more conventional choice is typically a normal distribution $b_i \sim \mathcal{N}\left( 0, \tau^2 \right)$, which implies $\beta_i \sim \mathcal{N}\left(\beta, \tau^2 \right)$ and $\hat \beta_i \sim \mathcal{N}\left(\beta + b_i, \tau^2 + v_i \right)$.
+\noindent The moment-based estimator is one of the most popular estimators of $\tau^2$ because it has a simple non-iterative formulation and does not require any distributional assumption for the random-effects. This estimator only assumes a finite first order moment. Other common non-iterative alternatives include estimators based on the variance components \citep{hedges1983random} and on methods for estimating the error variance in weighted linear models \citep{sidik2005simple}. Iterative methods based on maximizing the likelihood or restricted likelihood can also be used by specifying a distributional form for the random-effects. The more conventional choice is typically a normal distribution $b_i \sim \mathcal{N}\left( 0, \tau^2 \right)$, which implies $\beta_i \sim \mathcal{N}\left(\beta, \tau^2 \right)$ and $\hat \beta_i \sim \mathcal{N}\left(\beta + b_i, \tau^2 + v_i \right)$.
 
 Although $\tau^2$ is the more natural and appropriate measure of between-study variability, the actual value is difficult to interpret because it depends on type of effect size (e.g. log relative risk, standardized mean difference) and has no upper limit. Therefore, both evaluation of the degree (or levels) and the comparison of heterogeneity in different meta-analyses can hardly be based on the estimate of $\tau^2$ alone.
 
 
 \subsection{Measures of heterogeneity}\label{sec:measures_het}
 
-To complement the test based approach and the information provided by $\hat \tau^2$, measures that quantify the impact of heterogeneity have been proposed \citep{higgins2002quantifying}. 
+To complement the test-based approach and the information provided by $\hat \tau^2$, measures that quantify the impact of heterogeneity have been proposed \citep{higgins2002quantifying}. 
 \cite{higgins2002quantifying} presented several possibilities in the simpler case where all the sampling variances $v_i$ are equal to a fixed and known value $\sigma^2$. 
 
-\noindent Two measures aim to estimate the ratio $\sigma^2/(\sigma^2 + \tau^2)$, namely the $H^2= Q/(I-1)$ that represents the excess in $Q$~statistic relative to its degrees of freedom, and $R^2 = \Var\left(\hat \beta\right)/\Var\left(\hat \beta_{\text{FE}}\right)$ which describes the inflation in the variability of the mean effect in a random-effects model compared with a fixed-effect analysis
-Other measures, instead, relate the between-studies heterogeneity, $\tau^2$, to the marginal or unconditional variability $\tau^2 + v_i$, which is defined by the sum of within- and between-study components. These measures can be more easily interpreted as the percentage of the total variability due to heterogeneity, similar to the Intraclass Correlation Coefficient (ICC) defined for random intercepts linear models. These measures directly involve the within-terms $v_i$ that generally varies across the studies. Indeed, the most popular measures, namely the $R_I$ \citep{takkouche1999evaluation} and the $I^2$ \citep{higgins2002quantifying}, replaced $v_i$ with a statistic in order to summarize the observed distribution.
+\noindent Two measures aim to estimate the ratio $\sigma^2/(\sigma^2 + \tau^2)$, namely the $H^2= Q/(I-1)$ that represents the excess in $Q$~statistic relative to its degrees of freedom, and $R^2 = \Var\left(\hat \beta\right)/\Var\left(\hat \beta_{\text{fe}}\right)$ which describes the inflation in the variability of the mean effect in a random-effects model compared with a fixed-effect analysis.
+Other measures, instead, relate the between-studies heterogeneity, $\tau^2$, to the marginal or unconditional variability $\tau^2 + v_i$, which is defined by the sum of within- and between-study components. These measures can be more easily interpreted as the percentage of the total variability due to heterogeneity, similar to the Intraclass Correlation Coefficient (ICC) defined for random intercept linear models. These measures directly involve the within-terms $v_i$ that generally varies across the studies. The most popular measures, namely the $R_I$ \citep{takkouche1999evaluation} and the $I^2$ \citep{higgins2002quantifying}, replaced $v_i$ with a statistic in order to summarize the observed distribution.
 
 \noindent \cite{takkouche1999evaluation} chose
 \begin{equation}
-s_1^2 = \frac{I}{\sum_{i=1}^I v_i^{-2}}
+s_1^2 = \frac{I}{\sum_{i=1}^I v_i^{-1}}
 \label{eq:Ri}
 \end{equation}
 \noindent that is the harmonic mean of the inverse of the sampling variances. 
 \cite{higgins2002quantifying}, instead, described the ``typical'' within-study variance as
 \begin{equation}
-s_2^2 = \frac{(I-1) \sum_{i=1}^I v_i^{-2}}{ \left( \sum_{i=1}^I v_i^{-2} \right)^2 - \sum_{i=1}^I v_i^{-4}}
+s_2^2 = \frac{(I-1) \sum_{i=1}^I v_i^{-1}}{ \left( \sum_{i=1}^I v_i^{-1} \right)^2 - \sum_{i=1}^I v_i^{-2}}
 \label{eq:I2}
 \end{equation}
 \noindent that provided a direct relationship with the $Q$~statistic when $\tau^2$ is estimated using the method of moments: $I^2 = (Q - (I-1))/Q$.
-\noindent Both statistics can be expressed as a percentage where 0\% corresponds to no heterogeneity and increasing values imply higher levels of heterogeneity. It is known that these measures depend on precision of the study-specific estimates and tend to increase to 100\% when the $v_i$ are much smaller than the estimated $\tau^2$. 
+\noindent Both statistics can be expressed as a percentage where 0\% corresponds to no heterogeneity and increasing values imply higher levels of heterogeneity. It is known that these measures depend on the precision of the study-specific estimates and tend to increase to 100\% when the $v_i$ are much smaller than the estimated $\tau^2$ \citep{takkouche1999evaluation, higgins2002quantifying}. 
 A complementary measure is the between-studies coefficient of variation, defined as $\tau^2/|\hat \beta|$, that does not directly depend on the within-study variances. However, it increases quickly as $\hat \beta$ becomes smaller, and is not defined for $\hat \beta = 0$.
 
 
 
 \section{Categorical models for dose--response analysis}
 
-Epidemiological studies often assess the strength and direction of the association between a protective or risk factors (generally referred to as exposures) and the occurrence of a health outcome. When the exposure of interest is measured on a continuous scale, the additional information on the shape of the relationship is mostly of interest. Including the continuous variable simply as covariate in the appropriate statistical model assumes that the outcome linearly depends on the covariate. Associations between variables, however, are rarely linear. If the real dose--response is in fact non-linear, estimating a linear trend will have important consequences in detecting an association \citep{harrell2015regression}. 
+Epidemiological studies often assess the strength and direction of the association between exposures and the occurrence of a health outcome. When the exposure of interest is measured on a continuous scale, the additional information on the shape of the relationship is mostly of interest. Investigating how the outcome risk varies throughout the exposure range can provide insights on the causal mechanism \citep{hill1965environment}. Different patterns can be identified such as an increased/decreased outcome risk for increasing values of the exposure or a threshold effect.
 
-\noindent One common approach for relaxing the linearity assumption is to divide the quantitative exposure in categories. This categorical approach has been frequently criticized because of severe limitations \citep{royston2006dichotomizing, greenland1995dose} including loss of information and thus power, assuming an unrealistic step function, and subjective choice in selecting cut-points. Instead, many articles presented and illustrated alternative solutions such as the use of fractional polynomials and regression splines for easily modelling non-linear relationships \citep{royston1999use, greenland1995avoiding}. 
+A common approach in epidemiology is to include the continuous variable as covariate in the appropriate statistical model. By doing so, the outcome risk is assumed to linearly depends on the covariate. A frequent alternative is to divide the quantitative exposure in categories.
+Possible advantages of such a categorical approach is that it relaxes the linearity assumption and facilitates the interpretation of the estimated regression coefficients. In addition, the results can be easily presented in a tabular format \citep{orsini2011procedure}.
 
-Nevertheless, a recent survey among top medical and epidemiological journals estimated that categorization occurred 86\% of the times \citep{turner2010categorisation}. One possible reason is that a categorical approach facilitates the interpretation of the estimated regression coefficients and simplifies the presentation of the results in a tabular format \citep{orsini2011procedure}. 
+\noindent A recent survey among top medical and epidemiological journals estimated that categorization occurred 86\% of the times while a linear trend was reported 56\% of the times \citep{turner2010categorisation}.
+
 
 
 \subsection{Aggregated dose--response data}
 
-In a categorical approach the quantitative exposure is divided in $J+1$ categories. The corresponding indicator or dummy variables index by $j = 1, \dots, J$ are included in the model in place of the exposure variable. The results from such a categorical dose--response analysis are expressed as relative measures using one category (corresponding to the omitted dummy variable) as referent. Depending on the study-design and on the statistical model, the results consist of estimated odds ratios, rate ratios, or risk ratios (generally referred to as relative risks (RRs)) for the different exposure categories, possibly adjusted for potential confounders. The corresponding 95\% confidence intervals (CI) $\widehat{\mathrm{RR}}_L, \widehat{\mathrm{RR}}_U$ provide information on the uncertainty related to the estimated regression coefficients. Additional information about the assigned dose (mean or median within exposure intervals), the number of cases and the total number of subjects or person-time usually complements the reported results. The general structure and notation for aggregated or summarized dose--response data are presented for a generic $i$-th study in Table~\ref{tab:aggr_data}. The $i$ pedix in $J_i$ highlights that independent studies may categorize the continuous exposure using different number of categories.
+In a categorical approach the quantitative exposure is divided in $J+1$ categories. The corresponding indicator or dummy variables index by $j = 1, \dots, J$ are included in the model in place of the exposure variable. The results from such a categorical dose--response analysis are expressed as relative measures of association using one category (corresponding to the omitted dummy variable) as referent. Depending on the study-design and on the statistical model, the results consist of estimated odds ratios, rate ratios, or risk ratios (generally referred to as relative risks (RRs)) for the different exposure categories, possibly adjusted for potential confounders. The corresponding 95\% confidence intervals (CI) $\widehat{\mathrm{RR}}_L, \widehat{\mathrm{RR}}_U$ provide information on the uncertainty related to the estimated regression coefficients. Additional information about the assigned dose (mean or median within exposure intervals), the number of cases and the total number of subjects or person-time usually complements the reported results. The general structure and notation for aggregated or summarized dose--response data are presented for a generic $i$-th study in Table~\ref{tab:aggr_data}. The subscript $i$ in $J_i$ highlights that independent studies may categorize the continuous exposure using different number of categories.
 
 \begin{table}
   \centering
@@ -647,37 +679,42 @@ In a categorical approach the quantitative exposure is divided in $J+1$ categori
 \end{threeparttable}
 \end{table}
 
-The statistical model relate the effect of the exposure categories on a transformation of the mean outcome. Typically, these transformations involve the natural logarithm such as the log odds, log risk, or log rate. The estimated regression coefficients are then exponentiated for ease of interpretation but the inference is actually performed on the modelling scale. Therefore, the effect sizes considered in a meta-analysis of multiple aggregated dose--response data consist of the estimated log $\widehat{\mathrm{RR}}$s and the corresponding standard errors that can be easily derived from the data available in Table~\ref{tab:aggr_data}
+%The statistical model relate the effect of the exposure categories on a transformation of the mean outcome. Typically, these transformations involve the natural logarithm such as the log odds, log risk, or log rate. The estimated regression coefficients are then exponentiated for ease of interpretation but the inference is actually performed on the modelling scale. 
+The effect sizes considered in a meta-analysis of multiple aggregated dose--response data consist of the estimated log $\widehat{\mathrm{RR}}$s and the corresponding standard errors that can be easily derived from the data available in Table~\ref{tab:aggr_data}
 \begin{equation}
 \widehat{\SE} \left( \log \widehat{\mathrm{RR}} \right) = \frac{\log \left(\widehat{\mathrm{RR}}_U \right) - \log \left(\widehat{\mathrm{RR}}_L \right)}{2\; z_{1- \alpha/2}}
 \label{eq:se_logrr}
 \end{equation} 
 \noindent where $z_{1- \alpha/2}$ is the $1- \alpha/2$ quantile of a standard normal distribution, usually approximated to 1.96 for the common $\alpha$ = 5\% level.
 
-A distinctive feature of aggregated dose--response data is the correlation among the (log) $\widehat{\mathrm{RR}}$s, which arises from the fact that they are estimated using a common reference group. Each $\widehat{\mathrm{RR}}$ has the same baseline risk as denominator that works as comparator. If the observed baseline risk happens to be high or low just by chance, the estimated $\widehat{\mathrm{RR}}$s will be also higher or lower than expected \citep{schmid1998empirical}. This adds complications in guessing a trend from a categorical dose--response analysis or in directly comparing results based on different baseline categories. 
+A distinctive feature of aggregated dose--response data is the correlation among the (log) $\widehat{\mathrm{RR}}$s, which arises from the fact that they are estimated using a common reference group. Each $\widehat{\mathrm{RR}}$ has the same baseline risk as denominator that works as comparator. If the observed baseline risk happens to be high or low just by chance, the estimated $\widehat{\mathrm{RR}}$s will be also higher or lower than expected \citep{schmid1998empirical}. This adds complexity in evaluating a trend from a categorical dose--response analysis or in directly comparing results based on different baseline categories. 
 
 \subsection{High vs. low, categorical, and meta-regression models}
 
-A common approach for synthetizing the information from multiple aggregated dose--response data is to limit the analysis on a small portion of the available results. In particular, a high- versus-low meta-analysis focuses on the results for the highest exposure categories \citep{yu2013empirical}. By selecting only the last raw of the aggregated dose--response data, the meta-analytic models discussed in section~\ref{sec:rma} are used for combining and contrasting the results, with $\hat \beta_i = \log \widehat{\mathrm{RR}}_{iJ_i}$. 
-A major limitation of a high- versus-low approach is that both the highest and the lowest category may be associate to a different exposure value. To limit the impact of heterogeneous category definitions, practitioners should carefully plan the analysis by selecting the $\widehat{\mathrm{RR}}$s for exposure categories whose definition is more consistent across studies. If also the choice of baseline category substantially differs, the $\widehat{\mathrm{RR}}$s can be re-expressed using an alternative reference category implementing dedicated methodologies \cite{hamling2008facilitating}.
+A common approach for synthetizing the information from multiple aggregated dose--response data is to limit the analysis to a subset of the available results. In particular, a high- versus-low meta-analysis focuses on the results for the extreme exposure categories \citep{yu2013empirical}. By selecting only the last row of the aggregated dose--response data, the meta-analytic models discussed in section~\ref{sec:rma} are used for combining and contrasting the results, with $\hat \beta_i = \log \widehat{\mathrm{RR}}_{iJ_i}$. 
 
-The major limitation, however, is that only a subset of the data is analyzed, while the remaining information about intermediate exposure categories is excluded from the analysis. As a consequence, much of the information about the shape of the dose--response is lost and the power of detecting an association may dramatically decrease (e.g. in case of a U-shape relationship). A possible remedy, although less common, is to conduct a categorical meta-analysis, which consists of separate univariate meta-analyses pooling the results from comparable exposure categories. A dose--response association is then deducted from observing the combined $\widehat{\mathrm{RR}}$s for increasing dose levels. A part from evident difficulties in identifying $\widehat{\mathrm{RR}}$s for homogeneous exposure intervals in applied works, this approach does not take into account the correlations across set of log $\widehat{\mathrm{RR}}$s and suffers from the same problem of guessing a trend from a categorical dose--response analysis. 
+The major limitation of a high- versus-low approach is that only a subset of the data is analyzed, while the remaining information about intermediate exposure categories is excluded from the analysis. As a consequence, much of the information about the shape of the dose--response is lost and the power of detecting an association may dramatically decrease. For example, in cases where only moderate exposure values have a lower or higher outcome risk, e.g. U-shaped associations, a high- versus-low approach would wrongly conclude that there is no relationship between the exposure and the health outcome.
 
-A possible alternative may be the use meta-regression models \cite{berkey1995random}, where the dummy variables for the exposure categories or transformation of the dose are included as covariates in model~\ref{eq:rma}. The rational would be to estimate a pooled RRs for different dose levels and to reduce the heterogeneity across study finding. Despite the quantitative exposure can be modelled using flexible tools, a meta-regression model treats the continuous predictor as a confounder. In addition, inference may be severely biased because the described approach fails to handle the hierarchical structure of the data, that is dose levels nested within studies.
+\noindent In addition, in a high- versus-low analysis the highest and the lowest category may be associated to a different exposure value in the studies included in the meta-analysis. To limit the impact of heterogeneous category definitions, practitioners should carefully plan the analysis by selecting the $\widehat{\mathrm{RR}}$s for exposure categories whose definition is more consistent across studies. If also the choice of baseline category substantially differs, the $\widehat{\mathrm{RR}}$s can be re-expressed using an alternative reference category implementing dedicated methodologies \cite{hamling2008facilitating}.
+
+An alternative remedy, although less common, is to conduct a categorical meta-analysis, which consists of separate univariate meta-analyses pooling the results from comparable exposure categories. A dose--response association is then deducted from observing the combined $\widehat{\mathrm{RR}}$s for increasing dose levels. Apart from evident difficulties in identifying $\widehat{\mathrm{RR}}$s for homogeneous exposure intervals in applied works, this approach does not take into account the correlations across set of log $\widehat{\mathrm{RR}}$s and suffers from the same problem of guessing a trend from a categorical dose--response analysis. 
+
+%A possible alternative may be the use meta-regression models \cite{berkey1995random}, where the dummy variables for the exposure categories or transformation of the dose are included as covariates in model~\ref{eq:rma}. The rational would be to estimate a pooled RRs for different dose levels and to reduce the heterogeneity across study finding. Despite the fact that the quantitative exposure can be modelled using flexible tools, a meta-regression model treats the continuous predictor as a confounder. In addition, inference may be severely biased because the described approach fails to handle the hierarchical structure of the data, that is dose levels nested within studies.
 
 
 
 \section{Dose--response meta-analysis}
 
-The aim of a dose--response meta-analysis is to reconstruct the shape of the association from multiple aggregated dose--response data. As compared to the previous strategies, it has the advantages of using the whole information available and being more informative. By describing the variation of the outcome over the entire exposure range, a dose--response meta-analysis allows to answer the following questions
+The aim of a dose--response meta-analysis is to make inference about the shape of the association from multiple aggregated dose--response data. As compared to the previous strategies, it has the advantages of using the whole information available and the potential of to be more informative. By describing the variation of the outcome over the entire exposure range, a dose--response meta-analysis allows to answer the following questions
 \begin{itemize}
-\item Is there any association between increasing dose levels and the outcome? If that’s the case, what is the shape of the relationship?
-\item Which exposure values are associated with the minimum or maximum outcome value?
-\item Is there any difference in the study-specific dose--response associations? Which factors can explain the observed heterogeneity?
+\item Is there any association between increasing dose levels and the outcome? If that's the case, what is the shape of the relationship?
+\item Which exposure values are associated with the minimum or maximum response?
+\item Is there any difference in the study-specific dose--response associations across studies? Which factors can explain the observed heterogeneity?
 \end{itemize}
 
-\noindent The methodology for dose--response meta-analysis was first presented by \cite{greenland1992methods} in their seminal paper, which quickly became a standard reference for applied works. Indeed, the number of published dose--response meta-analyses increased exponentially from 9 in 2000 to 172 in 2016 (Figure~\ref{fig:cite_grl}).
-The most popular fields of application include oncology, environmental and public health, nutrition epidemiology, and general internal medicine. Dose--response meta-analyses are published in many leading medical and epidemiological journals, including JAMA, Lancet, Stroke, Gastroenterology, American J of Medicine, American J of Clinical Nutrition, American J Epidemiology, International J Epidemiology, Journal National Cancer Institute, International J of Cancer, Statistics in Medicine and many others. The method is also used by the World Cancer Research Fund/American Institute for Cancer Research for reviewing the evidence on the relations between life-style factors (e.g. diet and physical activity) and cancer. Guidelines based on these quantitative reviews are central to promote the overall health and prevent many chronic diseases.
+\noindent The statistical problems for modelling sets of correlated relative risks in a dose--response analysis were first presented by \cite{greenland1992methods}. Their seminal paper is now a standard reference for applied works. The number of published dose--response meta-analyses increased exponentially from 9 in 2000 to 172 in 2016 (Figure~\ref{fig:cite_grl}).
+The most popular fesearch fields of application include oncology, environmental and public health, nutrition epidemiology, and general internal medicine. Dose--response meta-analyses are published in many leading medical and epidemiological journals, including \textit{JAMA}, \textit{Lancet}, \textit{Stroke}, \textit{Gastroenterology}, \textit{American J of Medicine}, \textit{American J of Clinical Nutrition}, \textit{American J Epidemiology}, \textit{International J Epidemiology}, \textit{Journal National Cancer Institute}, \textit{International J of Cancer}, \textit{Statistics in Medicine} and many others. 
+The method is also routinely used by international organizations such as the World Cancer Research Fund and American Institute for Cancer Research for reviewing the evidence on the relations between life-style factors (e.g. diet and physical activity) and cancer. Guidelines based on these quantitative reviews are central to promote the overall health and prevent many chronic diseases.
 
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[ht!]
@@ -699,15 +736,16 @@ The common approach for dose--response meta-analysis consists of a two-stage pro
 
 If we had access to the individual patient data, the dose--response model for a simple linear trend could be written as
 \begin{equation}
-\log \left( \lambda \left(x, \mathbf{z} \right) \right) =  \beta_0 + \beta_1x + \boldsymbol{\gamma}^\top \mathbf{z}
+\log \left( \lambda \left(x, \mathbf{z} \right) \right) =  \beta_0 + \beta_1x + \boldsymbol{\gamma}^\top \mathbf{c}
 \label{eq:lin_ipd}
 \end{equation}
-\noindent with $x$ is the quantitative exposure and $z$ the set of possible confounders. The outcome variable is the log of a transformation of the mean outcome (e.g. odds, risk, or rate). Transformations of the exposure variable can be included to relax the linearity assumption, such as a quadratic term
+\noindent where $x$ is the quantitative exposure and $c$ the set of possible confounders. The outcome variable is the log of a transformation of the mean outcome (e.g. odds, risk, or rate). Transformations of the exposure variable can be included to relax the linearity assumption, such as a quadratic term
 \begin{equation}
 \log \left( \lambda \left(x, \mathbf{z} \right) \right) =  \beta_0 + \beta_1x + \beta_2x^2 + \boldsymbol{\gamma}^\top \mathbf{z}
 \label{eq:quadr_ipd}
 \end{equation}
-\noindent However, we have rarely access to the individual patient data and our inference is limited to a summary of the initial data. In particular, aggregated data from a categorical analysis can be often retrieved from published articles. 
+
+\noindent This thesis focuses on methods for estimating a dose--response relationship from a summary of the initial individual patient data. In particular, aggregated data from a categorical analysis can be often retrieved from published articles. 
 \noindent The aim of the first stage of a dose--response meta-analysis is to estimate the $\beta$ coefficients in Equation~\ref{eq:lin_ipd} and \ref{eq:quadr_ipd} using aggregated dose--response data. We consider the notation presented in Table~\ref{tab:aggr_data} with $i = 1, \dots, I$ indexing the studies and $j = 1, \dots, J_i$ the non-referent dose levels of a generic $i$-th study. The corresponding two models can be written as
 \begin{equation}
 \log \left( \widehat{\mathrm{RR}}_{ij} \right) = \log \left( \hat \lambda \left(x = x_{ij} \right) \right) - \log \left( \hat \lambda \left(x = x_{i0} \right) \right) = \beta_1\left(x_{ij} - x_{i0} \right)
@@ -759,9 +797,9 @@ x_{iJ_i} - x_{i0} & x_{iJ_i}^2 - x_{i0}^2 \\
 \right] 
 \end{equation*}
 
-\noindent A feature of the models \ref{eq:drmodel} is the absence of the intercept term. The reference line in Table~\ref{tab:aggr_data} is not actually used for the estimation of the regression coefficients but introduces the constrain on the predicted log $\widehat{\mathrm{RR}}$, which needs to be 0 ($\widehat{\mathrm{RR}}$ = 1) for the reference dose value $x_{i0}$, as explicit in models~\ref{eq:lin_ad} and~\ref{eq:quadr_ad}.
+\noindent A distinctive feature of the models \ref{eq:drmodel} is the absence of the intercept term. The reference line in Table~\ref{tab:aggr_data} is not actually used for the estimation of the regression coefficients but introduces the constrain on the predicted log $\widehat{\mathrm{RR}}$, which needs to be 0 ($\widehat{\mathrm{RR}}$ = 1) for the reference dose value $x_{i0}$, as explicit in models~\ref{eq:lin_ad} and~\ref{eq:quadr_ad}.
 
-\subsubsection*{Approximation of the covariance between log $\widehat{\mathrm{RR}}$}\label{sec:cov}
+\subsubsection*{Approximation of the covariance between log relative risks}\label{sec:cov}
 
 \noindent A particular characteristic of summarized dose--response data is that the log $\widehat{\mathrm{RR}}$s are reported with different precision and are constructed using the same baseline group. Thus, the error terms $\boldsymbol{\varepsilon}_i$ in Equation~\ref{eq:drmodel} are heterogeneous and correlated, with a covariance matrix structured as
 \begin{equation}
@@ -798,11 +836,14 @@ Using this additional assumption, the log-likelihood of model~\ref{eq:drmodel} i
 \label{eq:drmodel_logLik}
 \end{equation}
 
-\noindent Interestingly, the maximum likelihood (ML) estimates that maximize the log-likelihood~\ref{eq:drmodel_logLik} coincides with the GLS estimates in~\ref{eq:gls} \citep{orsini2006generalized}. Introducing the normality distribution for the random errors facilitates the inference, i.e. test of hypothesis and confidence intervals, on the $\boldsymbol{\beta}_i$ coefficients. The estimates in~\ref{eq:gls} are a linear combination of normal distributions, $\mathbf{y}_i \sim \mathcal{N}\left(\mathbf{X}_i \boldsymbol{\beta}_i, \mathbf{S}_i \right)$, and therefore are also normally  distributed $\boldsymbol{\hat \beta}_i \sim \mathcal{N}\left( \boldsymbol{\beta}_i, {\Var} \left( \boldsymbol{\hat \beta}_i \right)\right)$.
+\noindent Interestingly, the maximum likelihood (ML) estimates that maximize the log-likelihood~\ref{eq:drmodel_logLik} coincides with the GLS estimates in~\ref{eq:gls}. Introducing the normality distribution for the random errors facilitates the inference, i.e. test of hypothesis and confidence intervals, on the $\boldsymbol{\beta}_i$ coefficients. The estimates in~\ref{eq:gls} are a linear combination of normal distributions, $\mathbf{y}_i \sim \mathcal{N}\left(\mathbf{X}_i \boldsymbol{\beta}_i, \mathbf{S}_i \right)$, and therefore are also normally  distributed $\boldsymbol{\hat \beta}_i \sim \mathcal{N}\left( \boldsymbol{\beta}_i, {\Var} \left( \boldsymbol{\hat \beta}_i \right)\right)$.
 
-The ML and GLS estimators give unbiased estimates of $\boldsymbol{\beta}_i$ regardless of the specification of $\mathbf{S}_i$ \citep{orsini2006generalized}. As a consequence, also a weighted least squares estimator (WLS) that assumes independence of the log $\widehat{\mathrm{RR}}$s will produce unbiased estimates. However, taking into account the correlation will improve the statistical properties of the estimator, in particular the efficiency. 
-We investigated the differences between the GLS and WLS estimators using a simulation study of 5000 aggregated dose--response data where the true trends were linear ($\beta_\text{TRUE} =$ -0.014). As expected, both the estimators were unbiased and consistent but the empirical distribution of the GLS estimator was more concentrated around the true $\beta$ value \ref{fig:cov_methods_lin}. The WLS estimates of the standard errors of the $\hat \beta_i$ were lower than the corresponding GLS values. This had a direct effect on the inference for the estimated linear trend. For instance, it may be interesting to fit a quadratic curve as in~\ref{eq:quadr_ad} and test the hypothesis $H_0: \beta_2 = 0$, i.e. departure from a linear trend. Using inference based on WLS estimators the null hypothesis were wrongly rejected 3.96\% of the time, lower than the nominal level $\alpha = 5$\%. The corresponding number for the GLS estimator was instead closer (4.8\%). 
-\noindent We also implemented simulations assuming a quadratic curve with the true coefficients $\boldsymbol{\beta}_\text{TRUE}$ = (-0.092, 0.003). Similar results for the empirical bivariate distribution of $ \boldsymbol{\hat \beta}_i$ and their standard errors are presented in Figure~\ref{fig:cov_methods_quadr}.
+
+
+The ML and GLS estimators give unbiased estimates of $\boldsymbol{\beta}_i$ regardless of the specification of $\mathbf{S}_i$ \citep{orsini2006generalized}. As a consequence, also a weighted least squares estimator (WLS) that assumes independence of the log $\widehat{\mathrm{RR}}$s will produce unbiased estimates. However, taking into account the correlation will improve the efficiency of the estimator. 
+We investigated the differences between the GLS and WLS estimators using a simulation study of 5000 aggregated dose--response data where the true trends were linear ($\beta_\text{TRUE} =$ -0.014). As expected, both the estimators were unbiased but the empirical distribution of the GLS estimator was more concentrated around the true $\beta$ value \ref{fig:cov_methods_lin}. The empirical distributions of the estimated standard errors were shifted, with the mean standard error for the WLS estimates being 10\% lower than the corresponding GLS value. This had a direct effect on the inference for the estimated linear trend. For instance, it may be interesting to fit a quadratic curve as in~\ref{eq:quadr_ad} and test the hypothesis $H_0: \beta_2 = 0$, i.e. departure from a linear trend. Using inference based on WLS estimators the null hypothesis were wrongly rejected 3.96\% of the time, lower than the nominal level $\alpha = 5$\%. The corresponding number for the GLS estimator was instead closer to the right rejection rate (4.8\%). 
+
+\noindent We also implemented simulations assuming a quadratic curve with the true coefficients $\boldsymbol{\beta}_\text{TRUE}$ = (-0.092, 0.003). The empirical bivariate distributions of $ \boldsymbol{\hat \beta}_i$ were centered around the true parameter, with levels curve more concentrated for the GLS estimates (Figure~\ref{fig:cov_methods_quadr}). Similarly to the linear trend simulations, the distributions of the estimates of the standard errors for the two estimators where shifted, with the mean of $\widehat{\SE} \left( \hat \beta_1 \right)$ and $\widehat{\SE} \left( \hat \beta_2 \right)$ being 7 \% lower and 6\% higher, respectively, when comparing WLS to GLS estimates.
 
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[ht!]
@@ -811,7 +852,7 @@ We investigated the differences between the GLS and WLS estimators using a simul
 
 }
 
-\caption[Empirical distribution of the $\hat \beta$ (panel A) and $\widehat{\Var} \left( \hat \beta_i \right)$ (panel B) for a linear trend assuming independence of the log $\widehat{\mathrm{RR}}$  and reconstructing the covariances using the Greenland and Longnecker’s method]{Empirical distribution of the $\hat \beta$ (panel A) and $\widehat{\Var} \left( \hat \beta_i \right)$ (panel B) for a linear trend assuming independence of the log $\widehat{\mathrm{RR}}$  and reconstructing the covariances using the Greenland and Longnecker’s method. Results are based on simulations with 5000 replications and a true linear trend $\beta = $-0.014.}\label{fig:cov_methods_lin}
+\caption[Empirical distribution of the $\hat \beta$ (panel A) and $\widehat{\SE} \left( \hat \beta_i \right)$ (panel B) for a linear trend assuming independence of the log $\widehat{\mathrm{RR}}$  and reconstructing the covariances using the Greenland and Longnecker’s method]{Empirical distribution of the $\hat \beta$ (panel A) and $\widehat{\SE} \left( \hat \beta_i \right)$ (panel B) for a linear trend assuming independence of the log $\widehat{\mathrm{RR}}$  and reconstructing the covariances using the Greenland and Longnecker’s method. Results are based on simulations with 5000 replications and a true linear trend $\beta = $-0.014.}\label{fig:cov_methods_lin}
 \end{figure}
 
 
@@ -844,7 +885,7 @@ A multivariate random-effects model has a similar formulation as in the univaria
 \boldsymbol{\hat \beta}_i = \boldsymbol{\beta} + \mathbf{b}_i + \boldsymbol{\varepsilon}_i
 \label{eq:rmma}
 \end{equation}
-\noindent The unobserved random effects $\mathbf{b}_i$ are now of dimension $p$, still representing study-specific deviation from the mean $\boldsymbol{\beta}$ parameter. As before, they have zero mean $\E\left[\mathbf{b}_i\right] = \mathbf{0}$ and $\Var\left[\mathbf{b}_i\right] = \boldsymbol{\Psi}$, the $p \times p$ between-study variance matrix. Specification of a parametric distribution for the random-effects may facilitate the inference (especially confidence intervals) and improve the prediction of marginal and conditional dose--response associations. Typically a multivariate normal distribution is adopted $\mathbf{b}_i \sim \mathcal{N}\left(\mathbf{0}, \boldsymbol{\Psi} \right)$. Hence, we can write the marginal model of~\ref{eq:rmma} as
+\noindent The unobserved random effects $\mathbf{b}_i$ are now of dimension $p$, still representing study-specific deviation from the mean $\boldsymbol{\beta}$ parameter. As before, they have zero mean $\E\left[\mathbf{b}_i\right] = \mathbf{0}$ and $\Var\left[\mathbf{b}_i\right] = \boldsymbol{\Psi}$, the $p \times p$ between-study variance matrix. Specification of a parametric distribution for the random-effects may facilitate the inference (especially confidence intervals) and improve the prediction of marginal and conditional dose--response associations. Typically a multivariate normal distribution is assumed $\mathbf{b}_i \sim \mathcal{N}\left(\mathbf{0}, \boldsymbol{\Psi} \right)$. Hence, we can write the marginal model of~\ref{eq:rmma} as
 \begin{equation}
 \boldsymbol{\hat \beta}_i \sim \mathcal{N}\left(\boldsymbol{\beta}, \boldsymbol{\Sigma}_i \right)
 \label{eq:rmma2}
@@ -910,40 +951,40 @@ There are two main domains of interest for making inference that relate either t
 %In case of $p > 1$ multivariate Walt-type test are needed.
 Alternatively, a subset or linear combinations of the elements in $\boldsymbol \beta$ may be of interest. For example, in a quadratic trend the non-linearity is introduced by the quadratic term $x^2$. Thus, testing $H_0: \beta_2 = 0$ is a possible way for evaluating departure from a linear dose--response relationship.
 
-As previously presented in section~\ref{sec:het_rma}, the coefficients defining $\boldsymbol{\Psi}$ are not nuisance parameters rather than useful for quantifying the variation of the study-specific associations $\boldsymbol{\beta}_i$. Similar measures for testing and quantifying the impact of heterogeneity have been extended to the multivariate setting \citep{berkey1996multiple}. In particular, the $Q$~statistic
+As previously presented in section~\ref{sec:het_rma}, the coefficients defining $\boldsymbol{\Psi}$ are not nuisance parameters rather they are useful for quantifying the variation of the study-specific associations $\boldsymbol{\beta}_i$. Similar measures for testing and quantifying the impact of heterogeneity have been extended to the multivariate setting \citep{berkey1996multiple}. In particular, the $Q$~statistic
 \begin{equation}
 Q = \sum_{i=1}^I \left(\boldsymbol{\hat \beta}_i - \widetilde{\mathbf{X}}_i\boldsymbol{\hat \beta}_{\text{fe}}\right) ^\top \widehat{\Var} \left( \boldsymbol{\hat \beta}_i \right)^{-1} \left(\boldsymbol{\hat \beta}_i - \widetilde{\mathbf{X}}_i\boldsymbol{\hat \beta}_{\text{fe}}\right)
 \label{eq:Qmulti}
 \end{equation}
 \noindent with $\boldsymbol{\hat \beta}_{\text{fe}}$ estimated under a fixed-effect model is used to test $H_0: \boldsymbol{\Psi} = \boldsymbol{0}$. Under the null hypothesis, the $Q$~statistic follow a $\chi^2$ with $Ip - pm$ degrees of freedom. When $p = 1$ the formulations~\ref{eq:Q} and~\ref{eq:Qmulti} coincide. The multivariate extension of the $I^2$ was derived relating the $Q$~statistics to its degrees of freedom $I^2 = \max \left\{0, \frac{Q- (Ip - pm)}{Ip - pm}\right\}$ \citep{jackson2012quantifying}.
 
-The fit of alternative non-nested meta-analytical models can be compared using information criteria indeces such the Akaike information criterion (AIC), which is defined as $\textrm{AIC} = -2 \ell\left(\boldsymbol{\beta}, \boldsymbol{\xi} \right) + 2k$, a descriptive measure depending on the maximum log-likelihood and $k$, the number of estimated parameters. It is worth to note that the AIC can be used for comparing the fit of different analyses such as alternative meta-regression models. However, there is no reason to employ these indeces, derived from the meta-analytic models, for comparing different dose--response models, such as linear vs non-linear. 
+The fit of alternative non-nested meta-analytical models can be compared using information criteria indeces such the Akaike information criterion (AIC), which is defined as $\textrm{AIC} = -2 \ell\left(\boldsymbol{\beta}, \boldsymbol{\xi} \right) + 2k$, a descriptive measure depending on the maximum log-likelihood and $k$, the number of estimated parameters. It is  worth to note that the AIC can be used for comparing the fit of different analyses such as alternative meta-regression models. However, it is not clear if these indeces can be used for comparing different dose--response models, such as linear vs non-linear. 
 
 
 \subsubsection*{Prediction}\label{sec:pred}
 
-Oftentimes the estimated mean coefficients $\boldsymbol{\hat \beta}$ are not directly interpretable (an exception is the estimate for a linear trend). The dose--response results are thus communicated as predicted (log) relative risk for selected exposure levels using one value as referent. Obtaining predictions either in a graphical or tabular presentation is thus an important step of the analysis and yet often poorly implemented.
-Based on the model~\ref{eq:rmma}, the predicted $\log RR$ for a dose level $x_v$ using $x_\mathrm{ref}$ as referent can be calculated as
+Interpretation of a single regression coefficient of $\boldsymbol{\hat \beta}$ may be difficult. The dose--response findings are best communicated in a graphical form as predicted (log) relative risk for selected exposure levels using one value as referent. Obtaining predictions and presenting them either in a graphical or tabular form is an important step following the estimation of the model.
+Based on the model~\ref{eq:rmma}, the predicted $\log RR$ for a dose level $x_v$ relative to the level $x_\mathrm{ref}$ can be calculated as
 \begin{align}
-\log \widehat{RR}(x = x_v) = \mathbf{X}_v\boldsymbol{\hat \beta} \label{eq:pred} \\
-\Var \left(\log \widehat{RR}(x = x_v) \right) = \mathbf{X}_v \widehat{\Var} \left( \boldsymbol{\hat \beta} \right) \mathbf{X}_v^\top \label{eq:varpred}
+\log \widehat{RR}(x_v \text{ vs } x_\mathrm{ref}) = \mathbf{X}_v\boldsymbol{\hat \beta} \label{eq:pred} \\
+\Var \left(\log \widehat{RR}(x_v \text{ vs } x_\mathrm{ref}) \right) = \mathbf{X}_v \widehat{\Var} \left( \boldsymbol{\hat \beta} \right) \mathbf{X}_v^\top \label{eq:varpred}
 \end{align}
 \noindent where $\mathbf{X}_v$ is the design matrix evaluated in $x_v$, as defined in the first-stage analysis (Equation~\ref{eq:des.matrix}). For example, the predicted $\log RR$ for the quadratic model~\ref{eq:quadr_ad} comparing $x_v$ versus $x_\mathrm{ref}$ is
 \begin{equation*}
-\log \widehat{RR}(x = x_v) = \hat \beta_1 \left(x_v - x_\mathrm{ref} \right) + \hat \beta_2 \left(x_v^2 - x_\mathrm{ref}^2 \right)
+\log \widehat{RR}(x_v \text{ vs } x_\mathrm{ref}) = \hat \beta_1 \left(x_v - x_\mathrm{ref} \right) + \hat \beta_2 \left(x_v^2 - x_\mathrm{ref}^2 \right)
 \end{equation*}
 Of note, the referent dose $x_\mathrm{ref}$ is an arbitrary value and thus does not need to correspond to any of the study-specific reference values $x_{i0}$.
 
 \noindent A confidence interval for the predicted $\log \widehat{RR}(x = x_v)$ is based on the normal distribution of $\boldsymbol{\hat \beta}$
 \begin{equation*}
-\log \widehat{RR}(x = x_v) \mp z_{1- \alpha/2} \Var \left(\log \widehat{RR}(x = x_v) \right)^{\frac{1}{2}}
+\log \widehat{RR}(x_v \text{ vs } x_\mathrm{ref}) \mp z_{1- \alpha/2} \Var \left(\log \widehat{RR}(x_v \text{ vs } x_\mathrm{ref}) \right)^{\frac{1}{2}}
 \label{eq:pred_ci}
 \end{equation*}
 
 \noindent Formulas~\ref{eq:pred} and~\ref{eq:varpred} can be extended to meta-regression models. The predicted $\log RR$ conditional on a specific study-level covariate pattern $\mathbf{u} = \mathbf{u}_v$ is
 \begin{align}
-\log \widehat{RR}\left(x = x_v, \mathbf{u} = \mathbf{z}_v  \right)= \mathbf{X}_v \left(\mathbf{I}_{(p)} \otimes \mathbf{U}_v^\top \right) \boldsymbol{\hat \beta}  \label{eq:pred_mr} \\
-\Var \left(\log \widehat{RR}\left(x = x_v, \mathbf{z}= \mathbf{z}_v \right) \right) = \left( \mathbf{X}_v \mathbf{U}_v\right) \widehat{\Var} \left( \boldsymbol{\hat \beta} \right) \left( \mathbf{X}_v \mathbf{U}_v\right)^\top \label{eq:varpred_mr}
+\log \widehat{RR}\left(x_v \text{ vs } x_\mathrm{ref}, \mathbf{u} = \mathbf{u}_v  \right)= \mathbf{X}_v \left(\mathbf{I}_{(p)} \otimes \mathbf{U}_v^\top \right) \boldsymbol{\hat \beta}  \label{eq:pred_mr} \\
+\Var \left(\log \widehat{RR}\left(x_v \text{ vs } x_\mathrm{ref}, \mathbf{u}= \mathbf{u}_v \right) \right) = \left( \mathbf{X}_v \mathbf{U}_v\right) \widehat{\Var} \left( \boldsymbol{\hat \beta} \right) \left( \mathbf{X}_v \mathbf{U}_v\right)^\top \label{eq:varpred_mr}
 \end{align}
 
 Inference on study-specific dose--response associations can be enhanced by exploiting the information from the multivariate distribution for the random-effects. The best linear unbiased prediction (BLUP) for the study-specific regression coefficients $\mathbf{b}_i$ are defined as
@@ -954,7 +995,7 @@ Inference on study-specific dose--response associations can be enhanced by explo
 \noindent Study-specific predicted log relative risks can be obtained as in Equations~\ref{eq:pred} and~\ref{eq:varpred} by replacing the mean parameter $\boldsymbol{\hat \beta}$ with the individual dose-response coefficients $\boldsymbol{\hat \beta} + \boldsymbol{\hat b}_i$ 
 
 
-\subsection{Methodological research}
+\subsection{History of previous methodological research}
 
 Dose--response meta-analysis has received attention not only in applied works but also in theoretical articles that covered different aspects of the methodology. 
 \noindent \cite{greenland1992methods} originally presented the two-stage approach for efficiently estimating a linear trend in a fixed-effect analysis. An alternative model for estimating curvilinear model, referred to as ``pool first'', was also presented. The technique consists of a one-stage approach where the aggregated data are considered altogether and a single model as in~\ref{eq:drmodel} is fitted. By first combining the data, more flexible curve parametrized by multiple parameters ($p \ge 2$) can be estimated. The study-specific dose--response analyses are limited by the minimum number of non-referent log RRs across the studies. For example, if the aggregated data for a study consists of only one non referent log RR, only a univariate model with $p = 1$ can be estimated. The authors refined the methodology by extending the two-stage approach to allow for heterogeneity limited to a linear trend analysis \citep{berlin1993meta}. 
@@ -995,55 +1036,26 @@ The major contribution for estimating non-linear curves in a random-effects anal
 
 \cite{berlin1993meta} presented alternatives for assigning the dose levels within exposure categories and illustrated the use of meta-regression models for investigating the possible effect of study-level characteristics on the estimated linear trends. \cite{shi2004meta} further discussed the issue of dose assignment in grouped measures allowing for arbitrary dose levels. In addition, they investigated the effect of heterogeneity and publication bias by means of sensitivity analyses. A similar problem of dose assignment was addressed by using a likelihood approach limited to a linear trend analysis \citep{takahashi2010assignment}. This idea has been further extended to the case of restricted cubic splines \citep{takahashi2013cubic}.
 
-\subsection{Research questions}
+\subsection{Description of current practice}
 
-There were still many open research questions that need to be addressed to improve the synthesis of aggregated dose--response data. It was useful to observe the current practice in applied works in order to identify the more relevant questions. We searched the PubMed database for articles published between January 1, 2013 and April 1, 2013 using the research query (``meta-analysis'' [Title] and ``dose-response'' [Title]) and, after excluding irrelevant articles, found 42 applied dose--response meta-analyses. The authors of the select articles conducted a linear trend analysis most of the times (25 times, 60\%) while only 17 articles considered non-linear associations by means of restricted cubic splines (15) and fractional polynomials (2). The papers modelling non-linear curves reported a graphical presentation of the pooled dose--response association.
+There were still many open research questions that need to be addressed to improve the synthesis of aggregated dose--response data. It was useful to observe the current practice in applied works in order to identify the more relevant questions. We searched the PubMed database for articles published between January 1, 2013 and April 1, 2013 using the research query (``meta-analysis'' [Title] and ``dose-response'' [Title]) and, after excluding irrelevant articles, we found a total of 42 applied dose--response meta-analyses. The authors of the select articles conducted a linear trend analysis most of the times (25 times, 60\%) while only 17 (40\%) articles considered non-linear associations by means of restricted cubic splines (15) and fractional polynomials (2). All the papers modelling non-linear curves reported a graphical presentation of the pooled dose--response association.
 
-\noindent Interestingly, none of the retrieved articles evaluated the goodness-of-fit of the selected dose--response model. The assessment of how the estimated curve fits the aggregated data should be a natural and important step in a dose--response analysis. In \citetalias{discacciati2015goodness} we will address this important issue by presenting relevant measures and graphical tools to help the assessment of goodness-of-fit.
+\noindent Interestingly, none of the retrieved articles evaluated the goodness-of-fit of the selected dose--response model. The assessment of how the estimated curve fits the aggregated data should be a natural and important step in a dose--response analysis. We address this important issue by presenting relevant measures and graphical tools to help the assessment of goodness-of-fit.
 
-\noindent The majority of the screened papers (39, 93\%) quantify the impact of heterogeneity by reporting results for the $Q$~test and the value of $I^2$. While the limitations of the $Q$~test approach are widely known, little emphasis is placed on the assumptions underneath the definition of the established measures of heterogeneity, i.e.  all the estimates being reported with the same precision, which is unlikely to be met in almost all the applications. A measure of the impact of heterogeneity that does not require such an assumption would be desirable. In \citetalias{crippa2016new} we overcome this limitation by proposing an alternative measure of heterogeneity and comparing the performance of the new and available measures.
+\noindent The majority of the screened papers (39, 93\%) quantify the impact of heterogeneity by reporting results for the $Q$~test and the value of $I^2$. While the limitations of the $Q$~test approach are widely known, little emphasis is placed on the assumptions underneath the definition of the established measures of heterogeneity, i.e.  all the estimates being reported with the same precision, which is unlikely to be met in almost all the applications. A measure of the impact of heterogeneity that does not require such an assumption would be desirable. We overcome this limitation by proposing an alternative measure of heterogeneity and comparing the performance of the new and available measures.
 
-\noindent None of the surveyed meta-analyses discussed the sensitivity of the overall dose--response relationship to differences in study-specific exposure distribution. This analysis can be very relevant in case of studies reporting results for heterogeneous exposure range. Application of a point-wise average approach originally presented by \cite{sauerbrei2011new} in the context of individual patient data may represent an interesting alternative to the averaging of regression coefficients. In \citetalias{crippa2018pointwise} we will evaluate the advantages of this strategy based on aggregated dose--response data.
+\noindent None of the surveyed meta-analyses discussed the sensitivity of the overall dose--response relationship to differences in study-specific exposure distribution. This analysis can be relevant in case of studies reporting results for heterogeneous exposure range. Application of a point-wise average approach originally presented by \cite{sauerbrei2011new} in the context of individual patient data may represent an interesting alternative to the averaging of regression coefficients. 
 
-\noindent In all the meta-analyses assessing departure from of linearity, the authors excluded those studies reporting less than two non-referent RRs. Indeed, a two-stage dose--response meta-analysis requires that all the models in the dose--response analysis are identifiable ($p \le \min\left(J_i\right)$). A one-stage approach would avoid that requirement. Such an approach is conceptually easier to understand, and more elegant from a statistical point of view. In addition, it allows investigation of much more flexible dose--response curves, that are not possible within the context of a traditional two-stage analysis. Aim of \citetalias{crippa2018one} is to describe implementation and advantages of a one-stage random-effects dose--response meta-analysis of aggregated data.
-
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[ht!]
-
-{\centering \includegraphics[width=\textwidth]{../figure/dosresmeta_ts-1} 
-
-}
-
-\caption[Monthly number of downloads of the dosresmeta R package from the RStudio CRAN mirror September 2013 - December 2017]{Monthly number of downloads of the dosresmeta R package from the RStudio CRAN mirror September 2013 - December 2017.}\label{fig:dosresmeta_ts}
-\end{figure}
-
-
-\end{knitrout}
-
-
+\noindent In all the meta-analyses assessing departure from of linearity, the authors excluded those studies reporting less than two non-referent RRs. Indeed, a two-stage dose--response meta-analysis requires that all the models in the dose--response analysis are identifiable ($p \le \min\left(J_i\right)$). A one-stage approach would avoid that requirement. Such an approach is conceptually easier to understand, and more elegant from a statistical point of view. In addition, it allows investigation of much more flexible dose--response curves, that are not possible within the context of a traditional two-stage analysis.
 
 \section{Software}
 
 Dissemination of new statistical methodologies is certainly facilitated by the development and implementation of statistical software components. Many theoretical papers have not been considered in applied works because of lack of user-friendly software. 
 
-\noindent \cite{orsini2006generalized} described the \texttt{glst} command in Stata, the first publicly available procedure dedicated for dose--response meta-analysis. The command implements both the one- and two-stage approaches limited, in case of a random-effects analysis, to a linear trend. A two-stage random-effects meta-analysis of non-linear relationships can be performed with the aid of the \texttt{mvmeta} command for multivariate meta-analysis \citep{white2011multivariate}. Several worked examples and codes are available at \url{http://www.imm.ki.se/biostatistics/glst/}. Later on, \cite{li2010sas} wrote the macro \texttt{\%metadose}, a similar procedure for SAS users.
- 
-The majority of the applied meta-analyses retrieved in our survey were performed using the \texttt{glst} procedure in Stata (36, 87\%), while 2 used the \texttt{metadose} macro in SAS, 2 functions in RevMan. No dedicated package was available in the free software programming language \textsf{R}. Therefore, in 2013, we released the first version of the \pkg{dosresmeta} package on CRAN (\url{https://CRAN.R-project.org/package=dosresmeta}), a package specifically designed for dose--response meta-analysis in \textsf{R}, with specific functions that greatly facilitates the application in practical works. 
+\noindent \cite{orsini2006generalized} described the \texttt{glst} command in Stata, the first publicly available procedure dedicated for dose--response meta-analysis. The command implements both the one- and two-stage approaches limited, in case of a random-effects analysis, to a linear trend. A two-stage random-effects meta-analysis of non-linear relationships can be performed with the aid of the \texttt{mvmeta} command for multivariate meta-analysis \citep{white2011multivariate}. Several worked examples and codes are available at \url{http://www.imm.ki.se/biostatistics/glst/}. Later on, \cite{li2010sas} wrote \texttt{\%metadose}, a two-steps macro for dose-response meta-analysis, where estimation of non-linear relationships is restricted to a fixed-effect analysis.
 
-The \pkg{dosresmeta} package is now available in the updated version 2.0.1 and new features are being implemented in the version under development on GitHub (\url{https://github.com/alecri/dosresmeta}). Currently, the \pkg{dosresmeta} package is downloaded and used worldwide, with a median number of 260 downloads/month (Figure~\ref{fig:dosresmeta_ts}). The countries where it has been downloaded most are Great Britain (4005), United States (3905), and China (1605) (Figure~\ref{fig:dosresmeta_map}). Working examples, codes, and data are available at \url{http://alecri.github.io/software} for fully reproduce figures and numbers presented in both applied and theoretical papers.
+The majority of the applied meta-analyses retrieved in our survey were performed using the \texttt{glst} procedure in Stata (36, 87\%), while 2 used the \texttt{metadose} macro in SAS, 2 studies used functions in RevMan. No dedicated package was available in the free software programming language \textsf{R}. 
 
-\begin{knitrout}\footnotesize
-\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[ht!]
-
-{\centering \includegraphics[width=\textwidth]{../figure/dosresmeta_map-1} 
-
-}
-
-\caption[Total number of downloads of the doseresmeta R package worldwide from the RStudio CRAN mirror September 2013 - December 2017]{Total number of downloads of the doseresmeta R package worldwide from the RStudio CRAN mirror September 2013 - December 2017.}\label{fig:dosresmeta_map}
-\end{figure}
-
-
-\end{knitrout}
 
 % !TeX root = ../kappa.Rnw  
 
@@ -1066,15 +1078,15 @@ The overall aims of this thesis were to develop and implement new methods for do
 More specifically, the aims were:
 
 \begin{itemize}
-\item To describe the implementation of the main aspects of a dose--response meta-analysis and the usage of the \pkg{dosresmeta} \textsf{R} package.
+\item To develop, maintain, and share a package for dose--response meta-analysis in the open source and free \textsf{R} software.
 
-\item To present and discuss relevant measures and graphical tools to assess the goodness-of-fit in dose--response meta-analysis.
+\item To present and discuss relevant measures and graphical tools to assess the goodness-of-fit in dose--response meta-analytical models, which is often neglected.
 
-\item To develop a new measure of between-study heterogeneity in the broader context of meta-analysis and assess its properties as compared to other available measures. 
+\item To develop a new measure of between-study heterogeneity in the broader context of meta-analysis that does not make any assumption about the distribution of the within-study error variances.
 
-\item To explore possible advantages of a point-wise approach, especially, in case of dose--response meta-analysis where the exposure range varies substantially across the studies.
+\item To move beyond the specification of a unique model across the studies exploring possible advantages of a point-wise approach, especially in case of dose--response meta-analysis where the exposure range varies substantially across the studies.
 
-\item To formalize and present an alternative one-stage random-effects model for dose--response meta-analysis of aggregated data, formulating the meta-analytic model in terms of a general linear mixed-effect model. 
+\item To avoid exclusion of studies in order to fit more complex and informative models in an alternative one-stage approach for dose--response meta-analysis.
 
 \end{itemize}
 
@@ -1093,16 +1105,58 @@ More specifically, the aims were:
 
 \section{The \pkg{dosresmeta} \textsf{R} package}
 
-The first version of the \pkg{dosresmeta} $\R$ package was released on the Comprehensive R Archive Network (CRAN) on September 9, 2013. It is listed in the CRAN task view Meta-Analysis (\url{https://CRAN.R-project.org/view=MetaAnalysis}), a guide that covers the vast collection of $\R$ packages for facilitating meta-analysis of summary statistics.
-New features and some minor bug fixes were implemented in further versions, including the major release (2.0.0 version) in August 17, 2017. The implementation of the package is presented in \citetalias{crippa2016dosresmeta}, which is also offered as a free guide for the package in a vignette accessible by typing \texttt{browseVignettes("dosresmeta")} from the $\R$ console.
+The first version of the \pkg{dosresmeta} $\R$ package was released on the Comprehensive R Archive Network (CRAN) on September 2013. It is listed in the CRAN task view Meta-Analysis (\url{https://CRAN.R-project.org/view=MetaAnalysis}), a guide that covers the vast collection of $\R$ packages for facilitating meta-analysis of summary statistics.
 
-\subsection{Implementation}
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[ht!]
 
-The initial version 1.0 of the \pkg{dosresmeta} $\R$ package implemented the two-stage approach for dose--response meta-analysis described in Sections~\ref{sec:1st_stage} and~\ref{sec:2nd_stage}. The package included some facilities for efficiently estimating the dose--response associations across the included studies and used the \pkg{mvmeta} package for combining the study-specific regression coefficients \citep{gasparrini2012multivariate}. The main novelty of the version 1.0 was the implementation of \texttt{gl} and \texttt{hamling} functions for reconstructing the covariance matrices among set of log relative risks using the methods developed by \cite{greenland1992methods} and \cite{hamling2008facilitating}. 
-In version 1.3 dedicated functions were written for summarizing and displaying results, and for predicting the pooled dose--response association as described in Section~\ref{sec:pred}. Compared to other routines, the \texttt{predict} function offers the possibility of deriving the predicted curve also for dose levels that are not observed in the analyzed data. The same applies for the choice of the reference dose value. The main advantage is that nice curves and tables (i.e. combined results for desired dose values) can be easily obtained with a few lines of code. Practical examples are available at \url{https://alecri.github.io/software/dosresmeta.html}.
-Furhtermore, the \texttt{center} argument was added in the main function for centering the design matrix as described by \cite{liu2009two}. The argument has been set to \texttt{TRUE} by default for preventing possible errors when modelling non-linear curves, especially in case of non-zero exposure reference categories. Finally, additional arguments were introduced for allowing the specification of a list of covariance matrices directly by the user.
+{\centering \includegraphics[width=\textwidth]{../figure/dosresmeta_ts-1} 
+
+}
+
+\caption[Monthly number of downloads of the dosresmeta R package from the RStudio CRAN mirror September 2013 - December 2017]{Monthly number of downloads of the dosresmeta R package from the RStudio CRAN mirror September 2013 - December 2017.}\label{fig:dosresmeta_ts}
+\end{figure}
+
+
+\end{knitrout}
+
+\noindent The \pkg{dosresmeta} package is now available in the updated version 2.0.1 and new features are being implemented in the version under development on GitHub (\url{https://github.com/alecri/dosresmeta}). Currently, the \pkg{dosresmeta} package is downloaded and used worldwide, with a median number of 260 downloads/month (Figure~\ref{fig:dosresmeta_ts}). The countries where it has been downloaded most are Great Britain (4005), United States (3905), and China (1605) (Figure~\ref{fig:dosresmeta_map}). Working examples, codes, and data are available at \url{http://alecri.github.io/software} to fully reproduce figures and numbers presented in both applied and theoretical papers.
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[ht!]
+
+{\centering \includegraphics[width=\textwidth]{../figure/dosresmeta_map-1} 
+
+}
+
+\caption[Total number of downloads of the doseresmeta R package worldwide from the RStudio CRAN mirror September 2013 - December 2017]{Total number of downloads of the doseresmeta R package worldwide from the RStudio CRAN mirror September 2013 - December 2017.}\label{fig:dosresmeta_map}
+\end{figure}
+
+
+\end{knitrout}
+
+\noindent The implementation of the package is presented in \citetalias{crippa2016dosresmeta}, which is also offered as a free guide for the package in a vignette accessible by typing \texttt{browseVignettes("dosresmeta")} from the $\R$ console.
+
+\subsection{Architecture and design of the package}
+
+The initial version 1.0 of the \pkg{dosresmeta} $\R$ package implemented the two-stage approach for dose--response meta-analysis described in Sections~\ref{sec:1st_stage} and~\ref{sec:2nd_stage}. The package included some facilities for efficiently estimating the dose--response associations across the included studies and used the \pkg{mvmeta} package for combining the study-specific regression coefficients \citep{gasparrini2012multivariate}. The main novelty of the version 1.0 was the implementation of \texttt{gl} and \texttt{hamling} functions for reconstructing the covariance matrices among set of log relative risks using the methods developed by \cite{greenland1992methods} and \cite{hamling2008facilitating} (Figure~\ref{fig:drm_versions}). 
+In version 1.3 dedicated functions were written for summarizing and displaying results, and for predicting the pooled dose--response association as described in Section~\ref{sec:pred}. Compared to other routines, the \texttt{predict} function offers the possibility of deriving the predicted curve also for dose levels that are not observed in the analyzed data. The same applies for the choice of the reference dose value. The main advantage is that publication quality curves and tables (i.e. combined results for desired dose values) can be easily obtained with a few lines of code. Practical examples are available at \url{https://alecri.github.io/software/dosresmeta.html}.
+Furhtermore, the \texttt{center} argument was added in the main function for centering the design matrix as described by \cite{liu2009two}. The argument has been set to \texttt{TRUE} by default for preventing possible errors when modelling non-linear curves, especially in case of non-zero exposure reference categories. Finally, additional arguments were introduced for allowing the specification of a list of covariance matrices directly by the user. This can be useful in pooling projects where the principle investigators share the results of harmonized analyses.
 
 \noindent New capabilities and functions were written in the version under development available on GitHub and were finally included in the major release version 2.0 on CRAN. The \pkg{dosresmeta} package was largely redesigned in the internal functions but kept unchanged the external form and arguments for backward compatibility. Three main features were introduced: the extension of the two-stage approach for dose--response meta-analysis of differences in means (rather than log relative risks) \citep{crippa2016dose}, the  possibility of fitting meta-regression models and the implementation of an alternative one-stage approach. The first was achieved by extending the choices of the \texttt{covariance} argument for results presented in terms of mean and standardized mean differences, which related to the \texttt{covar.smd} function. The alternative \texttt{covariance == "indep"} can be specified for assuming independence of the log relative risks or differences in means. This is particularly useful when the information for reconstructing the covariances is not available (see additional (useful) code section on the referenced site for examples).
+
+\begin{knitrout}\footnotesize
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[ht!]
+
+{\centering \includegraphics[width=\textwidth]{../figure/drm_versions-1} 
+
+}
+
+\caption[Development of the dosresmeta R package over time]{Development of the dosresmeta R package over time.}\label{fig:drm_versions}
+\end{figure}
+
+
+\end{knitrout}
 
 \noindent The implementation of the one-stage approach and related functions is discussed in more details in the methods for \citetalias{crippa2018one}. 
 The updated \pkg{dosresmeta} package implements also functions to facilitate specific aspects of a dose--response meta-analysis. These includes the assessment of goodness-of-fit discussed in \citetalias{discacciati2015goodness}, tests for fixed- and random-effects coefficients, conditional and marginal predictions, and the use of fractional polynomials.
@@ -1141,9 +1195,9 @@ function (formula, id, v, type, cases, n, sd, data, mod = ~1, intercept = F,
 \end{kframe}
 \end{knitrout}
 
-\noindent The dose--response model is specified in the \texttt{formula} argument in a symbolic representation. For example, if logrr and dose are the variable names for the log relative risk and assigned doses, a linear trend is specified as \texttt{logrr $\sim$ dose} while a quadratic curve as \texttt{logrr $\sim$ dose + I(dose)\^{}2}. The variable are defined in a data.frame whose name in specified in the \texttt{data} argument. By default \texttt{intercept = FALSE} does not include the intercept term in the covariance matrix, which is constructed in terms of contrasted unless \texttt{center = FALSE}. The \texttt{id} argument specifies the name for the study id variable (can be omitted for single study analysis). 
-The standard errors for the log relative risks are specified in the \texttt{se} argument, or alternatively, either the variances (\texttt{v}) or the lower (\texttt{lb}) and upper bounds (\texttt{ub}) of the relative risks need to be specified. The additional information about the study-design (\texttt{type}), the number of cases (\texttt{cases}), and participants or amount of person-time (\texttt{n}) is used for reconstructed the covariance of the log relative risk (or mean differences) using the method specified in the \texttt{covariance} argument (default is the Greenland and Longnecker’s method). In alternatively, a list of covariance matrices can be passed to the \texttt{Slist} argument when \texttt{covariance = "user"}.
-As defaults, a two-stage procedure with REML estimation methods (\texttt{method}) are selected. Alternatives are a one-stage procedure (\texttt{proc = "1stage"}) and either ML estimators \texttt{method = "ml"} or a fixed-effect analysis \texttt{method = "fixed"}. Residual heterogeneity can be modeled in a meta-regression analysis specified in the \texttt{mods} argument. For example, a different curve depending on the study design can be specified with \texttt{mods = $\sim$ type}. Finally, a list of parameters can be passed to the \texttt{control} argument to control the fitting process.
+\noindent The dose--response model is specified in the \texttt{formula} argument in a symbolic representation. For example, if logrr and dose are the variable names for the log relative risk and assigned doses, a linear trend is specified as \texttt{logrr $\sim$ dose} while a quadratic curve as \texttt{logrr $\sim$ dose + I(dose)\^{}2}. The variable are defined in a \texttt{data.frame} whose name in specified in the \texttt{data} argument. By default \texttt{intercept = FALSE} does not include the intercept term in the covariance matrix, which is constructed in terms of contrasts unless \texttt{center = FALSE}. The \texttt{id} argument specifies the name for the study id variable (can be omitted for single study analysis). 
+The standard errors for the log relative risks are specified in the \texttt{se} argument, or alternatively, either the variances (\texttt{v}) or the lower (\texttt{lb}) and upper bounds (\texttt{ub}) of the relative risks need to be specified. The additional information about the study-design (\texttt{type}), the number of cases (\texttt{cases}), and participants or amount of person-time (\texttt{n}) is used for reconstructed the covariance of the log relative risk (or mean differences) using the method specified in the \texttt{covariance} argument (default is the Greenland and Longnecker’s method). A list of covariance matrices can be passed to the \texttt{Slist} argument when \texttt{covariance = "user"}.
+A two-stage procedure with REML estimation method (\texttt{method}) is the default. A one-stage procedure (\texttt{proc = "1stage"}) and either ML estimator \texttt{method = "ml"} or a fixed-effect analysis \texttt{method = "fixed"} can be adopted. Residual heterogeneity can be modeled in a meta-regression analysis by specifying covariates in the \texttt{mods} argument. For example, a different curve depending on the study design can be specified with \texttt{mods = $\sim$ type}. Finally, a list of parameters can be passed to the \texttt{control} argument to control the fitting process.
 
 The \texttt{dosresmeta} function returns an object of class ``\texttt{dosresmeta}'' with the information from the dose--response meta-analytic model. The \texttt{print} and \texttt{summary} methods display and produce a summary of the content of a \texttt{dosresmeta} object. The \texttt{predict} method facilitates the presentation of the results of a dose--response meta-analysis
 
@@ -1158,7 +1212,7 @@ function (object, newdata, xref, expo = FALSE, xref_vec, ci.incl = TRUE,
 \end{kframe}
 \end{knitrout}
 
-\noindent where object contains the results of the \texttt{dosresmeta} function. A new data.frame with the desired doses can be passed to the \texttt{newdata} argument for obtaining the corresponding predicted log relative risks. If not provided, the predictions will be calculated for the assigned dose values across the studies. The \texttt{expo} argument can be set to \texttt{TRUE} to predict log relative risk and confidence intervals (unless \texttt{ci.incl = FALSE}) on the exponential scale. The referent value can be specified with the \texttt{xref} argument, or better, specifying the line of the newdata which serves as referent (\texttt{xref\_pos} argument). For non-linear models a vector need to be provided in \texttt{xref\_vec} instead of \texttt{xref}. The \texttt{delta} argument is useful for predicting the linear increase in the outcome for a delta increase in the exposure, and is thus only appropriate in a linear trend analysis. In the updated version of the \pkg{dosresmeta} package, a \texttt{blup} method has also been implemented for predicting the study-specific random-effects and hence the conditional curves.
+\noindent where object contains the results of the \texttt{dosresmeta} function. A new data.frame with the desired doses can be passed to the \texttt{newdata} argument for obtaining the corresponding predicted log relative risks. If not provided, the predictions will be calculated for the assigned dose values available from the studies. The \texttt{expo} argument can be set to \texttt{TRUE} to predict log relative risk and confidence intervals (unless \texttt{ci.incl = FALSE}) on the exponential scale. The reference value can be specified with the \texttt{xref} argument, or better, specifying the line of the newdata which serves as referent (\texttt{xref\_pos} argument). For non-linear models a vector needs to be provided in \texttt{xref\_vec} instead of \texttt{xref}. The \texttt{delta} argument is useful for predicting the linear increase in the outcome for a delta increase in the exposure, and is thus only appropriate in a linear trend analysis. In the updated version of the \pkg{dosresmeta} package, a \texttt{blup} method has also been implemented for predicting the study-specific random-effects and hence the conditional curves.
 
 Additional functions can be listed
 
@@ -1176,9 +1230,9 @@ R> ls("package:dosresmeta")
 
 \noindent Use \texttt{ls(getNamespace("dosresmeta"), all.names=TRUE)} for a complete list including hidden auxiliary functions.
 
-\subsection{Data Sets}
+\subsection{Datasets}
 
-\noindent Several data sets from published dose-response meta-analyses and methodological articles have been included in the \pkg{dosresmeta} package. To get a list as in Table~\ref{tab:data_table} with the names and description type
+\noindent Several datasets from published dose-response meta-analyses and methodological articles have been included in the \pkg{dosresmeta} package. To get a list as in Table~\ref{tab:data_table} with the names and description type
 
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
@@ -1197,30 +1251,30 @@ R> data(package = "dosresmeta")
 \toprule
 Name & Description\\
 \midrule
-alcohol\_crc & Eight published studies on the relation between alcohol intake and colon-rectal cancer.\\
-alcohol\_cvd & Six published studies on the relation between alcohol intake and cardiovascular disease risk.\\
-alcohol\_esoph & Fourteen case-control studies on the relation between alcohol consumption and esophageal cancer\\
-alcohol\_lc & Four published studies on the relation between alcohol intake and lung cancer.\\
-ari & Five clinical trials on the relation between aripiprazole and schizophrenia\\
+alcohol\_crc & Eight published studies on the relation between alcohol intake and colon-rectal cancer \citep{orsini2011meta}\\
+alcohol\_cvd & Six published studies on the relation between alcohol intake and cardiovascular disease risk \citep{liu2009two}\\
+alcohol\_esoph & Fourteen case-control studies on the relation between alcohol consumption and esophageal cancer \citep{rota2010random}\\
+alcohol\_lc & Four published studies on the relation between alcohol intake and lung cancer \citep{orsini2011meta}\\
+ari & Five clinical trials on the relation between aripiprazole and schizophrenia \citep{crippa2016dose}\\
 \addlinespace
-bmi\_rc & Four case-control studies on the relation between Body Mass Index and renal cell cancer\\
-cc\_ex & Case-control data on alcohol and breast cancer risk\\
-ci\_ex & Cumulative incidence data on high-fat dairy food and colorectal cancer risk\\
-coffee\_cancer & Eight prospective studies on the relation between coffee consumption and cancer mortality\\
-coffee\_cvd & Thirteen prospective studies on the relation between coffee consumption and cardiovascular mortality\\
+bmi\_rc & Four case-control studies on the relation between Body Mass Index and renal cell cancer \citep{liu2009two}\\
+cc\_ex & Case-control data on alcohol and breast cancer risk \citep{greenland1992methods}\\
+ci\_ex & Cumulative incidence data on high-fat dairy food and colorectal cancer risk \citep{orsini2006generalized}\\
+coffee\_cancer & Eight prospective studies on the relation between coffee consumption and cancer mortality \citep{crippa2014coffee}\\
+coffee\_cvd & Thirteen prospective studies on the relation between coffee consumption and cardiovascular mortality \citep{crippa2014coffee}\\
 \addlinespace
-coffee\_mort & Twenty-one prospective studies on the relation between coffee consumption and all-cause mortality\\
-coffee\_mort\_add & \\
-coffee\_stroke & Eleven prospective studies on the relation between coffee consumption and stroke risk\\
-fish\_ra & Six studies on the relation between fish consumption and rheumatoid arthritis risk\\
-ir\_ex & Incidence-rate data on fiber intake and coronary heart disease risk\\
+coffee\_mort & Twenty-one prospective studies on the relation between coffee consumption and all-cause mortality \citep{crippa2014coffee}\\
+coffee\_mort\_add & Additional 3 prospective studies on the relation between coffee consumption and all-cause mortality \cite{nilsson2012traditional}\\
+coffee\_stroke & Eleven prospective studies on the relation between coffee consumption and stroke risk \citep{larsson2011coffee}\\
+fish\_ra & Six studies on the relation between fish consumption and rheumatoid arthritis risk \citep{di2014fish}\\
+ir\_ex & Incidence-rate data on fiber intake and coronary heart disease risk \citep{orsini2006generalized}\\
 \addlinespace
-milk\_mort & Eleven prospective studies on the relation between milk consumption and all-cause mortality\\
-milk\_ov & Nine studies on the relation between milk consumption and ovarian cancer\\
-oc\_breast & Twenty-two case-control studies on the relation between oral contraceptives use and breast cancer\\
-process\_bc & Ten studies on the relation between processed meat and bladder cancer\\
-red\_bc & Twelve studies on the relation between red meat and bladder cancer\\
-sim\_os & Simulated data for one-stage dose-response meta-analysis\\
+milk\_mort & Eleven prospective studies on the relation between milk consumption and all-cause mortality \citep{larsson2015milk}\\
+milk\_ov & Nine studies on the relation between milk consumption and ovarian cancer \citep{larsson2006milk}\\
+oc\_breast & Twenty-two case-control studies on the relation between oral contraceptives use and breast cancer \citep{berlin1993meta}\\
+process\_bc & Ten studies on the relation between processed meat and bladder cancer \citep{crippa2016red}\\
+red\_bc & Twelve studies on the relation between red meat and bladder cancer \citep{crippa2016red}\\
+sim\_os & Simulated data for one-stage dose-response meta-analysis \citep{crippa2018one}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1229,14 +1283,15 @@ sim\_os & Simulated data for one-stage dose-response meta-analysis\\
 \end{knitrout}
 
 
-
 \section{Goodness-of-fit}\label{sec:gof}
 
-The aim of \citetalias{discacciati2015goodness} was to address how to evaluate the goodness-of-fit in dose--response meta-analysis. The issue is particularly relevant in a dose--response analysis where the predicted curve should be a reasonably good summary of the modelled log relative risks. However, different features of aggregated dose--response data can complicate this comparison. The predicted curve is presented using a referent, $x_\mathrm{ref}$, which may differ from the study-specific reference values. Thus the predicted and observed log relative risks can no longer be directly compared because their baseline group is not the same. Even in the case where the reference values are all the same and equal to $x_\mathrm{ref}$, the covariance among the study-specific RRs and the heterogeneity across the studies add further difficulties in evaluating if the chosen model provides a good summary of the observed data. Therefore, the proposed tools for assessing the goodness-of-fit are presented in a fixed-effect analysis where meta-regression models as in~\ref{eq:rmmra2} are typically employed to explain the observed heterogeneity. We consider relevant measures, tests, and graphical tools that take into account the correlation of the observed data.
+The aim of \citetalias{discacciati2015goodness} was to address how to evaluate the goodness-of-fit in dose--response meta-analysis.
+The distance between observed and predicted data is often at the heart of model checking.
+Although we are working with linear regression models, features of aggregated dose--response data can complicate this comparison. The predicted curve is presented using a referent, $x_\mathrm{ref}$, which may differ from the study-specific reference values. Thus the predicted and observed log relative risks can no longer be directly compared because their baseline group is not the same. Even in the case where the reference values are all the same and equal to $x_\mathrm{ref}$, the covariance among the study-specific RRs and the heterogeneity across the studies adds further difficulties in evaluating if the chosen model provides a good summary of the observed data. The proposed tools for assessing the goodness-of-fit are presented in a fixed-effect analysis where meta-regression models as in~\ref{eq:rmmra2} are typically employed to explain the observed heterogeneity. We consider relevant measures, tests, and graphical tools that take into account the correlation of the observed data.
 
 \subsection{Deviance} 
 
-The first natural measure of goodness-of-fit is a comparison between the predicted and observed data points, i.e. the non-referent log relative risks. This can be done by analyzing the residual term errors, which is defined by the difference between the observed log RRs, $\mathbf{y}_i$, and the marginal prediction
+The first natural measure of goodness-of-fit is a comparison between the predicted and observed data points, i.e. the non-referent log relative risks. This can be done by analyzing the residual term errors, which are defined by the difference between the observed log RRs, $\mathbf{y}_i$, and the marginal prediction
 \begin{equation}
 \boldsymbol{\hat e_i} = \mathbf{y}_i - \mathbf{X}_i \widetilde{\mathbf{X}}_i \boldsymbol{\hat \beta}
 \label{eq:residual}
@@ -1274,7 +1329,7 @@ Possibly, a low $R^2$ may indicate that more flexible transformations of the exp
 The visual assessment of the goodness-of-fit may reveal specific patterns in the data that might otherwise go undetected by only looking at summary measures such as the deviance and the coefficient of variation \citep{kvaalseth1985cautionary}. The graphical comparison can sometimes be cumbersome because different factors may affect such analysis. The aggregated dose--response data are presented using one group as comparison. This feature has two important consequences when deducing an overall trend from the reported (log) relative risks. The former is that different parameterizations, or models, can be graphically compared only if the predicted risk for the reference category is similar. The latter, instead, involves the correlation of the modelled data points which makes even harder to evaluate if a specific model fits the reported data. To illustrate both the problems we consider IPD from one of the registers involved in the Surveillance, Epidemiology, and End Results (SEER) Program (\url{https://seer.cancer.gov}), and focus on the association between age at diagnosis and breast cancer mortality. 
 
 % latex table generated in R 3.4.3 by xtable 1.8-2 package
-% Tue Feb 13 13:41:03 2018
+% Thu Feb 22 16:12:09 2018
 \begin{table}[ht]
 \centering
 \caption{Aggregated dose-response data on the adjusted association between age and breast cancer mortality based on one registry from the SEER program using the first age category as referent.
@@ -1284,8 +1339,8 @@ The visual assessment of the goodness-of-fit may reveal specific patterns in the
   \hline
 Age category & Mean age & Cases & Person-years & IRR & 95\% CI & log IRR & SE \\ 
   \hline
-[20,35] & 32.4 & 56 & 2099.3 & 1.00 &  & 0.00 & 0.00 \\ 
-  (35,60] & 49.7 & 451 & 37585.3 & 0.68 & (0.51, 0.9) & -0.39 & 0.14 \\ 
+[20,35] & 32.4 & 56 & 2099.3 & 1.00 & --- & 0.00 & 0.00 \\ 
+  (35,60] & 49.7 & 451 & 37585.3 & 0.68 & (0.51, 0.90) & -0.39 & 0.14 \\ 
   (60,70] & 65.6 & 220 & 20590.7 & 0.71 & (0.53, 0.96) & -0.34 & 0.15 \\ 
   (70,97] & 77.0 & 215 & 17896.5 & 0.77 & (0.57, 1.04) & -0.27 & 0.15 \\ 
    \hline
@@ -1293,7 +1348,7 @@ Age category & Mean age & Cases & Person-years & IRR & 95\% CI & log IRR & SE \\
 \end{table}
 
 
-Using 35, 60, 70 years as cut points, we modelled age using 5 categories in a Poisson model adjusting for potential confounders and produced aggregated dose--response results in Table~\ref{tab:breast_ad}, where the first category worked as referent. Using the methodology presented in Section~\ref{sec:1st_stage}, we estimated a linear trend a graphically compared the predicted curve and the modelled data (left panel of Figure~\ref{fig:visual_problem}). While the reported log RRs suggest an inverse association between age and breast cancer mortality, the estimated linear trend indicates opposite conclusions (a 0.17\% increase in mortality for every 5-year increase of age at diagnosis). The linear trend does not seem to properly fit the data since the fitted line doesn't event pass through the reported log RRs. The problem is that there are few cases in the reference age category and so the log RRs are more unstable. By changing the group comparison to the second age category, this issue is partially solved (right panel of Figure~\ref{fig:visual_problem}). To address the further issue of the covariance, we proposed graphical tools based on the analysis of the decorrelated residuals.
+Using 35, 60, 70 years as cut points, we modelled age using 5 categories in a Poisson model adjusting for potential confounders and produced aggregated dose--response results in Table~\ref{tab:breast_ad}, where the first category served as referent. Using the methodology presented in Section~\ref{sec:1st_stage}, we estimated a linear trend and graphically compared the predicted curve and the modelled data (left panel of Figure~\ref{fig:visual_problem}). While the empirical log RRs may suggest an inverse association between age and breast cancer mortality, the estimated linear trend indicates opposite conclusions (a 0.17\% increase in mortality for every 5-year increase of age at diagnosis). The linear trend does not seem to properly fit the data since the fitted line doesn't event pass through the reported log RRs. The problem is that there are few cases in the reference age category and so the log RRs are typically larger. By changing the group comparison to the second age category, this issue is partially solved (right panel of Figure~\ref{fig:visual_problem}). To address the further issue of the covariance, we proposed graphical tools based on the analysis of the decorrelated residuals.
 
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[ht!]
@@ -1314,16 +1369,16 @@ The residuals can be decorrelated using the Cholesky factorization of the covari
 \label{eq:decor_res}
 \end{equation}
 
-\noindent and plotted against the exposure. Such a graphical analysis is the equivalent of a residual vs. predictors/predicted outcome plot after a model estimated through ordinary least squares. Since the variables in the plot are transformed, the actual value of the decorellated residuals is not directly interpretable. However, it is still possible to detect specific patterns for the residuals over the exposure range. In such a case, the plot can indicate lack of fit of the chosen model for select exposure values. Overlaying a locally weighted scatterplot smoothing (LOWESS) may help to visualize possible patterns, while a different shape or color for the residuals can distinguish them according to study-level covariates in case of meta-regression models.
+\noindent and plotted against the exposure. Such a graphical analysis is the equivalent to a residual vs. predictors/predicted outcome plot after a model estimated through ordinary least squares. Since the variables in the plot are transformed, the actual value of the decorellated residuals is not directly interpretable. However, it is still possible to detect specific patterns for the residuals over the exposure range. In such a case, the plot can indicate lack of fit of the chosen model for select exposure values. Overlaying a locally weighted scatterplot smoothing (LOWESS) may help to visualize possible patterns, while a different shape or color for the residuals can distinguish them according to study-level covariates in case of meta-regression models.
 
 
 
 \section{A new measure of heterogeneity}\label{sec:Rb}
 
-One of the possible reasons for large values of $D$ or similarly small values of $R^2$ is presence of heterogeneity in the dose--response associations. The measures of heterogeneity presented in Section~\ref{sec:measures_het}, namely $\hat R_I$ and $I^2$ were derived based on the assumption of homogeneity for the error variance terms $v_i$, which is unlikely to be met in applications. To illustrate this point, let us consider the two hypothetical distributions for the within-study error terms in Table~\ref{tab:hyp_vi}. The distribution of $v_i$ in the first example (Analysis A) is much more homogeneous compared to the second scenario (Analysis B). The coefficient of variation for the $v_i$ in the second example is 20 times higher than the corresponding number in the first scenario. While it seems reasonable to assume homogeneity of the $v_i$ for the Analysis A, in the second case this hypothesis is not appropriate. Nonetheless both $\hat R_I$ and $I^2$ would summarize the two distributions with a single common number. 
+One of the possible reasons for large values of $D$ or similarly small values of $R^2$ is the presence of heterogeneity in the dose--response associations. The measures of heterogeneity presented in Section~\ref{sec:measures_het}, namely $\hat R_I$ and $I^2$ were derived based on the assumption of homogeneity for the error variance terms $v_i$, which is unlikely to be met in applications. To illustrate this point, let us consider the two hypothetical distributions for the within-study error terms in Table~\ref{tab:hyp_vi}. The distribution of $v_i$ in the first example (Analysis A) is much more homogeneous compared to the second scenario (Analysis B). The coefficient of variation for the $v_i$ in the second example is 20 times higher than the corresponding number in the first scenario. While it seems reasonable to assume homogeneity of the $v_i$ for the Analysis A, in the second case this hypothesis is not appropriate. Nonetheless both $\hat R_I$ and $I^2$ would summarize the two distributions with a single common number. 
 
 % latex table generated in R 3.4.3 by xtable 1.8-2 package
-% Tue Feb 13 13:41:04 2018
+% Thu Feb 22 16:12:10 2018
 \begin{table}[ht]
 \centering
 \caption{Hypothetical distributions of within-study errors 
@@ -1354,7 +1409,7 @@ In the more realistic case where $v_i > 0$, the variance of $\hat \beta$ will in
 \noindent The $\hat R_b$ is a dimensionless number that can be expressed as a percentage, ranging from 0\% (corresponding to $\hat \tau^2 = 0$, i.e. no observed heterogeneity) to 100\%, for the hypothetical case where all the effects are estimated with no error. The proposed measure is defined as a function of the estimated heterogeneity ($\hat \tau^2$), the number of studies (I), and the within-study error terms ($v_i$). It satisfies the criteria required for a measure of heterogeneity \citep{higgins2002quantifying}: it is a non-decreasing function of $\hat \tau^2$, it is invariant to scale transformation of the estimates, and is not intrinsically affected by the number of studies included in the analysis. Similarly to $\hat R_I$ and $I^2$, the proposed measure is a function on the within-error terms $v_i$ and so it tends to 1 in case of meta-analysis of very precise estimates, even for relative small values of $\hat \tau^2$. As already mentioned in Section~\ref{sec:measures_het}, the use of the between-studies coefficient of variation can complement these measures \citep{takkouche1999evaluation}.
 The right hand of Equation~\ref{eq:Rb} expresses $\hat R_b$ as an average of the ratios of the $\hat \tau^2$ to the study-specific overall variance $v_i + \hat \tau^2$. It is easy to derive that $\hat R_b$ coincides with the definition of $\hat R_I$ and $I^2$ in case of homogeneity of the $v_i$. When the within-errors vary across study, the difference between $\hat R_b$ and $I^2$ will depend on the actual values of $v_i$, while it can be proven that $\hat R_b \le \hat R_I$.
 
-An estimate of the between-study heterogeneity is required for the computation of $\hat R_b$ as well for the alternative measures $\hat R_I$ and $I^2$. The moment-based estimator presented in Equation~\ref{eq:tau2DL} is a standard choice in many applied meta-analyses and has the advantage of having a closed formulation. In addition, the estimator is asymptotically consistent \citep{jackson2010extending}. Using this estimation method, $\hat R_b$ can be expressed as a function of the $Q$~statistic
+An estimate of the between-study heterogeneity is required for the computation of $\hat R_b$ as well for the alternative measures $\hat R_I$ and $I^2$. The moment-based estimator presented in Equation~\ref{eq:tau2DL} is a standard choice in many applied meta-analyses and it has the advantage of having a closed formulation. In addition, the estimator is consistent \citep{jackson2010extending}. Using this estimation method, $\hat R_b$ can be expressed as a function of the $Q$~statistic
 \begin{equation}
 \hat R_b = \frac{1}{I} \sum_{i = 1}^I \frac{Q - (I-1)}{Q + a_i - (I - 1)} 
 \label{eq:RbQ}
@@ -1367,7 +1422,7 @@ An estimate of the between-study heterogeneity is required for the computation o
 
 \noindent The formula for $\Var(Q) = 2(I-1) + 4\left(S_1 - \frac{S_2}{S_1}\right)\tau^2 + 2\left(S_2 - 2\frac{S_3}{S_1} + \frac{S_2^2}{S_1^2} \right)$, with $S_r = \sum_{i = 1}^I w_i^r$, was first presented by \cite{ biggerstaff1997incorporating}.
 
-\noindent When the number of studies is large, $\hat R_b$ is asymptotically distributed and thus Wald-type confidence interval can be constructed $\hat R_b \pm z_{1-\alpha/2} \sqrt{ \widehat{\Var} \left(\hat R_b \right)}$.
+\noindent When the number of studies is large, $\hat R_b$ is asymptotically distributed and thus Wald-type confidence interval can be constructed $\hat R_b \mp z_{1-\alpha/2} \sqrt{ \widehat{\Var} \left(\hat R_b \right)}$.
 
 
 
@@ -1375,14 +1430,13 @@ An estimate of the between-study heterogeneity is required for the computation o
 
 
 
-Measures of heterogeneity are frequently employed in applied works and in applications of meta-regression models. In a dose--response meta-analysis, however, there are two aspects of heterogeneity that can not be captured using standard methods. More specifically, in a two-stage analysis the same functional transformations $g_1, \dots, g_p$ need to be defined for all the studies so that the regression coefficients can be properly combined by meta-analysis.
 This may have important consequences in case the chosen dose--response model adequately fits only a subset of the analyzed studies. To illustrate this aspect, we consider a subset of 4 studies on the association between milk consumption (ml/day) and all-cause mortality \citep{larsson2015milk}. We modelled the individual curves using FP2 and selected in each study the combination of power terms which maximized the log likelihood (or equivalently with the minimum AIC). The chosen power terms in the individual analyses differ although the predicted curves describe a similar association (Figure~\ref{fig:milk_sub}). Forcing a unique set of power terms may decrease the fit of some of the study-specific analyses and thus produce more unstable estimates for the dose--response parameters.
 
-\noindent An other difficulty may be encountered in uniformly defining the $g$ transformations across the studies. For instance, we might decide to model the previous association between milk consumption and mortality using RCS. A percentile approach is commonly adopted for choosing where to place the $\mathbf{k}$ in Equation~\ref{eq:rcs} \citep{harrell2013regression}. The first and third knots at located at the extremes, generally at the 10-th and 90-th percentiles of the exposure distribution, while the median exposure value is chosen for the remaining knot.
-If the exposure distributions largely vary (especially in terms of range definition), as it is in this case, it may not be possible to equally locate the knots in all the studies. Indeed, in our example only one study considered dose levels higher than the upper knot (433 ml/day). As a consequence, the second spline transformation for the other studies will is equal 0 and the model is not estimable (the design matrix is not invertible). 
+\noindent Another difficulty may be encountered in uniformly defining the $g$ transformations across the studies. For instance, we might decide to model the previous association between milk consumption and mortality using RCS. A percentile approach is commonly adopted for choosing where to place the $\mathbf{k}$ in Equation~\ref{eq:rcs} \citep{harrell2013regression}. The first and third knots are located at fixed percentiles, generally at the 10-th and 90-th percentiles of the exposure distribution, while the median exposure value is chosen for the remaining knot.
+If the exposure distributions largely vary (especially in terms of range definition), as it is in this case, it may not be possible to equally locate the knots in all the studies. Indeed, in our example only one study considered dose levels higher than the upper knot (433 ml/day). As a consequence, the second spline transformation for the other studies will be equal 0 and the model is not estimable (the design matrix is not invertible). 
 
 \noindent A second related problem directly affects the prediction of the pooled log relative risks. The maximum dose levels varies largely across studies, with values 715, 441, 369, 146 ml/day. 
-The predictions from the second stage analysis, however, are obtained using the combined $\boldsymbol{\hat \beta}$, which disregards the information about the exposure ranges. All the studies contribute in predicting the log relative risks, even if some of them only reported results for low exposure values. In such a way, the combined curve may severely affected by these extrapolations.
+The predictions from the second stage analysis, however, are obtained using the combined $\boldsymbol{\hat \beta}$, which disregards the information about the exposure. All the studies contribute in predicting the log relative risks, even if some of them only reported results for low exposure values. In such a way, the combined curve may severely affected by these extrapolations.
 
 A point-wise approach for meta-analysis of aggregated dose--response data may properly address the described issues.
 
@@ -1399,7 +1453,7 @@ A point-wise approach for meta-analysis of aggregated dose--response data may pr
 
 \end{knitrout}
 
-A point-wise approach was first presented by \cite{sauerbrei2011new} for meta-analysis of continuous covariates based on IPD. The strategy consists of separately estimating the study-specific curves and, based on them, calculating the predicted log relative risks for selected exposure values. The combined curve is obtained by pooling the predicted relative risks instead of calculating them from the combined regression coefficients. The described methodology has the advantage of fitting potential diverse curves across the studies, and limiting the study-specific predicted log relative risks to the observed exposure range.   
+A point-wise approach was first presented by \cite{sauerbrei2011new} for meta-analysis of continuous covariates based on IPD. The strategy consists of separately estimating the study-specific curves and, based on them, calculating the predicted log relative risks for selected exposure values. The combined curve is obtained by averaging the predicted relative risks instead of calculating them from the combined regression coefficients. The described methodology has the advantage of fitting potential diverse curves across the studies, and limiting the study-specific predicted log relative risks to the observed exposure range.   
 
 \subsection{Estimation and prediction of study-specific curves}
 
@@ -1416,7 +1470,7 @@ g_{i1}(x_{iJ_i}) -  g_{i1}(x_{i0}) & \hdots & g_{ip_i}(x_{iJ_i}) -  g_{ip_i}(x_{
 \end{equation}
 \noindent For example, different power terms for FP2 can be chosen or, for a RCS analysis, the knots can be located separately in each study. Potentially, a mixed of curves could be also estimated across the study in order to improve the fit of the individual dose--response analyses. The regression coefficients are then estimated using generalized least squares estimators presented in Equation~\ref{eq:gls}.
 
-Once the curves have been estimated, the results of the first step analysis are presented in terms of predicted log relative risks for a set of $n_i$ exposure values $\mathbf{x}_{n_i}$ using a suitable value $x_\mathrm{ref}$ as comparator. The $i$ indexed is used to highlight that the chosen dose values may differ across the studies. In particular, the predictions in each study can be limited to the observed exposure range $\max \left( \mathbf{x}_{n_i} \right) \le \max \left( \mathbf{x_i} \right)$.
+Once the curves have been estimated, the results of the first step analysis are presented in terms of predicted log relative risks for a set of $n_i$ exposure values $\mathbf{x}_{n_i}$ using a suitable common value $x_\mathrm{ref}$ as comparator. The index $i$ is used to highlight that the chosen dose values may differ across the studies. In particular, the predictions in each study can be limited to the observed exposure range $\max \left( \mathbf{x}_{n_i} \right) \le \max \left( \mathbf{x_i} \right)$.
 \begin{align}
 \hat {\boldsymbol y}_i &= \mathbf{X}_{n_i} \boldsymbol{\hat \beta_i}
 \label{eq:pred_pwa} \\
@@ -1425,9 +1479,9 @@ Once the curves have been estimated, the results of the first step analysis are 
 \end{align}
 \noindent with formulas similar to those presented in Equation~\ref{eq:pred} and ~\ref{eq:varpred}, with the notable difference that the predictions are based on the study-specific $\boldsymbol{\hat \beta_i}$ rather than the mean $\boldsymbol{\hat \beta}$ coefficients.
 
-\subsection{Averaging of dose--response prediction}
+\subsection{Averaging of dose--response predictions}
 
-In a point-wise strategy the combined dose--response curve is derived by pooling the study-specific predicted log relative risks derived in Equation~\ref{eq:pred_pwa}. The second step analysis consists of $n = \max(n_i)$ univariate meta-analyses where the effect sizes are the elements in $\hat {\boldsymbol y}_i$ with the within-error variances $\hat{\boldsymbol{v}}_i$.
+In a point-wise strategy the combined dose--response curve is derived by pooling the study-specific predicted log RRs derived in Equation~\ref{eq:pred_pwa}. The second step consists of $n = \max(n_i)$ univariate meta-analyses where the effect sizes are the elements in $\hat {\boldsymbol y}_i$ with the within-error variances $\hat{\boldsymbol{v}}_i$.
 The combined predicted relative risks are estimated using the weighted average presented in Equation~\ref{eq:avgbeta}.
 
 As a final result, the combined dose--response curve is graphically presented as a smooth function of the combined predicted relative risks for the chosen $n$ dose levels. In addition, all the results of the univariate meta-analyses can be pointwisely presented, such as estimates of the heterogeneity $\tau^2$ and related measures ($R_b$, $I^2$, and $R_i$), the $Q$~statistic, and the study-specific weights, with the potential of a much richer set of results.
@@ -1437,7 +1491,7 @@ As a final result, the combined dose--response curve is graphically presented as
 
 The study-specific dose--response analyses in a standard two-stage or alternative point-wise approach suffer from the limited number of data points. Most of the individual studies present results for 2 to 4 non-referent exposure categories, but cases where dichotomization of the exposure occurred are not rare \citep{turner2010categorisation}. In the latter case, only dose--response models parameterized by $p = 1$ coefficient can be estimated (e.g. linear trend). Indeed, a standard requirement for meta-analysis of non-linear curves is that the studies provide at least two non-referent relative risks.
 
-The extension of the one-stage approach to a random-effects meta-analysis may overcome the constrain from the limited number of individual data points. A one-stage approach is conceptually easier since the entire analysis can be formulated in a single statistical model. Flexible curves characterized by multiple parameters ($p > 3$) can also be easily accommodated, so that more elaborate research questions can be answered, without loosing the information from those studies usually excluded in a two-stage analysis.
+The extension of the one-stage approach to a random-effects meta-analysis may overcome the exclusions of studies with limited number of individual data points. A one-stage approach is conceptually easier since the entire analysis can be formulated in a single statistical model. Flexible curves characterized by multiple parameters ($p > 3$) can also be easily accommodated, so that more elaborate research questions can be answered, without loosing the information from those studies usually excluded in a two-stage analysis.
 
 \subsection{Model definition}
 
@@ -1446,8 +1500,8 @@ A one-stage dose--response meta-analysis can be written in the form of a linear 
 \mathbf{y}_{i} = \mathbf{X}_{i} \boldsymbol{\beta} + \mathbf{Z}_{i}  \mathbf{b}_i + \boldsymbol{\varepsilon}_{i}
 \label{eq:onestage}
 \end{equation}
-\noindent where the terms $\mathbf{y}_{i}$, $\mathbf{X}_{i}$, and $\boldsymbol{\varepsilon}_{i}$ are defined exactly as those presented in the first step of a two-stage analysis (Equation~\ref{eq:drmodel}). The quantities $\boldsymbol{\beta}$ and $\mathbf{b}_i$, instead, are the population average parameter and unobserved random-effects as defined in second step (Equation~\ref{eq:rmma}). The additional $\mathbf{Z}_{i}$ is the $n_i \times p$ design matrix for the random-effects and coincides with the definition of $\mathbf{X}_{i}$.
-Placing the multivariate distribution for the random-effects terms, the marginal model for a one stage analysis is
+\noindent where the terms $\mathbf{y}_{i}$, $\mathbf{X}_{i}$, and $\boldsymbol{\varepsilon}_{i}$ are defined exactly as those presented in the first step of a two-stage analysis (Equation~\ref{eq:drmodel}). The quantities $\boldsymbol{\beta}$ and $\mathbf{b}_i$, instead, are the population average parameter and unobserved random-effects as defined in the second step (Equation~\ref{eq:rmma}). The additional $\mathbf{Z}_{i}$ is the $n_i \times p$ design matrix for the random-effects and coincides with $\mathbf{X}_{i}$.
+Assuming a multivariate distribution for the random-effects terms, the marginal model for a one-stage analysis is
 \begin{equation}
 \mathbf{y}_{i} \sim \mathcal{N} \left( \mathbf{X}_{i} \boldsymbol{\beta},  \mathbf{Z}_{i} \boldsymbol{\Psi} \mathbf{Z}_{i}^\top  + \mathbf{S}_i \right)
 \label{eq:marginal_os}
@@ -1491,16 +1545,18 @@ The parameters to be estimated are the $m\times p$ fixed effects and the $p \tim
 \begin{equation}
 \begin{split}
 \ell_R \left( \boldsymbol{\xi} \right) = & 
- -\frac{1}{2} (n - p) \log(2\pi)  - \frac{1}{2} \sum_{i=1}^I \log | \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) |  - \frac{1}{2} \log \left| \sum_{i=1}^I \mathbf{X}_i^T \left( \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) \right)^{-1}  \mathbf{X}_i  \right| + \\
+ -\frac{1}{2} (n - p) \log(2\pi)  - \frac{1}{2} \sum_{i=1}^I \log | \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) |  - \frac{1}{2} \log \left| \sum_{i=1}^I \mathbf{X}_i^\top \left( \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) \right)^{-1}  \mathbf{X}_i  \right| + \\
 &-\frac{1}{2}\sum_{i=1}^I \left[ \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\hat \beta} \right)^\top \left( \boldsymbol{\Sigma}_i \left( \boldsymbol{\xi} \right) \right)^{-1} \left( \mathbf{y}_i -  \mathbf{X}_i \boldsymbol{\hat \beta} \right) \right]
 \end{split}
 \label{eq:logLikR_os}
 \end{equation}
 
-\noindent As in case of multivariate meta-analysis, likelihood estimators requires iterative algorithms in optimizing the functions~\ref{eq:logLik_os} and ~\ref{eq:logLikR_os}. 
+\noindent As in case of multivariate meta-analysis, likelihood estimators requires iterative algorithms to optimize the functions~\ref{eq:logLik_os} and ~\ref{eq:logLikR_os}. 
 In particular, the Nelder-Mead method can be employed to find the maximum for the parameters in the multidimensional domain. For ease of computation, both likelihoods are expressed as function of only the $\boldsymbol{\xi}$ parameters, which corresponds to the elements of the lower triangular Cholesky decomposition of $\boldsymbol{\Psi}$. The algorithms start with an initial guess for $\boldsymbol{\Psi}$, obtain an estimate for $\boldsymbol{\beta}$ using GLS estimators and maximize the objective function in terms of $\boldsymbol{\xi}$. The steps are iterated until convergence.
 
-Test of hypothesis and confidence intervals are based on the established theory for mixed models. Inference on the fixed-effects coefficients is conducted in a similar way as presented in Section~\ref{sec:2nd_stage}, using the asymptotic normal distribution for the estimator of $\boldsymbol{\beta}$. Tests for the variance components, instead, generally require a mixture of $\chi^2$ because the coefficients to be tested can only be positive. When $p \ge 2$, however, the distribution of the test statistic is difficult to implement, so that alternative measures can be instead applied. Following the idea behind the definition of the ICC, the marginal variance in~\ref{eq:marginal_os} can also be decomposed in the within-study and between-studies components. The dose--response model~\ref{eq:onestage} is a mixed model with random-effects for the slope terms and with no intercept. Thus, the between-studies variance is a quadratic function of the assigned dose values. For this setting \cite{goldstein2002partitioning} defined the Variance Partition Coefficient (VPC) as the ratio of the between-studies component by the total residual variability
+Test of hypothesis and confidence intervals are based on the established theory for mixed models. Inference on the fixed-effects coefficients is conducted in a similar way as presented in Section~\ref{sec:2nd_stage}, using the asymptotic normal distribution for the estimator of $\boldsymbol{\beta}$. Tests for the variance components, instead, generally require a mixture of $\chi^2$ because the coefficients to be tested can only be positive. When $p \ge 2$, however, the distribution of the test statistic is difficult to implement, so that alternative measures can be instead applied. 
+
+\noindent Following the idea behind the definition of the ICC, the marginal variance in~\ref{eq:marginal_os} can also be decomposed in the within-study and between-study components. The dose--response model~\ref{eq:onestage} is a mixed model with random-effects for the slope terms and with no intercept. Thus, the between-study variance is a quadratic function of the assigned dose values. For this setting \cite{goldstein2002partitioning} defined the Variance Partition Coefficient (VPC) as the ratio of the between-studies component by the total residual variability
 \begin{equation}
 \textrm{VPC}_{ij} = \frac{\mathbf{z}_{ij} \boldsymbol{\Psi} \mathbf{z}_{ij}^\top}{\mathbf{z}_{ij} \boldsymbol{\Psi} \mathbf{z}_{ij}^\top  + s_{ij}^2}
 \label{eq:vpc}
@@ -1515,7 +1571,7 @@ Information criteria based on the log-likelihood~\ref{eq:logLik_os} can be used 
 
 Predictions for the combined, or marginal, curve are obtained as in Equation~\ref{eq:pred}, where now the $\boldsymbol{\hat \beta}$ coefficients were estimated using the log relative risks as outcome variables rather than the study-specific $\boldsymbol{\hat \beta}_i$. 
 
-\noindent Predictions are also available for study-specific curves. Using the normality distribution for the random-effects, \cite{henderson1959estimation} compute the asymptotic best linear unbiased prediction (BLUP) of the random-effects $\boldsymbol{b}$ as
+\noindent Predictions are also available for study-specific curves. Using the normality distribution for the random-effects, \cite{henderson1959estimation} computed the asymptotic best linear unbiased prediction (BLUP) of the random-effects $\boldsymbol{b}$ as
 \begin{equation}
 \hat {\mathbf{b}}_i = \hat{\boldsymbol{\Psi}} \mathbf{Z}_i^\top \hat{\boldsymbol{\Sigma}}_i^{-1}\left( \mathbf{y}_i - \mathbf{X}_i\hat{\boldsymbol{\beta}} \right)
 \label{eq:blup_os}
@@ -1545,7 +1601,6 @@ We illustrate the usage of the developed methodologies and measures reanalyzing 
 % Paper I
 \section{Paper~I}\label{sec:res_paperI}
 
-The aim of \citetalias{crippa2016dosresmeta} was to describe the implementation of the two-stage approach for dose--response meta-analysis in the \pkg{dosresmeta} \textsf{R} package.
 We demonstrate the main aspects of the methodology reanalyzing aggregated dose--response data from 21 prospective studies on the association between coffee consumption (cups/day) and all-cause mortality \citep{crippa2014coffee}. The data set \texttt{coffee\_mort} is included in the package, with the first six lines printed below.
 
 \begin{knitrout}\footnotesize
@@ -1606,7 +1661,7 @@ Fixed-effects coefficients:
 \end{knitrout}
 
 
-\noindent The change in the log relative risk of all-cause mortality associated with a 1 cup/day increase in coffee consumption was 0.033. The interpretation is easier on the exponential scale: every 1 cup/day increase was associated with a 3.4\%
+\noindent The change in the log relative risk of all-cause mortality associated with a 1 cup/day increase in coffee consumption was 0.033. That is, the increment of 1 cup/day of coffee was associated with a 3.4\%
 ($\exp(0.033) = 1.034$) higher mortality risk. 
 The \texttt{predict} method facilitates the computation for the predicted linear increase for any arbitrary amount of coffee consumption. For example, setting \texttt{delta = 3}
 
@@ -1621,7 +1676,7 @@ R> predict(lin_le, delta = 3, expo = TRUE)
 \end{knitrout}
 
 
-\noindent every 3 cups/day increase in coffee consumption was associate with a 10\% (95\% CI: 0.97, 1.25) higher mortality risk.
+\noindent In the study by \cite{legrady1987coffee}, 3 cups/day increase in coffee consumption was associate with a 10\% (95\% CI: 0.97, 1.25) higher mortality risk.
 
 Alternative curves can be specified in the formula argument. For example, a quadratic trend $y_{1j} = \beta_1 (x_{1j} - x_{10}) + \beta_2 (x_{1j}^2 - x_{10}^2) + \varepsilon_{1j}$ can be estimated.
 \begin{knitrout}\footnotesize
@@ -1644,7 +1699,7 @@ Fixed-effects coefficients:
 \end{kframe}
 \end{knitrout}
 
-\noindent The coefficients of the quadratic model are not directly interpretable. The results can be instead presented in terms of predicted relative risk for select values of coffee consumption.
+\noindent The coefficients of the quadratic model are not directly interpretable. The results can be instead presented in terms of predicted relative risks for selected values of coffee consumption.
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
@@ -1660,6 +1715,9 @@ R> predict(quadr_le, newdata = data.frame(dose = 0:6), expo = TRUE)
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
+
+
+The quadratic model suggested an U-shaped inverse association, with the maximum risk reduction, 29 \% (95\% CI 0.52, 0.98) observed for 3 cups/day of coffee compared.
 
 \subsection{Multiple studies}
 
@@ -1799,7 +1857,7 @@ I-square statistic = 63.0%
 \end{kframe}
 \end{knitrout}
 
-\noindent The overall test $H_0: \beta_1 = \beta_2 = 0$ (\texttt{Chi2 model}) indicated that the mortality risk significantly varied according to coffee consumption levels. The quadratic model reduces to the simpler linear trend analysis when $\beta_2 = 0$. Thus, the univariate test for $\beta_2$ ($z$ = 4.18, $p$~value < 0.01) suggested that the all-cause mortality risk was related in a non-linear fashion with coffee consumption. The heterogeneity in the study-specific regression coefficients reduced but its impact was still important, with the multivariate $I^2$ = 63\%. 
+\noindent The overall test $H_0: \beta_1 = \beta_2 = 0$ (\texttt{Chi2 model}) indicated that the mortality risk significantly varied according to coffee consumption levels ($\chi_2^2$ = 76, $p$~value < 0.001). The quadratic model reduces to the simpler linear trend analysis when $\beta_2 = 0$. Thus, the univariate test for $\beta_2$ ($z$ = 4.18, $p$~value < 0.001) suggested that the all-cause mortality risk was related in a non-linear fashion with coffee consumption. The heterogeneity in the study-specific regression coefficients reduced but its impact was still important, with the multivariate $I^2$ = 63\%. 
 
 The predicted log relative risks from the linear and quadratic analyses can be presented in a graphical format using $x_\mathrm{ref} = 0$ cups/day as referent (Figure~\ref{fig:pred_fig}).
 
@@ -1887,6 +1945,8 @@ R> p_indiv <- newd %>%
 \end{kframe}
 \end{knitrout}
 
+\noindent The previous analyses suggested that coffee consumption may be inversely associated with all-cause mortality in a non-linear fashion. The highest risk reduction, 17\% (95\% CI 0.79, 0.87), was observed for 4 cups/day of coffee consumption.
+
 
 \section{Paper~II}\label{sec:res_paperII}
 
@@ -1928,7 +1988,7 @@ Adjusted R-squared: 0.482
 
 \noindent An alternative strategy (Analysis C) was to model coffee consumption using RCS with 3 knots located at the fixed quantiles 0.10, 0.5, and 0.9 corresponding to 0, 2, 6.5 cups/day. Since the number of parameters is the same as in the Analysis B ($p$ = 2), the \textrm{$\mathrm{R^2}$} can be used to compare the fit of the two strategies. In particular, the RCS analysis had a better fit, as indicated by the higher \textrm{$\mathrm{R^2}$} = 0.68 (\textrm{$\mathrm{R_{\textrm{adj}}^2}$} = 0.67). The pattern in the residuals was also leveled off around zero with the exception for the 3 highest dose levels. The deviance test, however, rejected again the null hypothesis for model specification, possibly because of the heterogeneity in the individual curves. 
 
-\noindent To address this variability, we employed meta-regression models to explain differences across the studies (Analysis D). We included two study-level covariates indicating the geographical area where the study was conducted (Europa, USA, and Japan) and the sex of the participants (only men, only women, and both sexes). Both the decorellated vs exposure plot and \textrm{$\mathrm{R_{\textrm{adj}}^2}$} = 0.74 indicated an improvement in the overall fit of the analysis even if the $p$~value for the deviance test was below the nominal value ($D$ = 100.4, $p$~value = 0.008).
+\noindent Coffee consumption varies substantially across countries both in terms of coffee powder, methods of preparation, and amount of cup size. In addition, the effect of coffee on all-cause mortality may have a different impact depending on the sex of participants. To address this variability, we employed meta-regression models to explain differences across the studies (Analysis D). We included two study-level covariates indicating the geographical area where the study was conducted (Europa, USA, and Japan) and the sex of the participants (only men, only women, and both sexes). Both the decorellated vs exposure plot and \textrm{$\mathrm{R_{\textrm{adj}}^2}$} = 0.74 indicated an improvement in the overall fit of the analysis even if the $p$~value for the deviance test was below the nominal value ($D$ = 100.4, $p$~value = 0.008).
 
 \begin{table}[!h]
 
@@ -1960,11 +2020,11 @@ D & RCS + interaction \textsuperscript{b} & 100.372 & 69 & 0.008 & 0.772 & 0.739
 
 
 
-The aim of \citetalias{crippa2016new} was to develop an alternative measure of heterogeneity for meta-analysis that did not depend on the distribution of the within-study error terms. We illustrated how to employ the new measure reanalyzing aggregated dose--response data on the association between meat and bladder cancer \citep{crippa2016red}. Five cohort and 8 case-control studies reported results for either red or processed meat and bladder cancer risk including a total of 10,271 cases and 1,066,027 participants. The data for both the associations are also included in the \texttt{dosresmeta} package.
+We illustrated how to employ the new measure of heterogeneity, $\hat R_b$, reanalyzing aggregated dose--response data on the association between meat and bladder cancer \citep{crippa2016red}. Five cohort and 8 case-control studies reported results for either red or processed meat and bladder cancer risk including a total of 10,271 cases and 1,066,027 participants. The data for both the associations are also included in the \texttt{dosresmeta} package.
 
 \subsection{Processed meat and bladder cancer}
 
-\noindent We started considering a linear trend analysis for the association between processed meat and bladder cancer risk. The effect sizes for the meta-analysis in the second part of a two-stage dose--response meta-analysis were the linear trends for a 50 g per day increase in processed meat consumption (Figure~\ref{fig:forest_pr}). The combined relative risk was 1.2 (95\% CI 1.06, 1.37). The $Q$~test provided some indication of presence of statistical heterogeneity ($Q $ = 17.2, $p$~value = 0.07). The $\hat R_b$ = 38\% (95\% CI 37, 40) indicated that the contribution of heterogeneity in the pooled analysis was limited (Table~\ref{tab:tab_rb}), as also suggested by the alternative measures $I^2$ = 42\% (95\% CI 40, 43) and $R_I$ = 43\% (95\% CI 41, 44). Because the within-study variances were substantial homogenous the differences between the alternative measures were negligible. 
+\noindent We started considering a linear trend analysis for the association between processed meat and bladder cancer risk. The effect sizes for the meta-analysis in the second part of a two-stage dose--response meta-analysis were the linear trends for a 50 g per day increase in processed meat consumption (Figure~\ref{fig:forest_pr}). The combined relative risk was 1.2 (95\% CI 1.06, 1.37). The $Q$~test detected statistical heterogeneity ($Q $ = 17.2, $p$~value = 0.07). The $\hat R_b$ = 38\% (95\% CI 37, 40) indicated that the contribution of heterogeneity in the pooled analysis was limited (Table~\ref{tab:tab_rb}), as also suggested by the alternative measures $I^2$ = 42\% (95\% CI 40, 43) and $R_I$ = 43\% (95\% CI 41, 44). Because the within-study variances were substantial homogenous the differences between the alternative measures were negligible. 
 
 \noindent No evidence of non-linearity was observed using either a quadratic curve ($p$~value = 0.96) or a RCS model with 3 knots located at fixed percentiles ($p$~value = 0.92).
 
@@ -1985,7 +2045,7 @@ The aim of \citetalias{crippa2016new} was to develop an alternative measure of h
 
 
 
-An analogous analysis was conducted for the association between red meat consumption and bladder cancer risk, with the estimated linear trends expressed for a 100 g per day increase. The pooled relative risk was 1.22 (95\% CI 1.05, 1.41)). The study-specific associations in Figure~\ref{fig:forest_red}, however, appeared to be heterogeneous ($Q $ = 60, $p$~value < 0.01). In particular, the contribution of the heterogeneity in determining the variance of the combined effect was $\hat R_b$ = 67\%, indicating a moderate impact. Given that the distribution of within-error terms was higher as compared to the previous analysis (Figure~\ref{fig:fig_dist_vi}), the differences with the alternative measures were substantially higher: $I^2$ = 80\% (95\% CI 79, 81) and $R_I$ = 89\% (95\% CI 88, 89), which suggested a larger impact of the heterogeneity. 
+An analogous analysis was conducted for the association between red meat consumption and bladder cancer risk, with the estimated linear trends expressed for a 100 g per day increase \citep{crippa2016red}. The pooled relative risk was 1.22 (95\% CI 1.05, 1.41)). The study-specific associations in Figure~\ref{fig:forest_red}, however, appeared to be heterogeneous ($Q $ = 60, $p$~value < 0.01). In particular, the contribution of the heterogeneity in determining the variance of the combined effect was $\hat R_b$ = 67\%, indicating a moderate impact. Given that the distribution of within-error terms was higher as compared to the previous analysis (Figure~\ref{fig:fig_dist_vi}), the differences with the alternative measures were substantially higher: $I^2$ = 80\% (95\% CI 79, 81) and $R_I$ = 89\% (95\% CI 88, 89), which suggested a larger heterogeneity across the study specific trends. 
 
 \noindent Similarly to the case of processed meat, no evidence of non-linearity was found ($p$~value equal to 0.73 and 0.74 for $\beta_2$ in the quadratic and RCS model.)
 
@@ -2047,10 +2107,10 @@ Red meat Prospective & 1.51 (1.13, 2.02) & 40, < 0.01 & 0.36 & 81 (80, 82) & 85 
 
 \section{Paper IV}\label{sec:res_paperIV}
 
-\noindent The proposed and alternative measures of between-studies variability can not capture the heterogeneity related to differences in the exposure range distributions. We presented the implementation of a point-wise strategy as a possible remedy, reanalyzing the data between red meat consumption and bladder cancer risk described in the previous section.
+\noindent The proposed and alternative measures of between-studies variability cannot capture the heterogeneity related to differences in the exposure range distribution. We presented the implementation of a point-wise strategy as a possible remedy, reanalyzing the data between red meat consumption and bladder cancer risk described in the previous section.
 The data consists of 13 independent studies where the the exposure varied across studies not only in terms of definition and measurement but also in terms of range of assessment. For example, the minimum red meat consumption in one study (85.5 g per day in study ID 7) was higher then the maximum exposure value in other studies (71.7 g per day in study ID 3). Furthermore, only 3 out 13 studies reported relative risks for meat consumption greater than 150 grams/day. Descriptive measures of red meat consumption across studies are reported in Table~\ref{tab:chr_redtab} and graphically presented in Figure~\ref{fig:p_chr}.
 
-\noindent We decided to model the association under investigation using second-degree fractional polynomials. To allow for differential dose--response relationships, we fitted the FP2 models for different combination of power terms separately in each studies and selected the study-specific best fitting polynomials as the model with the lowest AIC. As expected, the best study-specific power terms varied across studies (Table~\ref{tab:AIC_pi_red}), with the most common polynomial defined by $p = c(-2, -2)$ (8 out of 13 studies). Interestingly, the corresponding analysis using the AIC from the corresponding one-stage model selected $p = c(-1, -0.5)$ as the best FP2, a combination of power terms that was not preferred in none of the individual dose--response analyses. Figure~\ref{fig:pbi_plot_red} displays the predicted curves based on the best FP2 for each study, limited to the observed exposure range (blue solid lines). Extrapolation are represented by dashed lines while the red curves represent the predicted association from the one-stage model, which imposed the common power terms $p = c(-1, -0.5)$ across the studies. While the alternative strategies gave similar results in the observed exposure range, larger differences were observed for high levels of red meat consumption. Taking study ID 5 as example, the predicted relative risks for 150 g compared to 15 g of red meat consumption per day were 2.14 (95\% CI 0.81, 5.67) and 1.13 (95\% CI 0.84, 1.53) for the FP2 with the study specific $p_5 = (3, 3)$ and the common $p = (-1, -0.5)$, respectively. 
+\noindent We decided to model the association under investigation using second-degree fractional polynomials. To allow for differential dose--response relationships, we fitted the FP2 models for different combination of power terms separately in each studies and selected the study-specific best fitting polynomials as the model with the lowest AIC. As expected, the best study-specific power terms varied across studies (Table~\ref{tab:AIC_pi_red}), with the most common polynomial defined by $p = (-2, -2)$ (8 out of 13 studies). Interestingly, the corresponding analysis using the AIC from the corresponding one-stage model selected $p = (-1, -0.5)$ as the best FP2, a combination of power terms that was not preferred in any of the individual dose--response analyses. Figure~\ref{fig:pbi_plot_red} displays the predicted curves based on the best FP2 for each study, limited to the observed exposure range (blue solid lines). Extrapolation are represented by dashed lines while the red curves represent the predicted association from the one-stage model, which imposed the common power terms $p = (-1, -0.5)$ across the studies. While the alternative strategies gave similar results in the observed exposure range, larger differences were observed for high levels of red meat consumption. Taking study ID 5 as example, the predicted relative risks for 150 g compared to 15 g of red meat consumption per day were 2.14 (95\% CI 0.81, 5.67) and 1.13 (95\% CI 0.84, 1.53) for the FP2 with the study specific $p_5 = (3, 3)$ and the common power terms $p = (-1, -0.5)$, respectively. 
 
 \noindent In a point-wise dose--response meta-analysis we chose to predict the study specific log relative risks for a fine grid of exposure values ranging from 5 g to 300 g with step by 5 g, using 85 g/day (median reference dose value) as referent. The study-specific predictions were limited to the observed exposure range so that study ID 3, for example, predicted log RRs for dose values up to 70 g/days. Thus, the number of study-specific predicted log RRs varies across the selected red meat consumption levels. 
 
@@ -2067,7 +2127,7 @@ The data consists of 13 independent studies where the the exposure varied across
 
 \end{knitrout}
 
-\noindent The combined results from the 59 meta-analyses can be presented pointwisely. Figure~\ref{fig:pwa} plots the combined predicted relative risk from a point-wise strategy, and compare them with the corresponding one-stage analysis. In the reanalyzed data, the two strategies provided similar point estimates. However, the confidence intervals from the point-wise analysis was larger as compared to the corresponding one-stage model, reflecting the higher uncertainty in the predictions. For example, for 100 g the predicted RRs were 0.92 (95\% CI 0.8, 1.07) for the point-wise strategy and 0.0625 (95\% CI 1.03, 1.19) for the one-stage model. Similarly, for 250 g the two predictions were 1.27 (95\% CI 0.71, 2.26) and 1.2 (95\% CI 1.05, 1.38).
+\noindent The combined results from the 59 meta-analyses can be presented pointwisely. Figure~\ref{fig:pwa} plots the combined predicted relative risk from a point-wise strategy, and compare them with the corresponding one-stage analysis. In the reanalyzed data, the two strategies provided similar point estimates. However, the confidence intervals from the point-wise analysis was larger as compared to the corresponding one-stage model, reflecting the higher uncertainty in the predictions. For example, for 100 g the predicted RRs were 0.92 (95\% CI 0.8, 1.07) for the point-wise strategy and 1.11 (95\% CI 1.03, 1.19) for the one-stage model. Similarly, for 250 g the two predictions were 1.27 (95\% CI 0.71, 2.26) and 1.2 (95\% CI 1.05, 1.38).
 
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{figure}[ht!]
@@ -2082,7 +2142,7 @@ The data consists of 13 independent studies where the the exposure varied across
 
 \end{knitrout}
 
-One advantage of a point-wise strategy is that also additional statistics from the meta-analytic models can be presented pointwisely (Figure~\ref{fig:pwa_results}). For example, the estimates for the between-study heterogeneity, $\hat \tau^2$, were lower than 0.02 for red meat consumption between 20 g and 150 g per day, while largely increased for higher values (panel A). The weights of the individual studies changed over the selected exposure values. Panel B displays the standardized weights for three of the included studies. The percentage weight for study ID 5 was very large for red meat consumption lower than 30 g, while it stabilized around 15\% after that. For study ID 10, the weight declined from 20\% to 5\% as the dose value increased, while it remained constant around 3\% for study ID 1. The results from the $Q$~test in panel C indicated presence of statistical heterogeneity for dose value lower than 100 g and higher than 200 g of red meat consumption. The impact of heterogeneity quantified by the $\hat R_b$ varied between 25\% and 60\% for exposure values below 75 g per day, while it reached 85\% for higher dose levels.
+One advantage of a point-wise strategy is that also additional statistics from the meta-analytic models can be presented pointwisely (Figure~\ref{fig:pwa_results}). For example, the estimates for the between-study heterogeneity, $\hat \tau^2$, were lower than 0.02 for red meat consumption between 20 g and 150 g per day, while largely increased for higher values (panel A). The weights of the individual studies changed over the range of the exposure values. Panel B displays the standardized weights for three of the included studies. The percentage weight for study ID 5 was very large for red meat consumption lower than 30 g, while it stabilized around 15\% after that. For study ID 10, the weight declined from 20\% to 5\% as the dose value increased, while it remained constant around 3\% for study ID 1. The results from the $Q$~test in panel C indicated presence of statistical heterogeneity for dose value lower than 100 g and higher than 200 g of red meat consumption. The impact of heterogeneity quantified by the $\hat R_b$ varied between 25\% and 60\% for exposure values below 75 g per day, while it reached 85\% for higher dose levels.
 
 
 
@@ -2092,7 +2152,7 @@ One advantage of a point-wise strategy is that also additional statistics from t
 
 
 
-A common limitation of a two-stage and point-wise approach is that the dose--response analyses are limited by the low number of data points in each study, usually $J_i \le 3$. We demonstrated an alternative one-stage model for dose--response meta-analysis using a subset of the data on coffee consumption and all-cause mortality presented in Sections~\ref{sec:res_paperI} and \ref{sec:res_paperII}. The data consists of the results for 12 independent populations including 5508 cases and 750959 participants. The results for two cohorts \citep{nilsson2012traditional} were excluded in the initial analysis of a non-linear trend because they only reported 1 non-referent risk. We performed a one-stage random-effects meta-analysis assuming a quadratic relationship on the whole data set and compared the results with the corresponding two-stage analysis which excluded the results by \cite{nilsson2012traditional}. 
+A common limitation of a two-stage and point-wise approach is that the dose--response analyses are limited by the low number of data points in each study, usually $J_i \le 3$. We demonstrated an alternative one-stage model for dose--response meta-analysis using a subset of the data on coffee consumption and all-cause mortality presented in Sections~\ref{sec:res_paperI} and \ref{sec:res_paperII}. The data consists of the results for 12 independent populations including 5508 cases and 750959 participants \citep{crippa2016red}. The results for two cohorts \citep{nilsson2012traditional} were excluded in the initial analysis of a non-linear trend because they only reported 1 non-referent risk. We performed a one-stage random-effects meta-analysis assuming a quadratic relationship on the whole data set and compared the results with the corresponding two-stage analysis which excluded the results by \cite{nilsson2012traditional}. 
 
 \noindent Although both the analyses suggested a U-shaped association between increasing levels of coffee consumption and mortality risk, the predicted curve from a two-stage model provided lower relative risk estimates (Figure~\ref{fig:comp_osts}). Using 0 cups/day, the predicted RRs for 2 cups/day were 0.86 (95\% CI 0.81, 0.91) for the two-stage analysis, and 0.89 (95\% CI 0.83, 0.96) for the one-stage model. Similarly, for 5 cups/day the corresponding numbers were 0.78 (95\% CI 0.72, 0.84) and 0.82 (95\% CI 0.76, 0.89). Interestingly, the standard errors for the beta coefficients were lower in the two-stage analysis ($\SE \left(\hat \beta_1 \right)$ = 0.021, $\SE \left(\hat \beta_2 \right) = 0.003$), even if the corresponding estimates from the one-stage analysis were based on a larger number of data points ($\SE \left(\hat \beta_1 \right)$ = 0.027, $\SE \left(\hat \beta_2 \right) = 0.004$). As a consequence, the confidence intervals for the reported predicted relative risks were larger in the one-stage analysis, while the $p$ value for non-linearity $H_0: \beta_2 = 0$ was lower in a two-stage analysis: $p$ = 0.008 compared to $p$ = 0.154 from the alternative one-stage model.
 
@@ -2135,7 +2195,7 @@ Different strategies can be chosen to model the dose--response association of in
 \label{spike_zero}
 \end{multline*}
 
-\noindent where the indicator function $\mathbf{I}$ assumes value 1 if the condition in the parenthesis  is met, 0 otherwise.
+\noindent where the indicator function $\mathbf{I}$ takes on value 1 if the condition in the parenthesis  is met, 0 otherwise.
 \noindent Another possibility consists of considering homogeneous groups of exposure in which the mortality risk can be considered constant. For instance, coffee consumption could be divided in intervals $< 1$, $[1, 3)$, $[3, 5)$, $[5, 7)$, and $> 7$ cups/day. The dose--response model is specified by including 4 dummy variables ($x_1, x_2, x_3$, and $x_4$) and using one level (e.g. $[1, 3)$) as referent
 \begin{multline*}
 \mathbf{y}_i =  (\beta_0 + b_{i0}) + (\beta_1 + b_{i1}) (\mathbf{x_1}_{i} - {x_1}_{i0}) + (\beta_2  + b_{i2}) (\mathbf{x_2}_{i} - {x_2}_{i0})
@@ -2172,19 +2232,20 @@ After choosing the quadratic curve as the basis for modelling the dose--response
 
 \chapter{Discussion}
 
-The aim of this thesis was to develop new tools to address specific methodological aspects of a dose--response meta-analysis. The developed methodologies have been implemented in the \pkg{dosresmeta} and \pkg{hetmeta} \textsf{R} packages freely available on CRAN. Several codes for reproducing the results of this thesis and of the corresponding papers can be found either on my website \url{ https://alecri.github.io/software} and on GitHub at \url{ https://github.com/alecri}.
+We have proposed and developed new strategies and ad-hoc measures for dose--response meta-analysis, including tools for evaluating the goodness-of-fit, a new measure for quantifying the impact of heterogeneity, a strategy to deal with differences in the exposure range across studies, and a one-stage approach to estimate complex models without excluding relevant studies.
+The developed methodologies have been implemented in the \pkg{dosresmeta} and \pkg{hetmeta} \textsf{R} packages freely available on CRAN. Several codes for reproducing the results of this thesis and of the corresponding papers can be found on my website \url{ https://alecri.github.io/software} and on GitHub at \url{ https://github.com/alecri}.
 
 
 \section{Goodness-of-fit}
 
-In \citetalias{discacciati2015goodness} we discussed the relevant issue of how to evaluate the goodness-of-fit in a dose--response meta-analysis. Flexible parametric curves are estimated in order to summarize and represent the aggregated data in a synthetic format. To give a fair representation of the analyzed data, it is important to check if the fitted meta-analytical model actually provides an adequate description of the data at hand. Therefore, we think that an evaluation of the goodness-of-fit should be a natural step in a dose--response meta-analysis.
+An evaluation of the goodness-of-fit should be a natural step in a dose--response meta-analysis. In \citetalias{discacciati2015goodness} we discussed the relevant issue of how to evaluate the goodness-of-fit in a dose--response meta-analysis. Flexible parametric curves are estimated in order to summarize and represent the aggregated data in a synthetic format. It is important to check if the fitted meta-analytical model actually provides an adequate description of the data at hand. 
 
 The evaluation of the goodness-of-fit is usually carried out in practice by measuring the degree of agreement between the fitted and observed data. We have presented and discussed three tools (deviance, coefficients of determination, and decorrelated residuals versus exposure plot) specifically designed for assessing the goodness-of-fit in meta-analysis of aggregated dose--response data. In particular, the deviance can be employed for testing if the chosen meta-analytic model is properly specified, while the $R^2$ can be useful for quantifying from a descriptive point of view the proportion of variability accounted by the dose--response model. The fit of the dose--response analysis can be visually checked by inspecting the scatter plot of the decorrelated residuals versus the quantitative exposure.
 
-The practical examples in \citetalias{discacciati2015goodness} and Section~\ref{sec:res_paperII} illustrated the use of the proposed tools in evaluating the fit of the candidate dose--response models. In particular, we shown how they can be useful for identifying specific dose--response pattern, investigating possible sources of heterogeneity, and generally evaluating if the combined dose--response association can be an adequate summary of the observed data. Implementation of the proposed tools in applied works can strengthen the results or, contrary, raise doubts about the ability of the selected model in summarizing the available evidence. 
+The practical examples in \citetalias{discacciati2015goodness} and Section~\ref{sec:res_paperII} illustrated the use of the proposed tools in evaluating the fit of the candidate dose--response models. In particular, we have shown how they can be useful for identifying specific dose--response pattern, investigating possible sources of heterogeneity, and generally evaluating if the combined dose--response association can be an adequate summary of the observed data. Implementation of the proposed tools in applied works can strengthen the results or, on the contrary, raise doubts about the ability of the selected model in summarizing the available evidence. 
 
 \noindent As in the general case for the use of summary measures, one should be aware of the possible limitations of the developed tools.
-We have already seen that while a small $p$~value for the deviance test for model specification is an indication that the posit model failed in accounting the observed variation in the log relative risks, a large $p$~value can not be interpreted as evidence that the model adequately explains the observed variability. In addition, a test based approach is generally unsatisfactory because it does not provide information about the actual fit of the analysis and suffers from the low power due to the typically small number of data points in applied meta-analyses. Lastly, the $p$~values for the global test of goodness-of-fit are not valid when the meta-analytical dose--response models are estimated driven by the observed data.
+We have already seen that while a small $p$~value for the deviance test for model specification is an indication that the posited model failed in accounting for the observed variation in the log relative risks, a large $p$~value can not be interpreted as evidence that the model adequately explains the observed variability. In addition, a test based approach is generally unsatisfactory because it does not provide information about the actual fit of the analysis and suffers from the low power due to the typically small number of data points in meta-analyses. Lastly, the $p$~values for the global test of goodness-of-fit are not valid when the meta-analytical dose--response models are estimated driven by the observed data.
 
 Possible explanations for a low value of the $R^2$ may be multiple. In fact, an $R^2$ close to zero may indicate that the selected model poorly fits the data, but also that there is no association between the quantitative exposure and the relative risk for the health outcome, or again that the model is correctly specified but the residual variability is still close to the overall variability. Finally, the visual inspection of the goodness-of-fit can reveal dose--response patterns in the modeled data but its judgment can be quite subjective. In case of sparse data, almost any patterns can be detected in the decorellated residuals-versus-exposure plot.
 
@@ -2195,7 +2256,7 @@ More generally, the tools have been presented in a fixed-effect framework. The d
 
 Another relevant aspect in a quantitative review, which is also related the assessment of goodness-of-fit, is the evaluation of the impact of heterogeneity. Indeed, a high variability in the reported effect sizes may undermine the appropriateness of presenting the combined effect as a summary measure. The common measures of heterogeneity have been developed under the unrealistic assumption of constant error variances. In \citetalias{crippa2016new} we have proposed a new measure of heterogeneity, $\hat R_b$, that overcomes the limitation of the previous measures.
 
-The $\hat R_b$ quantifies the impact of heterogeneity as the proportion of the variance of the combined effect due to the between-study variability. We have shown how $\hat R_b$ satisfies the properties required for a measure of heterogeneity without making any assumption about the distribution for the within-study error terms. It can be expressed as the average of the study-specific intraclass correlation terms, i.e. the ratios of the $\tau^2$ to the overall study-specific variance $\tau^2 + v_i$. Like $I^2$ and $\hat R_I$, the proposed measure tends to its upper limit 1 in case of meta-analysis of very precise estimates (small $v_i$). The between-study coefficient of variation can give additional information about the magnitude of heterogeneity compensating the shortcoming of the available measures.
+The $\hat R_b$ quantifies the impact of heterogeneity as the proportion of the variance of the combined effect due to the between-study variability. We have shown how $\hat R_b$ satisfies the properties required for a measure of heterogeneity without making any assumption about the distribution of the within-study error terms. It can be expressed as the average of the study-specific intraclass correlation terms, i.e. the ratios of the $\tau^2$ to the overall study-specific variance $\tau^2 + v_i$. Like $I^2$ and $\hat R_I$, the proposed measure tends to its upper limit 1 in case of meta-analysis of very precise estimates (small $v_i$). The between-study coefficient of variation can give additional information about the magnitude of heterogeneity compensating the shortcoming of the available measures.
 The proposed measure of heterogeneity requires an estimate of $\tau^2$, the between-study variability. Thus, confidence intervals should accompany the point estimates of $\hat R_b$ to reflect the uncertainty in the sample. We have proposed Wald type confidence intervals using the delta methods based on the relation between $\hat R_b$ and $Q$. The performances of the confidence intervals were tested throughout an extensive simulation study presented in \citetalias{crippa2016new}.
 
 We have shown how to present and interpret the new measure of heterogeneity reanalyzing both univariate meta-analyses (in the illustrative examples of \citetalias{crippa2016new}) and, more specifically, dose--response meta-analysis (in Section~\ref{sec:res_paperIII}). As expected, the $\hat R_b$ provided similar results as compared to both $I^2$ and $\hat R_I$ in case of effect sizes with homogeneous distribution for the within-error terms. On the contrary, differences were more evident as the variability of the $v_i$ increased, with values of $\hat R_b$ generally lower than the corresponding $I^2$ and $\hat R_I$.
@@ -2208,7 +2269,7 @@ In \citetalias{crippa2018pointwise} we have extended a point-wise approach origi
 A point-wise approach has the potential advantage of improving the individual dose--response analyses since the study-specific models can be defined separately across the studies. Although the aim of a dose--response meta-analysis should be to estimate a common curve that uniformly fits the study-specific results, estimation of a single functional form may lower the fit of some individual analyses. We have illustrated in Section~\ref{sec:pwa} and~\ref{sec:res_paperIV} the case of second degree fractional polynomials. In a two-stage approach, a single couple of power terms needs to be defined for all the studies so that the pooled dose--response curve can be derived by pooling the study-specific regression coefficients. In a point-wise approach, each study can choose a possibly different combination of power terms to better fit the observed data. In such a way, the predicted log relative risks will be closer to the observed ones. The combined curve can be then derived by pooling the individual predicted log relative risks pointwisely.
 
 Another important advantage relates to the meta-analysis of heterogeneous exposure distributions where the quantitative exposure may differ not only in the definition and measurement but also in the range. The solution in a two-stage analysis could be to limit the prediction of the pooled curve to a subset of the observed exposure values. Depending of the extent of the diversity of the exposure ranges this might not be sufficient. We have illustrated this feature reanalyzing aggregated data on the association between milk consumption and all-cause mortality in the results of \citetalias{crippa2018pointwise} and between red meat consumption and bladder cancer in Section~\ref{sec:res_paperIV}. 
-In the point-wise strategy, the predicted log relative risk can be limited to the observed exposure range. The combined curve is thus obtained by combining pointwisely a potential different number of log relative risks. Neglecting this type of heterogeneity may have important consequences both in terms of point and interval estimates for the combined dose--response association. We have seen in Section~\ref{sec:res_paperIV} how the results based on a two-stage analysis may provide overconfident results for moderate to high values of red meat consumption, whereas a point-wise strategy limited the number of study participating in the corresponding prediction and produced thus wider confident intervals, reflecting the uncertainty associated with the lower number of results. Finally, additional results from the univariate meta-analytic models can also presented pointwisely, providing a richer description of the quantities of interest over of the exposure range.
+In the point-wise strategy, the predicted log relative risk can be limited to the observed exposure range. The combined curve is thus obtained by combining pointwisely a potential different number of log relative risks. Neglecting this type of heterogeneity may have important consequences both in terms of point and interval estimates for the combined dose--response association. We have seen in Section~\ref{sec:res_paperIV} how the results based on a two-stage analysis may provide overconfident results for moderate to high values of red meat consumption, whereas a point-wise strategy limited the number of study participating in the corresponding prediction and produced thus wider confident intervals, reflecting the uncertainty associated with the lower number of results. Finally, additional results from the univariate meta-analytic models can also be presented pointwisely, providing a richer description of the quantities of interest over the exposure range.
 
 A possible limitation of the proposed approach is that the combined curve is obtained by means of separate univariate meta-analyses which are based on a set of common study-specifics analyses. As a consequence, the standard errors and confidence intervals may no longer be valid. A potential remedy would be to incorporate the covariance matrix for the study-specific predictions in the multivariate meta-analytic model. However, the number and the nature of the multivariate predictions are typically to0 high for the estimation algorithms to converge.
 
@@ -2217,7 +2278,7 @@ A possible limitation of the proposed approach is that the combined curve is obt
 
 In \citetalias{crippa2018one} we have formalized and presented a one-stage model for meta-analysis of heterogeneous non-linear curves. The two steps analyses of a two-stage approach, dose--response and pooling, can be written as a single procedure in terms of a linear mixed-effects model. The mixed-effects framework is particularly suitable for inferential procedures, marginal and conditional predictions, quantification of heterogeneity, goodness-of-fit and model comparison. The same questions frequently answered in a two-stage approach can be similarly addressed using a one-stage methodology. 
 
-The technique was initially presented in a fixed-effect analysis as a more flexible alternative for the two-stage methodology. Extensions to random-effects meta-analysis of non-linear curves has been typically framed into a two-stage framework because of the developments related to multivariate meta-analysis and for simplicity in the implementation using common statistical software.  A one-stage model has oftentimes been regarded as equivalent and never further investigated. Even if we proved that a one-stage and two-stage approach give the same point and interval inference, the one-stage methodology is more flexible and allows to answer more elaborated research questions. Flexible curves can be estimated also based on the results from studies reporting a limited number of relative risks. In a two-stage meta-analysis, on the other hand, a typical requirement is that each study provides enough data for the individual dose--response analyses. For example, using either second order fractional polynomials or restricted cubic splines with 3 knots, $p = 2$ transformations are required for modeling the non-linear association. As a consequence, only studies providing at least 2 non-referent relative risks can be included in the non-linear analysis. The case where studies reported the results after dichotomizing the quantitative exposure are not rare. The data for these studies will be excluded in a two-stage meta-analysis. One important objective of a quantitative review, however, is to consider and analyze the whole body of evidence for a research question of interest. Systematic exclusion of studies because of insufficient number of data points will necessarily discard useful information and provide only a limited summary of the available information. Furthermore, the assessment and investigation of between-studies variability will be also distorted, so that residual heterogeneity might be undetected. 
+The technique was initially presented in a fixed-effect analysis as a more flexible alternative of the two-stage methodology. Extensions to random-effects meta-analysis of non-linear curves have been typically framed into a two-stage framework because of the developments related to multivariate meta-analysis and for simplicity in the implementation using common statistical software.  A one-stage model has oftentimes been regarded as equivalent. Even if we proved that a one-stage and two-stage approach give the same point estimates and inference, the one-stage methodology is more flexible and allows to answer more elaborated research questions. Flexible curves can be estimated also based on the results from studies reporting a limited number of relative risks. In a two-stage meta-analysis, on the other hand, a typical requirement is that each study provides enough data for the individual dose--response analyses. For example, using either second order fractional polynomials or restricted cubic splines with 3 knots, $p = 2$ transformations are required for modeling non-linear associations. As a consequence, only studies providing at least 2 non-referent relative risks can be included in the non-linear analysis. The case where studies reported the results after dichotomizing the quantitative exposure are not rare. The data for these studies will be excluded in a two-stage meta-analysis. One important objective of a quantitative review, however, is to consider and analyze the whole body of evidence for a research question of interest. Systematic exclusion of studies because of insufficient number of data points will necessarily discard useful information and provide only a limited summary of the available information. Furthermore, the assessment and investigation of between-studies variability will be also distorted, so that residual heterogeneity might be undetected. 
 
 Another advantage of a one-stage model is that many methodological aspects are greatly facilitated by using a single linear mixed-effects model. The tools presented in \citetalias{discacciati2015goodness}, for instance, were developed using the equivalence between the one- and two-stage approach in a fixed-effects analysis. The comparison of the fit in different dose--response analyses is also greatly facilitated by using information criteria such as the AIC which are based on a common comparable likelihood.
 
@@ -2242,15 +2303,15 @@ More specifically we conclude the following:
 
 \begin{itemize}
 
-\item The \texttt{dosresmeta} $\R$ package can help practitioners to conduct dose--response meta-analyses and to apply the methods presented in this thesis. Dedicated functions help to avoid pitfalls frequently encountered in published meta-analyses, such as definition of the design matrix and prediction of the pooled results (\citetalias{crippa2016dosresmeta}).
+\item The \texttt{dosresmeta} $\R$ package has been widely used throughout the world and applied be practitioners in conducting dose--response meta-analyses. Most recent developments are available to apply the methods presented in this thesis. Dedicated functions have been useful to avoid pitfalls frequently encountered in published meta-analyses, such as definition of the design matrix and prediction of the pooled results (\citetalias{crippa2016dosresmeta}).
 
-\item Goodness-of-fit should be regularly evaluated in applied dose--response meta-analysis. The proposed solutions consist of descriptive measures to summarize the agreement between fitted and observed data (the deviance and the coefficient of determination), and graphical tools to visualize the fit of the model (decorrelated residuals-versus-exposure plot). These tools can be employed to identify systematic dose--response patterns and possible source of heterogeneity, and to support the conclusions in applied meta-analyses (\citetalias{discacciati2015goodness}).
+\item The proposed tools consist of descriptive measures to summarize the agreement between fitted and observed data (the deviance and the coefficient of determination), and graphical tools to visualize the fit of the model (decorrelated residuals-versus-exposure plot). These tools can be employed to identify systematic dose--response patterns and possible source of heterogeneity, and to support the conclusions. Goodness-of-fit should be regularly evaluated in applied dose--response meta-analysis (\citetalias{discacciati2015goodness}).
 
-\item The new measure of heterogeneity, $\hat R_b$, quantifies the proportion of the variance of the pooled estimate attributable to the between-study heterogeneity. Contrary to the available measures of heterogeneity, it does not make any assumption about the distribution of the within-study error variances, nor does it require specification of a typical value for these quantities. Therefore, we recommend the use of the $\hat R_b$ as preferred measure for quantifying the impact of heterogeneity (\citetalias{crippa2016new}). 
+\item The new measure of heterogeneity, $\hat R_b$, quantifies the proportion of the variance of the pooled estimate attributable to the between-study heterogeneity. Contrary to the available measures of heterogeneity, it does require specification of a typical value for these quantities. Therefore, we recommend the use of the $\hat R_b$ as preferred measure for quantifying the impact of heterogeneity (\citetalias{crippa2016new}). 
 
 \item A point-wise strategy for dose--response meta-analysis does not require the specification of a unique model as in the traditional approaches, and therefore allows for more flexibility in modeling the individual curves. In addition, the extent of extrapolation is limited by predicting the study-specific relative risk based on the observe exposure range. The use of the described strategy may improve the robustness of the results, especially in case of heterogeneous exposure range (\citetalias{crippa2018pointwise}).
 
-\item A one-stage approach for dose--response meta-analysis consists of a linear mixed-effects model, which offer useful tools for describing the impact of heterogeneity over the exposure range, for comparing the fit of different models, and for predicting individual dose--response associations. The main advantage is that flexible curves can be estimated regardless of the number of data-points in the individual analyses (\citetalias{crippa2018one}).
+\item The proposed one-stage approach for dose--response meta-analysis consists of a linear mixed-effects model, offering useful tools for describing the impact of heterogeneity over the exposure range, for comparing the fit of different models, and for predicting individual dose--response associations. The main advantage is that flexible curves can be estimated regardless of the number of data-points in the individual analyses (\citetalias{crippa2018one}).
 
 \end{itemize}
 
