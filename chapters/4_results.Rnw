@@ -462,7 +462,7 @@ dist_vi <- ggplot(NULL, aes(lin_pr$vi, col = "Processed meat")) +
   geom_line(aes(lin_red$vi, col = "Red meat"), 
             stat = "density", adjust = 2.5) +
   labs(x = "Within-study error variance", col = "Exposure") +
-  scale_color_manual(values = c(`Processed meat` = "blue", `Read meat` = "red"))
+  scale_color_manual(values = c(`Processed meat` = "blue", `Red meat` = "red"))
 @
 
 

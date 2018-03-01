@@ -742,9 +742,9 @@ If we had access to the individual patient data, the dose--response model for a 
 \log \left( \lambda \left(x, \mathbf{z} \right) \right) =  \beta_0 + \beta_1x + \boldsymbol{\gamma}^\top \mathbf{c}
 \label{eq:lin_ipd}
 \end{equation}
-\noindent where $x$ is the quantitative exposure and $c$ the set of possible confounders. The outcome variable is the log transformation of the mean outcome (e.g. odds, risk, or rate). Transformations of the exposure variable can be included to relax the linearity assumption, such as a quadratic term
+\noindent where $x$ is the quantitative exposure and $\mathbf{c}$ the set of possible confounders. The outcome variable is the log transformation of the mean outcome (e.g. odds, risk, or rate). Transformations of the exposure variable can be included to relax the linearity assumption, such as a quadratic term
 \begin{equation}
-\log \left( \lambda \left(x, \mathbf{z} \right) \right) =  \beta_0 + \beta_1x + \beta_2x^2 + \boldsymbol{\gamma}^\top \mathbf{z}
+\log \left( \lambda \left(x, \mathbf{z} \right) \right) =  \beta_0 + \beta_1x + \beta_2x^2 + \boldsymbol{\gamma}^\top \mathbf{c}
 \label{eq:quadr_ipd}
 \end{equation}
 
@@ -1336,7 +1336,7 @@ The first is that different parameterizations, or models, can be graphically com
 To illustrate both problems, I consider Individual Participant Data (IPD) from one of the registers involved in the Surveillance, Epidemiology, and End Results (SEER) Program (\url{https://seer.cancer.gov}), and focus on the association between age at diagnosis and breast cancer mortality. 
 
 % latex table generated in R 3.4.3 by xtable 1.8-2 package
-% Thu Mar  1 11:09:57 2018
+% Thu Mar  1 12:20:20 2018
 \begin{table}[ht]
 \centering
 \caption{Aggregated dose--response data on the adjusted association between age and breast cancer mortality based on one registry from the SEER program using the first age category as referent.
@@ -1385,7 +1385,7 @@ The residuals can be decorrelated using the Cholesky factorization of the covari
 One of the possible reasons for large values of $D$ or similarly small values of $R^2$ is the presence of heterogeneity in the dose--response associations. The measures of heterogeneity presented in Section~\ref{sec:measures_het}, namely $\hat R_I$ and $I^2$ were derived based on the assumption of homogeneity for the error variance terms $v_i$, which is unlikely to be met in applications. To illustrate this point, let us consider the two hypothetical distributions for the within-study error terms in Table~\ref{tab:hyp_vi}. The distribution of $v_i$ in the first example (Analysis A) is much more homogeneous compared to the second scenario (Analysis B). The coefficient of variation for the $v_i$ in the second example is 20 times higher than the corresponding number in the first scenario. While it seems reasonable to assume homogeneity of the $v_i$ for the Analysis A, in the second case this hypothesis is not appropriate. Nonetheless, both $\hat R_I$ and $I^2$ would summarize the two distributions with a single common number. 
 
 % latex table generated in R 3.4.3 by xtable 1.8-2 package
-% Thu Mar  1 11:09:58 2018
+% Thu Mar  1 12:20:21 2018
 \begin{table}[ht]
 \centering
 \caption{Hypothetical distributions of within-study errors 

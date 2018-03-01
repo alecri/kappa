@@ -343,7 +343,7 @@ p_milk <- Map(function(d, m, p){
   newdata <- data.frame(dose = seq(min(d$dose), max(d$dose), length.out = 100)) %>%
     mutate(pred = predict(m, ., expo = T)$pred)
   ggplot(d, aes(dose, rr)) +
-    geom_errorbar(aes(ymin = lb, ymax = ub), width = 0.2) +
+    geom_errorbar(aes(ymin = lb, ymax = ub)) +
     scale_y_continuous(trans = "log", breaks = c(.5, .6, .7, .85, 1, 1.25, 1.5)) +
     labs(y = "Relative risk", x = "Milk consumption (ml/day)", 
          title = paste0("Study ID ", d$id[1], ", p = (", paste0(p, collapse = ", "), ")")) +

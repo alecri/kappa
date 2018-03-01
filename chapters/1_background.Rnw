@@ -198,9 +198,9 @@ If we had access to the individual patient data, the dose--response model for a 
 \log \left( \lambda \left(x, \mathbf{z} \right) \right) =  \beta_0 + \beta_1x + \boldsymbol{\gamma}^\top \mathbf{c}
 \label{eq:lin_ipd}
 \end{equation}
-\noindent where $x$ is the quantitative exposure and $c$ the set of possible confounders. The outcome variable is the log transformation of the mean outcome (e.g. odds, risk, or rate). Transformations of the exposure variable can be included to relax the linearity assumption, such as a quadratic term
+\noindent where $x$ is the quantitative exposure and $\mathbf{c}$ the set of possible confounders. The outcome variable is the log transformation of the mean outcome (e.g. odds, risk, or rate). Transformations of the exposure variable can be included to relax the linearity assumption, such as a quadratic term
 \begin{equation}
-\log \left( \lambda \left(x, \mathbf{z} \right) \right) =  \beta_0 + \beta_1x + \beta_2x^2 + \boldsymbol{\gamma}^\top \mathbf{z}
+\log \left( \lambda \left(x, \mathbf{z} \right) \right) =  \beta_0 + \beta_1x + \beta_2x^2 + \boldsymbol{\gamma}^\top \mathbf{c}
 \label{eq:quadr_ipd}
 \end{equation}
 
