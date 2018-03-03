@@ -1,4 +1,4 @@
-\begin{thebibliography}{80}
+\begin{thebibliography}{81}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -51,7 +51,7 @@ Biggerstaff B, Tweedie R (1997).
 \bibitem[{Borenstein \emph{et~al.}(2009)Borenstein, Hedges, Higgins, and
   Rothstein}]{borenstein2009references}
 Borenstein M, Hedges LV, Higgins J, Rothstein HR (2009).
-\newblock \emph{References}.
+\newblock \emph{References - Introduction to Meta-Analysis}.
 \newblock Wiley Online Library.
 
 \bibitem[{Borenstein \emph{et~al.}(2010)Borenstein, Hedges, Higgins, and
@@ -370,6 +370,12 @@ Pogue JM, Yusuf S (1997).
 \newblock \enquote{Cumulating evidence from randomized trials: utilizing
   sequential monitoring boundaries for cumulative meta-analysis.}
 \newblock \emph{Controlled clinical trials}, \textbf{18}(6), 580--593.
+
+\bibitem[{{R Core Team}(2017)}]{Rcit}
+{R Core Team} (2017).
+\newblock \emph{R: A Language and Environment for Statistical Computing}.
+\newblock R Foundation for Statistical Computing, Vienna, Austria.
+\newblock \urlprefix\url{https://www.R-project.org/}.
 
 \bibitem[{Rice \emph{et~al.}(2017)Rice, Higgins, and Lumley}]{rice2017re}
 Rice K, Higgins J, Lumley T (2017).

@@ -12,7 +12,7 @@
 
 \chapter{Aims of the thesis}
 
-The overall aims of this thesis were to develop and implement new methods for dose--response in meta-analysis, in order to deal with the methodological aspects that have not yet been addressed.
+The overall aims of this thesis were to develop and implement new methods for dose--response meta-analysis, in order to deal with the methodological aspects that have not yet been addressed.
 
 \bigskip
 
