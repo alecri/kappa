@@ -102,7 +102,7 @@ lin <- dosresmeta(logrr ~ dose, id = id, se = se, type = type,
             cases = cases, n = n, data = coffee_mort)
 @
 
-\noindent The \texttt{summary} method displays the measures and tests of interest
+\noindent The \texttt{summary} method displays the measures and tests of interest.
 <<summary_lin_b, echo = 1>>=
 summary(lin)
 sum_lin <- summary(lin)
@@ -427,7 +427,7 @@ The variability across the linear trends could be related to differences in the 
 
 <<tab_rb, results='asis'>>=
 tab_rb <- rbind(tab_rb,
-                data.frame(analysis = c("Red meat", "Red meat Prospective", "Red meat Case-control")) %>%
+                data.frame(analysis = c("Red meat", "Red meat, Prospective", "Red meat, Case-control")) %>%
                   cbind(
                     do.call("rbind", 
                             map(list(lin_red, lin_redci, lin_redcc), ~

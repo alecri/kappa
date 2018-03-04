@@ -1340,7 +1340,7 @@ The first is that different parameterizations, or models, can be graphically com
 To illustrate both problems, I consider IPD from one of the registers involved in the Surveillance, Epidemiology, and End Results (SEER) Program (\url{https://seer.cancer.gov}), and focus on the association between age at diagnosis and breast cancer mortality. Using 35, 60, 70 years as cut points, I modelled age using 5 categories in a Poisson model adjusting for potential confounders and produced aggregated dose--response results in Table~\ref{tab:breast_ad}, where the first category served as referent. 
 
 % latex table generated in R 3.4.3 by xtable 1.8-2 package
-% Sat Mar  3 13:41:28 2018
+% Sun Mar  4 09:07:31 2018
 \begin{table}[ht]
 \centering
 \caption{Aggregated dose--response data on the adjusted association between age and breast cancer mortality based on one registry from the SEER program using the first age category as referent.
@@ -1389,7 +1389,7 @@ The residuals can be decorrelated using the Cholesky factorization of the covari
 One of the possible reasons for large values of $D$ or similarly small values of $R^2$ is the presence of heterogeneity in the dose--response associations. The measures of heterogeneity presented in Section~\ref{sec:measures_het}, namely $\hat R_I$ and $I^2$ were derived based on the assumption of homogeneity for the error variance terms $v_i$, which is unlikely to be met in applications. To illustrate this point, let us consider the two hypothetical distributions for the within-study error terms in Table~\ref{tab:hyp_vi}. The distribution of $v_i$ in the first example (Analysis A) is much more homogeneous compared to the second scenario (Analysis B). The coefficient of variation for the $v_i$ in the second example is 20 times higher than the corresponding number in the first scenario. While it seems reasonable to assume homogeneity of the $v_i$ for the Analysis A, in the second case this hypothesis is not appropriate. Nonetheless, both $\hat R_I$ and $I^2$ would summarize the two distributions with a single common number. 
 
 % latex table generated in R 3.4.3 by xtable 1.8-2 package
-% Sat Mar  3 13:41:29 2018
+% Sun Mar  4 09:07:32 2018
 \begin{table}[ht]
 \centering
 \caption{Hypothetical distributions of within-study errors 
@@ -1784,7 +1784,7 @@ R> lin <- dosresmeta(logrr ~ dose, id = id, se = se, type = type,
 \end{kframe}
 \end{knitrout}
 
-\noindent The \texttt{summary} method displays the measures and tests of interest
+\noindent The \texttt{summary} method displays the measures and tests of interest.
 \begin{knitrout}\footnotesize
 \definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
@@ -2086,8 +2086,8 @@ Analysis & $\hat \beta$ (95\% CI) & $Q$~test, $p$~values & $CV_{v_i}$ & $\hat R_
 \midrule
 Processed meat & 1.2 (1.06, 1.37) & 17, 0.07 & 0.33 & 38 (37, 40) & 42 (40, 43) & 43 (41, 44)\\
 Red meat & 1.22 (1.05, 1.41) & 60, < 0.01 & 5.94 & 67 (66, 68) & 80 (79, 81) & 89 (88, 89)\\
-Red meat Prospective & 1.01 (0.97, 1.06) & 4, 0.6 & 3.51 & 0 (0, 4) & 0 (0, 8) & 0 (0, 100)\\
-Red meat Case-control & 1.51 (1.13, 2.02) & 40, < 0.01 & 0.36 & 81 (80, 82) & 85 (84, 86) & 86 (85, 86)\\
+Red meat, Prospective & 1.01 (0.97, 1.06) & 4, 0.6 & 3.51 & 0 (0, 4) & 0 (0, 8) & 0 (0, 100)\\
+Red meat, Case-control & 1.51 (1.13, 2.02) & 40, < 0.01 & 0.36 & 81 (80, 82) & 85 (84, 86) & 86 (85, 86)\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -2658,7 +2658,7 @@ All the co-authors of the studies for your important contributions and for start
 \textbf{Viktor Oskarsson} and \textbf{Eleonor Säfsten}, with whom I shared office, concerns and laughs, and pleasant extra activities. Thanks for being patient with the too many Italians around you. An extra warm thanks goes to \textbf{Carolina Donat Vargas}, \textbf{Constance Boissin}, \textbf{Emilia Riggi}, \textbf{Nada Hana}, and \textbf{Paolo Frumento}. All my present and past colleagues at the department of Public Health Sciences: \textbf{Antonio Ponce De~Leon}, \textbf{Ashley Mcallister}, \textbf{Asli Kulane}, \textbf{Bo Burström}, \textbf{Diana Corman}, \textbf{Dominika Seblova}, \textbf{Erika Saliba Gustafsson}, \textbf{Jad Shedrawy}, \textbf{Janne Agerholm}, \textbf{Malin Pettersson}, \textbf{Megan Doheny}, \textbf{Melody Almroth}, \textbf{Pär Schön}, \textbf{Sara Delilovic}, \textbf{Sara Fritzell}, \textbf{Stefania Manetti} and \textbf{Zangin Zeebari}; and the Unit of Nutritional Epidemiology: \textbf{Agneta Åkesson}, \textbf{Alice Wallin}, \textbf{Ann Burgaz}, \textbf{Anna Ingemarsdotter}, \textbf{Becky Leung}, \textbf{Bettina Julin}, \textbf{Camilla Olofsson}, \textbf{Frej Stilling}, \textbf{Holly Harris}, \textbf{Iffat Rahman}, \textbf{Ilias Thomas}, \textbf{Jinjin Zheng Selin}, \textbf{Katica Anusic}, \textbf{Lollo Sjöholm}, \textbf{Mimi Throne-Holst}, \textbf{Niclas Håkansson}, \textbf{Susanne Rautiainen Lagerström}, \textbf{Otto Stackelberg}, and \textbf{Thanasis Tektonidis}.
 \medskip
 
-My parents, \textbf{Margherita} and \textbf{Pierangelo}, and my extended family \textbf{Gaia} and \textbf{Alessandra}, for their unconditional love and support. All that I’ve become, I owe to you.
+My parents, \textbf{Margherita} and \textbf{Pierangelo}, my sister \textbf{Gaia}, and my aunt \textbf{Alessandra}, for their unconditional love and support. All that I’ve become, I owe to you.
 \medskip
 
 Last but not least thanks to all my friends in Italy, Sweden, and around the world. In particular, to my present and past flatmates \textbf{Andrea Serio}, \textbf{Davide Bossoli}, \textbf{Daniela Mariosa}, \textbf{Elena Raffetti}, \textbf{Lucia Michielon} and
