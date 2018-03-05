@@ -295,7 +295,7 @@ By \vspace{.5cm} \\
 {\Large \textbf{\textsf{Alessio Crippa}} \vspace{1.5cm}}\\
 
 \noindent{\large Lecture hall Inghesalen, Widerströmska huset, Karolinska Institutet, Solna} \\
-\noindent{\large Friday the 13th of April, 2018, at 10:00} \vspace{1.5cm}\\
+\noindent{\large Friday the 13th of April, 2018, at 9:00} \vspace{1.5cm}\\
 
 \begin{minipage}[t]{6.2cm}
 \singlespacing
@@ -1340,7 +1340,7 @@ The first is that different parameterizations, or models, can be graphically com
 To illustrate both problems, I consider IPD from one of the registers involved in the Surveillance, Epidemiology, and End Results (SEER) Program (\url{https://seer.cancer.gov}), and focus on the association between age at diagnosis and breast cancer mortality. Using 35, 60, 70 years as cut points, I modelled age using 5 categories in a Poisson model adjusting for potential confounders and produced aggregated dose--response results in Table~\ref{tab:breast_ad}, where the first category served as referent. 
 
 % latex table generated in R 3.4.3 by xtable 1.8-2 package
-% Sun Mar  4 09:07:31 2018
+% Mon Mar  5 09:47:38 2018
 \begin{table}[ht]
 \centering
 \caption{Aggregated dose--response data on the adjusted association between age and breast cancer mortality based on one registry from the SEER program using the first age category as referent.
@@ -1389,7 +1389,7 @@ The residuals can be decorrelated using the Cholesky factorization of the covari
 One of the possible reasons for large values of $D$ or similarly small values of $R^2$ is the presence of heterogeneity in the dose--response associations. The measures of heterogeneity presented in Section~\ref{sec:measures_het}, namely $\hat R_I$ and $I^2$ were derived based on the assumption of homogeneity for the error variance terms $v_i$, which is unlikely to be met in applications. To illustrate this point, let us consider the two hypothetical distributions for the within-study error terms in Table~\ref{tab:hyp_vi}. The distribution of $v_i$ in the first example (Analysis A) is much more homogeneous compared to the second scenario (Analysis B). The coefficient of variation for the $v_i$ in the second example is 20 times higher than the corresponding number in the first scenario. While it seems reasonable to assume homogeneity of the $v_i$ for the Analysis A, in the second case this hypothesis is not appropriate. Nonetheless, both $\hat R_I$ and $I^2$ would summarize the two distributions with a single common number. 
 
 % latex table generated in R 3.4.3 by xtable 1.8-2 package
-% Sun Mar  4 09:07:32 2018
+% Mon Mar  5 09:47:38 2018
 \begin{table}[ht]
 \centering
 \caption{Hypothetical distributions of within-study errors 
