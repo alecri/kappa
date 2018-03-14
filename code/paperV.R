@@ -3,8 +3,6 @@ library(tidyverse)
 library(rms)
 library(scales)
 library(cowplot)
-library(knitr)
-library(kableExtra)
 library(Epi)
 source("code/functions.R")
 
@@ -15,6 +13,7 @@ coffee <- rbind(coffee_mort, coffee_mort_add) %>%
   arrange(id) %>%
   subset(area == "Europe")
 
+# convariances of logrr
 Slist <- lapply(unique(coffee$id), function(i)
   with(subset(coffee, id == i), {
     if (any(is.na(cases) | is.na(n))){
@@ -26,30 +25,28 @@ Slist <- lapply(unique(coffee$id), function(i)
     }
   }))
 names(Slist) <- unique(coffee$id)
+# data for tabular and graphical prediction
 newd <- data.frame(dose = seq(0, 8, length.out = 100))
 newd_tab <- data.frame(dose = c(0:6))
 
 
-# With and without exclusion
+# With (two-stage) and without (one-stage) exclusion
 twostage <- dosresmeta(logrr ~ dose + I(dose^2), id = id, se = se, 
                        data = subset(coffee, !(id %in% c(28, 29))), 
                        covariance = "user", Slist = Slist[!names(Slist) %in% c("28", "29")])
 summary(twostage)
+twostage$Psi
+
 onestage <- dosresmeta(logrr ~ dose + I(dose^2), id = id, se = se, data = coffee, 
                   covariance = "user", Slist = Slist, proc = "1stage")
 summary(onestage)
-p_ts <- round(summary(twostage)$coefficients[2, 4], 3)
-p_os <- round(summary(onestage)$coefficients[2, 4], 3)
-se_ts <- round(summary(twostage)$coefficients[1:2, 2], 3)
-se_os <- round(summary(onestage)$coefficients[1:2, 2], 3)
-psi_ts <- round(c(twostage$Psi)[-2], 5)
-psi_os <- round(c(onestage$Psi)[-2], 5)
+onestage$Psi
 
 # comparison of estimated quantities
 cbind(twostage = coef(twostage), onestage = coef(onestage))
 cbind(twostage = c(vcov(twostage))[-2], onestage = c(vcov(onestage))[-2]) %>% round(5)
 
-# predicted curves
+# graphical and tabular comparison
 newd %>%
   mutate(
     twostage = predict(twostage, ., expo = T)$pred,
@@ -63,7 +60,7 @@ newd %>%
   labs(x = "Coffee consumption (cups/day)", y = "Relative risk", linetype = "Curve") +
   scale_linetype_manual(values = c(`One-stage` = "solid", `Two-stage` = "dashed"))
 
-tab_coffee <- newd_tab %>%
+newd_tab %>%
   bind_cols(predict(twostage, ., expo = T)[, -c(1:2)]) %>%
   bind_cols(predict(onestage, ., expo = T)[, -c(1:2)]) %>%
   round(2)
@@ -87,19 +84,25 @@ predi <- data.frame(
   y_ts = pred_sq(coef =  bi[, c("bi.1.y", "bi.2.y")], newd$dose, bi$xref)
 )
 
+# individual predicted curve
 p_coffee <- lapply(seq_along(unique(coffee$id)), function(i){
   idi <- unique(coffee$id)[i]
   ggplot(subset(coffee, id == idi), aes(x = dose, y = exp(logrr))) + 
     geom_errorbar(aes(ymin = exp(logrr - 1.96*se), ymax = exp(logrr + 1.96*se)), width = .3) +
-    geom_line(data = predi, aes_string(x = "x", y = paste0("y_os.pred", i), lty = "'One-stage'"), lwd = 1) +
-    geom_line(data = predi, aes_string(x = "x", y = paste0("y_ts.pred", i), lty = "'Two-stage'"), lwd = 1) +
-    scale_y_continuous(trans = "log", breaks = pretty_breaks()) + 
-    theme(legend.position = "none")  + xlim(c(0, 8)) +
-    labs(title = paste0("Study ID ", idi), x = "Dose", y = "Relative Risk", lty = "Curvwe")
+    geom_line(data = predi, aes_string(x = "x", y = paste0("y_os.pred", i), col = "'One-stage'"), lwd = 1) +
+    geom_line(data = predi, aes_string(x = "x", y = paste0("y_ts.pred", i), col = "'Two-stage'"), lwd = 1) +
+    scale_y_continuous(trans = "log", breaks = pretty_breaks()) + xlim(c(0, 8)) +
+    theme(legend.position = "none", axis.title.y = element_text(size = rel(.8)),
+          axis.title.x = element_text(size = rel(.8))) + 
+    labs(title = paste0("Study ID ", idi), x = "Coffee consumption, cups/day", 
+         y = "Relative Risk", col = "Curve") +
+    scale_color_manual(values = c(`One-stage` = "blue", `Two-stage` = "red"))
 })
+grid_coffee <- plot_grid(plotlist = p_coffee, nrow = 4, ncol = 3, 
+                         align = 'vh', hjust = -1)
 legend_grid_coffee <- get_legend(p_coffee[[1]] + theme(legend.position = "bottom"))
-p_grid_coffee <- plot_grid(plotlist = c(p_coffee, list(legend_grid_coffee)), nrow = 5, ncol = 3,
-                           rel_heights = c(1, 1, 1, 1, .1))
+p_grid_coffee <- plot_grid(grid_coffee, legend_grid_coffee, ncol = 1, rel_heights = c(1, .1))
+p_grid_coffee
 
 
 # model comparison
@@ -116,7 +119,7 @@ categ <- dosresmeta(logrr ~ relevel(cut(dose, breaks = k2, include.lowest = T, r
                     covariance = "user", proc = "1stage", method = "ml",
                     Slist = Slist, control = list(maxiter = 5000))
 waldtest(vcov(categ), coef(categ), 2:4)
-AIC_os <- round(sapply(list(quadr = quadr_ml, spk = spk_ml, categ = categ), AIC), 2)
+sapply(list(quadr = quadr_ml, spk = spk_ml, categ = categ), AIC)
 
 xref <- 1
 comp <- rbind(xref, newd) %>%
@@ -139,7 +142,6 @@ for (i in seq_along(k2[-1])){
 }
 p_comp
 
-
 # meta-regression
 quadr_reg <- dosresmeta(logrr ~ dose + I(dose^2), id = id, se = se, data = coffee, 
                        covariance = "user", Slist = Slist, proc = "1stage",
@@ -154,7 +156,6 @@ coffee_vpc <- coffee %>%
     `Quadratic meta-regression` = vpc(quadr_reg)
   ) %>%
   gather(curve, vpc, Quadratic:`Quadratic meta-regression`)
-
 p_coffee_vpc <- ggplot(coffee_vpc, aes(dose, vpc, group = curve)) +
   geom_point(aes(shape = curve, col = curve)) +
   geom_smooth(aes(col = curve), method = "loess", se = F) +
